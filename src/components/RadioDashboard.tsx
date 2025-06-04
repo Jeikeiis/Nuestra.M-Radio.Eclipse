@@ -20,22 +20,46 @@ export default function RadioDashboard() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new window.MediaMetadata({
-        title: "ECLIPSE FM",
-        artist: "106.3 · Canelones, Uruguay", // No es un artista real, pero MediaMetadata requiere el campo
-        album: "Radio en vivo",    // No es un álbum real, pero es parte de la API
-        artwork: [
-          { src: "/RadioEclipseRectangular.webp", sizes: "512x172", type: "image/webp" }
-        ]
-      });
+      const updateMetadata = () => {
+        navigator.mediaSession.metadata = new window.MediaMetadata({
+          title: "ECLIPSE FM",
+          artist: "106.3 · Canelones, Uruguay",
+          album: "Radio en vivo",
+          artwork: [
+            { src: "/RadioEclipse2.0.webp", sizes: "512x512", type: "image/webp" }
+          ]
+        });
+      };
+      updateMetadata();
       navigator.mediaSession.setActionHandler("play", () => {
         if (audioRef.current) audioRef.current.play();
       });
       navigator.mediaSession.setActionHandler("pause", () => {
         if (audioRef.current) audioRef.current.pause();
       });
+      navigator.mediaSession.setActionHandler("stop", () => {
+        if (audioRef.current) audioRef.current.pause();
+      });
+      // Botón 'Vivo' accesible desde controles multimedia (solo nexttrack)
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        handleSyncLive();
+      });
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
+        if (audioRef.current && typeof details.seekTime === "number") {
+          audioRef.current.currentTime = details.seekTime;
+        }
+      });
+      // El label del botón nexttrack no se puede cambiar por código, solo los metadatos
+      navigator.mediaSession.metadata = new window.MediaMetadata({
+        title: "ECLIPSE FM (Vivo)",
+        artist: "106.3 · Canelones, Uruguay",
+        album: "Radio en vivo",
+        artwork: [
+          { src: "/RadioEclipse2.0.webp", sizes: "512x512", type: "image/webp" }
+        ]
+      });
     }
-  }, []);
+  }, [playing]);
 
   return (
     <section
