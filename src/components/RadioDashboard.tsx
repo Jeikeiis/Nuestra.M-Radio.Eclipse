@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 export default function RadioDashboard() {
@@ -7,7 +8,6 @@ export default function RadioDashboard() {
 
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
   const coverUrl = "https://stream-tools.zenomedia.com/content/stations/agxzfnplbm8tc3RhdHNyMgsSCkF1dGhDbGllbnQYgICQmpfPhgkMCxIOU3RhdGlvblByb2ZpbGUYgIDwyvXcpAoMogEEemVubw/image/?keep=w&lu=1661505950000&resize=350x350";
-  // Gradiente eclipse: naranja a azul oscuro, marco acentuado
   const bgStyle = {
     background: "linear-gradient(90deg, #ff7300 0%, #1e293b 100%)",
     boxShadow: "0 0 24px 0 rgba(255,115,0,0.2), 0 0 24px 0 rgba(30,41,59,0.2)",
@@ -26,12 +26,13 @@ export default function RadioDashboard() {
         style={{ display: "none" }}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-        volume={volume}
       />
       <a href="https://zeno.fm/eclipsefm1063" target="_blank" rel="noopener noreferrer">
-        <img
+        <Image
           src={coverUrl}
           alt="ECLIPSE FM"
+          width={40}
+          height={40}
           className="w-10 h-10 rounded-lg shadow-lg border border-white"
         />
       </a>
