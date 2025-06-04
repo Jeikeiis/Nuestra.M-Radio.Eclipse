@@ -1,25 +1,41 @@
-@import "tailwindcss";
+/* =====================
+   ThemeToggle Styles
+   ===================== */
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* Elimina el media query y usa la clase .dark para modo oscuro */
+/*
+  La clase .dark define los colores para el modo oscuro.
+  ThemeToggle debe alternar esta clase en el <body> o <html>.
+*/
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
 }
 
+/* =====================
+   Tailwind Import
+   ===================== */
+@import "tailwindcss";
+
+/* =====================
+   Variables de Tema Global
+   ===================== */
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans, Arial, Helvetica, sans-serif);
+  --font-mono: var(--font-geist-mono, monospace);
+}
+
+/* =====================
+   Estilos Generales
+   ===================== */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }

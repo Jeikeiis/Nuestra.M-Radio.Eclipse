@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    if (saved === "light") setDarkMode(false);
     if (saved === "dark") setDarkMode(true);
+    else setDarkMode(false);
   }, []);
 
   useEffect(() => {
@@ -23,13 +23,13 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className={`px-4 py-2 rounded font-semibold shadow transition-all
-        bg-gray-800 text-white hover:bg-gray-700
-        dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 w-[110px]`}
+      className={`px-4 py-2 rounded font-semibold transition-all
+      bg-transparent text-black hover:bg-gray-100
+      dark:bg-transparent dark:text-white dark:hover:bg-orange-900 w-[110px] shadow-none`}
       onClick={() => setDarkMode((v) => !v)}
       aria-label="Cambiar modo claro/oscuro"
     >
-      {darkMode ? "Modo Claro" : "Modo Oscuro"}
+      {darkMode ? "Modo Oscuro" : "Modo Claro"}
     </button>
   );
 }
