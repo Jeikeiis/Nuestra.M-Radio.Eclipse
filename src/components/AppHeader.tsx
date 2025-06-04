@@ -22,7 +22,7 @@ export default function AppHeader() {
           />
           <div className="min-w-0 ml-2">
             <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
-              Nuestra.M-Radio.Eclipse
+              Radio Eclipse FM 106.3
             </h1>
             <p className="text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 truncate">
               La mejor música, en vivo y online.
