@@ -2,6 +2,7 @@
 import AppHeader from "../components/AppHeader";
 import AppFooter from "../components/AppFooter";
 import { useRef, useLayoutEffect, useState } from "react";
+import WebScrapingSection from "../components/WebScrapingSection";
 
 export default function Home() {
   const headerRef = useRef<HTMLElement>(null);
@@ -156,6 +157,9 @@ export default function Home() {
             />
           </div>
         </section>
+
+        {/* Sección de eventos scrapeados de la comuna canaria */}
+        <WebScrapingSection />
 
         {/* Sección de contacto */}
         <section className="w-full max-w-xl bg-white dark:bg-black rounded-2xl shadow-lg p-8 flex flex-col items-center mb-8">
