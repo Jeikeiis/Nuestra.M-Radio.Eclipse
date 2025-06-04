@@ -13,6 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" type="image/webp" href="/favicon.webp" />
+      </head>
       <body className="bg-white text-black dark:bg-black dark:text-white transition-colors">
         {children}
       </body>

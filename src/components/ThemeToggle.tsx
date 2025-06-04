@@ -30,26 +30,22 @@ export default function ThemeToggle() {
       aria-label="Cambiar modo claro/oscuro"
     >
       <span className="icon-sun-moon" aria-hidden="true">
-        <span className="sun">
-          {/* Partículas del sol */}
-          {[...Array(8)].map((_, i) => (
+        {/* Eclipse animado */}
+        <span className="eclipse-container">
+          {/* Sol */}
+          <span className="eclipse-sun" />
+          {/* Luna/Eclipse */}
+          <span className="eclipse-moon" />
+          {/* Rayos del sol eclipsado */}
+          {[...Array(12)].map((_, i) => (
             <span
               key={i}
-              className="sun-ray"
+              className="eclipse-ray"
               style={{
-                transform: `rotate(${i * 45}deg) translate(16px, 0)`,
+                transform: `rotate(${i * 30}deg) translate(18px, 0)`,
               }}
             />
           ))}
-        </span>
-        <span className="moon">
-          {/* Partículas de la luna (cráteres) - valores fijos para evitar errores de hidratación */}
-          <span className="moon-crater" style={{ left: "15px", top: "6px" }} />
-          <span className="moon-crater" style={{ left: "19px", top: "13px" }} />
-          <span className="moon-crater" style={{ left: "13px", top: "18px" }} />
-          <span className="moon-crater" style={{ left: "7px", top: "16px" }} />
-          <span className="moon-crater" style={{ left: "5px", top: "10px" }} />
-          <span className="moon-crater" style={{ left: "9px", top: "7px" }} />
         </span>
       </span>
     </button>

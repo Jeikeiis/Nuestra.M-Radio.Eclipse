@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function RadioDashboard() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -16,6 +16,26 @@ export default function RadioDashboard() {
       audioRef.current.play();
     }
   };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new window.MediaMetadata({
+        title: "ECLIPSE FM",
+        artist: "106.3 · Canelones, Uruguay", // No es un artista real, pero MediaMetadata requiere el campo
+        album: "Radio en vivo",    // No es un álbum real, pero es parte de la API
+        artwork: [
+          { src: "/RadioEclipseRectangular.webp", sizes: "512x172", type: "image/webp" }
+        ]
+      });
+      navigator.mediaSession.setActionHandler("play", () => {
+        if (audioRef.current) audioRef.current.play();
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        if (audioRef.current) audioRef.current.pause();
+      });
+    }
+  }, []);
 
   return (
     <section
