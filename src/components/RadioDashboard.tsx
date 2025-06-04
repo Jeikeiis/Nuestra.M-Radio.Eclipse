@@ -5,7 +5,7 @@ export default function RadioDashboard() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
-
+  const [error, setError] = useState(false);
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
   const coverUrl = "https://stream-tools.zenomedia.com/content/stations/agxzfnplbm8tc3RhdHNyMgsSCkF1dGhDbGllbnQYgICQmpfPhgkMCxIOU3RhdGlvblByb2ZpbGUYgIDwyvXcpAoMogEEemVubw/image/?keep=w&lu=1661505950000&resize=350x350";
   const bgStyle = {
@@ -14,20 +14,35 @@ export default function RadioDashboard() {
     backdropFilter: "blur(2px)",
   };
 
+  // Sincronizar con el vivo: recarga el stream y reproduce
+  const handleSyncLive = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.load();
+      audioRef.current.play();
+    }
+  };
+
   return (
-    <div
+    <section
       className="w-auto max-w-xs rounded-full flex flex-row items-center gap-2 px-3 py-2"
       style={bgStyle}
+      aria-label="Radio en vivo Eclipse FM"
     >
       <audio
         ref={audioRef}
         src={streamUrl}
-        preload="none"
+        preload="auto"
         style={{ display: "none" }}
-        onPlay={() => setPlaying(true)}
+        onPlay={() => { setPlaying(true); setError(false); }}
         onPause={() => setPlaying(false)}
+        onError={() => setError(true)}
+        autoPlay={false}
+        controls={false}
+        crossOrigin="anonymous"
       />
-      <a href="https://zeno.fm/eclipsefm1063" target="_blank" rel="noopener noreferrer">
+      <a href="https://zeno.fm/eclipsefm1063" target="_blank" rel="noopener noreferrer" tabIndex={-1}>
         <Image
           src={coverUrl}
           alt="ECLIPSE FM"
@@ -36,11 +51,11 @@ export default function RadioDashboard() {
           className="w-10 h-10 rounded-lg shadow-lg border border-white"
         />
       </a>
-      <div className="flex flex-col justify-center">
-        <span className="text-xs font-bold text-white leading-tight">
+      <div className="flex flex-col justify-center min-w-0">
+        <span className="text-xs font-bold text-white leading-tight truncate">
           ECLIPSE FM
         </span>
-        <span className="text-[10px] text-gray-200">106.3 · Uruguay</span>
+        <span className="text-[10px] text-gray-200 truncate">106.3 · Uruguay</span>
       </div>
       <button
         onClick={() => {
@@ -51,7 +66,7 @@ export default function RadioDashboard() {
             audioRef.current.pause();
           }
         }}
-        className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-base shadow-lg hover:bg-blue-700 transition"
+        className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-base shadow-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
         aria-label={playing ? "Pausar" : "Reproducir"}
       >
         {playing ? (
@@ -71,9 +86,21 @@ export default function RadioDashboard() {
           setVolume(v);
           if (audioRef.current) audioRef.current.volume = v;
         }}
-        className="w-16 accent-blue-600"
+        className="w-16 accent-blue-600 mx-1"
         aria-label="Volumen"
       />
-    </div>
+      <button
+        onClick={handleSyncLive}
+        className="flex items-center gap-1 px-2 h-7 rounded-full bg-white border border-red-500 ml-1 shadow hover:bg-red-50 transition focus:outline-none focus:ring-2 focus:ring-red-400"
+        aria-label="Sincronizar con el vivo"
+        title="Sincronizar con el vivo"
+      >
+        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span className="text-xs font-bold text-red-600 leading-none">Vivo</span>
+      </button>
+      {error && (
+        <span className="text-xs text-red-400 ml-2">Error de señal</span>
+      )}
+    </section>
   );
 }

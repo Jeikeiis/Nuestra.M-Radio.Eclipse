@@ -23,13 +23,15 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className={`px-4 py-2 rounded font-semibold transition-all
-      bg-transparent text-black hover:bg-gray-100
-      dark:bg-transparent dark:text-white dark:hover:bg-orange-900 w-[110px] shadow-none`}
+      className={`theme-toggle-btn px-4 py-2 rounded font-semibold transition-all
+      bg-transparent hover:bg-gray-100 dark:bg-transparent dark:hover:bg-orange-900 w-[48px] h-[48px] flex items-center justify-center shadow-none`}
       onClick={() => setDarkMode((v) => !v)}
       aria-label="Cambiar modo claro/oscuro"
     >
-      {darkMode ? "Modo Oscuro" : "Modo Claro"}
+      <span className="icon-sun-moon" aria-hidden="true">
+        <span className="sun"></span>
+        <span className="moon"></span>
+      </span>
     </button>
   );
 }

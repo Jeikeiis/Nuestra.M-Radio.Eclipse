@@ -70,10 +70,10 @@ export default function Home() {
                 className="w-20 h-20 rounded-full mb-2 border-4 border-orange-400"
               />
               <span className="font-bold text-gray-900 dark:text-white">
-                Carlos Pérez
+                Federico Pinato
               </span>
               <span className="text-xs text-gray-600 dark:text-gray-300">
-                Tardes Musicales
+                Nuestra Mañana
               </span>
             </div>
             <div className="flex flex-col items-center">

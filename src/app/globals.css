@@ -3,7 +3,7 @@
    ===================== */
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%);
   --foreground: #171717;
 }
 
@@ -12,7 +12,7 @@
   ThemeToggle debe alternar esta clase en el <body> o <html>.
 */
 .dark {
-  --background: #0a0a0a;
+  --background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
   --foreground: #ededed;
 }
 
@@ -25,17 +25,179 @@
    Variables de Tema Global
    ===================== */
 :root {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans, Arial, Helvetica, sans-serif);
-  --font-mono: var(--font-geist-mono, monospace);
+  --color-background: linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%);
+  --color-foreground: #171717;
+  --color-accent: #fd7a00;
+  --color-accent-dark: #00027a;
+  --font-sans: 'Montserrat', Arial, Helvetica, sans-serif;
+  --font-mono: 'Fira Mono', monospace;
+}
+.dark {
+  --color-background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+  --color-foreground: #ededed;
+  --color-accent: #ff9800;
+  --color-accent-dark: #23272f;
 }
 
 /* =====================
    Estilos Generales
    ===================== */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sans);
+  transition: background 0.5s cubic-bezier(.4,0,.2,1), color 0.3s;
+  letter-spacing: 0.01em;
+}
+
+/* Tarjetas y secciones principales */
+section, .card, .radio-section, .dynamic-bg {
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.10), 0 1.5px 6px 0 rgba(255,115,0,0.08);
+  border-radius: 1.25rem;
+  border: 1.5px solid #ffe0b2;
+  backdrop-filter: blur(2px);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  transition: background 0.5s cubic-bezier(.4,0,.2,1), border 0.3s;
+}
+.dark section, .dark .card, .dark .radio-section, .dark .dynamic-bg {
+  border: 1.5px solid #23272f;
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.25), 0 1.5px 6px 0 rgba(255,115,0,0.10);
+  background: var(--color-background);
+}
+
+/* Títulos destacados */
+h3 {
+  font-family: 'Montserrat', var(--font-sans);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(255,115,0,0.10);
+}
+
+/* Inputs y botones */
+input, textarea {
+  border: 1.5px solid #ffd699;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  background: #fff;
+  color: #171717;
+}
+input:focus, textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px #ff980033;
+}
+.dark input, .dark textarea {
+  border: 1.5px solid #23272f;
+  background: #18181b;
+  color: #ededed;
+}
+.dark input:focus, .dark textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px #ff730033;
+}
+
+button {
+  box-shadow: 0 2px 8px 0 rgba(255,115,0,0.08);
+  font-family: var(--font-sans);
+  letter-spacing: 0.03em;
+}
+
+/* Galería de eventos */
+section .object-cover {
+  filter: brightness(0.98) saturate(1.1);
+  transition: filter 0.3s;
+}
+section .object-cover:hover {
+  filter: brightness(1.08) saturate(1.3) drop-shadow(0 2px 8px #ff9800cc);
+}
+
+/* Footer y header */
+footer {
+  box-shadow: 0 2px 16px 0 rgba(255,115,0,0.10);
+  border-radius: 0.75rem 0.75rem 0 0;
+  color: var(--color-foreground);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+}
+.dark footer {
+  color: var(--color-foreground);
+  background: var(--color-background);
+}
+
+header {
+  box-shadow: 0 2px 16px 0 rgba(255,115,0,0.10);
+  border-radius: 0;
+  border-bottom: 1.5px solid #ffe0b2;
+}
+.dark header {
+  border-bottom: 1.5px solid #23272f;
+}
+
+/* Scrollbar personalizada */
+body::-webkit-scrollbar {
+  width: 10px;
+  background: #ffe0b2;
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 8px;
+}
+.dark body::-webkit-scrollbar {
+  background: #23272f;
+}
+.dark body::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+}
+
+/* =====================
+   Theme Toggle Button
+   ===================== */
+.theme-toggle-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-sun-moon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+.sun {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #FFD600;
+  box-shadow: 0 0 12px 2px #FFD60066;
+  transition: transform 0.5s, opacity 0.5s, background 0.5s;
+  z-index: 2;
+}
+.moon {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: -6px 0 0 0 #23272f;
+  transform: scale(0.7) translate(8px, 0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s, background 0.5s;
+  z-index: 3;
+}
+.dark .sun {
+  transform: scale(0.7) translate(-8px, 0);
+  opacity: 0;
+  background: #FFD60033;
+}
+.dark .moon {
+  opacity: 1;
+  background: #fff;
+  box-shadow: -6px 0 0 0 #18181b;
+  transform: scale(1) translate(0, 0);
 }
