@@ -19,8 +19,8 @@ const AppHeader = forwardRef<HTMLElement>((props, ref) => {
         {/* Logo e info */}
         <div className="flex flex-row items-center gap-3 min-w-0 flex-1 justify-center sm:justify-start">
           <Image
-            src="/NuestraMañana2.0.webp"
-            alt="Logo Nuestra.M-Radio.Eclipse"
+            src="/NuestraManana2.0.webp"
+            alt="Logo Nuestra Mañana - Radio Eclipse"
             width={120}
             height={120}
             className="rounded-lg flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40"

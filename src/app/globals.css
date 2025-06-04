@@ -51,9 +51,6 @@ body {
 }
 
 @media (max-width: 640px) {
-  body, section, .card, .radio-section, .dynamic-bg, h3, span, p, li, label, input, textarea, button {
-    color: var(--color-foreground) !important;
-  }
   .rounded-2xl, .rounded-lg, .rounded-full {
     border-radius: 1rem !important;
   }

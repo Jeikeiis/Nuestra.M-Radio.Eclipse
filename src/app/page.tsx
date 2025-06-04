@@ -67,9 +67,11 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center">
               <img
-                src="/NuestraMañana2.0.png"
-                alt="Locutor 2"
-                className="w-20 h-20 rounded-full mb-2 border-4 border-orange-400"
+                src="/NuestraManana2.0.webp"
+                alt="Nuestra Mañana - Radio Eclipse"
+                width={120}
+                height={120}
+                className="rounded-lg"
               />
               <span className="font-bold text-gray-900 dark:text-white">
                 Federico Pinato
@@ -142,7 +144,7 @@ export default function Home() {
               className="rounded-lg object-cover w-full h-32"
             />
             <img
-              src="/NuestraMañana2.0.webp"
+              src="/NuestraManana2.0.webp"
               alt="Evento 2"
               className="rounded-lg object-cover w-full h-32"
             />
@@ -152,7 +154,7 @@ export default function Home() {
               className="rounded-lg object-cover w-full h-32"
             />
             <img
-              src="/NuestraMañana2.0.webp"
+              src="/NuestraManana2.0.webp"
               alt="Evento 4"
               className="rounded-lg object-cover w-full h-32"
             />

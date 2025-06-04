@@ -1,3 +1,41 @@
+/*
+  =============================
+  Footer.css - Estilos del Footer (panel de color centralizado y lógica optimizada)
+  =============================
+  - Todas las variables de color del footer dependen de un panel principal de variables.
+  - Sin dependencias circulares ni duplicadas.
+  - Lógica clara y profesional para modo claro/oscuro y mobile/desktop.
+*/
+
+:root {
+  /* PANEL PRINCIPAL DE COLORES DEL FOOTER */
+  --footer-bg-light: #ffffff00;
+  --footer-bg-dark: #000000;
+  --footer-text-light: #ffffff;
+  --footer-text-dark: #000000;
+  --footer-border-light: #e5e7eb;
+  --footer-border-dark: #ff9100;
+  --footer-credits-bg-light: #000000;
+  --footer-credits-bg-dark: rgb(26, 26, 26);
+  --footer-credits-bg-light-mobile: #000000;
+  --footer-credits-bg-dark-mobile: rgb(255, 136, 0);
+  --footer-credits-text-light: #ffffff;
+  --footer-credits-text-dark: #ffffff;
+  --footer-title-light: #fff;
+  --footer-title-dark: #ededed;
+  --footer-location-light: #fff;
+  --footer-location-dark: #ededed;
+  --footer-link-light: #fff;
+  --footer-link-dark: #ededed;
+  --footer-madeby-light: #fff;
+  --footer-madeby-dark: #ffffff;
+  --footer-logo-info-bg-light: #000000;
+  --footer-logo-info-bg-dark: rgb(0, 0, 0);
+}
+
+/* =============================
+   Estructura principal del footer
+   ============================= */
 footer {
   width: 100%;
   margin-top: auto;
@@ -7,17 +45,18 @@ footer {
   gap: 1.5rem;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid #e5e7eb;
-  background: #18181b;
+  border-top: 1px solid var(--footer-border-light);
+  background: var(--footer-bg-light);
   border-radius: 0.75rem 0.75rem 0 0;
-  color: #fff;
+  color: var(--footer-text-light);
   transition: background 0.3s, color 0.3s;
 }
 .dark footer {
-  background: #23272f;
-  color: #ededed;
-  border-top: 1px solid #23272f;
+  background: var(--footer-bg-dark);
+  color: var(--footer-text-dark);
+  border-top: 1px solid var(--footer-border-dark);
 }
+
 @media (min-width: 640px) {
   footer {
     flex-direction: row;
@@ -25,43 +64,67 @@ footer {
     padding-right: 4rem;
   }
 }
+
+/* =============================
+   Logo y bloque de información
+   ============================= */
 .footer-logo-info {
   display: flex;
   align-items: center;
   gap: 1rem;
+  background: var(--footer-logo-info-bg-light);
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
 }
-.footer-logo-img {
+.dark .footer-logo-info {
+  background: var(--footer-logo-info-bg-dark);
+}
+
+.footer-logo-img, footer img {
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-  border: 1px solid #23272f;
-  background: #23272f;
+  border: 1px solid var(--footer-bg-dark);
+  background: var(--footer-bg-dark);
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
 }
-.dark .footer-logo-img {
-  border: 1px solid #ededed;
+.dark .footer-logo-img, .dark footer img {
+  border: 1px solid var(--footer-text-dark);
   background: #18181b;
 }
+
 .footer-info-text {
   display: flex;
   flex-direction: column;
 }
+
+/* =============================
+   Título y ubicación
+   ============================= */
 .footer-title {
   font-weight: bold;
   font-size: 1.125rem;
   line-height: 1.5rem;
-  color: #fff;
+  color: var(--footer-title-light);
   text-shadow: 0 1px 4px rgba(0,0,0,0.10);
 }
 .dark .footer-title {
-  color: #ededed;
+  color: var(--footer-title-dark);
 }
+
 .footer-location {
   font-size: 0.875rem;
-  color: #fff;
+  color: var(--footer-location-light);
   opacity: 0.85;
 }
 .dark .footer-location {
-  color: #ededed;
+  color: var(--footer-location-dark);
 }
+
+/* =============================
+   Créditos y barra inferior
+   ============================= */
 .footer-credits {
   text-align: center;
   display: flex;
@@ -69,61 +132,105 @@ footer {
   align-items: center;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  background: rgba(24,24,27,0.7);
+  background: var(--footer-credits-bg-light);
   box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  color: var(--footer-credits-text-light);
 }
 .dark .footer-credits {
-  background: rgba(35,39,47,0.7);
+  background: var(--footer-credits-bg-dark);
+  color: var(--footer-credits-text-dark);
 }
 @media (min-width: 640px) {
+  .footer-logo-info {
+    flex-direction: row;
+  }
   .footer-credits {
     align-items: flex-end;
     text-align: right;
   }
 }
+
+/* =============================
+   Enlaces y créditos
+   ============================= */
 .footer-link {
-  color: #fff;
+  color: var(--footer-link-light);
   text-decoration: underline;
   transition: color 0.2s;
+}
+.dark .footer-link,
+.footer-link.footer-link--dark {
+  color: rgb(255, 136, 0);
 }
 .footer-link:hover {
   color: #fd7a00;
 }
+.dark .footer-link:hover {
+  color: #0090ff ;
+}
+
 .footer-madeby {
   font-size: 0.75rem;
-  color: #fff;
+  color: var(--footer-madeby-light);
   margin-top: 0.25rem;
 }
 .dark .footer-madeby {
-  color: #90cdf4;
+  color: var(--footer-madeby-dark);
 }
+
 .footer-heart {
-  color: #fd7a00;
+  color: #fd0000;
   font-weight: bold;
 }
 
-/* Mejor contraste en mobile */
+/* =============================
+   Adaptaciones para mobile
+   ============================= */
 @media (max-width: 640px) {
   footer {
-    background: #18181b;
-    color: #fff;
+    background: var(--footer-bg-light);
+    color: var(--footer-text-light);
   }
   .dark footer {
-    background: #23272f;
-    color: #ededed;
+    background: var(--footer-bg-dark);
+    color: var(--footer-text-dark);
   }
   .footer-credits {
-    background: rgba(24,24,27,0.92);
-    color: #fff;
+    background: var(--footer-credits-bg-light-mobile);
+    color: var(--footer-credits-text-light);
   }
   .dark .footer-credits {
-    background: rgba(35,39,47,0.92);
-    color: #ededed;
+    background: var(--footer-credits-bg-dark-mobile);
+    color: var(--footer-credits-text-dark);
   }
-  .footer-title, .footer-location, .footer-link, .footer-madeby {
-    color: #fff;
+  .footer-title {
+    color: var(--footer-title-light);
   }
-  .dark .footer-title, .dark .footer-location, .dark .footer-link, .dark .footer-madeby {
-    color: #ededed;
+  .dark .footer-title {
+    color: var(--footer-title-dark);
+  }
+  .footer-location {
+    color: var(--footer-location-light);
+  }
+  .dark .footer-location {
+    color: var(--footer-location-dark);
+  }
+  .footer-link {
+    color: var(--footer-link-light);
+  }
+  .dark .footer-link {
+    color: var(--footer-link-dark);
+  }
+  .footer-madeby {
+    color: var(--footer-madeby-light);
+  }
+  .dark .footer-madeby {
+    color: var(--footer-madeby-dark);
+  }
+  .footer-logo-info {
+    background: var(--footer-logo-info-bg-light);
+  }
+  .dark .footer-logo-info {
+    background: var(--footer-logo-info-bg-dark);
   }
 }

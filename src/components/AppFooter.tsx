@@ -10,7 +10,6 @@ export default function AppFooter() {
           alt="Radio Eclipse 106.3"
           width={90}
           height={90}
-          className="footer-logo-img"
           priority={false}
         />
         <div className="footer-info-text">
