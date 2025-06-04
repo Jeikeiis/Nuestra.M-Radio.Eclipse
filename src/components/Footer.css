@@ -1,0 +1,129 @@
+footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  background: #18181b;
+  border-radius: 0.75rem 0.75rem 0 0;
+  color: #fff;
+  transition: background 0.3s, color 0.3s;
+}
+.dark footer {
+  background: #23272f;
+  color: #ededed;
+  border-top: 1px solid #23272f;
+}
+@media (min-width: 640px) {
+  footer {
+    flex-direction: row;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+.footer-logo-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.footer-logo-img {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  border: 1px solid #23272f;
+  background: #23272f;
+}
+.dark .footer-logo-img {
+  border: 1px solid #ededed;
+  background: #18181b;
+}
+.footer-info-text {
+  display: flex;
+  flex-direction: column;
+}
+.footer-title {
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+.dark .footer-title {
+  color: #ededed;
+}
+.footer-location {
+  font-size: 0.875rem;
+  color: #fff;
+  opacity: 0.85;
+}
+.dark .footer-location {
+  color: #ededed;
+}
+.footer-credits {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background: rgba(24,24,27,0.7);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
+.dark .footer-credits {
+  background: rgba(35,39,47,0.7);
+}
+@media (min-width: 640px) {
+  .footer-credits {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+.footer-link {
+  color: #fff;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #fd7a00;
+}
+.footer-madeby {
+  font-size: 0.75rem;
+  color: #fff;
+  margin-top: 0.25rem;
+}
+.dark .footer-madeby {
+  color: #90cdf4;
+}
+.footer-heart {
+  color: #fd7a00;
+  font-weight: bold;
+}
+
+/* Mejor contraste en mobile */
+@media (max-width: 640px) {
+  footer {
+    background: #18181b;
+    color: #fff;
+  }
+  .dark footer {
+    background: #23272f;
+    color: #ededed;
+  }
+  .footer-credits {
+    background: rgba(24,24,27,0.92);
+    color: #fff;
+  }
+  .dark .footer-credits {
+    background: rgba(35,39,47,0.92);
+    color: #ededed;
+  }
+  .footer-title, .footer-location, .footer-link, .footer-madeby {
+    color: #fff;
+  }
+  .dark .footer-title, .dark .footer-location, .dark .footer-link, .dark .footer-madeby {
+    color: #ededed;
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./ThemeToggle.css";
 
 export default function ThemeToggle() {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,8 +30,27 @@ export default function ThemeToggle() {
       aria-label="Cambiar modo claro/oscuro"
     >
       <span className="icon-sun-moon" aria-hidden="true">
-        <span className="sun"></span>
-        <span className="moon"></span>
+        <span className="sun">
+          {/* Partículas del sol */}
+          {[...Array(8)].map((_, i) => (
+            <span
+              key={i}
+              className="sun-ray"
+              style={{
+                transform: `rotate(${i * 45}deg) translate(16px, 0)`,
+              }}
+            />
+          ))}
+        </span>
+        <span className="moon">
+          {/* Partículas de la luna (cráteres) - valores fijos para evitar errores de hidratación */}
+          <span className="moon-crater" style={{ left: "15px", top: "6px" }} />
+          <span className="moon-crater" style={{ left: "19px", top: "13px" }} />
+          <span className="moon-crater" style={{ left: "13px", top: "18px" }} />
+          <span className="moon-crater" style={{ left: "7px", top: "16px" }} />
+          <span className="moon-crater" style={{ left: "5px", top: "10px" }} />
+          <span className="moon-crater" style={{ left: "9px", top: "7px" }} />
+        </span>
       </span>
     </button>
   );

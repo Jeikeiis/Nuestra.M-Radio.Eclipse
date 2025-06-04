@@ -6,11 +6,6 @@ export default function RadioDashboard() {
   const [volume, setVolume] = useState(1);
   const [error, setError] = useState(false);
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
-  const bgStyle = {
-    background: "linear-gradient(90deg, #ff7300 0%, #1e293b 100%)",
-    boxShadow: "0 0 24px 0 rgba(255,115,0,0.2), 0 0 24px 0 rgba(30,41,59,0.2)",
-    backdropFilter: "blur(2px)",
-  };
 
   // Sincronizar con el vivo: recarga el stream y reproduce
   const handleSyncLive = () => {
@@ -25,7 +20,11 @@ export default function RadioDashboard() {
   return (
     <section
       className="w-auto max-w-xs rounded-full flex flex-row items-center gap-2 px-3 py-2"
-      style={bgStyle}
+      style={{
+        background: "linear-gradient(90deg, #ff7300 0%, #1e293b 100%)",
+        boxShadow: "0 0 24px 0 rgba(255,115,0,0.2), 0 0 24px 0 rgba(30,41,59,0.2)",
+        backdropFilter: "blur(2px)",
+      }}
       aria-label="Radio en vivo Eclipse FM"
     >
       <audio
@@ -36,15 +35,43 @@ export default function RadioDashboard() {
         onPlay={() => { setPlaying(true); setError(false); }}
         onPause={() => setPlaying(false)}
         onError={() => setError(true)}
-        autoPlay={false}
         controls={false}
         crossOrigin="anonymous"
+        playsInline
       />
-      <a href="https://zeno.fm/eclipsefm1063" target="_blank" rel="noopener noreferrer" tabIndex={-1}>
-        <div className="w-10 h-10 rounded-lg shadow-lg border border-white bg-black flex items-center justify-center">
-          {/* Puedes poner un ícono SVG aquí si lo deseas */}
-        </div>
-      </a>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => {
+          if (!audioRef.current) return;
+          if (audioRef.current.paused) {
+        audioRef.current.play();
+          } else {
+        audioRef.current.pause();
+          }
+        }}
+        onKeyPress={e => {
+          if (e.key === "Enter" || e.key === " ") {
+        if (!audioRef.current) return;
+        if (audioRef.current.paused) {
+          audioRef.current.play();
+        } else {
+          audioRef.current.pause();
+        }
+          }
+        }}
+        className="cursor-pointer"
+        aria-label={playing ? "Pausar" : "Reproducir"}
+      >
+        <img
+          src="/RadioEclipse2.0.webp"
+          alt="Logo Radio Eclipse"
+          width={40}
+          height={40}
+          className="w-10 h-10 rounded-lg shadow-lg border border-white/40 bg-black object-cover flex items-center justify-center"
+          style={{ background: "#000" }}
+        />
+      </div>
       <div className="flex flex-col justify-center min-w-0">
         <span className="text-xs font-bold text-white leading-tight truncate">
           ECLIPSE FM
@@ -60,14 +87,13 @@ export default function RadioDashboard() {
             audioRef.current.pause();
           }
         }}
-        className={`w-8 h-8 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400
-          ${playing ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500 hover:bg-gray-300"}`}
+        className="w-8 h-8 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400 bg-black text-white hover:bg-gray-800 border border-white/40"
         aria-label={playing ? "Pausar" : "Reproducir"}
       >
         {playing ? (
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><rect x="4" y="4" width="4" height="12"/><rect x="12" y="4" width="4" height="12"/></svg>
+          <svg width="18" height="18" fill="white" viewBox="0 0 20 20"><rect x="4" y="4" width="4" height="12"/><rect x="12" y="4" width="4" height="12"/></svg>
         ) : (
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><polygon points="5,4 15,10 5,16"/></svg>
+          <svg width="18" height="18" fill="white" viewBox="0 0 20 20"><polygon points="5,4 15,10 5,16"/></svg>
         )}
       </button>
       <input

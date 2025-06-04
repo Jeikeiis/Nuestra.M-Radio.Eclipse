@@ -1,0 +1,84 @@
+/* ThemeToggle.css: estilos exclusivos para el botón y animación de ThemeToggle */
+.theme-toggle-btn {
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+.theme-toggle-btn:hover {
+  background: rgba(253, 122, 0, 0.08);
+}
+.icon-sun-moon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+.sun {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #FFD600;
+  box-shadow: 0 0 12px 2px #FFD60066;
+  transition: transform 0.5s, opacity 0.5s, background 0.5s;
+  z-index: 2;
+}
+.moon {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: -6px 0 0 0 #23272f;
+  transform: scale(0.7) translate(8px, 0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s, background 0.5s;
+  z-index: 3;
+}
+.dark .sun {
+  transform: scale(0.7) translate(-8px, 0);
+  opacity: 0;
+  background: #FFD60033;
+}
+.dark .moon {
+  opacity: 1;
+  background: #fff;
+  box-shadow: -6px 0 0 0 #18181b;
+  transform: scale(1) translate(0, 0);
+}
+.sun-ray {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 2px;
+  background: #FFD600;
+  border-radius: 2px;
+  transform-origin: left center;
+  opacity: 0.7;
+  transition: opacity 0.5s;
+}
+.dark .sun-ray {
+  opacity: 0;
+}
+.moon-crater {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+.dark .moon-crater {
+  opacity: 0.7;
+}

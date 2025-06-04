@@ -137,22 +137,22 @@ export default function Home() {
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
             <img
-              src="/RadioEclipse2.0.png"
+              src="/RadioEclipse2.0.webp"
               alt="Evento 1"
               className="rounded-lg object-cover w-full h-32"
             />
             <img
-              src="/NuestraMañana2.0.png"
+              src="/NuestraMañana2.0.webp"
               alt="Evento 2"
               className="rounded-lg object-cover w-full h-32"
             />
             <img
-              src="/RadioEclipse2.0.png"
+              src="/RadioEclipse2.0.webp"
               alt="Evento 3"
               className="rounded-lg object-cover w-full h-32"
             />
             <img
-              src="/NuestraMañana2.0.png"
+              src="/NuestraMañana2.0.webp"
               alt="Evento 4"
               className="rounded-lg object-cover w-full h-32"
             />
