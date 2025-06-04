@@ -8,27 +8,29 @@ export async function GET(req: NextRequest) {
   try {
     const res = await fetch(EXTERNAL_URL, {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; scraping-bot/1.0)"
+        "User-Agent": "Mozilla/5.0 (compatible; scraping-bot/1.0)",
       },
-      cache: "no-store"
+      cache: "no-store",
     });
     if (!res.ok) {
-      return NextResponse.json({ error: "No se pudo obtener la página externa" }, { status: 500 });
+      return NextResponse.json(
+        { error: "No se pudo obtener la página externa" },
+        { status: 500 }
+      );
     }
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    // Ejemplo: extraer los títulos de eventos de la agenda
-    // Ajusta el selector según la estructura real de la página
     const eventos: string[] = [];
     $(".views-row .views-field-title a").each(function () {
       eventos.push($(this).text().trim());
     });
 
-    // También puedes extraer fechas, descripciones, etc.
-
     return NextResponse.json({ eventos });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message || "Error desconocido" }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message || "Error desconocido" },
+      { status: 500 }
+    );
   }
 }

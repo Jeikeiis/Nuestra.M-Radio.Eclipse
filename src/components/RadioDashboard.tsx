@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRef, useState } from "react";
 
 export default function RadioDashboard() {
@@ -7,7 +6,6 @@ export default function RadioDashboard() {
   const [volume, setVolume] = useState(1);
   const [error, setError] = useState(false);
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
-  const coverUrl = "https://stream-tools.zenomedia.com/content/stations/agxzfnplbm8tc3RhdHNyMgsSCkF1dGhDbGllbnQYgICQmpfPhgkMCxIOU3RhdGlvblByb2ZpbGUYgIDwyvXcpAoMogEEemVubw/image/?keep=w&lu=1661505950000&resize=350x350";
   const bgStyle = {
     background: "linear-gradient(90deg, #ff7300 0%, #1e293b 100%)",
     boxShadow: "0 0 24px 0 rgba(255,115,0,0.2), 0 0 24px 0 rgba(30,41,59,0.2)",
@@ -43,13 +41,9 @@ export default function RadioDashboard() {
         crossOrigin="anonymous"
       />
       <a href="https://zeno.fm/eclipsefm1063" target="_blank" rel="noopener noreferrer" tabIndex={-1}>
-        <Image
-          src={coverUrl}
-          alt="ECLIPSE FM"
-          width={40}
-          height={40}
-          className="w-10 h-10 rounded-lg shadow-lg border border-white"
-        />
+        <div className="w-10 h-10 rounded-lg shadow-lg border border-white bg-black flex items-center justify-center">
+          {/* Puedes poner un ícono SVG aquí si lo deseas */}
+        </div>
       </a>
       <div className="flex flex-col justify-center min-w-0">
         <span className="text-xs font-bold text-white leading-tight truncate">
@@ -66,7 +60,8 @@ export default function RadioDashboard() {
             audioRef.current.pause();
           }
         }}
-        className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-base shadow-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className={`w-8 h-8 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400
+          ${playing ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500 hover:bg-gray-300"}`}
         aria-label={playing ? "Pausar" : "Reproducir"}
       >
         {playing ? (
