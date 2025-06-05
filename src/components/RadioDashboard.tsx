@@ -63,11 +63,12 @@ export default function RadioDashboard() {
 
   return (
     <section
-      className="w-auto max-w-xs rounded-full flex flex-row items-center gap-2 px-3 py-2"
+      className="w-full max-w-2xl rounded-full flex flex-row items-center gap-2 px-3 py-2 overflow-x-auto whitespace-nowrap shadow-lg"
       style={{
+        minWidth: 0,
+        WebkitOverflowScrolling: 'touch',
         background: "linear-gradient(90deg, #ff7300 0%, #1e293b 100%)",
         boxShadow: "0 0 24px 0 rgba(255,115,0,0.2), 0 0 24px 0 rgba(30,41,59,0.2)",
-        backdropFilter: "blur(2px)",
       }}
       aria-label="Radio en vivo Eclipse FM"
     >
@@ -120,7 +121,7 @@ export default function RadioDashboard() {
         <span className="text-xs font-bold text-white leading-tight truncate">
           ECLIPSE FM
         </span>
-        <span className="text-[10px] text-gray-200 truncate">106.3 · Uruguay</span>
+        <span className="text-[10px] text-gray-200 truncate">106.3 · Canelones, Uruguay</span>
       </div>
       <button
         onClick={() => {

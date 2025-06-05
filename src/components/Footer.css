@@ -1,36 +1,60 @@
 /*
-  =============================
-  Footer.css - Estilos del Footer (panel de color centralizado y lógica optimizada)
-  =============================
-  - Todas las variables de color del footer dependen de un panel principal de variables.
-  - Sin dependencias circulares ni duplicadas.
-  - Lógica clara y profesional para modo claro/oscuro y mobile/desktop.
+  Footer.css - Footer styles centralizados y simplificados
+  - Variables de color centralizadas para modo claro/oscuro
+  - Layout responsivo y limpio
+  - Sin duplicados ni reglas innecesarias
 */
 
+/* =============================
+  Variables CSS para Footer
+  =============================
+  Estas variables definen los colores y fondos para el modo claro y oscuro.
+  Se usan en todo el footer para facilitar el cambio de tema.
+  - :root: variables por defecto (modo claro)
+  - --*-dark: variables para modo oscuro
+*/
 :root {
-  /* PANEL PRINCIPAL DE COLORES DEL FOOTER */
-  --footer-bg-light: #ffffff00;
-  --footer-bg-dark: #000000;
-  --footer-text-light: #ffffff;
-  --footer-text-dark: #000000;
-  --footer-border-light: #e5e7eb;
-  --footer-border-dark: #ff9100;
-  --footer-credits-bg-light: #000000;
-  --footer-credits-bg-dark: rgb(26, 26, 26);
-  --footer-credits-bg-light-mobile: #000000;
-  --footer-credits-bg-dark-mobile: rgb(255, 136, 0);
-  --footer-credits-text-light: #ffffff;
-  --footer-credits-text-dark: #ffffff;
-  --footer-title-light: #fff;
-  --footer-title-dark: #ededed;
-  --footer-location-light: #fff;
-  --footer-location-dark: #ededed;
-  --footer-link-light: #fff;
-  --footer-link-dark: #ededed;
-  --footer-madeby-light: #fff;
-  --footer-madeby-dark: #ffffff;
-  --footer-logo-info-bg-light: #000000;
-  --footer-logo-info-bg-dark: rgb(0, 0, 0);
+  --footer-bg: #fff;                        /* Fondo del footer (claro) */
+  --footer-bg-dark: #000;                   /* Fondo del footer (oscuro) */
+  --footer-text: #000;                      /* Texto principal (claro) */
+  --footer-text-dark: #fff;                 /* Texto principal (oscuro) */
+  --footer-border: #e5e7eb;                 /* Borde superior (claro) */
+  --footer-border-dark: #ff9100;            /* Borde superior (oscuro) */
+  --footer-credits-bg: #fff;                /* Fondo créditos (claro) */
+  --footer-credits-bg-dark: #18181b;        /* Fondo créditos (oscuro) */
+  --footer-credits-text: #000;              /* Texto créditos (claro) */
+  --footer-credits-text-dark: #ffffff00;         /* Texto créditos (oscuro) */
+  --footer-title: #222;                     /* Título (claro) */
+  --footer-title-dark: #fff;                /* Título (oscuro) */
+  --footer-location: #444;                  /* Ubicación (claro) */
+  --footer-location-dark: #ededed;          /* Ubicación (oscuro) */
+  --footer-link: #000;                      /* Enlaces (claro) */
+  --footer-link-dark: #ff8800;              /* Enlaces (oscuro) */
+  --footer-madeby: #000;                    /* "Hecho por" (claro) */
+  --footer-madeby-dark: #fff;               /* "Hecho por" (oscuro) */
+  --footer-logo-info-bg: #f3000000;         /* Fondo logo/info (claro) */
+  --footer-logo-info-bg-dark: #18181b;      /* Fondo logo/info (oscuro) */
+  --footer-info-text: #000;                 /* Texto info (claro) */
+  --footer-info-text-dark: #fff;            /* Texto info (oscuro) */
+  --footer-copyright: #000;                 /* Copyright (claro) */
+  --footer-copyright-dark: #fff;            /* Copyright (oscuro) */
+  --footer-content-layout-bg: #ec000000;    /* Fondo layout (claro) */
+  --footer-content-layout-bg-dark: #18181b; /* Fondo layout (oscuro) */
+}
+.dark {
+  --footer-bg: var(--footer-bg-dark);
+  --footer-text: var(--footer-text-dark);
+  --footer-border: var(--footer-border-dark);
+  --footer-credits-bg: var(--footer-credits-bg-dark);
+  --footer-credits-text: var(--footer-credits-text-dark);
+  --footer-title: var(--footer-title-dark);
+  --footer-location: var(--footer-location-dark);
+  --footer-link: var(--footer-link-dark);
+  --footer-madeby: var(--footer-madeby-dark);
+  --footer-logo-info-bg: var(--footer-logo-info-bg-dark);
+  --footer-info-text: var(--footer-info-text-dark);
+  --footer-copyright: var(--footer-copyright-dark);
+  --footer-content-layout-bg: var(--footer-content-layout-bg-dark);
 }
 
 /* =============================
@@ -45,15 +69,15 @@ footer {
   gap: 1.5rem;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--footer-border-light);
-  background: var(--footer-bg-light);
+  border-top: 1px solid var(--footer-border);
+  background: var(--footer-bg);
   border-radius: 0.75rem 0.75rem 0 0;
-  color: var(--footer-text-light);
+  color: var(--footer-text);
   transition: background 0.3s, color 0.3s;
 }
 .dark footer {
   background: var(--footer-bg-dark);
-  color: var(--footer-text-dark);
+  color: var(--footer-text-light);
   border-top: 1px solid var(--footer-border-dark);
 }
 
@@ -66,21 +90,48 @@ footer {
 }
 
 /* =============================
-   Logo y bloque de información
+   Footer Layout Estructurado
    ============================= */
-.footer-logo-info {
+.footer-content-layout {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: var(--footer-logo-info-bg-light);
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  background: var(--footer-content-layout-bg);
   border-radius: 0.75rem;
-  padding: 0.5rem 1rem;
+  transition: background 0.3s;
 }
-.dark .footer-logo-info {
-  background: var(--footer-logo-info-bg-dark);
+@media (max-width: 900px) {
+  .footer-content-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 0.5rem 1.5rem 0.5rem;
+  }
 }
 
-.footer-logo-img, footer img {
+/* =============================
+   Logo e Información
+   ============================= */
+.footer-logo-info {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  background: var(--footer-logo-info-bg);
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  max-width: 350px;
+}
+.footer-logo-img {
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
   border: 1px solid var(--footer-bg-dark);
@@ -89,148 +140,150 @@ footer {
   height: 90px;
   object-fit: cover;
 }
-.dark .footer-logo-img, .dark footer img {
-  border: 1px solid var(--footer-text-dark);
-  background: #18181b;
-}
-
 .footer-info-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  color: var(--footer-info-text);
 }
-
-/* =============================
-   Título y ubicación
-   ============================= */
 .footer-title {
   font-weight: bold;
   font-size: 1.125rem;
   line-height: 1.5rem;
-  color: var(--footer-title-light);
+  color: var(--footer-title);
   text-shadow: 0 1px 4px rgba(0,0,0,0.10);
 }
-.dark .footer-title {
-  color: var(--footer-title-dark);
-}
-
 .footer-location {
   font-size: 0.875rem;
-  color: var(--footer-location-light);
+  color: var(--footer-location);
   opacity: 0.85;
-}
-.dark .footer-location {
-  color: var(--footer-location-dark);
 }
 
 /* =============================
-   Créditos y barra inferior
+   Sponsors
    ============================= */
-.footer-credits {
-  text-align: center;
+.footer-sponsors {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5rem;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+.footer-sponsor-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.75rem 1.5rem;
+  transition: color 0.2s;
+}
+.footer-sponsor-img {
+  width: 7rem;
+  height: 7rem;
+  object-fit: contain;
+  background: transparent;
   border-radius: 0.75rem;
-  background: var(--footer-credits-bg-light);
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-  color: var(--footer-credits-text-light);
+  padding: 0.5rem;
+  transition: transform 0.2s;
+  border: none;
+  box-shadow: none;
 }
-.dark .footer-credits {
-  background: var(--footer-credits-bg-dark);
-  color: var(--footer-credits-text-dark);
+.footer-sponsor-item:hover .footer-sponsor-img {
+  transform: scale(1.07);
 }
-@media (min-width: 640px) {
-  .footer-logo-info {
-    flex-direction: row;
-  }
-  .footer-credits {
-    align-items: flex-end;
-    text-align: right;
-  }
+.footer-sponsor-item span {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.dark .footer-sponsor-item span {
+  color: #ededed;
+}
+.footer-sponsor-item:hover span {
+  color: #fd7a00;
 }
 
 /* =============================
-   Enlaces y créditos
+   Créditos
    ============================= */
+.footer-credits, .footer-credits-right {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: right;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--footer-credits-bg);
+  color: var(--footer-credits-text);
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
+  border: none;
+}
+@media (max-width: 900px) {
+  .footer-logo-info,
+  .footer-credits,
+  .footer-credits-right {
+    min-height: unset;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-credits, .footer-credits-right {
+    align-items: center;
+    text-align: center;
+  }
+}
 .footer-link {
-  color: var(--footer-link-light);
+  color: var(--footer-link);
   text-decoration: underline;
   transition: color 0.2s;
-}
-.dark .footer-link,
-.footer-link.footer-link--dark {
-  color: rgb(255, 136, 0);
 }
 .footer-link:hover {
   color: #fd7a00;
 }
-.dark .footer-link:hover {
-  color: #0090ff ;
-}
-
 .footer-madeby {
   font-size: 0.75rem;
-  color: var(--footer-madeby-light);
+  color: var(--footer-madeby);
   margin-top: 0.25rem;
 }
-.dark .footer-madeby {
-  color: var(--footer-madeby-dark);
-}
-
 .footer-heart {
   color: #fd0000;
   font-weight: bold;
 }
+.footer-copyright {
+  color: var(--footer-copyright);
+}
 
 /* =============================
-   Adaptaciones para mobile
+   Responsive General
    ============================= */
 @media (max-width: 640px) {
   footer {
-    background: var(--footer-bg-light);
-    color: var(--footer-text-light);
+    flex-direction: column;
+    padding: 2rem 0.5rem;
   }
-  .dark footer {
-    background: var(--footer-bg-dark);
-    color: var(--footer-text-dark);
+  .footer-logo-info, .footer-sponsors, .footer-credits, .footer-credits-right {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
-  .footer-credits {
-    background: var(--footer-credits-bg-light-mobile);
-    color: var(--footer-credits-text-light);
-  }
-  .dark .footer-credits {
-    background: var(--footer-credits-bg-dark-mobile);
-    color: var(--footer-credits-text-dark);
-  }
-  .footer-title {
-    color: var(--footer-title-light);
-  }
-  .dark .footer-title {
-    color: var(--footer-title-dark);
-  }
-  .footer-location {
-    color: var(--footer-location-light);
-  }
-  .dark .footer-location {
-    color: var(--footer-location-dark);
-  }
-  .footer-link {
-    color: var(--footer-link-light);
-  }
-  .dark .footer-link {
-    color: var(--footer-link-dark);
-  }
-  .footer-madeby {
-    color: var(--footer-madeby-light);
-  }
-  .dark .footer-madeby {
-    color: var(--footer-madeby-dark);
-  }
-  .footer-logo-info {
-    background: var(--footer-logo-info-bg-light);
-  }
-  .dark .footer-logo-info {
-    background: var(--footer-logo-info-bg-dark);
-  }
+}
+
+/* =============================
+   Transiciones Suaves para Modo Claro/Oscuro
+   ============================= */
+footer, .footer-content-layout, .footer-logo-info, .footer-credits, .footer-credits-right, .footer-title, .footer-location, .footer-link, .footer-madeby, .footer-info-text, .footer-copyright {
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
