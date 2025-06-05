@@ -20,12 +20,11 @@ export default function AppFooter() {
           </div>
         </div>
         {/* Sponsors al centro */}
-        <div className="footer-sponsors flex flex-row justify-center items-end">
-          <div className="flex flex-row gap-4 items-end justify-center">
+        <div className="footer-sponsors">
+          <div className="footer-sponsors-inner">
             <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="javascript:void(0);"
+              tabIndex={-1}
               className="footer-sponsor-item"
             >
               <img
@@ -35,14 +34,13 @@ export default function AppFooter() {
               />
             </a>
             <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="javascript:void(0);"
+              tabIndex={-1}
               className="footer-sponsor-item"
             >
               <img
-                src="/globe.svg"
-                alt="Sponsor 2"
+                src="/MirandaConstruccion.webp"
+                alt="Miranda Construcciones"
                 className="footer-sponsor-img"
               />
             </a>

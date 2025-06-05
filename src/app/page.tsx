@@ -7,7 +7,6 @@ import LocutoresSection from "../components/LocutoresSection";
 import PodcastsSection from "../components/PodcastsSection";
 import EventosSection from "../components/EventosSection";
 import ContactoSection from "../components/ContactoSection";
-import SponsorsSection from "../components/SponsorsSection";
 
 export default function Home() {
   const headerRef = useRef<HTMLElement>(null);
@@ -32,20 +31,15 @@ export default function Home() {
       {/* Encabezado */}
       <AppHeader ref={headerRef} />
 
-      {/* Sección principal */}
       <main className="flex-1 flex flex-col items-center justify-start px-4 pb-10 gap-12 w-full">
         {/* Menú de información */}
         <ProgramacionSection />
-
         {/* Sección de locutores */}
         <LocutoresSection />
-
         {/* Sección de podcasts */}
         <PodcastsSection />
-
         {/* Sección de galería de eventos */}
         <EventosSection />
-
         {/* Sección de contacto */}
         <ContactoSection />
       </main>

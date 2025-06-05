@@ -1,246 +1,118 @@
 /*
-  Footer.css - Footer styles centralizados y simplificados
-  - Variables de color centralizadas para modo claro/oscuro
-  - Layout responsivo y limpio
-  - Sin duplicados ni reglas innecesarias
+  Footer.css - Footer styles slim y complementarios con header, soporta claro/oscuro
 */
 
-/* =============================
-  Variables CSS para Footer
-  =============================
-  Estas variables definen los colores y fondos para el modo claro y oscuro.
-  Se usan en todo el footer para facilitar el cambio de tema.
-  - :root: variables por defecto (modo claro)
-  - --*-dark: variables para modo oscuro
-*/
 :root {
-  --footer-bg: #fff;                        /* Fondo del footer (claro) */
-  --footer-bg-dark: #000;                   /* Fondo del footer (oscuro) */
-  --footer-text: #000;                      /* Texto principal (claro) */
-  --footer-text-dark: #fff;                 /* Texto principal (oscuro) */
-  --footer-border: #e5e7eb;                 /* Borde superior (claro) */
-  --footer-border-dark: #ff9100;            /* Borde superior (oscuro) */
-  --footer-credits-bg: #fff;                /* Fondo créditos (claro) */
-  --footer-credits-bg-dark: #18181b;        /* Fondo créditos (oscuro) */
-  --footer-credits-text: #000;              /* Texto créditos (claro) */
-  --footer-credits-text-dark: #ffffff00;         /* Texto créditos (oscuro) */
-  --footer-title: #222;                     /* Título (claro) */
-  --footer-title-dark: #fff;                /* Título (oscuro) */
-  --footer-location: #444;                  /* Ubicación (claro) */
-  --footer-location-dark: #ededed;          /* Ubicación (oscuro) */
-  --footer-link: #000;                      /* Enlaces (claro) */
-  --footer-link-dark: #ff8800;              /* Enlaces (oscuro) */
-  --footer-madeby: #000;                    /* "Hecho por" (claro) */
-  --footer-madeby-dark: #fff;               /* "Hecho por" (oscuro) */
-  --footer-logo-info-bg: #f3000000;         /* Fondo logo/info (claro) */
-  --footer-logo-info-bg-dark: #18181b;      /* Fondo logo/info (oscuro) */
-  --footer-info-text: #000;                 /* Texto info (claro) */
-  --footer-info-text-dark: #fff;            /* Texto info (oscuro) */
-  --footer-copyright: #000;                 /* Copyright (claro) */
-  --footer-copyright-dark: #fff;            /* Copyright (oscuro) */
-  --footer-content-layout-bg: #ec000000;    /* Fondo layout (claro) */
-  --footer-content-layout-bg-dark: #18181b; /* Fondo layout (oscuro) */
+  --footer-bg: #000000;
+  --footer-bg-dark: #18181b;
+  --footer-text: #ffffff;
+  --footer-text-dark: #ededed;
+  --footer-link: #fd7a00;
+  --footer-link-dark: #ff9800;
+  --footer-border: #ececec;
+  --footer-border-dark: #23232b;
+  --footer-card-bg: #00000000;
+  --footer-card-bg-dark: #18181b;
+  --footer-muted: #000000;
+  --footer-muted-dark: #bdbdbd;
 }
 .dark {
   --footer-bg: var(--footer-bg-dark);
   --footer-text: var(--footer-text-dark);
-  --footer-border: var(--footer-border-dark);
-  --footer-credits-bg: var(--footer-credits-bg-dark);
-  --footer-credits-text: var(--footer-credits-text-dark);
-  --footer-title: var(--footer-title-dark);
-  --footer-location: var(--footer-location-dark);
   --footer-link: var(--footer-link-dark);
-  --footer-madeby: var(--footer-madeby-dark);
-  --footer-logo-info-bg: var(--footer-logo-info-bg-dark);
-  --footer-info-text: var(--footer-info-text-dark);
-  --footer-copyright: var(--footer-copyright-dark);
-  --footer-content-layout-bg: var(--footer-content-layout-bg-dark);
+  --footer-border: var(--footer-border-dark);
+  --footer-card-bg: var(--footer-card-bg-dark);
+  --footer-muted: var(--footer-muted-dark);
 }
 
-/* =============================
-   Estructura principal del footer
-   ============================= */
 footer {
   width: 100%;
   margin-top: auto;
-  padding: 2.5rem 1.5rem;
+  padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-top: 1.5px solid var(--footer-border);
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.03);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--footer-border);
-  background: var(--footer-bg);
-  border-radius: 0.75rem 0.75rem 0 0;
-  color: var(--footer-text);
-  transition: background 0.3s, color 0.3s;
-}
-.dark footer {
-  background: var(--footer-bg-dark);
-  color: var(--footer-text-light);
-  border-top: 1px solid var(--footer-border-dark);
+  font-family: 'Montserrat', 'Inter', Arial, sans-serif;
 }
 
-@media (min-width: 640px) {
-  footer {
-    flex-direction: row;
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-}
-
-/* =============================
-   Footer Layout Estructurado
-   ============================= */
 .footer-content-layout {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  background: var(--footer-content-layout-bg);
+  align-items: flex-end;
+  background: var(--footer-card-bg);
   border-radius: 0.75rem;
-  transition: background 0.3s;
-}
-@media (max-width: 900px) {
-  .footer-content-layout {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 0 0.5rem 1.5rem 0.5rem;
-  }
+  padding: 1rem 1.5rem;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,0.03);
 }
 
-/* =============================
-   Logo e Información
-   ============================= */
 .footer-logo-info {
-  flex: 1 1 0;
-  min-width: 0;
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 1rem;
-  justify-content: flex-start;
-  background: var(--footer-logo-info-bg);
-  border-radius: 0.75rem;
-  padding: 0.5rem 1rem;
-  max-width: 350px;
-}
-.footer-logo-img {
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-  border: 1px solid var(--footer-bg-dark);
-  background: var(--footer-bg-dark);
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
 }
 .footer-info-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  color: var(--footer-info-text);
 }
 .footer-title {
-  font-weight: bold;
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  color: var(--footer-title);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--footer-text);
 }
 .footer-location {
-  font-size: 0.875rem;
-  color: var(--footer-location);
-  opacity: 0.85;
+  font-size: 0.9rem;
+  color: #fff;
 }
 
-/* =============================
-   Sponsors
-   ============================= */
 .footer-sponsors {
-  flex: 1 1 0;
-  min-width: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.5rem 0 2rem 0;
+}
+.footer-sponsors-inner {
+  display: flex;
+  flex-direction: row;
   gap: 1.5rem;
-  background: transparent;
-  margin: 0;
-  padding: 0;
+  align-items: end;
+  justify-content: center;
 }
 .footer-sponsor-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: color 0.2s;
+  pointer-events: none;
+  cursor: default;
 }
 .footer-sponsor-img {
-  width: 7rem;
-  height: 7rem;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
-  background: transparent;
+  background: var(--footer-bg);
   border-radius: 0.75rem;
   padding: 0.5rem;
-  transition: transform 0.2s;
-  border: none;
-  box-shadow: none;
-}
-.footer-sponsor-item:hover .footer-sponsor-img {
-  transform: scale(1.07);
-}
-.footer-sponsor-item span {
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
-  color: #444;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.dark .footer-sponsor-item span {
-  color: #ededed;
-}
-.footer-sponsor-item:hover span {
-  color: #fd7a00;
+  border: 1.5px solid transparent;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
 }
 
-/* =============================
-   Créditos
-   ============================= */
-.footer-credits, .footer-credits-right {
-  flex: 1 1 0;
-  min-width: 0;
+.footer-credits {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
   text-align: right;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem;
-  background: var(--footer-credits-bg);
-  color: var(--footer-credits-text);
-  width: 100%;
-  max-width: 350px;
-  box-sizing: border-box;
-  border: none;
-}
-@media (max-width: 900px) {
-  .footer-logo-info,
-  .footer-credits,
-  .footer-credits-right {
-    min-height: unset;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .footer-credits, .footer-credits-right {
-    align-items: center;
-    text-align: center;
-  }
+  font-size: 0.95rem;
+  gap: 0.25rem;
 }
 .footer-link {
   color: var(--footer-link);
@@ -248,42 +120,54 @@ footer {
   transition: color 0.2s;
 }
 .footer-link:hover {
-  color: #fd7a00;
+  color: var(--footer-text);
+  background: #fff3e0;
+  border-radius: 0.25rem;
 }
 .footer-madeby {
-  font-size: 0.75rem;
-  color: var(--footer-madeby);
-  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #fff;
 }
 .footer-heart {
-  color: #fd0000;
-  font-weight: bold;
-}
-.footer-copyright {
-  color: var(--footer-copyright);
+  color: var(--footer-link);
 }
 
-/* =============================
-   Responsive General
-   ============================= */
-@media (max-width: 640px) {
-  footer {
+@media (max-width: 900px) {
+  .footer-content-layout {
     flex-direction: column;
-    padding: 2rem 0.5rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
   }
-  .footer-logo-info, .footer-sponsors, .footer-credits, .footer-credits-right {
-    justify-content: center;
+  .footer-credits {
     align-items: center;
     text-align: center;
-    max-width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+  }
+  .footer-logo-info {
+    justify-content: center;
+  }
+  .footer-sponsors {
+    gap: 1rem;
+    padding: 1.5rem 0 1rem 0;
+  }
+  .footer-sponsors-inner {
+    gap: 1rem;
+  }
+  .footer-sponsor-img {
+    width: 80px;
+    height: 80px;
   }
 }
-
-/* =============================
-   Transiciones Suaves para Modo Claro/Oscuro
-   ============================= */
-footer, .footer-content-layout, .footer-logo-info, .footer-credits, .footer-credits-right, .footer-title, .footer-location, .footer-link, .footer-madeby, .footer-info-text, .footer-copyright {
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
+@media (max-width: 640px) {
+  .footer-sponsors {
+    gap: 0.5rem;
+    padding: 1rem 0 0.5rem 0;
+  }
+  .footer-sponsor-img {
+    width: 56px;
+    height: 56px;
+  }
+  .footer-content-layout {
+    padding: 0.5rem;
+  }
 }
