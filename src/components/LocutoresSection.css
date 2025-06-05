@@ -1,0 +1,85 @@
+/* =============================
+   Panel de Personalización CSS para Locutores
+   ============================= */
+:root {
+  --locutores-bg: linear-gradient(135deg, #7a0000 0%, #ff0000 100%);
+  --locutores-title: #fff;
+  --locutores-text: #e5e5e5;
+  --locutores-desc: #e5e5e5;
+  --locutores-border: var(--color-accent-dark);
+}
+.dark {
+  --locutores-bg: linear-gradient(135deg, #7a0000 0%, #ff0000 100%);
+  --locutores-title: #fff;
+  --locutores-text: #e5e5e5;
+  --locutores-desc: #e5e5e5;
+  --locutores-border: var(--color-accent-dark);
+}
+.locutores-section {
+  width: 100%;
+  max-width: 48rem;
+  background: var(--locutores-bg);
+  border-radius: 1rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.10);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 320px;
+}
+.locutores-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--locutores-title);
+  margin-bottom: 1rem;
+}
+.locutores-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+.locutores-img {
+  border-radius: 0.5rem;
+  object-fit: cover;
+  width: 6rem;
+  height: 6rem;
+  margin-bottom: 0.5rem;
+  border: 4px solid var(--locutores-border);
+}
+.locutores-img-lg {
+  width: 8rem;
+  height: 8rem;
+}
+.locutores-name {
+  font-weight: bold;
+  color: var(--locutores-text);
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.locutores-name-lg {
+  font-size: 1.5rem;
+}
+.locutores-desc {
+  font-size: 0.75rem;
+  color: var(--locutores-desc);
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.locutores-desc-lg {
+  font-size: 1rem;
+}
+.locutores-profile img {
+  display: block;
+}
+@media (max-width: 640px) {
+  .locutores-section {
+    padding: 1rem;
+  }
+}

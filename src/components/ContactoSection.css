@@ -1,0 +1,31 @@
+/* =============================
+   Panel de Personalización CSS para Contacto
+   ============================= */
+:root {
+  --contacto-bg: var(--color-background);
+  --contacto-title: #fff;
+  --contacto-title-dark: #fff;
+  --contacto-text: #fff;
+  --contacto-text-dark: #e5e5e5;
+  --contacto-placeholder-bg: #111112;
+  --contacto-placeholder-bg-dark: #111112;
+  --contacto-border: var(--color-accent-dark);
+}
+.dark {
+  --contacto-bg: var(--color-background);
+  --contacto-title: var(--contacto-title-dark);
+  --contacto-text: var(--contacto-text-dark);
+  --contacto-placeholder-bg: var(--contacto-placeholder-bg-dark);
+  --contacto-border: var(--color-accent-dark);
+}
+
+.contacto-input, .contacto-textarea {
+  background: var(--contacto-placeholder-bg) !important;
+  color: var(--contacto-text) !important;
+  border: none;
+}
+
+.contacto-input::placeholder, .contacto-textarea::placeholder {
+  color: #bdbdbd;
+  opacity: 1;
+}

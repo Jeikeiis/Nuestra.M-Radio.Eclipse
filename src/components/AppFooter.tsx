@@ -1,5 +1,6 @@
 import Image from "next/image";
 import "./Footer.css";
+import SponsorsCarousel from "./SponsorsCarousel";
 
 export default function AppFooter() {
   return (
@@ -21,38 +22,14 @@ export default function AppFooter() {
         </div>
         {/* Sponsors al centro */}
         <div className="footer-sponsors">
-          <div className="footer-sponsors-inner">
-            <a
-              href="javascript:void(0);"
-              tabIndex={-1}
-              className="footer-sponsor-item"
-            >
-              <img
-                src="/SanitariaNunez.webp"
-                alt="Sanitaria Nuñez"
-                className="footer-sponsor-img"
-              />
-            </a>
-            <a
-              href="javascript:void(0);"
-              tabIndex={-1}
-              className="footer-sponsor-item"
-            >
-              <img
-                src="/MirandaConstruccion.webp"
-                alt="Miranda Construcciones"
-                className="footer-sponsor-img"
-              />
-            </a>
-            {/* Agrega más sponsors aquí si lo deseas */}
-          </div>
+          <SponsorsCarousel />
         </div>
         {/* Créditos a la derecha */}
         <div className="footer-credits footer-credits-right">
           <span className="footer-copyright">
             © {new Date().getFullYear()}{" "}
             <a
-              href="https://nuestramananaradioeclipse-git-main-jeikeiis-projects.vercel.app/"
+              href="https://nuestramananaradioeclipse.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"

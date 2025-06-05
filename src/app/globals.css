@@ -25,17 +25,17 @@
    Variables de Tema Global
    ===================== */
 :root {
-  --color-background: linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%);
-  --color-foreground: #171717;
-  --color-accent: #fd7a00;
-  --color-accent-dark: #00027a;
+  --color-background: #fff5f5;
+  --color-foreground: #2d0000;
+  --color-accent: #470100;
+  --color-accent-dark: #ff0000;
   --font-sans: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 .dark {
-  --color-background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
-  --color-foreground: #ededed;
-  --color-accent: #ff9800;
-  --color-accent-dark: #23272f;
+  --color-background: #000000;
+  --color-foreground: #fff5f5;
+  --color-accent: #470100;
+  --color-accent-dark: #ff0000;
 }
 
 /* =====================
@@ -65,14 +65,14 @@ body {
 
 section, .card, .radio-section, .dynamic-bg {
   border-radius: 1.25rem;
-  border: 1.5px solid #ffe0b2;
+  border: 1.5px solid var(--color-accent);
   background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-  background-color: rgba(255,255,255,0.6);
+  background-color: rgba(255, 0, 0, 0.08);
 }
 .dark section, .dark .card, .dark .radio-section, .dark .dynamic-bg {
-  border: 1.5px solid #23272f;
-  background: var(--color-background);
-  background-color: rgba(24,24,27,0.6);
+  border: 1.5px solid var(--color-accent-dark);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  background-color: rgba(183, 28, 28, 0.6);
 }
 
 h1, .text-4xl, .text-3xl {

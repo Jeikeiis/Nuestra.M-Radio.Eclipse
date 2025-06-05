@@ -1,3 +1,5 @@
+import "./ContactoSection.css";
+
 export default function ContactoSection() {
   return (
     <section className="w-full max-w-xl bg-white dark:bg-black rounded-2xl shadow-lg p-8 flex flex-col items-center mb-8 min-h-[220px]">
@@ -8,16 +10,16 @@ export default function ContactoSection() {
         <input
           type="text"
           placeholder="Nombre"
-          className="px-4 py-2 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="px-4 py-2 rounded contacto-input"
         />
         <input
           type="email"
           placeholder="Correo electrónico"
-          className="px-4 py-2 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="px-4 py-2 rounded contacto-input"
         />
         <textarea
           placeholder="Mensaje"
-          className="px-4 py-2 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="px-4 py-2 rounded contacto-textarea"
           rows={3}
         ></textarea>
         <button
