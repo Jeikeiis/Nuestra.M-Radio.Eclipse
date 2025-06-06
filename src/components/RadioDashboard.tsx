@@ -1,172 +1,111 @@
 import { useRef, useState, useEffect } from "react";
 
-export default function RadioDashboard() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [error, setError] = useState(false);
-  const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
-
-  // Sincronizar con el vivo: recarga el stream y reproduce
-  const handleSyncLive = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current.load();
-      audioRef.current.play();
-    }
-  };
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if ("mediaSession" in navigator) {
-      const updateMetadata = () => {
-        navigator.mediaSession.metadata = new window.MediaMetadata({
-          title: "ECLIPSE FM",
-          artist: "106.3 · Canelones, Uruguay",
-          album: "Radio en vivo",
-          artwork: [
-            { src: "/RadioEclipse2.0.webp", sizes: "512x512", type: "image/webp" }
-          ]
-        });
-      };
-      updateMetadata();
-      navigator.mediaSession.setActionHandler("play", () => {
-        if (audioRef.current) audioRef.current.play();
-      });
-      navigator.mediaSession.setActionHandler("pause", () => {
-        if (audioRef.current) audioRef.current.pause();
-      });
-      navigator.mediaSession.setActionHandler("stop", () => {
-        if (audioRef.current) audioRef.current.pause();
-      });
-      // Botón 'Vivo' accesible desde controles multimedia (solo nexttrack)
-      navigator.mediaSession.setActionHandler("nexttrack", () => {
-        handleSyncLive();
-      });
-      navigator.mediaSession.setActionHandler("seekto", (details) => {
-        if (audioRef.current && typeof details.seekTime === "number") {
-          audioRef.current.currentTime = details.seekTime;
-        }
-      });
-      // El label del botón nexttrack no se puede cambiar por código, solo los metadatos
-      navigator.mediaSession.metadata = new window.MediaMetadata({
-        title: "ECLIPSE FM (Vivo)",
-        artist: "106.3 · Canelones, Uruguay",
-        album: "Radio en vivo",
-        artwork: [
-          { src: "/RadioEclipse2.0.webp", sizes: "512x512", type: "image/webp" }
-        ]
-      });
-    }
-  }, [playing]);
-
+export default function RadioDashboard({
+  playing,
+  setPlaying,
+  volume,
+  setVolume,
+  error,
+  setError,
+  onClose,
+  onSyncLive,
+  audioRef
+}: {
+  playing: boolean;
+  setPlaying: (v: boolean) => void;
+  volume: number;
+  setVolume: (v: number) => void;
+  error: boolean;
+  setError: (v: boolean) => void;
+  onClose?: () => void;
+  onSyncLive: () => void;
+  audioRef: React.RefObject<HTMLAudioElement>;
+}) {
+  // El panel solo controla la UI, no el audio
   return (
-    <section
-      className="w-full max-w-2xl rounded-full flex flex-row items-center gap-2 px-3 py-2 overflow-x-auto whitespace-nowrap shadow-lg"
-      style={{
-        minWidth: 0,
-        WebkitOverflowScrolling: 'touch',
-        background: "linear-gradient(90deg, #ff7300 0%, #1e293b 100%)",
-        boxShadow: "0 0 24px 0 rgba(255,115,0,0.2), 0 0 24px 0 rgba(30,41,59,0.2)",
-      }}
-      aria-label="Radio en vivo Eclipse FM"
-    >
-      <audio
-        ref={audioRef}
-        src={streamUrl}
-        preload="auto"
-        style={{ display: "none" }}
-        onPlay={() => { setPlaying(true); setError(false); }}
-        onPause={() => setPlaying(false)}
-        onError={() => setError(true)}
-        controls={false}
-        crossOrigin="anonymous"
-        playsInline
-      />
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={() => {
-          if (!audioRef.current) return;
-          if (audioRef.current.paused) {
-        audioRef.current.play();
-          } else {
-        audioRef.current.pause();
-          }
-        }}
-        onKeyPress={e => {
-          if (e.key === "Enter" || e.key === " ") {
-        if (!audioRef.current) return;
-        if (audioRef.current.paused) {
-          audioRef.current.play();
-        } else {
-          audioRef.current.pause();
-        }
-          }
-        }}
-        className="cursor-pointer"
-        aria-label={playing ? "Pausar" : "Reproducir"}
+    <>
+      {/* El audio ya está en layout.tsx, aquí solo controles visuales */}
+      <section
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-md rounded-t-2xl flex flex-col items-center shadow-2xl border border-white/10 bg-gradient-to-tr from-black via-[#1e293b] to-[#ff0000] animate-fade-in-up backdrop-blur-md bg-opacity-80"
+        style={{ minWidth: 0, WebkitOverflowScrolling: 'touch', backgroundColor: 'rgba(20,20,20,0.85)' }}
+        aria-label="Radio en vivo Nuestra Mañana FM 106.3"
       >
-        <img
-          src="/RadioEclipse2.0.webp"
-          alt="Logo Radio Eclipse"
-          width={40}
-          height={40}
-          className="w-10 h-10 rounded-lg shadow-lg border border-white/40 bg-black object-cover flex items-center justify-center"
-          style={{ background: "#000" }}
-        />
-      </div>
-      <div className="flex flex-col justify-center min-w-0">
-        <span className="text-xs font-bold text-white leading-tight truncate">
-          ECLIPSE FM
-        </span>
-        <span className="text-[10px] text-gray-200 truncate">106.3 · Canelones, Uruguay</span>
-      </div>
-      <button
-        onClick={() => {
-          if (!audioRef.current) return;
-          if (audioRef.current.paused) {
-            audioRef.current.play();
-          } else {
-            audioRef.current.pause();
-          }
-        }}
-        className="w-8 h-8 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400 bg-black text-white hover:bg-gray-800 border border-white/40"
-        aria-label={playing ? "Pausar" : "Reproducir"}
-      >
-        {playing ? (
-          <svg width="18" height="18" fill="white" viewBox="0 0 20 20"><rect x="4" y="4" width="4" height="12"/><rect x="12" y="4" width="4" height="12"/></svg>
-        ) : (
-          <svg width="18" height="18" fill="white" viewBox="0 0 20 20"><polygon points="5,4 15,10 5,16"/></svg>
-        )}
-      </button>
-      <input
-        type="range"
-        min={0}
-        max={1}
-        step={0.01}
-        value={volume}
-        onChange={e => {
-          const v = Number(e.target.value);
-          setVolume(v);
-          if (audioRef.current) audioRef.current.volume = v;
-        }}
-        className="w-16 accent-blue-600 mx-1"
-        aria-label="Volumen"
-      />
-      <button
-        onClick={handleSyncLive}
-        className="flex items-center gap-1 px-2 h-7 rounded-full bg-white border border-red-500 ml-1 shadow hover:bg-red-50 transition focus:outline-none focus:ring-2 focus:ring-red-400"
-        aria-label="Sincronizar con el vivo"
-        title="Sincronizar con el vivo"
-      >
-        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-        <span className="text-xs font-bold text-red-600 leading-none">Vivo</span>
-      </button>
-      {error && (
-        <span className="text-xs text-red-400 ml-2">Error de señal</span>
-      )}
-    </section>
+        <div className="flex items-center justify-between w-full px-4 pt-3 pb-2">
+          <div className="flex items-center gap-3">
+            <img
+              src="/NuestraManana2.0.webp"
+              alt="Logo Nuestra Mañana FM 106.3"
+              width={44}
+              height={44}
+              className="rounded-lg shadow border border-white/30 bg-black object-cover"
+              style={{ background: "#000" }}
+            />
+            <div className="flex flex-col min-w-0">
+              <span className="text-base font-bold text-white leading-tight truncate">
+                Nuestra Mañana FM 106.3
+              </span>
+              <span className="text-xs text-gray-200 truncate">En vivo · Lunes a Viernes de 10 a 13 hs</span>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              if (onClose) onClose();
+            }}
+            className="ml-2 text-white text-2xl hover:text-red-500 px-2"
+            aria-label="Minimizar reproductor"
+          >
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 16V8m0 0 4 4m-4-4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+        </div>
+        <div className="w-full px-4 pb-4 flex flex-col items-center">
+          <div className="flex items-center gap-2 w-full justify-center mt-2">
+            <button
+              onClick={() => {
+                if (!audioRef.current) return;
+                if (audioRef.current.paused) {
+                  audioRef.current.play();
+                } else {
+                  audioRef.current.pause();
+                }
+              }}
+              className="w-10 h-10 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400 bg-black text-white hover:bg-gray-800 border border-white/40"
+              aria-label={playing ? "Pausar" : "Reproducir"}
+            >
+              {playing ? (
+                <svg width="22" height="22" fill="white" viewBox="0 0 20 20"><rect x="4" y="4" width="4" height="12"/><rect x="12" y="4" width="4" height="12"/></svg>
+              ) : (
+                <svg width="22" height="22" fill="white" viewBox="0 0 20 20"><polygon points="5,4 15,10 5,16"/></svg>
+              )}
+            </button>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={volume}
+              onChange={e => {
+                const v = Number(e.target.value);
+                setVolume(v);
+                if (audioRef.current) audioRef.current.volume = v;
+              }}
+              className="w-20 accent-red-600 mx-1"
+              aria-label="Volumen"
+            />
+            <button
+              onClick={onSyncLive}
+              className="flex items-center gap-1 px-2 h-8 rounded-full bg-white border border-red-500 ml-1 shadow hover:bg-red-50 transition focus:outline-none focus:ring-2 focus:ring-red-400"
+              aria-label="Sincronizar con el vivo"
+              title="Sincronizar con el vivo"
+            >
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+              <span className="text-xs font-bold text-red-600 leading-none">Vivo</span>
+            </button>
+          </div>
+          {error && (
+            <span className="text-xs text-red-400 ml-2 mt-2">Error de señal</span>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

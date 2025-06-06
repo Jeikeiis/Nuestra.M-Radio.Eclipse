@@ -226,23 +226,25 @@ footer {
   }
 }
 @media (max-width: 640px) {
-  .footer-sponsors {
-    gap: 0.5rem;
-    padding: 1rem 0 0.5rem 0;
+  .footer-content-layout {
+    /* Eliminar sombra y fondo extra */
+    box-shadow: none !important;
+    background: none !important;
   }
   .footer-sponsor-img {
-    width: 56px;
-    height: 56px;
+    /* Fondo plano y sin gradiente ni sombra */
+    background: #fff !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border: 1.5px solid #b71c1c !important;
   }
-  .footer-content-layout {
-    padding: 0.5rem;
-  }
-}
-@media (max-width: 600px) {
   .sponsors-carousel-outer {
-    max-width: 95vw;
+    box-shadow: none !important;
+    background: #fff !important;
   }
   .sponsors-carousel-track {
-    gap: 1.5rem;
+    /* Eliminar animación CSS si existe, solo usar JS */
+    animation: none !important;
+    will-change: auto !important;
   }
 }

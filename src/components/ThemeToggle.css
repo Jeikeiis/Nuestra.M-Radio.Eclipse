@@ -210,3 +210,21 @@
   z-index: 1;
   pointer-events: none;
 }
+
+@media (max-width: 640px) {
+  .theme-toggle-btn,
+  .icon-sun-moon,
+  .sun,
+  .moon,
+  .eclipse-sun,
+  .eclipse-moon,
+  .eclipse-ray,
+  .eclipse-moon-crater,
+  .eclipse-moon-halo {
+    box-shadow: none !important;
+    background: #fff !important;
+    background-image: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+}

@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { useEffect, useRef, RefObject } from "react";
 
+function isMobile() {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth <= 640;
+}
+
 const sponsors = [
   { src: "/SanitariaNunez.webp", alt: "Sanitaria Nuñez" },
   { src: "/MirandaConstruccion.webp", alt: "Miranda Construcciones" },
@@ -34,9 +39,19 @@ export default function SponsorsCarousel() {
     if (!track) return;
     let animationFrame: number;
     let scrollAmount = 0;
-    const speed = 0.25;
+    let frame = 0;
+    const mobile = isMobile();
+    const speed = mobile ? 0.08 : 0.25;
     function animate() {
       if (!track) return;
+      if (mobile) {
+        // Solo animar cada 2 frames para reducir carga
+        frame = (frame + 1) % 2;
+        if (frame !== 0) {
+          animationFrame = requestAnimationFrame(animate);
+          return;
+        }
+      }
       scrollAmount += speed;
       if (scrollAmount >= track.scrollWidth / 2) {
         scrollAmount = 0;

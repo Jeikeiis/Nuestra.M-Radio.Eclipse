@@ -23,7 +23,7 @@ export default function WebScrapingSection() {
 
   useEffect(() => {
     fetchEventos();
-    const interval = setInterval(fetchEventos, 7 * 60 * 1000);
+    let interval = setInterval(fetchEventos, 7 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 

@@ -6,50 +6,63 @@ import { forwardRef } from "react";
 const ThemeToggle = dynamic(() => import("./ThemeToggle"), { ssr: false });
 const RadioDashboard = dynamic(() => import("./RadioDashboard"), { ssr: false });
 
-const AppHeader = forwardRef<HTMLElement>((props, ref) => {
-  return (
-    <header
-      ref={ref as any}
-      className="fixed top-0 left-0 w-full z-50 bg-white/90 dark:bg-black/90 shadow-lg transition-colors backdrop-blur-sm sm:backdrop-blur"
-      style={{ minHeight: 80 }}
-    >
-      {/*
+type AppHeaderProps = {
+  radioOpen: boolean;
+  setRadioOpen: (open: boolean) => void;
+};
+
+const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
+  (
+    { radioOpen, setRadioOpen }: { radioOpen: boolean; setRadioOpen: (open: boolean) => void },
+    ref
+  ) => {
+    return (
+      <header
+        ref={ref as any}
+        className="fixed top-0 left-0 w-full z-50 bg-white/90 dark:bg-black/90 shadow-lg transition-colors backdrop-blur-sm sm:backdrop-blur"
+        style={{ minHeight: 80 }}
+      >
+        {/*
         Layout responsive horizontal:
         - En pantallas sm o mayores: todos los elementos en fila (logo/info, reproductor, toggle)
         - En móvil: logo/info arriba, reproductor y toggle abajo
       */}
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-2 sm:px-6 py-2 sm:py-3">
-        {/* Logo e info */}
-        <div className="flex flex-row items-center gap-3 min-w-0 flex-1 justify-center sm:justify-start">
-          <Image
-            src="/NuestraManana2.0.webp"
-            alt="Logo Nuestra Mañana FM 106.3"
-            width={120}
-            height={120}
-            className="rounded-lg flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40"
-            priority
-          />
-          <div className="min-w-0 ml-2">
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
-              Nuestra Mañana FM 106.3
-            </h1>
-            <p className="text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 truncate">
-              La mejor música, en vivo y online.
-            </p>
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-2 sm:px-6 py-2 sm:py-3">
+          {/* Logo e info */}
+          <div className="flex flex-row items-center gap-3 min-w-0 flex-1 justify-center sm:justify-start">
+            <Image
+              src="/NuestraManana2.0.webp"
+              alt="Logo Nuestra Mañana FM 106.3"
+              width={120}
+              height={120}
+              className="rounded-lg flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40"
+              priority
+            />
+            <div className="min-w-0 ml-2">
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
+                Nuestra Mañana FM 106.3
+              </h1>
+              <p className="text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 truncate">
+                Lunes a Viernes de 10 a 13 horas
+              </p>
+            </div>
+          </div>
+          {/* Botón Radio en Vivo y toggle */}
+          <div className="flex flex-col sm:flex-row items-center gap-2 flex-shrink-0 w-full sm:w-auto sm:justify-end mt-2 sm:mt-0">
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white font-bold rounded-full px-6 py-2 shadow transition-colors text-base mb-2 sm:mb-0"
+              onClick={() => setRadioOpen(!radioOpen)}
+            >
+              Radio en Vivo
+            </button>
+            <div className="flex-shrink-0 ml-0 sm:ml-4 mt-2 sm:mt-0">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
-        {/* Reproductor y toggle en horizontal en sm+ */}
-        <div className="flex flex-col sm:flex-row items-center gap-2 flex-shrink-0 w-full sm:w-auto sm:justify-end mt-2 sm:mt-0">
-          <div className="flex-1 flex justify-center w-full sm:w-auto min-w-0">
-            <RadioDashboard />
-          </div>
-          <div className="flex-shrink-0 ml-0 sm:ml-4 mt-2 sm:mt-0">
-            <ThemeToggle />
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-});
+      </header>
+    );
+  }
+);
 
 export default AppHeader;

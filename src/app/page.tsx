@@ -1,16 +1,34 @@
 "use client";
 import AppHeader from "../components/AppHeader";
 import AppFooter from "../components/AppFooter";
-import { useRef, useLayoutEffect, useState } from "react";
+import { createContext, useContext, useRef, useLayoutEffect, useState } from "react";
 import ProgramacionSection from "../components/ProgramacionSection";
 import LocutoresSection from "../components/LocutoresSection";
 import PodcastsSection from "../components/PodcastsSection";
 import EventosSection from "../components/EventosSection";
 import ContactoSection from "../components/ContactoSection";
+import RadioDashboard from "../components/RadioDashboard";
+
+// Definir el tipo del contexto de audio
+export type AudioContextType = {
+  playing: boolean;
+  setPlaying: (v: boolean) => void;
+  volume: number;
+  setVolume: (v: number) => void;
+  error: boolean;
+  setError: (v: boolean) => void;
+  handleSyncLive: () => void;
+  audioRef: React.RefObject<HTMLAudioElement>;
+};
+export const AudioContext = createContext<AudioContextType | null>(null);
 
 export default function Home() {
   const headerRef = useRef<HTMLElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [radioOpen, setRadioOpen] = useState(false);
+
+  // Consumir el contexto de audio global
+  const audio = useContext(AudioContext);
 
   useLayoutEffect(() => {
     function updateHeight() {
@@ -19,7 +37,7 @@ export default function Home() {
       }
     }
     updateHeight();
-    window.addEventListener("resize", updateHeight);
+    window.addEventListener("resize", updateHeight, { passive: true });
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
@@ -29,7 +47,7 @@ export default function Home() {
       style={{ paddingTop: headerHeight }}
     >
       {/* Encabezado */}
-      <AppHeader ref={headerRef} />
+      <AppHeader ref={headerRef} radioOpen={radioOpen} setRadioOpen={setRadioOpen} />
 
       <main className="flex-1 flex flex-col items-center justify-start px-4 pb-10 gap-12 w-full">
         {/* Menú de información */}
@@ -43,7 +61,20 @@ export default function Home() {
         {/* Sección de contacto */}
         <ContactoSection />
       </main>
-
+      {/* Panel de RadioDashboard fijo sobre el footer */}
+      {radioOpen && audio && (
+        <RadioDashboard
+          playing={audio.playing}
+          setPlaying={audio.setPlaying}
+          volume={audio.volume}
+          setVolume={audio.setVolume}
+          error={audio.error}
+          setError={audio.setError}
+          onClose={() => setRadioOpen(false)}
+          onSyncLive={audio.handleSyncLive}
+          audioRef={audio.audioRef}
+        />
+      )}
       {/* Pie de página */}
       <AppFooter />
     </div>
