@@ -24,7 +24,11 @@ export default function ContactoSection() {
         ></textarea>
         <button
           type="submit"
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded transition-colors"
+          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
+          style={{
+            background:
+              "linear-gradient(90deg,rgb(255, 94, 0) 0%,rgb(255, 43, 15) 100%)",
+          }}
         >
           Enviar
         </button>

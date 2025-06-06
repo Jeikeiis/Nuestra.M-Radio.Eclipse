@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useEffect, useRef, RefObject } from "react";
+import "./SponsorsCarousel.css";
 
 function isMobile() {
   if (typeof window === "undefined") return false;

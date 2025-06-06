@@ -29,7 +29,7 @@ export default function AppFooter() {
           <span className="footer-copyright">
             © {new Date().getFullYear()}{" "}
             <a
-              href="https://nuestramananaradioeclipse.vercel.app/"
+              href="https://zeno.fm/radio/eclipsefm1063/"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"

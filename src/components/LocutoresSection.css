@@ -80,8 +80,9 @@
 }
 @media (max-width: 640px) {
   .locutores-section {
-    background: #fff !important;
-    box-shadow: none !important;
+    /* Elimina el fondo blanco forzado y el box-shadow para respetar modo oscuro y gradientes */
+    /* background: #fff !important; */
+    /* box-shadow: none !important; */
     border: 1.5px solid #b71c1c !important;
     padding: 1rem;
   }

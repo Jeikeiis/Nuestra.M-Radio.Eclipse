@@ -1,0 +1,33 @@
+/* SponsorsCarousel.css: asegura fondo transparente y soporte de modo oscuro en todas las vistas */
+.sponsors-carousel {
+  background: transparent !important;
+  box-shadow: none;
+  border: none;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark .sponsors-carousel {
+  background: transparent !important;
+}
+@media (max-width: 640px) {
+  .sponsors-carousel {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0.5rem 0;
+  }
+  .dark .sponsors-carousel {
+    background: transparent !important;
+  }
+  .sponsors-carousel-track {
+    background: transparent !important;
+  }
+  .sponsor-carousel-item {
+    background: transparent !important;
+  }
+}

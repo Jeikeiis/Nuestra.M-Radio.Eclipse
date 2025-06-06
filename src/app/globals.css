@@ -61,12 +61,14 @@ body {
   .rounded-2xl, .rounded-lg, .rounded-full {
     border-radius: 1rem !important;
   }
+  /*
   section, .card, .radio-section, .dynamic-bg {
     background: #fff !important;
     background-image: none !important;
     box-shadow: none !important;
     border: 1.5px solid #b71c1c !important;
   }
+  */
 }
 
 section, .card, .radio-section, .dynamic-bg {

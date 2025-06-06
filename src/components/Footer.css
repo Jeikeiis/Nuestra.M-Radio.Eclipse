@@ -232,15 +232,10 @@ footer {
     background: none !important;
   }
   .footer-sponsor-img {
-    /* Fondo plano y sin gradiente ni sombra */
-    background: #fff !important;
+    /* background: #fff !important; */ /* <--- Eliminado para respetar modo oscuro/transparente */
     box-shadow: none !important;
     outline: none !important;
     border: 1.5px solid #b71c1c !important;
-  }
-  .sponsors-carousel-outer {
-    box-shadow: none !important;
-    background: #fff !important;
   }
   .sponsors-carousel-track {
     /* Eliminar animación CSS si existe, solo usar JS */
