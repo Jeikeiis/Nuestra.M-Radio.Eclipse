@@ -35,8 +35,23 @@ export default function Home() {
   // Consumir el contexto de audio global
   const audio = useContext(AudioContext);
 
-  // Ajusta el padding-top del body en móviles para que el header no tape el contenido
+  // Mantener el scroll en el tope durante la precarga y unos segundos después
   useLayoutEffect(() => {
+    let scrollLock = true;
+    let unlockTimeout: NodeJS.Timeout | number;
+    let interval: NodeJS.Timeout | number;
+
+    function forceScrollTop() {
+      if (scrollLock) {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        if (document.scrollingElement) {
+          document.scrollingElement.scrollTop = 0;
+        }
+      }
+    }
+
     function updateHeight() {
       if (headerRef.current) {
         setHeaderHeight(headerRef.current.offsetHeight);
@@ -46,19 +61,40 @@ export default function Home() {
           document.body.style.paddingTop = "";
         }
       }
+      forceScrollTop();
     }
+
     updateHeight();
     window.addEventListener("resize", updateHeight, { passive: true });
+
+    interval = setInterval(forceScrollTop, 60);
+
+    unlockTimeout = setTimeout(() => {
+      scrollLock = false;
+      clearInterval(interval);
+    }, 1500);
+
+    setTimeout(forceScrollTop, 0);
+
     return () => {
       window.removeEventListener("resize", updateHeight);
       document.body.style.paddingTop = "";
+      clearInterval(interval);
+      clearTimeout(unlockTimeout);
     };
   }, []);
 
+  // Evita el style dinámico en SSR para evitar hydration mismatch
+  const paddingTop = typeof window !== "undefined" && !isMobile() ? headerHeight : undefined;
+
   return (
     <div
-      className="min-h-screen flex flex-col transition-colors pt-20"
-      // Elimina el style dinámico para evitar diferencias SSR/cliente
+      className="min-h-screen flex flex-col transition-colors"
+      style={
+        paddingTop !== undefined
+          ? { paddingTop }
+          : undefined
+      }
     >
       {/* Encabezado */}
       <AppHeader ref={headerRef} radioOpen={radioOpen} setRadioOpen={setRadioOpen} />

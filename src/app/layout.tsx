@@ -15,6 +15,17 @@ export default function RootLayout({
   const [volume, setVolume] = useState(1);
   const [error, setError] = useState(false);
 
+  // Estado para controlar el preloader
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    // Forzar modo oscuro en el html al cargar
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+    const timer = setTimeout(() => setHydrated(true), 200); // Preload más rápido
+    return () => clearTimeout(timer);
+  }, []);
+
   // Sincronizar con el vivo
   const handleSyncLive = () => {
     if (audioRef.current) {
@@ -79,11 +90,40 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="es">
+    <html lang="es" className="dark">
       <head>
         <link rel="icon" type="image/webp" href="/favicon.webp" />
+        {/* Preload imágenes críticas */}
+        <link rel="preload" as="image" href="/NuestraManana2.0.webp" />
+        <link rel="preload" as="image" href="/RadioEclipse2.0.webp" />
+        {/* Elimina los preloads de fuentes si no usas font-face local o Next/font para evitar warnings */}
+        {/* Si usas next/font, el preload lo gestiona Next.js automáticamente */}
+        {/* <link rel="preload" as="font" href="/fonts/Montserrat.woff2" type="font/woff2" crossOrigin="anonymous" /> */}
+        {/* <link rel="preload" as="font" href="/fonts/Inter.woff2" type="font/woff2" crossOrigin="anonymous" /> */}
+        {/* ...otros preloads si tienes más recursos críticos... */}
       </head>
       <body className="bg-white text-black dark:bg-black dark:text-white transition-colors">
+        {!hydrated && (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 9999,
+              background: "#000",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "opacity 0.2s",
+            }}
+            aria-label="Cargando contenido"
+          >
+            <div style={{ textAlign: "center" }}>
+              <img src="/NuestraManana2.0.webp" alt="Cargando..." width={90} height={90} style={{ margin: "0 auto" }} />
+              <div style={{ marginTop: 16, fontWeight: 700, fontSize: 18 }}>Cargando...</div>
+            </div>
+          </div>
+        )}
         {/* Audio global siempre presente */}
         <audio
           ref={audioRef}
@@ -99,7 +139,10 @@ export default function RootLayout({
           autoPlay={playing}
         />
         <AudioContext.Provider value={audioContextValue}>
-          {children}
+          {/* Oculta el contenido hasta que esté hidratado */}
+          <div style={{ opacity: hydrated ? 1 : 0, transition: "opacity 0.2s" }}>
+            {children}
+          </div>
         </AudioContext.Provider>
       </body>
     </html>
