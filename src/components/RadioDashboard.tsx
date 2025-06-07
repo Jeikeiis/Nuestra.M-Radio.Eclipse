@@ -26,8 +26,12 @@ export default function RadioDashboard({
     <>
       {/* El audio ya está en layout.tsx, aquí solo controles visuales */}
       <section
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-md rounded-t-2xl flex flex-col items-center shadow-2xl border border-white/10 bg-gradient-to-tr from-black via-[#1e293b] to-[#ff0000] animate-fade-in-up backdrop-blur-md bg-opacity-80"
-        style={{ minWidth: 0, WebkitOverflowScrolling: 'touch', backgroundColor: 'rgba(20,20,20,0.85)' }}
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-md rounded-t-2xl flex flex-col items-center shadow-2xl border border-white/10 animate-fade-in-up backdrop-blur-md bg-opacity-80"
+        style={{
+          minWidth: 0,
+          WebkitOverflowScrolling: 'touch',
+          background: "rgba(20,20,20,0.92)", // Fondo oscuro semitransparente
+        }}
         aria-label="Radio en vivo Nuestra Mañana FM 106.3"
       >
         <div className="flex items-center justify-between w-full px-4 pt-3 pb-2">

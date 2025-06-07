@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./SponsorsCarousel.css";
 
 function isMobile() {
@@ -32,39 +32,43 @@ function SponsorItem({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function SponsorsCarousel() {
+  const [offset, setOffset] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  const [trackWidth, setTrackWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
 
-  // Animación de scroll horizontal
+  // Duplicar sponsors para loop infinito
+  const sponsorsLoop = [...sponsors, ...sponsors];
+
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    let animationFrame: number;
-    let scrollAmount = 0;
-    let frame = 0;
-    const mobile = isMobile();
-    const speed = mobile ? 0.08 : 0.25;
-    function animate() {
-      if (!track) return;
-      if (mobile) {
-        // Solo animar cada 2 frames para reducir carga
-        frame = (frame + 1) % 2;
-        if (frame !== 0) {
-          animationFrame = requestAnimationFrame(animate);
-          return;
-        }
+    function updateWidths() {
+      if (trackRef.current) {
+        setTrackWidth(trackRef.current.scrollWidth / 2); // solo la mitad (un loop)
+        setContainerWidth(trackRef.current.parentElement?.offsetWidth || 0);
       }
-      scrollAmount += speed;
-      if (scrollAmount >= track.scrollWidth / 2) {
-        scrollAmount = 0;
-      }
-      track.scrollLeft = scrollAmount;
-      animationFrame = requestAnimationFrame(animate);
     }
-    animate();
-    return () => cancelAnimationFrame(animationFrame);
+    updateWidths();
+    window.addEventListener("resize", updateWidths);
+    return () => window.removeEventListener("resize", updateWidths);
   }, []);
 
-  const sponsorsLoop = [...sponsors, ...sponsors];
+  useEffect(() => {
+    let raf: number;
+    let pos = offset;
+    const speed = isMobile() ? 0.5 : 1.5; // píxeles por frame
+
+    function animate() {
+      pos += speed;
+      if (trackWidth > 0 && pos >= trackWidth) {
+        pos = 0;
+      }
+      setOffset(pos);
+      raf = requestAnimationFrame(animate);
+    }
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trackWidth]);
 
   return (
     <div
@@ -74,7 +78,12 @@ export default function SponsorsCarousel() {
       <div
         className="sponsors-carousel-track"
         ref={trackRef}
-        style={{ display: "flex", width: "max-content" }}
+        style={{
+          display: "flex",
+          width: sponsorsLoop.length * 120, // 110px img + margen
+          transform: `translateX(-${offset}px)`,
+          transition: "none",
+        }}
       >
         {sponsorsLoop.map((s, i) => (
           <SponsorItem key={i} src={s.src} alt={s.alt} />

@@ -3,12 +3,12 @@
    ============================= */
 :root {
   --contacto-bg: var(--color-background);
-  --contacto-title: #1a1a1a; /* texto oscuro */
+  --contacto-title: #fff;
   --contacto-title-dark: #fff;
-  --contacto-text: #222;      /* texto oscuro */
+  --contacto-text: #fff;
   --contacto-text-dark: #e5e5e5;
-  --contacto-placeholder-bg: #5f0000; /* fondo claro */
-  --contacto-placeholder-bg-dark: #111112;
+  --contacto-placeholder-bg: #4d0000;
+  --contacto-placeholder-bg-dark: #4d0000;
   --contacto-border: var(--color-accent-dark);
 }
 .dark {
@@ -26,6 +26,6 @@
 }
 
 .contacto-input::placeholder, .contacto-textarea::placeholder {
-  color: #ffffff; /* mejor contraste */
+  color: #bdbdbd;
   opacity: 1;
 }

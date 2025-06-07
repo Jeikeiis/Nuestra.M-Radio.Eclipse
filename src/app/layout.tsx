@@ -22,8 +22,53 @@ export default function RootLayout({
     // Forzar modo oscuro en el html al cargar
     document.documentElement.classList.add("dark");
     localStorage.setItem("theme", "dark");
-    const timer = setTimeout(() => setHydrated(true), 200); // Preload más rápido
-    return () => clearTimeout(timer);
+
+    // Golpea el fondo y vuelve al top varias veces para asegurar el layout,
+    // pero mantiene el scroll en top antes de mostrar la app
+    let count = 0;
+    const max = 3;
+    let finalTopTimeout: NodeJS.Timeout | number;
+
+    function bounceScroll() {
+      window.scrollTo(0, 99999);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        if (document.scrollingElement) {
+          document.scrollingElement.scrollTop = 0;
+        }
+        count++;
+        if (count < max) {
+          setTimeout(bounceScroll, 120);
+        } else {
+          // Mantener el scroll en el top durante el preloader
+          finalTopTimeout = setInterval(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            if (document.scrollingElement) {
+              document.scrollingElement.scrollTop = 0;
+            }
+          }, 60);
+          setTimeout(() => {
+            clearInterval(finalTopTimeout);
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            if (document.scrollingElement) {
+              document.scrollingElement.scrollTop = 0;
+            }
+            setHydrated(true);
+          }, 650);
+        }
+      }, 120);
+    }
+    bounceScroll();
+
+    return () => {
+      if (finalTopTimeout) clearInterval(finalTopTimeout);
+    };
   }, []);
 
   // Sincronizar con el vivo
@@ -96,10 +141,6 @@ export default function RootLayout({
         {/* Preload imágenes críticas */}
         <link rel="preload" as="image" href="/NuestraManana2.0.webp" />
         <link rel="preload" as="image" href="/RadioEclipse2.0.webp" />
-        {/* Elimina los preloads de fuentes si no usas font-face local o Next/font para evitar warnings */}
-        {/* Si usas next/font, el preload lo gestiona Next.js automáticamente */}
-        {/* <link rel="preload" as="font" href="/fonts/Montserrat.woff2" type="font/woff2" crossOrigin="anonymous" /> */}
-        {/* <link rel="preload" as="font" href="/fonts/Inter.woff2" type="font/woff2" crossOrigin="anonymous" /> */}
         {/* ...otros preloads si tienes más recursos críticos... */}
       </head>
       <body className="bg-white text-black dark:bg-black dark:text-white transition-colors">

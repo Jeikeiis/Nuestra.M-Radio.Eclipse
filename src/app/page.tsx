@@ -35,7 +35,10 @@ export default function Home() {
   // Consumir el contexto de audio global
   const audio = useContext(AudioContext);
 
-  // Mantener el scroll en el tope durante la precarga y unos segundos después
+  // Evita el style dinámico en SSR para evitar hydration mismatch
+  // Siempre renderiza style={{paddingTop: 0}} en SSR y solo cambia en cliente
+  const [clientPaddingTop, setClientPaddingTop] = useState(0);
+
   useLayoutEffect(() => {
     let scrollLock = true;
     let unlockTimeout: NodeJS.Timeout | number;
@@ -60,6 +63,8 @@ export default function Home() {
         } else {
           document.body.style.paddingTop = "";
         }
+        // Solo en cliente, actualiza el paddingTop del div
+        setClientPaddingTop(isMobile() ? 0 : headerRef.current.offsetHeight);
       }
       forceScrollTop();
     }
@@ -84,20 +89,16 @@ export default function Home() {
     };
   }, []);
 
-  // Evita el style dinámico en SSR para evitar hydration mismatch
-  const paddingTop = typeof window !== "undefined" && !isMobile() ? headerHeight : undefined;
-
   return (
     <div
       className="min-h-screen flex flex-col transition-colors"
-      style={
-        paddingTop !== undefined
-          ? { paddingTop }
-          : undefined
-      }
+      style={{ paddingTop: clientPaddingTop }}
     >
       {/* Encabezado */}
       <AppHeader ref={headerRef} radioOpen={radioOpen} setRadioOpen={setRadioOpen} />
+
+      {/* Espacio extra debajo del header */}
+      <div style={{ height: 24 }} />
 
       <main className="flex-1 flex flex-col items-center justify-start px-4 pb-10 gap-12 w-full">
         {/* Menú de información */}
