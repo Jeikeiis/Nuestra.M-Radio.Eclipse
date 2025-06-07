@@ -4,16 +4,16 @@
 :root {
   --locutores-bg: linear-gradient(135deg, #7a0000 0%, #ff0000 100%);
   --locutores-title: #fff;
-  --locutores-text: #e5e5e5;
-  --locutores-desc: #e5e5e5;
-  --locutores-border: var(--color-accent-dark);
+  --locutores-text: #fff; /* Mejor contraste */
+  --locutores-desc: #f3f3f3; /* Más claro para contraste */
+  --locutores-border: #fff; /* Borde claro para contraste */
 }
 .dark {
   --locutores-bg: linear-gradient(135deg, #7a0000 0%, #ff0000 100%);
   --locutores-title: #fff;
-  --locutores-text: #e5e5e5;
-  --locutores-desc: #e5e5e5;
-  --locutores-border: var(--color-accent-dark);
+  --locutores-text: #fff;
+  --locutores-desc: #ededed;
+  --locutores-border: #fff;
 }
 .locutores-section {
   width: 100%;

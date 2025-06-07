@@ -5,20 +5,60 @@
 :root {
   --background: linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%);
   --foreground: #171717;
-  --color-background: #fff5f5;
-  --color-foreground: #2d0000;
+  --color-background: #fffdf8; /* más claro para mejor contraste */
+  --color-foreground: #1a1a1a; /* más oscuro para mejor contraste */
   --color-accent: #470100;
   --color-accent-dark: #ff0000;
-  --font-sans: 'Montserrat', Arial, Helvetica, sans-serif;
+  --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
+  --font-body: 'Inter', Arial, Helvetica, sans-serif;
+
+  /* Paleta de colores semántica */
+  --primary: #ff0000;
+  --primary-dark: #b71c1c;
+  --secondary: #470100;
+  --secondary-dark: #23272f;
+  --accent: #fd7a00;
+  --accent-dark: #ff9800;
+  --success: #43a047;
+  --danger: #e53935;
+  --warning: #ffa000;
+  --info: #1976d2;
+  --background-main: #fff5f5;
+  --background-alt: #fffbe6;
+  --foreground-main: #1a1a1a; /* texto principal más oscuro */
+  --foreground-alt: #171717;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
 }
 
 .dark {
+  /* Solo variables necesarias para modo oscuro */
   --background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
   --foreground: #ededed;
-  --color-background: #000000;
-  --color-foreground: #fff5f5;
+  --color-background: #18181b; /* fondo oscuro */
+  --color-foreground: #fff5f5; /* texto claro */
   --color-accent: #470100;
   --color-accent-dark: #ff0000;
+
+  /* Paleta de colores semántica */
+  --primary: #ff5252;
+  --primary-dark: #b71c1c;
+  --secondary: #23272f;
+  --secondary-dark: #18181b;
+  --accent: #ff9800;
+  --accent-dark: #fd7a00;
+  --success: #66bb6a;
+  --danger: #ef5350;
+  --warning: #ffb300;
+  --info: #64b5f6;
+  --background-main: #000000;
+  --background-alt: #18181b;
+  --foreground-main: #fff5f5; /* texto principal claro */
+  --foreground-alt: #ededed;
 }
 
 /* =====================
@@ -37,7 +77,7 @@ body {
   min-height: 100vh;
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-sans), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
   letter-spacing: 0.01em;
   scroll-behavior: smooth;
   font-size: 1.08rem;
@@ -58,39 +98,34 @@ section, .card, .radio-section, .dynamic-bg {
   background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   background-color: rgba(255, 0, 0, 0.08);
 }
-.dark section, .dark .card, .dark .radio-section, .dark .dynamic-bg {
-  border: 1.5px solid var(--color-accent-dark);
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-  background-color: rgba(183, 28, 28, 0.6);
-}
 
 /* Tipografía */
 h1, .text-4xl, .text-3xl {
-  font-family: var(--font-sans), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: var(--font-title);
   font-weight: 800;
   letter-spacing: 0.05em;
   line-height: 1.15;
 }
 h2, .text-2xl {
-  font-family: var(--font-sans), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: var(--font-title);
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.2;
 }
 h3, .text-xl {
-  font-family: var(--font-sans), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: var(--font-title);
   font-weight: 600;
   letter-spacing: 0.03em;
   line-height: 1.25;
 }
 h4, .text-lg {
-  font-family: var(--font-sans), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: var(--font-title);
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.3;
 }
 p, .text-base, .text-sm, .text-xs, span, label, li, input, textarea, button {
-  font-family: 'Inter', var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.7;
@@ -122,4 +157,21 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #ff0000 0%, #ff5252 100%);
+}
+
+/* Edge y IE */
+body {
+  scrollbar-face-color: #ff0000;
+  scrollbar-track-color: #470100;
+  scrollbar-arrow-color: #fff;
+  scrollbar-highlight-color: #b71c1c;
+  scrollbar-shadow-color: #470100;
+  scrollbar-3dlight-color: #ff5252;
+  scrollbar-darkshadow-color: #b71c1c;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #ff0000 #470100;
 }

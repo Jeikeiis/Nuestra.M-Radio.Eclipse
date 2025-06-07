@@ -22,6 +22,11 @@ export type AudioContextType = {
 };
 export const AudioContext = createContext<AudioContextType | null>(null);
 
+function isMobile() {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth <= 640;
+}
+
 export default function Home() {
   const headerRef = useRef<HTMLElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -30,21 +35,30 @@ export default function Home() {
   // Consumir el contexto de audio global
   const audio = useContext(AudioContext);
 
+  // Ajusta el padding-top del body en móviles para que el header no tape el contenido
   useLayoutEffect(() => {
     function updateHeight() {
       if (headerRef.current) {
         setHeaderHeight(headerRef.current.offsetHeight);
+        if (isMobile()) {
+          document.body.style.paddingTop = headerRef.current.offsetHeight + "px";
+        } else {
+          document.body.style.paddingTop = "";
+        }
       }
     }
     updateHeight();
     window.addEventListener("resize", updateHeight, { passive: true });
-    return () => window.removeEventListener("resize", updateHeight);
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+      document.body.style.paddingTop = "";
+    };
   }, []);
 
   return (
     <div
       className="min-h-screen flex flex-col transition-colors pt-20"
-      style={{ paddingTop: headerHeight }}
+      // Elimina el style dinámico para evitar diferencias SSR/cliente
     >
       {/* Encabezado */}
       <AppHeader ref={headerRef} radioOpen={radioOpen} setRadioOpen={setRadioOpen} />

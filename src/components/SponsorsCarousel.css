@@ -1,5 +1,5 @@
 .sponsors-carousel {
-  background: transparent !important;
+  background: transparent;
   box-shadow: none;
   border: none;
   padding: 0.5rem 0;
@@ -11,28 +11,28 @@
   justify-content: center;
 }
 .dark .sponsors-carousel {
-  background: transparent !important;
+  background: transparent;
 }
 .sponsors-carousel-track {
-  background: transparent !important;
+  background: transparent;
 }
 .sponsor-carousel-item {
-  background: transparent !important;
+  background: transparent;
 }
 @media (max-width: 640px) {
   .sponsors-carousel {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
+    background: transparent;
+    box-shadow: none;
+    border: none;
     padding: 0.5rem 0;
   }
   .dark .sponsors-carousel {
-    background: transparent !important;
+    background: transparent;
   }
   .sponsors-carousel-track {
-    background: transparent !important;
+    background: transparent;
   }
   .sponsor-carousel-item {
-    background: transparent !important;
+    background: transparent;
   }
 }
