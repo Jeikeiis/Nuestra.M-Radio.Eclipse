@@ -21,67 +21,6 @@
   height: 28px;
   display: block;
 }
-.sun {
-  position: absolute;
-  top: 0; left: 0;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: #FFD600;
-  box-shadow: 0 0 12px 2px #FFD60066;
-  transition: transform 0.5s, opacity 0.5s, background 0.5s;
-  z-index: 2;
-}
-.moon {
-  position: absolute;
-  top: 0; left: 0;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: -6px 0 0 0 #23272f;
-  transform: scale(0.7) translate(8px, 0);
-  opacity: 0;
-  transition: transform 0.5s, opacity 0.5s, background 0.5s;
-  z-index: 3;
-}
-.dark .sun {
-  transform: scale(0.7) translate(-8px, 0);
-  opacity: 0;
-  background: #FFD60033;
-}
-.dark .moon {
-  opacity: 1;
-  background: #fff;
-  box-shadow: -6px 0 0 0 #18181b;
-  transform: scale(1) translate(0, 0);
-}
-.sun-ray {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 6px;
-  height: 2px;
-  background: #FFD600;
-  border-radius: 2px;
-  transform-origin: left center;
-  opacity: 0.7;
-  transition: opacity 0.5s;
-}
-.dark .sun-ray {
-  opacity: 0;
-}
-.moon-crater {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #e0e0e0;
-  border-radius: 50%;
-  opacity: 0.5;
-  transition: opacity 0.5s;
-  pointer-events: none;
-}
-.dark .moon-crater {
-  opacity: 0.7;
-}
 .eclipse-container {
   position: relative;
   width: 28px;
@@ -138,55 +77,6 @@
 .dark .eclipse-ray {
   opacity: 0.15;
 }
-
-/* Cráteres de la luna del eclipse */
-.eclipse-moon-crater {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.7;
-  pointer-events: none;
-  box-shadow: 0 1px 2px 0 #23272f44 inset, 0 0 2px 1px #fff2;
-  transition: opacity 0.5s;
-  z-index: 4;
-}
-.dark .eclipse-moon-crater {
-  background: rgba(180,180,180,0.18);
-  opacity: 0.85;
-}
-
-/* Ejemplo de posiciones y tamaños de cráteres */
-.eclipse-moon-crater.c1 {
-  width: 5px; height: 5px;
-  left: 7px; top: 8px;
-  background: radial-gradient(circle at 60% 40%, #e0e3ea 60%, #bfc3d1 100%);
-}
-.eclipse-moon-crater.c2 {
-  width: 3.5px; height: 3.5px;
-  left: 15px; top: 13px;
-  background: radial-gradient(circle at 40% 60%, #bfc3d1 60%, #7a7e8a 100%);
-}
-.eclipse-moon-crater.c3 {
-  width: 2.5px; height: 2.5px;
-  left: 18px; top: 7px;
-  background: radial-gradient(circle at 50% 50%, #e6e9f0 70%, #bfc3d1 100%);
-}
-.eclipse-moon-crater.c4 {
-  width: 4px; height: 4px;
-  left: 10px; top: 17px;
-  background: radial-gradient(circle at 60% 40%, #bfc3d1 60%, #7a7e8a 100%);
-}
-.eclipse-moon-crater.c5 {
-  width: 2px; height: 2px;
-  left: 20px; top: 18px;
-  background: radial-gradient(circle at 50% 50%, #e6e9f0 80%, #bfc3d1 100%);
-}
-.eclipse-moon-crater.c6 {
-  width: 3px; height: 3px;
-  left: 13px; top: 4px;
-  background: radial-gradient(circle at 60% 40%, #e0e3ea 60%, #bfc3d1 100%);
-}
-
-/* Perfil y borde de la luna para dar volumen */
 .eclipse-moon::after {
   content: '';
   position: absolute;
@@ -199,7 +89,6 @@
   pointer-events: none;
   z-index: 4;
 }
-/* Halo exterior sutil */
 .eclipse-moon-halo {
   content: '';
   position: absolute;
@@ -212,5 +101,5 @@
 }
 
 @media (max-width: 640px) {
-  /* Se eliminaron reglas destructivas para respetar modo oscuro y animaciones en ThemeToggle */
+  /* No se requieren reglas destructivas aquí */
 }

@@ -1,3 +1,5 @@
+import "./ProgramacionSection.css";
+
 export default function ProgramacionSection() {
   return (
     <section className="w-full max-w-xl bg-white dark:bg-black rounded-2xl shadow-lg p-8 flex flex-col items-center mt-8 min-h-[220px]">

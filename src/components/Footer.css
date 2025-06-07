@@ -185,20 +185,10 @@ footer {
 .sponsor-carousel-item::before {
   content: none;
 }
-
-/* Partículas rojas animadas dentro de cada sponsor */
-.sponsor-carousel-item {
-  position: relative;
-  overflow: visible;
-}
-.sponsor-particle {
-  display: none;
-}
 @keyframes sponsors-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 @media (max-width: 900px) {
   .footer-content-layout {
     flex-direction: column;
@@ -227,18 +217,15 @@ footer {
 }
 @media (max-width: 640px) {
   .footer-content-layout {
-    /* Eliminar sombra y fondo extra */
     box-shadow: none !important;
     background: none !important;
   }
   .footer-sponsor-img {
-    /* background: #fff !important; */ /* <--- Eliminado para respetar modo oscuro/transparente */
     box-shadow: none !important;
     outline: none !important;
     border: 1.5px solid #b71c1c !important;
   }
   .sponsors-carousel-track {
-    /* Eliminar animación CSS si existe, solo usar JS */
     animation: none !important;
     will-change: auto !important;
   }
