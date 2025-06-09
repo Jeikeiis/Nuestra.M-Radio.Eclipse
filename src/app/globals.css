@@ -221,7 +221,7 @@ html {
 @media (max-width: 900px) {
   .main-content {
     width: 100%;
-    max-width: 100%;
+    max-width: 100vw;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -229,7 +229,7 @@ html {
 @media (max-width: 640px) {
   .main-content {
     width: 100%;
-    max-width: 100%;
+    max-width: 100vw;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
   }
@@ -326,13 +326,13 @@ html {
   .contacto-section {
     padding: 1.5rem 0.5rem;
     max-width: 100vw;
-    width: 100vw;
+    width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
   .main-content {
     max-width: 100vw;
-    width: 100vw;
+    width: 100%;
     padding-left: 0;
     padding-right: 0;
     /* Elimina cualquier padding-top aquí */
@@ -355,13 +355,13 @@ html {
   .contacto-section {
     padding: 0.7rem 0.1rem 1.2rem 0.1rem;
     max-width: 100vw;
-    width: 100vw;
+    width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
   .main-content {
     max-width: 100vw;
-    width: 100vw;
+    width: 100%;
     padding-left: 0;
     padding-right: 0;
     /* Elimina cualquier padding-top aquí */
