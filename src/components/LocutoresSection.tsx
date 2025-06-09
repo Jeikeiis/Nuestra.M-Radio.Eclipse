@@ -19,15 +19,6 @@ export default function LocutoresSection() {
           <span className="locutores-name">Federico Pinato</span>
           <span className="locutores-programa">Nuestra Mañana</span>
         </div>
-        <div className="locutores-profile">
-          <img
-            src="/RadioEclipse2.0.webp"
-            alt="María López - Eclipse Tarde"
-            className="locutores-img"
-          />
-          <span className="locutores-name">María López</span>
-          <span className="locutores-programa">Eclipse Tarde</span>
-        </div>
       </div>
     </section>
   );

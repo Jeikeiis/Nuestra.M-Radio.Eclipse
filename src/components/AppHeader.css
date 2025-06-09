@@ -1,18 +1,28 @@
-/* (Eliminado: todo el contenido ya está en globals.css) */
+/* Header styles migrados desde globals.css */
 
 .app-header {
+  color: var(--appheader-text);
+  background: var(--appheader-bg);
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 50;
-  background: var(--appheader-bg, #000);
-  color: var(--appheader-text, #fff);
-  min-height: 80px;
-  /* box-shadow reducido para mejor rendimiento */
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
-  /* Reduce la transición a lo esencial */
+  z-index: 100;
   transition: background 0.15s linear, color 0.15s linear;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .app-header { padding: 0 0.5rem; min-height: 38px; }
+}
+@media (max-width: 640px) {
+  .app-header { padding: 0 0.25rem; min-height: 32px; }
 }
 
 .app-header-inner {

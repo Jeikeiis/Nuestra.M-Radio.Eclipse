@@ -51,13 +51,13 @@
   width: 28px;
   height: 28px;
   display: block;
-  animation: sun-spin 18s linear infinite; /* Más lento */
+  /* Elimina animación de giro */
+  /* animation: sun-spin 18s linear infinite; */
 }
 @keyframes sun-spin {
   100% { transform: rotate(360deg); }
 }
 .eclipse-moon-halo {
-  /* El halo debe estar detrás de todo */
   position: absolute;
   top: -4px; left: -4px;
   width: 36px; height: 36px;
@@ -65,7 +65,8 @@
   box-shadow: 0 0 16px 8px #bfc3d122;
   z-index: 0;
   pointer-events: none;
-  animation: halo-pulse 6s infinite alternate; /* Más lento */
+  /* Elimina animación de halo */
+  /* animation: halo-pulse 6s infinite alternate; */
 }
 @keyframes halo-pulse {
   0% { opacity: 0.5; transform: scale(1); }
@@ -80,7 +81,8 @@
   box-shadow: 0 0 12px 2px #FFD60066;
   z-index: 1;
   transition: background 0.5s, box-shadow 0.5s;
-  animation: sun-glow 2s infinite alternate;
+  /* Elimina animación de glow */
+  /* animation: sun-glow 2s infinite alternate; */
 }
 @keyframes sun-glow {
   0% { box-shadow: 0 0 12px 2px #FFD60066, 0 0 0 0 #FFD60033; }
@@ -98,7 +100,8 @@
   opacity: 0.7;
   z-index: 2;
   transition: opacity 0.5s;
-  animation: ray-flicker 4s infinite alternate; /* Más lento */
+  /* Elimina animación de rayos */
+  /* animation: ray-flicker 4s infinite alternate; */
 }
 @keyframes ray-flicker {
   0% { opacity: 0.7; }

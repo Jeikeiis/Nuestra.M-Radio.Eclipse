@@ -55,8 +55,10 @@
 }
 
 .locutores-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;    /* Centra horizontalmente las tarjetas */
+  align-items: center;        /* Centra verticalmente si hay espacio */
   gap: 1.5rem 1.2rem;
   width: 100%;
   margin-top: 1.2rem;
@@ -65,12 +67,14 @@
 
 @media (min-width: 640px) {
   .locutores-grid {
-    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;  /* Mantiene centrado en tablet */
+    gap: 1.5rem 1.2rem;
   }
 }
 @media (min-width: 900px) {
   .locutores-grid {
-    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;  /* Mantiene centrado en desktop */
+    gap: 1.5rem 1.2rem;
   }
 }
 

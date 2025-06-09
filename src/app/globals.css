@@ -31,6 +31,7 @@
   --footer-card-bg-dark: #18181b;
   --footer-muted: #000;
   --footer-muted-dark: #bdbdbd;
+  --font-size-base: 16px; /* 1rem = 16px universal para todos los dispositivos */
 }
 
 .dark {
@@ -70,7 +71,7 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-body);
-  font-size: 1.08rem;
+  font-size: var(--font-size-base);
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0.01em;
@@ -168,11 +169,28 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem 0.2rem 1.2rem 0.2rem;
+  padding: 13rem 1rem 2.5rem 1rem; /* Aumentado el padding-top a 13rem (+2rem más) */
   width: 100%;
-  max-width: 480px;
+  max-width: 48rem;
   margin: 0 auto;
   gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    padding-top: 16rem; /* Aumentado el padding superior para tablet (+2rem más) */
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-bottom: 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .main-content {
+    padding-top: 16rem; /* Aumentado el padding superior para móvil (+2rem más) */
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 /* =====================
@@ -296,29 +314,6 @@ button {
 /* =====================
    Header Global Styles
    ===================== */
-.app-header {
-  color: var(--appheader-text);
-  background: var(--appheader-bg);
-  width: 100%;
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  transition: background 0.15s linear, color 0.15s linear;
-}
-
-@media (max-width: 900px) {
-  .app-header { padding: 0 1rem; min-height: 56px; }
-}
-@media (max-width: 640px) {
-  .app-header { padding: 0 0.5rem; min-height: 48px; }
-}
 
 /* =====================
    Footer Global Styles
