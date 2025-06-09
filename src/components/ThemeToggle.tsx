@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import "./ThemeToggle.css";
 
 // Importa el contexto de tema global
-import { ThemeContext } from "../app/page"; // Ajusta la ruta si tu contexto está en otro archivo
+import { ThemeContext } from "../app/layout"; // Corrige la ruta al contexto real
 
 export default function ThemeToggle() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);

@@ -1,95 +1,120 @@
 .podcasts-section {
-  width: 100%;
-  max-width: 48rem;
-  margin: 0 auto 2.5rem auto;
-  padding: 1.2rem 1.5rem 2.5rem 1.5rem;
-  background: var(--background-alt, #23272f);
-  border-radius: 1.5rem;
-  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.13);
-  border: 2px solid #ff0000; /* Borde rojo uniforme */
   display: flex;
   flex-direction: column;
   align-items: center;
-  --podcasts-subtitle: #111;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  padding: 1.2rem 1.5rem 2rem 1.5rem;
+  width: 100%;
+  max-width: 48rem;
+  background: rgba(35, 39, 47, 0.92);
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 rgba(255,0,0,0.04);
+  border: 2.5px solid var(--color-accent-dark, #b71c1c);
+  position: relative;
+  overflow: hidden;
 }
 
-.dark .podcasts-section {
-  --podcasts-subtitle: #fff;
+.podcasts-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .podcasts-title {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 2.3rem;
+  font-weight: 900;
   color: var(--primary, #ff0000);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.7rem;
   text-align: center;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 12px #ff000033;
+  z-index: 1;
 }
 
 .podcasts-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
   width: 100%;
-  justify-items: center;
-}
-
-@media (min-width: 640px) {
-  .podcasts-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 900px) {
-  .podcasts-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  margin-top: 1.2rem;
+  z-index: 1;
 }
 
 .podcasts-card {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.08);
   border-radius: 1rem;
-  padding: 1.2rem 0.5rem 1rem 0.5rem;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
+  border: 2px solid var(--color-accent-dark, #b71c1c);
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 170px;
-  max-width: 220px;
-  width: 100%;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
-  border: 2px solid #ff0000; /* Borde rojo uniforme */
-}
-
-.podcasts-card:hover {
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  justify-content: center;
+  padding: 1.2rem 0.5rem 1rem 0.5rem;
+  min-height: 110px;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-foreground);
 }
 
 .podcasts-title-card {
-  font-weight: bold;
-  color: var(--podcasts-subtitle, #111);
-  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--primary, #ff0000);
   text-align: center;
-  width: 100%;
-  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  opacity: 0.93;
+  margin-bottom: 0.5rem;
   line-height: 1.2;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: unset;
   word-break: break-word;
 }
 
 .podcasts-audio {
   width: 100%;
-  min-width: 180px;
-  max-width: 210px;
-  height: 44px;
-  box-sizing: border-box;
-  display: block;
+  max-width: 180px;
+  height: 36px;
+  border-radius: 0.5rem;
+  border: 1.5px solid #ccc;
+  background: #fff;
   margin: 0 auto;
+  display: block;
+}
+
+.podcasts-card:hover {
+  box-shadow: 0 4px 12px 0 rgba(255,0,0,0.09);
+  border-color: var(--primary, #ff0000);
+  background: rgba(255,255,255,0.15);
+}
+
+@media (max-width: 900px) {
+  .podcasts-section {
+    padding: 0.8rem 0.3rem 1.1rem 0.3rem;
+    max-width: 98vw;
+  }
+  .podcasts-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+  }
 }
 
 @media (max-width: 640px) {
   .podcasts-section {
-    border: 2px solid #ff0000; /* Borde rojo uniforme también en móvil */
-    padding: 0.7rem 0.5rem 1.2rem 0.5rem;
+    padding: 0.7rem 0.2rem 1rem 0.2rem;
+    max-width: 100vw;
+  }
+  .podcasts-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+  .podcasts-card {
+    padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+    min-height: 80px;
+  }
+  .podcasts-audio {
+    max-width: 98vw;
+    height: 32px;
   }
 }

@@ -20,7 +20,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, #ff000022 0%, #fd7a0022 100%);
+  background: none;
   opacity: 0.18;
   pointer-events: none;
   z-index: 0;

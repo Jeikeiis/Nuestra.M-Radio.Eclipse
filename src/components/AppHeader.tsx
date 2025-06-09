@@ -61,3 +61,4 @@ const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
 );
 
 export default AppHeader;
+// No requiere cambios, ya recibe radioOpen y setRadioOpen por props

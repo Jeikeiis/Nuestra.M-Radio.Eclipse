@@ -7,68 +7,30 @@
   --foreground: #171717;
   --color-background: #fffdf8;
   --color-foreground: #1a1a1a;
-  --color-accent: #470100;
-  --color-accent-dark: #ff0000;
-  --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
-  --font-body: 'Inter', Arial, Helvetica, sans-serif;
   --primary: #ff0000;
   --primary-dark: #b71c1c;
-  --secondary: #470100;
-  --secondary-dark: #23272f;
-  --accent: #fd7a00;
-  --accent-dark: #ff9800;
-  --success: #43a047;
-  --danger: #e53935;
-  --warning: #ffa000;
-  --info: #1976d2;
-  --background-main: #fff5f5;
-  --background-alt: #fff;          /* Fondo blanco puro para modo claro */
-  --foreground-main: #1a1a1a;
-  --foreground-alt: #171717;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
+  --section-bg: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+  --section-bg-contrast: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+  --section-text: #23272f;
+  --section-title: #ff0000;
+  --section-shadow: 0 8px 32px 0 rgba(255,0,0,0.10), 0 1.5px 8px 0 rgba(255,0,0,0.04);
+  --section-border: #ff0000;
+  --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
+  --font-body: 'Inter', Arial, Helvetica, sans-serif;
   --appheader-bg: #fff;
   --appheader-text: #171717;
-  --footer-bg: #fff;              /* Fondo blanco para modo claro */
-  --footer-bg-dark: #18181b;      /* Fondo oscuro para modo oscuro */
-  --footer-text: #171717;         /* Texto negro para modo claro */
-  --footer-text-dark: #ededed;    /* Texto claro para modo oscuro */
+  --footer-bg: #fff;
+  --footer-bg-dark: #18181b;
+  --footer-text: #171717;
+  --footer-text-dark: #ededed;
   --footer-link: #fd7a00;
   --footer-link-dark: #ff9800;
   --footer-border: #ececec;
   --footer-border-dark: #23232b;
-  --footer-card-bg: #fffbe6;      /* Fondo claro para tarjetas en modo claro */
-  --footer-card-bg-dark: #18181b; /* Fondo oscuro para tarjetas en modo oscuro */
-  --footer-muted: #000000;
+  --footer-card-bg: #fffbe6;
+  --footer-card-bg-dark: #18181b;
+  --footer-muted: #000;
   --footer-muted-dark: #bdbdbd;
-}
-
-/* Elimina esto, ya no se usa para el layout dinámico */
-/*
-:root {
-  --header-height: 200px;
-}
-@media (max-width: 900px) {
-  :root {
-    --header-height: 170px;
-  }
-}
-@media (max-width: 640px) {
-  :root {
-    --header-height: 210px;
-  }
-}
-@media (max-width: 480px) {
-  :root {
-    --header-height: 210px;
-  }
-}
-*/
-
-.main-content--with-header {
-  /* padding-top: var(--header-height) !important; */
 }
 
 .dark {
@@ -76,30 +38,22 @@
   --foreground: #ededed;
   --color-background: #18181b;
   --color-foreground: #fff;
-  --color-accent: #470100;
-  --color-accent-dark: #ff0000;
   --primary: #ff5252;
   --primary-dark: #b71c1c;
-  --secondary: #23272f;
-  --secondary-dark: #18181b;
-  --accent: #ff9800;
-  --accent-dark: #fd7a00;
-  --success: #66bb6a;
-  --danger: #ef5350;
-  --warning: #ffb300;
-  --info: #64b5f6;
-  --background-main: #000000;
-  --background-alt: #18181b;
-  --foreground-main: #fff5f5;
-  --foreground-alt: #ededed;
+  --section-bg: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
+  --section-bg-contrast: #2a0000;
+  --section-text: #fff;
+  --section-title: #ff5252;
+  --section-shadow: 0 8px 32px 0 rgba(255,0,0,0.18), 0 1.5px 8px 0 rgba(255,0,0,0.10);
+  --section-border: #ff5252;
   --appheader-bg: #171717;
   --appheader-text: #fff;
-  --footer-bg: var(--footer-bg-dark);
-  --footer-text: var(--footer-text-dark);
-  --footer-link: var(--footer-link-dark);
-  --footer-border: var(--footer-border-dark);
-  --footer-card-bg: var(--footer-card-bg-dark);
-  --footer-muted: var(--footer-muted-dark);
+  --footer-bg: #18181b;
+  --footer-text: #ededed;
+  --footer-link: #ff9800;
+  --footer-border: #23232b;
+  --footer-card-bg: #18181b;
+  --footer-muted: #bdbdbd;
 }
 
 /* =====================
@@ -107,6 +61,8 @@
    ===================== */
 body, html {
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -114,11 +70,10 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-body);
-  letter-spacing: 0.01em;
-  scroll-behavior: auto;
   font-size: 1.08rem;
   font-weight: 400;
   line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
 /* Ajuste global para box-sizing */
@@ -202,109 +157,96 @@ html {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-background);
-  padding-top: 0 !important;
-  width: 100%;
-  max-width: 100%;
-  /* Elimina width: 100vw y max-width: 100vw aquí */
+  background: #fffbe6;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
+
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem 3rem 1rem;
+  padding: 0.5rem 0.2rem 1.2rem 0.2rem;
   width: 100%;
-  max-width: 1400px;
+  max-width: 480px;
   margin: 0 auto;
-  padding-top: 0 !important;
-  box-sizing: border-box;
-}
-
-@media (max-width: 900px) {
-  .main-content {
-    width: 100%;
-    max-width: 100vw;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-}
-@media (max-width: 640px) {
-  .main-content {
-    width: 100%;
-    max-width: 100vw;
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
-  }
+  gap: 1rem;
 }
 
 /* =====================
-   Grid de Secciones
+   Secciones y tarjetas UNIFICADAS
    ===================== */
-.sections-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem 2.5rem;
-  width: 100%;
-  max-width: 1200px;
-  margin: 2.5rem auto;
-  align-items: start;
-}
-@media (max-width: 900px) {
-  .sections-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    max-width: 100vw;
-    width: 100vw;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-.sections-grid > * {
-  width: 100%;
-  min-width: 0;
-}
-
-/* =====================
-   Estilos de Secciones Principales
-   ===================== */
-
-/* Tarjetas y secciones principales */
 .card,
 .programacion-section,
 .locutores-section,
 .eventos-section,
-.contacto-section {
-  background: var(--background-alt, #23272f) !important;
+.contacto-section,
+.podcasts-section {
+  background: var(--section-bg) !important;
   border-radius: 1.5rem !important;
-  /* box-shadow suavizado */
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08) !important; /* antes: 0 8px 32px 0 ... */
-  border: 2px solid var(--color-accent-dark, #b71c1c) !important;
-  padding: 2.5rem 1.5rem !important;
-  margin: 0 auto 2.5rem auto !important;
+  box-shadow: var(--section-shadow) !important;
+  border: 2.5px solid var(--section-border) !important;
+  padding: 1.2rem 1.5rem 2rem 1.5rem !important;
   width: 100% !important;
   max-width: 48rem !important;
+  margin: 0 auto 2.5rem auto !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  /* backdrop-filter eliminado */
-  /* backdrop-filter: blur(2px); */
+  position: relative;
+  overflow: hidden !important;
+  color: var(--section-text) !important;
+  transition: none !important;
 }
 
+.card:hover,
+.programacion-section:hover,
+.locutores-section:hover,
+.eventos-section:hover,
+.contacto-section:hover,
+.podcasts-section:hover {
+  /* Elimina cambios de fondo y sombra en hover para evitar parpadeo */
+  box-shadow: var(--section-shadow) !important;
+  border-color: var(--section-border) !important;
+  background: var(--section-bg) !important;
+}
+
+.card::before,
+.programacion-section::before,
+.locutores-section::before,
+.eventos-section::before,
+.contacto-section::before,
+.podcasts-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 70% 30%, #ff000033 0%, transparent 70%);
+  /* No animaciones ni cambios en hover */
+}
+
+/* =====================
+   Títulos y textos UNIFICADOS
+   ===================== */
 .card h3,
 .programacion-title,
 .locutores-title,
 .eventos-title,
-.contacto-title {
+.contacto-title,
+.podcasts-title {
   font-size: 2.3rem !important;
   font-weight: 900 !important;
-  color: var(--primary, #ff0000) !important;
+  color: var(--section-title) !important;
   margin-bottom: 0.7rem !important;
   text-align: center !important;
   letter-spacing: 0.03em !important;
   text-shadow: 0 2px 12px #ff000033 !important;
+  z-index: 1;
+  transition: color 0.3s;
 }
 
 .locutores-desc-main,
@@ -312,96 +254,42 @@ html {
 .contacto-desc-main,
 .programacion-desc-main {
   font-size: 1.15rem !important;
-  color: var(--color-foreground) !important;
+  color: var(--section-text) !important;
   text-align: center !important;
   margin-bottom: 2.2rem !important;
   max-width: 36rem !important;
   line-height: 1.6 !important;
   opacity: 0.92 !important;
-}
-
-/* Responsive para tarjetas y secciones */
-@media (max-width: 900px) {
-  .card,
-  .programacion-section,
-  .locutores-section,
-  .eventos-section,
-  .contacto-section {
-    padding: 1.5rem 0.5rem;
-    max-width: 100vw;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .main-content {
-    max-width: 100vw;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    /* Elimina cualquier padding-top aquí */
-    padding-top: 0 !important;
-  }
-  .sections-grid {
-    max-width: 100vw;
-    width: 100vw;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-@media (max-width: 640px) {
-  .card,
-  .programacion-section,
-  .locutores-section,
-  .eventos-section,
-  .contacto-section {
-    padding: 0.7rem 0.1rem 1.2rem 0.1rem;
-    max-width: 100vw;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .main-content {
-    max-width: 100vw;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    /* Elimina cualquier padding-top aquí */
-    padding-top: 0 !important;
-  }
-  .sections-grid {
-    max-width: 100vw;
-    width: 100vw;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
+  z-index: 1;
+  transition: color 0.3s;
 }
 
 /* =====================
    Espaciado entre secciones
    ===================== */
+.card,
 .programacion-section,
-.locutores-section {
-  margin-bottom: 2.5rem;
+.locutores-section,
+.eventos-section,
+.contacto-section,
+.podcasts-section {
+  margin-bottom: 2.5rem !important;
 }
 
 /* =====================
    Inputs y Formularios Globales
    ===================== */
 input, textarea, button {
-  border-radius: 0.5rem;
   font-size: 1rem;
-  outline: none;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+  padding: 0.5em;
 }
 input:focus, textarea:focus {
-  border: 2px solid var(--primary, #ff0000);
+  border: 1.5px solid var(--primary, #ff0000);
 }
 button {
   font-weight: 600;
-  border: none;
   cursor: pointer;
 }
 
@@ -417,29 +305,19 @@ button {
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  /* box-shadow reducido para mejor rendimiento */
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04); /* antes: 0 2px 16px 0 rgba(0,0,0,0.08) */
-  position: fixed; /* Cambia sticky por fixed */
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 100;
   transition: background 0.15s linear, color 0.15s linear;
-  /* backdrop-filter eliminado para mejorar rendimiento */
-  /* backdrop-filter: blur(8px); */
 }
 
 @media (max-width: 900px) {
-  .app-header {
-    padding: 0 1rem;
-    min-height: 56px;
-  }
+  .app-header { padding: 0 1rem; min-height: 56px; }
 }
 @media (max-width: 640px) {
-  .app-header {
-    padding: 0 0.5rem;
-    min-height: 48px;
-  }
+  .app-header { padding: 0 0.5rem; min-height: 48px; }
 }
 
 /* =====================
@@ -451,13 +329,10 @@ button {
   width: 100%;
   padding: 2rem 1rem;
   border-top: 1px solid var(--footer-border);
-  /* Cambiado de fixed a sticky para evitar repaints constantes */
   position: sticky;
   bottom: 0;
   z-index: 10;
   transition: background 0.2s, color 0.2s;
-  /* box-shadow eliminado para mejor rendimiento */
-  /* box-shadow: none; */
 }
 
 .app-footer a {
@@ -465,21 +340,17 @@ button {
   text-decoration: none;
   transition: color 0.2s;
 }
-
 .app-footer a:hover {
   color: var(--footer-link-dark);
 }
-
 .app-footer .footer-card {
   background: var(--footer-card-bg);
   border: 1px solid var(--footer-border);
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  /* box-shadow suavizado */
   box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
 }
-
 .app-footer .footer-muted {
   color: var(--footer-muted);
   font-size: 0.9rem;
@@ -487,16 +358,11 @@ button {
   margin-top: 1rem;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
-  .app-footer {
-    padding: 1.5rem 0.5rem;
-  }
+  .app-footer { padding: 1.5rem 0.5rem; }
 }
 @media (max-width: 640px) {
-  .app-footer {
-    padding: 1rem 0.5rem;
-  }
+  .app-footer { padding: 1rem 0.5rem; }
 }
 
 
