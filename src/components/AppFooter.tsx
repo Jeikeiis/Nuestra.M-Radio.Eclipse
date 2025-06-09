@@ -1,32 +1,28 @@
 import Image from "next/image";
-import "./Footer.css";
+import "./AppFooter.css";
 import SponsorsCarousel from "./SponsorsCarousel";
 
 export default function AppFooter() {
   return (
     <footer>
-      <div className="footer-content-layout">
-        {/* Logo e info a la izquierda */}
-        <div className="footer-logo-info">
+      <div className="footer-content">
+        {/* Logo a la izquierda */}
+        <div className="footer-logo">
           <Image
             src="/RadioEclipse2.0.webp"
             alt="Radio Eclipse 106.3"
-            width={90}
-            height={90}
+            width={38}
+            height={38}
             priority={false}
           />
-          <div className="footer-info-text">
-            <span className="footer-title">Radio Eclipse 106.3</span>
-            <span className="footer-location">Canelones, Uruguay</span>
-          </div>
         </div>
-        {/* Sponsors al centro */}
+        {/* Carrusel al centro */}
         <div className="footer-sponsors">
           <SponsorsCarousel />
         </div>
         {/* Créditos a la derecha */}
-        <div className="footer-credits footer-credits-right">
-          <span className="footer-copyright">
+        <div className="footer-credits">
+          <span>
             © {new Date().getFullYear()}{" "}
             <a
               href="https://zeno.fm/radio/eclipsefm1063/"

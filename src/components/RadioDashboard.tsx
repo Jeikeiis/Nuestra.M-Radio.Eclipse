@@ -31,6 +31,21 @@ export default function RadioDashboard({
           minWidth: 0,
           WebkitOverflowScrolling: 'touch',
           background: "rgba(20,20,20,0.92)", // Fondo oscuro semitransparente
+          boxShadow: "0 8px 32px 0 rgba(0,0,0,0.28)",
+          borderRadius: "1.5rem 1.5rem 0 0",
+          left: "50%",
+          transform: "translateX(-50%)",
+          bottom: "1.5rem",
+          position: "fixed",
+          zIndex: 9999,
+          width: "100%",
+          maxWidth: "420px",
+          padding: "0.5rem 1.2rem 1.2rem 1.2rem",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          backdropFilter: "blur(8px)",
+          border: "2px solid rgba(255,255,255,0.13)",
         }}
         aria-label="Radio en vivo Nuestra Mañana FM 106.3"
       >
@@ -52,11 +67,10 @@ export default function RadioDashboard({
             </div>
           </div>
           <button
-            onClick={() => {
-              if (onClose) onClose();
-            }}
-            className="ml-2 text-white text-2xl hover:text-red-500 px-2"
+            onClick={() => { if (onClose) onClose(); }}
+            className="ml-2 text-white text-2xl bg-red-600 hover:bg-red-700 rounded-full p-2 transition shadow focus:outline-none focus:ring-2 focus:ring-red-400 border-2 border-red-700"
             aria-label="Minimizar reproductor"
+            style={{ minWidth: 40, minHeight: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 16V8m0 0 4 4m-4-4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
@@ -72,8 +86,9 @@ export default function RadioDashboard({
                   audioRef.current.pause();
                 }
               }}
-              className="w-10 h-10 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400 bg-black text-white hover:bg-gray-800 border border-white/40"
+              className="w-12 h-12 rounded-full flex items-center justify-center text-base shadow-lg transition focus:outline-none focus:ring-2 focus:ring-red-400 bg-red-600 text-white hover:bg-red-700 border-2 border-red-700"
               aria-label={playing ? "Pausar" : "Reproducir"}
+              style={{ fontSize: 22 }}
             >
               {playing ? (
                 <svg width="22" height="22" fill="white" viewBox="0 0 20 20"><rect x="4" y="4" width="4" height="12"/><rect x="12" y="4" width="4" height="12"/></svg>
@@ -92,17 +107,19 @@ export default function RadioDashboard({
                 setVolume(v);
                 if (audioRef.current) audioRef.current.volume = v;
               }}
-              className="w-20 accent-red-600 mx-1"
+              className="w-24 accent-red-600 mx-1"
               aria-label="Volumen"
+              style={{ verticalAlign: 'middle' }}
             />
             <button
               onClick={onSyncLive}
-              className="flex items-center gap-1 px-2 h-8 rounded-full bg-white border border-red-500 ml-1 shadow hover:bg-red-50 transition focus:outline-none focus:ring-2 focus:ring-red-400"
+              className="flex items-center gap-1 px-3 h-10 rounded-full bg-red-600 border-2 border-red-700 shadow hover:bg-red-700 transition text-white font-bold text-xs focus:outline-none focus:ring-2 focus:ring-red-400"
               aria-label="Sincronizar con el vivo"
               title="Sincronizar con el vivo"
+              style={{ minWidth: 60 }}
             >
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              <span className="text-xs font-bold text-red-600 leading-none">Vivo</span>
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span className="leading-none">Vivo</span>
             </button>
           </div>
           {error && (

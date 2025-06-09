@@ -1,86 +1,160 @@
 /* =============================
-   Panel de Personalización CSS para Locutores
+   LocutoresSection - Estilos
    ============================= */
-:root {
-  --locutores-bg: linear-gradient(135deg, #7a0000 0%, #ff0000 100%);
-  --locutores-title: #fff;
-  --locutores-text: #fff; /* Mejor contraste */
-  --locutores-desc: #f3f3f3; /* Más claro para contraste */
-  --locutores-border: #fff; /* Borde claro para contraste */
-}
-.dark {
-  --locutores-bg: linear-gradient(135deg, #7a0000 0%, #ff0000 100%);
-  --locutores-title: #fff;
-  --locutores-text: #fff;
-  --locutores-desc: #ededed;
-  --locutores-border: #fff;
-}
+
 .locutores-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2.5rem auto;
+  padding: 1.2rem 1.5rem 2.5rem 1.5rem; /* Menos padding arriba, igual abajo */
   width: 100%;
   max-width: 48rem;
-  background: var(--locutores-bg);
-  border-radius: 1rem;
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.10);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 320px;
+  background: rgba(35, 39, 47, 0.92);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(255,0,0,0.04);
+  border: 2.5px solid var(--color-accent-dark, #b71c1c);
+  backdrop-filter: blur(2px);
+  position: relative;
+  overflow: hidden;
 }
+
+.locutores-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* background: linear-gradient(120deg, #ff000022 0%, #fd7a0022 100%); */
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.locutores-section:hover {
+  box-shadow: 0 16px 48px 0 rgba(255,0,0,0.13), 0 2px 16px 0 rgba(0,0,0,0.13);
+  border-color: var(--primary, #ff0000);
+}
+
 .locutores-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--locutores-title);
-  margin-bottom: 1rem;
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: var(--primary, #ff0000);
+  margin-bottom: 0.7rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 12px #ff000033;
 }
+
+.locutores-desc-main {
+  font-size: 1.15rem;
+  color: var(--color-foreground);
+  text-align: center;
+  margin-bottom: 2.2rem;
+  max-width: 36rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.locutores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem 1.2rem;
+  width: 100%;
+  margin-top: 1.2rem;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .locutores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 900px) {
+  .locutores-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Perfil de locutor */
 .locutores-profile {
+  background: rgba(255,255,255,0.06);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  border: 2px solid var(--color-accent-dark, #b71c1c);
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 0;
+  justify-content: center;
+  padding: 1.2rem 0.5rem 1rem 0.5rem;
+  min-height: 110px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-foreground);
 }
+.locutores-profile:hover {
+  box-shadow: 0 8px 28px 0 rgba(255,0,0,0.13);
+  border-color: var(--primary, #ff0000);
+  background: rgba(255,255,255,0.12);
+}
+
+/* Imagen de locutor */
 .locutores-img {
-  border-radius: 0.5rem;
-  object-fit: cover;
-  width: 6rem;
-  height: 6rem;
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
-  border: 4px solid var(--locutores-border);
+  filter: drop-shadow(0 2px 8px #ff000033);
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
+  border: 2.5px solid var(--primary, #ff0000);
+  background: #fff;
 }
-.locutores-img-lg {
-  width: 8rem;
-  height: 8rem;
+.locutores-profile:hover .locutores-img {
+  border-color: #fff;
 }
+
+/* Nombre y programa */
 .locutores-name {
-  font-weight: bold;
-  color: var(--locutores-text);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--primary, #ff0000);
   text-align: center;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+  opacity: 0.93;
+  margin-bottom: 0.18rem;
 }
-.locutores-name-lg {
-  font-size: 1.5rem;
-}
-.locutores-desc {
-  font-size: 0.75rem;
-  color: var(--locutores-desc);
+.locutores-programa {
+  font-size: 1.01rem;
+  color: var(--color-foreground);
   text-align: center;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  opacity: 0.85;
+  margin-bottom: 0.1rem;
 }
-.locutores-desc-lg {
-  font-size: 1rem;
+
+@media (max-width: 900px) {
+  .locutores-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem 0.7rem;
+  }
 }
-.locutores-profile img {
-  display: block;
-}
+
 @media (max-width: 640px) {
   .locutores-section {
-    border: 1.5px solid #b71c1c !important;
-    padding: 1rem;
+    padding: 0.7rem 0.5rem 1.2rem 0.5rem; /* Menos padding arriba en mobile */
+    max-width: 98vw;
+  }
+  .locutores-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+  }
+  .locutores-profile {
+    padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+    min-height: 80px;
+  }
+  .locutores-img {
+    width: 60px;
+    height: 60px;
   }
 }

@@ -90,27 +90,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-      className="min-h-screen flex flex-col transition-colors"
-      style={{ paddingTop: clientPaddingTop }}
-    >
+    <div style={{ paddingTop: clientPaddingTop }}>
       {/* Encabezado */}
       <AppHeader ref={headerRef} radioOpen={radioOpen} setRadioOpen={setRadioOpen} />
 
-      {/* Espacio extra debajo del header */}
-      <div style={{ height: 24 }} />
-
-      <main className="flex-1 flex flex-col items-center justify-start px-4 pb-10 gap-12 w-full">
-        {/* Menú de información */}
+      {/* Secciones principales */}
+      <main>
         <ProgramacionSection />
-        {/* Sección de locutores */}
         <LocutoresSection />
-        {/* Sección de podcasts */}
         <PodcastsSection />
-        {/* Sección de galería de eventos */}
-        <EventosSection />
-        {/* Sección de contacto */}
-        <ContactoSection />
       </main>
       {/* Panel de RadioDashboard fijo sobre el footer */}
       {radioOpen && audio && (

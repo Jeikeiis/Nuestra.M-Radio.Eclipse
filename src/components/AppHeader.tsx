@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { forwardRef } from "react";
+import "./AppHeader.css"; // Asegúrate de importar el CSS
 
 // Importación dinámica para mejorar el rendimiento
 const ThemeToggle = dynamic(() => import("./ThemeToggle"), { ssr: false });
@@ -19,43 +20,37 @@ const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
     return (
       <header
         ref={ref as any}
-        className="fixed top-0 left-0 w-full z-50 bg-white/90 dark:bg-black/90 shadow-lg transition-colors backdrop-blur-sm sm:backdrop-blur"
-        style={{ minHeight: 80 }}
+        className="app-header"
       >
-        {/*
-        Layout responsive horizontal:
-        - En pantallas sm o mayores: todos los elementos en fila (logo/info, reproductor, toggle)
-        - En móvil: logo/info arriba, reproductor y toggle abajo
-      */}
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-2 sm:px-6 py-2 sm:py-3">
+        <div className="app-header-inner">
           {/* Logo e info */}
-          <div className="flex flex-row items-center gap-3 min-w-0 flex-1 justify-center sm:justify-start">
+          <div className="app-header-logo-info">
             <Image
               src="/NuestraManana2.0.webp"
               alt="Logo Nuestra Mañana FM 106.3"
               width={120}
               height={120}
-              className="rounded-lg flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40"
+              className="app-header-logo"
               priority
             />
-            <div className="min-w-0 ml-2">
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
+            <div className="app-header-info">
+              <h1 className="app-header-title">
                 Nuestra Mañana FM 106.3
               </h1>
-              <p className="text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 truncate">
+              <p className="app-header-subtitle">
                 Lunes a Viernes de 10 a 13 horas
               </p>
             </div>
           </div>
           {/* Botón Radio en Vivo y toggle */}
-          <div className="flex flex-col sm:flex-row items-center gap-2 flex-shrink-0 w-full sm:w-auto sm:justify-end mt-2 sm:mt-0">
+          <div className="app-header-actions">
             <button
-              className="bg-red-600 hover:bg-red-700 text-white font-bold rounded-full px-6 py-2 shadow transition-colors text-base mb-2 sm:mb-0"
+              className="app-header-radio-btn"
               onClick={() => setRadioOpen(!radioOpen)}
             >
               Radio en Vivo
             </button>
-            <div className="flex-shrink-0 ml-0 sm:ml-4 mt-2 sm:mt-0">
+            <div className="app-header-theme-toggle">
               <ThemeToggle />
             </div>
           </div>

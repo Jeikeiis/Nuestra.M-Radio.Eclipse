@@ -1,7 +1,4 @@
 .sponsors-carousel {
-  background: transparent;
-  box-shadow: none;
-  border: none;
   padding: 0.5rem 0;
   margin: 0 auto;
   width: 100%;
@@ -10,29 +7,21 @@
   align-items: center;
   justify-content: center;
 }
-.dark .sponsors-carousel {
-  background: transparent;
-}
+
 .sponsors-carousel-track {
-  background: transparent;
 }
+
 .sponsor-carousel-item {
-  background: transparent;
 }
+
 @media (max-width: 640px) {
   .sponsors-carousel {
-    background: transparent;
-    box-shadow: none;
-    border: none;
     padding: 0.5rem 0;
   }
-  .dark .sponsors-carousel {
-    background: transparent;
-  }
+
   .sponsors-carousel-track {
-    background: transparent;
   }
+
   .sponsor-carousel-item {
-    background: transparent;
   }
 }

@@ -3,16 +3,14 @@
    ===================== */
 
 :root {
-  --background: linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%);
+  --background: #fffbe6;
   --foreground: #171717;
-  --color-background: #fffdf8; /* más claro para mejor contraste */
-  --color-foreground: #1a1a1a; /* más oscuro para mejor contraste */
+  --color-background: #fffdf8;
+  --color-foreground: #1a1a1a;
   --color-accent: #470100;
   --color-accent-dark: #ff0000;
   --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
   --font-body: 'Inter', Arial, Helvetica, sans-serif;
-
-  /* Paleta de colores semántica */
   --primary: #ff0000;
   --primary-dark: #b71c1c;
   --secondary: #470100;
@@ -25,26 +23,35 @@
   --info: #1976d2;
   --background-main: #fff5f5;
   --background-alt: #fffbe6;
-  --foreground-main: #1a1a1a; /* texto principal más oscuro */
+  --foreground-main: #1a1a1a;
   --foreground-alt: #171717;
-
-  /* Breakpoints */
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
+  --appheader-bg: #fff;
+  --appheader-text: #171717;
+  --footer-bg: #fff;              /* Fondo blanco para modo claro */
+  --footer-bg-dark: #18181b;      /* Fondo oscuro para modo oscuro */
+  --footer-text: #171717;         /* Texto negro para modo claro */
+  --footer-text-dark: #ededed;    /* Texto claro para modo oscuro */
+  --footer-link: #fd7a00;
+  --footer-link-dark: #ff9800;
+  --footer-border: #ececec;
+  --footer-border-dark: #23232b;
+  --footer-card-bg: #fffbe6;      /* Fondo claro para tarjetas en modo claro */
+  --footer-card-bg-dark: #18181b; /* Fondo oscuro para tarjetas en modo oscuro */
+  --footer-muted: #000000;
+  --footer-muted-dark: #bdbdbd;
 }
 
 .dark {
-  /* Solo variables necesarias para modo oscuro */
-  --background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+  --background: #18181b;
   --foreground: #ededed;
-  --color-background: #18181b; /* fondo oscuro */
-  --color-foreground: #fff5f5; /* texto claro */
+  --color-background: #18181b;
+  --color-foreground: #fff;
   --color-accent: #470100;
   --color-accent-dark: #ff0000;
-
-  /* Paleta de colores semántica */
   --primary: #ff5252;
   --primary-dark: #b71c1c;
   --secondary: #23272f;
@@ -57,17 +64,20 @@
   --info: #64b5f6;
   --background-main: #000000;
   --background-alt: #18181b;
-  --foreground-main: #fff5f5; /* texto principal claro */
+  --foreground-main: #fff5f5;
   --foreground-alt: #ededed;
+  --appheader-bg: #171717;
+  --appheader-text: #fff;
+  --footer-bg: var(--footer-bg-dark);
+  --footer-text: var(--footer-text-dark);
+  --footer-link: var(--footer-link-dark);
+  --footer-border: var(--footer-border-dark);
+  --footer-card-bg: var(--footer-card-bg-dark);
+  --footer-muted: var(--footer-muted-dark);
 }
 
 /* =====================
-   Tailwind Import
-   ===================== */
-@import "tailwindcss";
-
-/* =====================
-   Estilos Generales
+   Estilos Globales
    ===================== */
 body, html {
   overflow-x: hidden;
@@ -79,60 +89,42 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-body);
   letter-spacing: 0.01em;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   font-size: 1.08rem;
   font-weight: 400;
   line-height: 1.7;
 }
 
-@media (max-width: 640px) {
-  .rounded-2xl, .rounded-lg, .rounded-full {
-    border-radius: 1rem !important;
-  }
+/* Ajuste global para box-sizing */
+html {
+  box-sizing: border-box;
 }
-
-/* Secciones principales */
-section, .card, .radio-section, .dynamic-bg {
-  border-radius: 1.25rem;
-  border: 1.5px solid var(--color-accent);
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-  background-color: rgba(255, 0, 0, 0.08);
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 /* Tipografía */
-h1, .text-4xl, .text-3xl {
-  font-family: var(--font-title);
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  line-height: 1.15;
-}
-h2, .text-2xl {
-  font-family: var(--font-title);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-}
-h3, .text-xl {
-  font-family: var(--font-title);
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  line-height: 1.25;
-}
+h1, .text-4xl, .text-3xl,
+h2, .text-2xl,
+h3, .text-xl,
 h4, .text-lg {
   font-family: var(--font-title);
   font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.3;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
 }
+h1, .text-4xl, .text-3xl { font-weight: 800; letter-spacing: 0.05em; line-height: 1.15; }
+h2, .text-2xl { font-weight: 700; letter-spacing: 0.04em; }
+h3, .text-xl { font-weight: 600; }
+h4, .text-lg { font-weight: 600; letter-spacing: 0.02em; line-height: 1.3; }
+
 p, .text-base, .text-sm, .text-xs, span, label, li, input, textarea, button {
   font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.7;
 }
-strong, b {
-  font-weight: 700;
-}
+strong, b { font-weight: 700; }
 
 /* Suavizado y legibilidad */
 html {
@@ -143,20 +135,18 @@ html {
   scrollbar-color: #ff0000 #470100;
 }
 
-/* =====================
-   Scrollbar rojo personalizado
-   ===================== */
+/* Scrollbar personalizado */
 ::-webkit-scrollbar {
   width: 10px;
   background: #470100;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff0000 0%, #b71c1c 100%);
+  background: #ff0000;
   border-radius: 8px;
   border: 2px solid #470100;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ff0000 0%, #ff5252 100%);
+  background: #ff5252;
 }
 
 /* Edge y IE */
@@ -175,3 +165,271 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #ff0000 #470100;
 }
+
+/* =====================
+   Layout General
+   ===================== */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem 1rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* =====================
+   Grid de Secciones
+   ===================== */
+.sections-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2.5rem auto;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .sections-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 100vw;
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.sections-grid > * {
+  width: 100%;
+  min-width: 0;
+}
+
+/* =====================
+   Estilos de Secciones Principales
+   ===================== */
+
+/* Tarjetas y secciones principales */
+.card,
+.programacion-section,
+.locutores-section,
+.eventos-section,
+.contacto-section {
+  background: var(--background-alt, #23272f) !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.13) !important;
+  border: 2px solid var(--color-accent-dark, #b71c1c) !important;
+  padding: 2.5rem 1.5rem !important;
+  margin: 0 auto 2.5rem auto !important;
+  width: 100% !important;
+  max-width: 48rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.card h3,
+.programacion-title,
+.locutores-title,
+.eventos-title,
+.contacto-title {
+  font-size: 2.3rem !important;
+  font-weight: 900 !important;
+  color: var(--primary, #ff0000) !important;
+  margin-bottom: 0.7rem !important;
+  text-align: center !important;
+  letter-spacing: 0.03em !important;
+  text-shadow: 0 2px 12px #ff000033 !important;
+}
+
+.locutores-desc-main,
+.eventos-desc-main,
+.contacto-desc-main,
+.programacion-desc-main {
+  font-size: 1.15rem !important;
+  color: var(--color-foreground) !important;
+  text-align: center !important;
+  margin-bottom: 2.2rem !important;
+  max-width: 36rem !important;
+  line-height: 1.6 !important;
+  opacity: 0.92 !important;
+}
+
+/* Responsive para tarjetas y secciones */
+@media (max-width: 900px) {
+  .card,
+  .programacion-section,
+  .locutores-section,
+  .eventos-section,
+  .contacto-section {
+    padding: 1.5rem 0.5rem;
+    max-width: 100vw;
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .main-content {
+    max-width: 100vw;
+    width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .sections-grid {
+    max-width: 100vw;
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (max-width: 640px) {
+  .card,
+  .programacion-section,
+  .locutores-section,
+  .eventos-section,
+  .contacto-section {
+    padding: 0.7rem 0.1rem 1.2rem 0.1rem;
+    max-width: 100vw;
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .main-content {
+    max-width: 100vw;
+    width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .sections-grid {
+    max-width: 100vw;
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* =====================
+   Espaciado entre secciones
+   ===================== */
+.programacion-section,
+.locutores-section {
+  margin-bottom: 2.5rem;
+}
+
+/* =====================
+   Inputs y Formularios Globales
+   ===================== */
+input, textarea, button {
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+}
+input:focus, textarea:focus {
+  border: 2px solid var(--primary, #ff0000);
+}
+button {
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+/* =====================
+   Header Global Styles
+   ===================== */
+.app-header {
+  color: var(--appheader-text);
+  background: var(--appheader-bg);
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.2s, color 0.2s;
+}
+
+@media (max-width: 900px) {
+  .app-header {
+    padding: 0 1rem;
+    min-height: 56px;
+  }
+}
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0 0.5rem;
+    min-height: 48px;
+  }
+}
+
+/* =====================
+   Footer Global Styles
+   ===================== */
+.app-footer {
+  color: var(--footer-text);
+  background: var(--footer-bg);
+  width: 100%;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--footer-border);
+  position: relative;
+  z-index: 10;
+  transition: background 0.2s, color 0.2s;
+}
+
+.app-footer a {
+  color: var(--footer-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.app-footer a:hover {
+  color: var(--footer-link-dark);
+}
+
+.app-footer .footer-card {
+  background: var(--footer-card-bg);
+  border: 1px solid var(--footer-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.1);
+}
+
+.app-footer .footer-muted {
+  color: var(--footer-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app-footer {
+    padding: 1.5rem 0.5rem;
+  }
+}
+@media (max-width: 640px) {
+  .app-footer {
+    padding: 1rem 0.5rem;
+  }
+}
+
+
+

@@ -1,8 +1,33 @@
+/* =============================
+   Panel de Personalización CSS para ThemeToggle
+   ============================= */
+:root {
+  --themetoggle-bg: transparent;
+  --themetoggle-text: #23272f; /* Oscuro para modo claro */
+  --themetoggle-sun: #FFD600;
+  --themetoggle-ray: #FFD600;
+  --themetoggle-moon: #e6e9f0;
+  --themetoggle-moon-shadow: #bfc3d1;
+  --themetoggle-moon-border: #23272f;
+}
+.dark {
+  --themetoggle-bg: transparent;
+  --themetoggle-text: #ededed;
+  --themetoggle-sun: #FFD600;
+  --themetoggle-ray: #FFD600;
+  --themetoggle-moon: #d2d6e0;
+  --themetoggle-moon-shadow: #7a7e8a;
+  --themetoggle-moon-border: #18181b;
+}
+
 /* ThemeToggle.css: estilos exclusivos para el botón y animación de ThemeToggle */
+.theme-toggle-btn, .theme-toggle-btn * {
+  color: var(--themetoggle-text) !important;
+}
 .theme-toggle-btn {
   width: 48px;
   height: 48px;
-  background: transparent;
+  background: var(--themetoggle-bg);
   border: none;
   outline: none;
   cursor: pointer;
@@ -26,41 +51,40 @@
   width: 28px;
   height: 28px;
   display: block;
+  animation: sun-spin 6s linear infinite;
+}
+@keyframes sun-spin {
+  100% { transform: rotate(360deg); }
+}
+.eclipse-moon-halo {
+  /* El halo debe estar detrás de todo */
+  position: absolute;
+  top: -4px; left: -4px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 0 16px 8px #bfc3d122;
+  z-index: 0;
+  pointer-events: none;
+  animation: halo-pulse 2.5s infinite alternate;
+}
+@keyframes halo-pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.15); }
 }
 .eclipse-sun {
   position: absolute;
   top: 0; left: 0;
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: #FFD600;
+  background: var(--themetoggle-sun);
   box-shadow: 0 0 12px 2px #FFD60066;
-  z-index: 2;
+  z-index: 1;
   transition: background 0.5s, box-shadow 0.5s;
+  animation: sun-glow 2s infinite alternate;
 }
-.eclipse-moon {
-  position: absolute;
-  top: 0; left: 0;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 60% 40%, #e6e9f0 55%, #bfc3d1 70%, #23272f 100%);
-  box-shadow:
-    -6px 0 12px 0 #0008,
-    0 0 0 2px #23272f,
-    0 0 16px 2px #bfc3d144;
-  border: 1.5px solid #23272f;
-  z-index: 3;
-  transform: translate(8px, 0) scale(0.9);
-  transition: background 0.5s, box-shadow 0.5s, transform 0.5s;
-  overflow: visible;
-}
-.dark .eclipse-moon {
-  background: radial-gradient(circle at 60% 40%, #d2d6e0 45%, #7a7e8a 70%, #18181b 100%);
-  box-shadow:
-    -6px 0 12px 0 #000c,
-    0 0 0 2px #18181b,
-    0 0 24px 4px #7a7e8a33;
-  border: 1.5px solid #18181b;
-  transform: translate(0, 0) scale(1);
+@keyframes sun-glow {
+  0% { box-shadow: 0 0 12px 2px #FFD60066, 0 0 0 0 #FFD60033; }
+  100% { box-shadow: 0 0 24px 8px #FFD60099, 0 0 8px 4px #FFD60055; }
 }
 .eclipse-ray {
   position: absolute;
@@ -68,14 +92,36 @@
   top: 50%;
   width: 8px;
   height: 2px;
-  background: #FFD600;
+  background: var(--themetoggle-ray);
   border-radius: 2px;
   transform-origin: left center;
   opacity: 0.7;
+  z-index: 2;
   transition: opacity 0.5s;
+  animation: ray-flicker 1.5s infinite alternate;
 }
-.dark .eclipse-ray {
-  opacity: 0.15;
+@keyframes ray-flicker {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+.eclipse-moon {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 40%, var(--themetoggle-moon) 55%, var(--themetoggle-moon-shadow) 70%, var(--themetoggle-moon-border) 100%);
+  box-shadow: 0 2px 10px 0 #0005;
+  border: 1.5px solid var(--themetoggle-moon-border);
+  z-index: 3;
+  transform: translate(8px, 0) scale(0.9);
+  transition: background 0.5s, box-shadow 0.5s, transform 0.7s cubic-bezier(.77,0,.18,1.01);
+  overflow: visible;
+}
+.dark .eclipse-moon {
+  background: radial-gradient(circle at 60% 40%, var(--themetoggle-moon) 45%, var(--themetoggle-moon-shadow) 70%, var(--themetoggle-moon-border) 100%);
+  box-shadow: 0 4px 18px 0 #000a;
+  border: 1.5px solid var(--themetoggle-moon-border);
+  transform: translate(0, 0) scale(1);
 }
 .eclipse-moon::after {
   content: '';
@@ -89,15 +135,32 @@
   pointer-events: none;
   z-index: 4;
 }
-.eclipse-moon-halo {
+
+/* Cráteres y manchas lunares adicionales */
+.eclipse-moon::before {
   content: '';
   position: absolute;
-  top: -4px; left: -4px;
-  width: 36px; height: 36px;
+  top: 18%;
+  left: 22%;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  box-shadow: 0 0 16px 8px #bfc3d122;
-  z-index: 1;
+  background: rgba(191,195,209,0.22);
+  box-shadow:
+    8px 4px 0 0 rgba(191,195,209,0.18),
+    12px 10px 0 0 rgba(191,195,209,0.13),
+    3px 13px 0 0 rgba(191,195,209,0.16),
+    14px 3px 0 0 rgba(191,195,209,0.10);
+  z-index: 2;
   pointer-events: none;
+}
+.dark .eclipse-moon::before {
+  background: rgba(122,126,138,0.22);
+  box-shadow:
+    8px 4px 0 0 rgba(122,126,138,0.18),
+    12px 10px 0 0 rgba(122,126,138,0.13),
+    3px 13px 0 0 rgba(122,126,138,0.16),
+    14px 3px 0 0 rgba(122,126,138,0.10);
 }
 
 @media (max-width: 640px) {

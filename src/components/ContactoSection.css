@@ -1,31 +1,131 @@
 /* =============================
-   Panel de Personalización CSS para Contacto
+   ContactoSection - Estilos
    ============================= */
-:root {
-  --contacto-bg: var(--color-background);
-  --contacto-title: #fff;
-  --contacto-title-dark: #fff;
-  --contacto-text: #fff;
-  --contacto-text-dark: #e5e5e5;
-  --contacto-placeholder-bg: #4d0000;
-  --contacto-placeholder-bg-dark: #4d0000;
-  --contacto-border: var(--color-accent-dark);
-}
-.dark {
-  --contacto-bg: var(--color-background);
-  --contacto-title: var(--contacto-title-dark);
-  --contacto-text: var(--contacto-text-dark);
-  --contacto-placeholder-bg: var(--contacto-placeholder-bg-dark);
-  --contacto-border: var(--color-accent-dark);
+
+.contacto-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2.5rem auto;
+  padding: 1.2rem 1.5rem 2.5rem 1.5rem; /* Menos padding arriba, igual abajo */
+  width: 100%;
+  max-width: 48rem;
+  background: rgba(35, 39, 47, 0.92);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(255,0,0,0.04);
+  border: 2.5px solid var(--color-accent-dark, #b71c1c);
+  backdrop-filter: blur(2px);
+  position: relative;
+  overflow: hidden;
 }
 
-.contacto-input, .contacto-textarea {
-  background: var(--contacto-placeholder-bg) !important;
-  color: var(--contacto-text) !important;
+.contacto-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #ff000022 0%, #fd7a0022 100%);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contacto-section:hover {
+  box-shadow: 0 16px 48px 0 rgba(255,0,0,0.13), 0 2px 16px 0 rgba(0,0,0,0.13);
+  border-color: var(--primary, #ff0000);
+}
+
+.contacto-title {
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: var(--primary, #ff0000);
+  margin-bottom: 0.7rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 12px #ff000033;
+}
+
+.contacto-desc-main {
+  font-size: 1.15rem;
+  color: var(--color-foreground);
+  text-align: center;
+  margin-bottom: 2.2rem;
+  max-width: 36rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.contacto-form {
+  width: 100%;
+  max-width: 32rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  border-radius: 1rem;
+  padding: 2rem 1.2rem 1.5rem 1.2rem;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  position: relative;
+  z-index: 1;
+}
+
+.contacto-form input,
+.contacto-form textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.7rem;
+  border: 2px solid var(--primary, #ff0000);
+  color: var(--color-foreground, #23272f);
+  font-size: 1.07rem;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
+  background: transparent !important;
+}
+
+.contacto-input,
+.contacto-textarea,
+.contacto-btn {
+  background: transparent !important;
+}
+
+.contacto-form input:focus,
+.contacto-form textarea:focus {
+  outline: 2px solid #0070f3;
+  background-color: #f0f8ff;
+  border-color: #0070f3;
+}
+
+.contacto-form button {
+  padding: 0.85rem 2.2rem;
+  border-radius: 0.7rem;
+  background: var(--primary, #ff0000);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
   border: none;
+  box-shadow: 0 2px 12px 0 rgba(255,0,0,0.10);
 }
 
-.contacto-input::placeholder, .contacto-textarea::placeholder {
-  color: #bdbdbd;
-  opacity: 1;
+.contacto-form button:hover {
+  background-color: #0070f3;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .contacto-section {
+    padding: 0.7rem 0.5rem 1.2rem 0.5rem; /* Menos padding arriba en mobile */
+    max-width: 98vw;
+  }
+  .contacto-form {
+    padding: 1.1rem 0.3rem 0.8rem 0.3rem;
+  }
+  .contacto-form input,
+  .contacto-form textarea {
+    font-size: 0.97rem;
+    padding: 0.6rem 0.7rem;
+  }
+  .contacto-title {
+    font-size: 1.5rem;
+  }
 }

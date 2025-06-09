@@ -1,29 +1,33 @@
+import "./EventosSection.css";
+
 export default function EventosSection() {
   return (
-    <section className="w-full max-w-4xl bg-white dark:bg-black rounded-2xl shadow-lg p-8 flex flex-col items-center min-h-[220px]">
-      <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+    <section className="eventos-section">
+      <h3 className="eventos-title">
         Galería de Eventos
       </h3>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
+      {/* Si necesitas una descripción, descomenta la siguiente línea */}
+      {/* <div className="eventos-desc-main">Descripción de la galería de eventos.</div> */}
+      <div className="eventos-grid">
         <img
           src="/RadioEclipse2.0.webp"
           alt="Evento 1"
-          className="rounded-lg object-cover w-full h-32"
+          className="evento-img"
         />
         <img
           src="/NuestraManana2.0.webp"
           alt="Evento 2"
-          className="rounded-lg object-cover w-full h-32"
+          className="evento-img"
         />
         <img
           src="/RadioEclipse2.0.webp"
           alt="Evento 3"
-          className="rounded-lg object-cover w-full h-32"
+          className="evento-img"
         />
         <img
           src="/NuestraManana2.0.webp"
           alt="Evento 4"
-          className="rounded-lg object-cover w-full h-32"
+          className="evento-img"
         />
       </div>
     </section>

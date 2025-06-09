@@ -143,7 +143,7 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/RadioEclipse2.0.webp" />
         {/* ...otros preloads si tienes más recursos críticos... */}
       </head>
-      <body className="bg-white text-black dark:bg-black dark:text-white transition-colors">
+      <body>
         {!hydrated && (
           <div
             style={{
@@ -181,7 +181,7 @@ export default function RootLayout({
         />
         <AudioContext.Provider value={audioContextValue}>
           {/* Oculta el contenido hasta que esté hidratado */}
-          <div style={{ opacity: hydrated ? 1 : 0, transition: "opacity 0.2s" }}>
+          <div>
             {children}
           </div>
         </AudioContext.Provider>
