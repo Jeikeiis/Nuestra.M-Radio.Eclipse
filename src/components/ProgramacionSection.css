@@ -67,6 +67,11 @@
   filter: drop-shadow(0 2px 8px #ff000033);
 }
 
+/* Elimina el margen superior extra, ya no es necesario */
+.main-content--with-header > .programacion-section:first-child {
+  margin-top: 0 !important;
+}
+
 @media (max-width: 900px) {
   .programacion-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -86,6 +91,9 @@
   .programacion-item {
     padding: 0.7rem 0.2rem 0.7rem 0.2rem;
     min-height: 80px;
+  }
+  .main-content--with-header > .programacion-section:first-child {
+    margin-top: 0 !important;
   }
 }
 

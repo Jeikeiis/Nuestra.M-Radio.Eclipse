@@ -4,7 +4,7 @@ import SponsorsCarousel from "./SponsorsCarousel";
 
 export default function AppFooter() {
   return (
-    <footer>
+    <footer className="app-footer">
       <div className="footer-content">
         {/* Logo a la izquierda */}
         <div className="footer-logo">

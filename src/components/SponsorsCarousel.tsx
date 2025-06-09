@@ -55,7 +55,7 @@ export default function SponsorsCarousel() {
   useEffect(() => {
     let raf: number;
     let pos = offset;
-    const speed = isMobile() ? 0.5 : 1.5; // píxeles por frame
+    const speed = isMobile() ? 0.2 : 0.7; // Reduce la velocidad
 
     function animate() {
       pos += speed;

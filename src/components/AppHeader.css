@@ -11,7 +11,8 @@
   min-height: 80px;
   /* box-shadow reducido para mejor rendimiento */
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
-  transition: background 0.2s, color 0.2s;
+  /* Reduce la transición a lo esencial */
+  transition: background 0.15s linear, color 0.15s linear;
 }
 
 .app-header-inner {

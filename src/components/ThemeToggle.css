@@ -51,7 +51,7 @@
   width: 28px;
   height: 28px;
   display: block;
-  animation: sun-spin 6s linear infinite;
+  animation: sun-spin 18s linear infinite; /* Más lento */
 }
 @keyframes sun-spin {
   100% { transform: rotate(360deg); }
@@ -65,7 +65,7 @@
   box-shadow: 0 0 16px 8px #bfc3d122;
   z-index: 0;
   pointer-events: none;
-  animation: halo-pulse 2.5s infinite alternate;
+  animation: halo-pulse 6s infinite alternate; /* Más lento */
 }
 @keyframes halo-pulse {
   0% { opacity: 0.5; transform: scale(1); }
@@ -98,7 +98,7 @@
   opacity: 0.7;
   z-index: 2;
   transition: opacity 0.5s;
-  animation: ray-flicker 1.5s infinite alternate;
+  animation: ray-flicker 4s infinite alternate; /* Más lento */
 }
 @keyframes ray-flicker {
   0% { opacity: 0.7; }

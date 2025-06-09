@@ -9,6 +9,7 @@
 }
 
 .sponsors-carousel-track {
+  animation: sponsors-scroll 60s linear infinite; /* Más lento */
 }
 
 .sponsor-carousel-item {

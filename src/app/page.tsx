@@ -70,12 +70,15 @@ export default function Home() {
 
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-      <div style={{ paddingTop: clientPaddingTop }}>
+      <div>
         {/* Encabezado */}
         <AppHeader ref={headerRef} radioOpen={radioOpen} setRadioOpen={setRadioOpen} />
 
         {/* Secciones principales */}
-        <main>
+        <main
+          className="main-content"
+          style={{ paddingTop: headerHeight }}
+        >
           <ProgramacionSection />
           <LocutoresSection />
           <PodcastsSection />
