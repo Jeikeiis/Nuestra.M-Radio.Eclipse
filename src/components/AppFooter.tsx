@@ -11,9 +11,9 @@ export default function AppFooter() {
           <Image
             src="/RadioEclipse2.0.webp"
             alt="Radio Eclipse 106.3"
-            width={38}
-            height={38}
-            priority={false}
+            width={160}
+            height={160}
+            priority={true}
           />
         </div>
         {/* Carrusel al centro */}

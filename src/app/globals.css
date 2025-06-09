@@ -22,7 +22,7 @@
   --warning: #ffa000;
   --info: #1976d2;
   --background-main: #fff5f5;
-  --background-alt: #fffbe6;
+  --background-alt: #fff;          /* Fondo blanco puro para modo claro */
   --foreground-main: #1a1a1a;
   --foreground-alt: #171717;
   --breakpoint-sm: 640px;
@@ -228,7 +228,8 @@ html {
 .contacto-section {
   background: var(--background-alt, #23272f) !important;
   border-radius: 1.5rem !important;
-  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.13) !important;
+  /* box-shadow suavizado */
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08) !important; /* antes: 0 8px 32px 0 ... */
   border: 2px solid var(--color-accent-dark, #b71c1c) !important;
   padding: 2.5rem 1.5rem !important;
   margin: 0 auto 2.5rem auto !important;
@@ -237,6 +238,8 @@ html {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
+  /* backdrop-filter eliminado */
+  /* backdrop-filter: blur(2px); */
 }
 
 .card h3,
@@ -359,11 +362,15 @@ button {
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  /* box-shadow reducido para mejor rendimiento */
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04); /* antes: 0 2px 16px 0 rgba(0,0,0,0.08) */
+  /* Cambiado de fixed a sticky */
   position: sticky;
   top: 0;
   z-index: 100;
   transition: background 0.2s, color 0.2s;
+  /* backdrop-filter eliminado para mejorar rendimiento */
+  /* backdrop-filter: blur(8px); */
 }
 
 @media (max-width: 900px) {
@@ -388,9 +395,13 @@ button {
   width: 100%;
   padding: 2rem 1rem;
   border-top: 1px solid var(--footer-border);
-  position: relative;
+  /* Cambiado de fixed a sticky para evitar repaints constantes */
+  position: sticky;
+  bottom: 0;
   z-index: 10;
   transition: background 0.2s, color 0.2s;
+  /* box-shadow eliminado para mejor rendimiento */
+  /* box-shadow: none; */
 }
 
 .app-footer a {
@@ -409,7 +420,8 @@ button {
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.1);
+  /* box-shadow suavizado */
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
 }
 
 .app-footer .footer-muted {

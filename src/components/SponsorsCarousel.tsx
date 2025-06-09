@@ -92,3 +92,5 @@ export default function SponsorsCarousel() {
     </div>
   );
 }
+
+// Revisa SponsorsCarousel.css para eliminar box-shadow/backdrop-filter si existen

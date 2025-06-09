@@ -1,7 +1,10 @@
 "use client";
 import "./globals.css";
 import { AudioContext, AudioContextType } from "./page";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, createContext } from "react";
+
+// Nuevo contexto solo para el estado de hidratación
+export const HydrationContext = createContext(false);
 
 export default function RootLayout({
   children,
@@ -23,52 +26,8 @@ export default function RootLayout({
     document.documentElement.classList.add("dark");
     localStorage.setItem("theme", "dark");
 
-    // Golpea el fondo y vuelve al top varias veces para asegurar el layout,
-    // pero mantiene el scroll en top antes de mostrar la app
-    let count = 0;
-    const max = 3;
-    let finalTopTimeout: NodeJS.Timeout | number;
-
-    function bounceScroll() {
-      window.scrollTo(0, 99999);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        if (document.scrollingElement) {
-          document.scrollingElement.scrollTop = 0;
-        }
-        count++;
-        if (count < max) {
-          setTimeout(bounceScroll, 120);
-        } else {
-          // Mantener el scroll en el top durante el preloader
-          finalTopTimeout = setInterval(() => {
-            window.scrollTo(0, 0);
-            document.documentElement.scrollTop = 0;
-            document.body.scrollTop = 0;
-            if (document.scrollingElement) {
-              document.scrollingElement.scrollTop = 0;
-            }
-          }, 60);
-          setTimeout(() => {
-            clearInterval(finalTopTimeout);
-            window.scrollTo(0, 0);
-            document.documentElement.scrollTop = 0;
-            document.body.scrollTop = 0;
-            if (document.scrollingElement) {
-              document.scrollingElement.scrollTop = 0;
-            }
-            setHydrated(true);
-          }, 650);
-        }
-      }, 120);
-    }
-    bounceScroll();
-
-    return () => {
-      if (finalTopTimeout) clearInterval(finalTopTimeout);
-    };
+    // Solo mostrar el preloader hasta hidratar, sin manipular el scroll
+    setHydrated(true);
   }, []);
 
   // Sincronizar con el vivo
@@ -144,47 +103,49 @@ export default function RootLayout({
         {/* ...otros preloads si tienes más recursos críticos... */}
       </head>
       <body>
-        {!hydrated && (
-          <div
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 9999,
-              background: "#000",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "opacity 0.2s",
-            }}
-            aria-label="Cargando contenido"
-          >
-            <div style={{ textAlign: "center" }}>
-              <img src="/NuestraManana2.0.webp" alt="Cargando..." width={90} height={90} style={{ margin: "0 auto" }} />
-              <div style={{ marginTop: 16, fontWeight: 700, fontSize: 18 }}>Cargando...</div>
+        <HydrationContext.Provider value={hydrated}>
+          {!hydrated && (
+            <div
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 9999,
+                background: "#000",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "opacity 0.2s",
+              }}
+              aria-label="Cargando contenido"
+            >
+              <div style={{ textAlign: "center" }}>
+                <img src="/NuestraManana2.0.webp" alt="Cargando..." width={90} height={90} style={{ margin: "0 auto" }} />
+                <div style={{ marginTop: 16, fontWeight: 700, fontSize: 18 }}>Cargando...</div>
+              </div>
             </div>
-          </div>
-        )}
-        {/* Audio global siempre presente */}
-        <audio
-          ref={audioRef}
-          src={streamUrl}
-          preload="auto"
-          style={{ display: "none" }}
-          onPlay={() => { setPlaying(true); setError(false); }}
-          onPause={() => setPlaying(false)}
-          onError={() => setError(true)}
-          controls={false}
-          crossOrigin="anonymous"
-          playsInline
-          autoPlay={playing}
-        />
-        <AudioContext.Provider value={audioContextValue}>
-          {/* Oculta el contenido hasta que esté hidratado */}
-          <div>
-            {children}
-          </div>
-        </AudioContext.Provider>
+          )}
+          {/* Audio global siempre presente */}
+          <audio
+            ref={audioRef}
+            src={streamUrl}
+            preload="auto"
+            style={{ display: "none" }}
+            onPlay={() => { setPlaying(true); setError(false); }}
+            onPause={() => setPlaying(false)}
+            onError={() => setError(true)}
+            controls={false}
+            crossOrigin="anonymous"
+            playsInline
+            autoPlay={playing}
+          />
+          <AudioContext.Provider value={audioContextValue}>
+            {/* Oculta el contenido hasta que esté hidratado */}
+            <div>
+              {children}
+            </div>
+          </AudioContext.Provider>
+        </HydrationContext.Provider>
       </body>
     </html>
   );

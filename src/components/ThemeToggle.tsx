@@ -1,18 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import "./ThemeToggle.css";
 
+// Importa el contexto de tema global
+import { ThemeContext } from "../app/page"; // Ajusta la ruta si tu contexto está en otro archivo
+
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(true); // Modo oscuro por defecto
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "light") setDarkMode(false);
-    else setDarkMode(true); // Si no hay preferencia, oscuro
-  }, []);
-
-  useEffect(() => {
-    const root = document.documentElement; // Usar <html> para Tailwind
+    const root = document.documentElement;
     if (darkMode) {
       root.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -26,7 +23,7 @@ export default function ThemeToggle() {
     <button
       className={`theme-toggle-btn px-4 py-2 rounded font-semibold transition-all
       bg-transparent hover:bg-gray-100 dark:bg-transparent dark:hover:bg-orange-900 w-[48px] h-[48px] flex items-center justify-center shadow-none`}
-      onClick={() => setDarkMode((v) => !v)}
+      onClick={() => setDarkMode((v: boolean) => !v)}
       aria-label="Cambiar modo claro/oscuro"
     >
       <span className="icon-sun-moon" aria-hidden="true">
