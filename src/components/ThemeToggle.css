@@ -62,7 +62,7 @@
   top: -4px; left: -4px;
   width: 36px; height: 36px;
   border-radius: 50%;
-  box-shadow: 0 0 16px 8px #bfc3d122;
+  /* box-shadow: 0 0 16px 8px #bfc3d122; */
   z-index: 0;
   pointer-events: none;
   /* Elimina animación de halo */
@@ -78,15 +78,15 @@
   width: 28px; height: 28px;
   border-radius: 50%;
   background: var(--themetoggle-sun);
-  box-shadow: 0 0 12px 2px #FFD60066;
+  /* box-shadow: 0 0 12px 2px #FFD60066; */
   z-index: 1;
-  transition: background 0.5s, box-shadow 0.5s;
+  transition: background 0.5s; /* box-shadow 0.5s; */
   /* Elimina animación de glow */
   /* animation: sun-glow 2s infinite alternate; */
 }
 @keyframes sun-glow {
-  0% { box-shadow: 0 0 12px 2px #FFD60066, 0 0 0 0 #FFD60033; }
-  100% { box-shadow: 0 0 24px 8px #FFD60099, 0 0 8px 4px #FFD60055; }
+  0% { /* box-shadow: 0 0 12px 2px #FFD60066, 0 0 0 0 #FFD60033; */ }
+  100% { /* box-shadow: 0 0 24px 8px #FFD60099, 0 0 8px 4px #FFD60055; */ }
 }
 .eclipse-ray {
   position: absolute;
@@ -113,16 +113,16 @@
   width: 28px; height: 28px;
   border-radius: 50%;
   background: radial-gradient(circle at 60% 40%, var(--themetoggle-moon) 55%, var(--themetoggle-moon-shadow) 70%, var(--themetoggle-moon-border) 100%);
-  box-shadow: 0 2px 10px 0 #0005;
+  /* box-shadow: 0 2px 10px 0 #0005; */
   border: 1.5px solid var(--themetoggle-moon-border);
   z-index: 3;
   transform: translate(8px, 0) scale(0.9);
-  transition: background 0.5s, box-shadow 0.5s, transform 0.7s cubic-bezier(.77,0,.18,1.01);
+  transition: background 0.5s, /* box-shadow 0.5s, */ transform 0.7s cubic-bezier(.77,0,.18,1.01);
   overflow: visible;
 }
 .dark .eclipse-moon {
   background: radial-gradient(circle at 60% 40%, var(--themetoggle-moon) 45%, var(--themetoggle-moon-shadow) 70%, var(--themetoggle-moon-border) 100%);
-  box-shadow: 0 4px 18px 0 #000a;
+  /* box-shadow: 0 4px 18px 0 #000a; */
   border: 1.5px solid var(--themetoggle-moon-border);
   transform: translate(0, 0) scale(1);
 }
@@ -132,9 +132,9 @@
   top: 0; left: 0;
   width: 100%; height: 100%;
   border-radius: 50%;
-  box-shadow:
+  /* box-shadow:
     8px 0 12px 2px #18181bcc,
-    0 0 16px 4px #bfc3d122;
+    0 0 16px 4px #bfc3d122; */
   pointer-events: none;
   z-index: 4;
 }
@@ -149,21 +149,21 @@
   height: 7px;
   border-radius: 50%;
   background: rgba(191,195,209,0.22);
-  box-shadow:
+  /* box-shadow:
     8px 4px 0 0 rgba(191,195,209,0.18),
     12px 10px 0 0 rgba(191,195,209,0.13),
     3px 13px 0 0 rgba(191,195,209,0.16),
-    14px 3px 0 0 rgba(191,195,209,0.10);
+    14px 3px 0 0 rgba(191,195,209,0.10); */
   z-index: 2;
   pointer-events: none;
 }
 .dark .eclipse-moon::before {
   background: rgba(122,126,138,0.22);
-  box-shadow:
+  /* box-shadow:
     8px 4px 0 0 rgba(122,126,138,0.18),
     12px 10px 0 0 rgba(122,126,138,0.13),
     3px 13px 0 0 rgba(122,126,138,0.16),
-    14px 3px 0 0 rgba(122,126,138,0.10);
+    14px 3px 0 0 rgba(122,126,138,0.10); */
 }
 
 @media (max-width: 640px) {

@@ -12,9 +12,13 @@ export default function ThemeToggle() {
     const root = document.documentElement;
     if (darkMode) {
       root.classList.add("dark");
+      // Elimina la clase light si existe
+      root.classList.remove("light");
       localStorage.setItem("theme", "dark");
     } else {
       root.classList.remove("dark");
+      // No agregues la clase light, el modo claro es el predeterminado
+      root.classList.remove("light");
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);

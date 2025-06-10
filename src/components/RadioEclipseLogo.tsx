@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import "./SponsorsCarousel.css";
@@ -12,6 +10,7 @@ function isMobile() {
 const sponsors = [
   { src: "/SanitariaNunez.webp", alt: "Sanitaria Nuñez" },
   { src: "/MirandaConstruccion.webp", alt: "Miranda Construcciones" },
+  { src: "/RadioEclipse2.0.webp", alt: "Radio Eclipse 106.3" }, // Nueva imagen añadida
   // Puedes agregar más sponsors aquí
 ];
 
@@ -35,17 +34,11 @@ export default function SponsorsCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [trackWidth, setTrackWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
-  const [mounted, setMounted] = useState(false); // NUEVO
 
   // Duplicar sponsors para loop infinito
   const sponsorsLoop = [...sponsors, ...sponsors];
 
   useEffect(() => {
-    setMounted(true); // Marca como montado en cliente
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
     function updateWidths() {
       if (trackRef.current) {
         setTrackWidth(trackRef.current.scrollWidth / 2);
@@ -55,10 +48,9 @@ export default function SponsorsCarousel() {
     updateWidths();
     window.addEventListener("resize", updateWidths);
     return () => window.removeEventListener("resize", updateWidths);
-  }, [mounted]);
+  }, []);
 
   useEffect(() => {
-    if (!mounted) return;
     let raf: number;
     let pos = offset;
     const speed = isMobile() ? 0.2 : 0.7;
@@ -73,9 +65,7 @@ export default function SponsorsCarousel() {
     }
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [trackWidth, mounted]);
-
-  if (!mounted) return null; // No renderizar en SSR
+  }, [trackWidth]);
 
   return (
     <div className="sponsors-carousel-outer">

@@ -1,3 +1,10 @@
+.sponsors-carousel-outer {
+  overflow: hidden;
+  width: 100%;
+  padding-left: 16px;   /* Espacio a la izquierda */
+  padding-right: 16px;  /* Espacio a la derecha */
+}
+
 .sponsors-carousel {
   padding: 0.5rem 0;
   margin: 0 auto;
@@ -9,20 +16,45 @@
 }
 
 .sponsors-carousel-track {
-  animation: sponsors-scroll 60s linear infinite; /* Más lento */
+  display: flex;
 }
 
 .sponsor-carousel-item {
+  flex: 0 0 auto;
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.footer-sponsor-img {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;      /* Ocupa todo el espacio cuadrado */
+  object-position: center;
+  display: block;
 }
 
 @media (max-width: 640px) {
   .sponsors-carousel {
     padding: 0.5rem 0;
   }
-
-  .sponsors-carousel-track {
+  .sponsors-carousel-outer {
+    padding-left: 8px;
+    padding-right: 8px;
   }
-
-  .sponsor-carousel-item {
+  .footer-sponsor-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
 }

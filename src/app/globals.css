@@ -1,22 +1,30 @@
 /* =====================
-   Variables de Tema Global
+   1. Variables Globales
    ===================== */
 
 :root {
-  --background: #fffbe6;
+  /* Colores base */
+  --background: #ffffff;
   --foreground: #171717;
   --color-background: #fffdf8;
   --color-foreground: #1a1a1a;
   --primary: #ff0000;
   --primary-dark: #b71c1c;
-  --section-bg: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
-  --section-bg-contrast: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+
+  /* Secciones */
+  --section-bg: linear-gradient(120deg, #fff0f0 0%, #ffeaea 60%, #ffe3e3 100%); /* gradiente más colorido */
+  --section-bg-contrast: #fff6f6;
   --section-text: #23272f;
-  --section-title: #ff0000;
-  --section-shadow: 0 8px 32px 0 rgba(255,0,0,0.10), 0 1.5px 8px 0 rgba(255,0,0,0.04);
-  --section-border: #ff0000;
+  --section-title: #d60000;
+  --section-shadow: 0 6px 32px 0 rgba(255,0,0,0.07);
+  --section-border: #ffb3b3; /* borde más vibrante */
+
+  /* Fuentes */
   --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
   --font-body: 'Inter', Arial, Helvetica, sans-serif;
+  --font-size-base: 16px;
+
+  /* Header y Footer */
   --appheader-bg: #fff;
   --appheader-text: #171717;
   --footer-bg: #fff;
@@ -31,10 +39,10 @@
   --footer-card-bg-dark: #18181b;
   --footer-muted: #000;
   --footer-muted-dark: #bdbdbd;
-  --font-size-base: 16px; /* 1rem = 16px universal para todos los dispositivos */
 }
 
 .dark {
+  /* ...variables para modo oscuro... */
   --background: #18181b;
   --foreground: #ededed;
   --color-background: #18181b;
@@ -58,14 +66,28 @@
 }
 
 /* =====================
-   Estilos Globales
+   2. Reset y Box Sizing
    ===================== */
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
+  scrollbar-color: #ff0000 #470100;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 body, html {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
 
+/* =====================
+   3. Tipografía Global
+   ===================== */
 body {
   min-height: 100vh;
   background: var(--color-background);
@@ -76,16 +98,6 @@ body {
   line-height: 1.7;
   letter-spacing: 0.01em;
 }
-
-/* Ajuste global para box-sizing */
-html {
-  box-sizing: border-box;
-}
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
-/* Tipografía */
 h1, .text-4xl, .text-3xl,
 h2, .text-2xl,
 h3, .text-xl,
@@ -98,11 +110,7 @@ h4, .text-lg {
 h1, .text-4xl, .text-3xl { font-weight: 800; letter-spacing: 0.05em; line-height: 1.15; }
 h2, .text-2xl { font-weight: 700; letter-spacing: 0.04em; }
 h3, .text-xl { font-weight: 600; }
-h4, .text-lg { font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.3;
-}
-
+h4, .text-lg { font-weight: 600; letter-spacing: 0.02em; line-height: 1.3; }
 p, .text-base, .text-sm, .text-xs, span, label, li, input, textarea, button {
   font-family: var(--font-body);
   font-weight: 400;
@@ -111,16 +119,9 @@ p, .text-base, .text-sm, .text-xs, span, label, li, input, textarea, button {
 }
 strong, b { font-weight: 700; }
 
-/* Suavizado y legibilidad */
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  scrollbar-width: thin;
-  scrollbar-color: #ff0000 #470100;
-}
-
-/* Scrollbar personalizado */
+/* =====================
+   4. Scrollbar Personalizado
+   ===================== */
 ::-webkit-scrollbar {
   width: 10px;
   background: #470100;
@@ -133,8 +134,6 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #ff5252;
 }
-
-/* Edge y IE */
 body {
   scrollbar-face-color: #ff0000;
   scrollbar-track-color: #470100;
@@ -145,40 +144,32 @@ body {
   scrollbar-darkshadow-color: #b71c1c;
 }
 
-/* Firefox */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #ff0000 #470100;
-}
-
 /* =====================
-   Layout General
+   5. Layout General
    ===================== */
 .app-root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #fffbe6;
+  background: var(--background);
   width: 100vw;
   margin: 0;
   padding: 0;
 }
-
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 13rem 1rem 2.5rem 1rem; /* Aumentado el padding-top a 13rem (+2rem más) */
+  padding: 13rem 1rem 2.5rem 1rem;
   width: 100%;
   max-width: 48rem;
   margin: 0 auto;
   gap: 1rem;
 }
-
 @media (max-width: 900px) {
   .main-content {
-    padding-top: 16rem; /* Aumentado el padding superior para tablet (+2rem más) */
+    padding-top: 16rem;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
     padding-bottom: 2rem;
@@ -186,7 +177,7 @@ html {
 }
 @media (max-width: 640px) {
   .main-content {
-    padding-top: 16rem; /* Aumentado el padding superior para móvil (+2rem más) */
+    padding-top: 16rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     padding-bottom: 1.5rem;
@@ -194,7 +185,7 @@ html {
 }
 
 /* =====================
-   Secciones y tarjetas UNIFICADAS
+   6. Componentes: Secciones y Tarjetas
    ===================== */
 .card,
 .programacion-section,
@@ -203,10 +194,9 @@ html {
 .contacto-section,
 .podcasts-section {
   background: var(--section-bg) !important;
-  border-radius: 1.5rem !important;
-  box-shadow: var(--section-shadow) !important;
-  border: 2.5px solid var(--section-border) !important;
-  padding: 1.2rem 1.5rem 2rem 1.5rem !important;
+  border-radius: 1rem !important;
+  border: 1.5px solid var(--section-border) !important;
+  padding: 1.5rem 1.2rem 2rem 1.2rem !important;
   width: 100% !important;
   max-width: 48rem !important;
   margin: 0 auto 2.5rem auto !important;
@@ -216,39 +206,30 @@ html {
   position: relative;
   overflow: hidden !important;
   color: var(--section-text) !important;
-  transition: none !important;
+  box-shadow: var(--section-shadow) !important;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s !important;
 }
-
 .card:hover,
 .programacion-section:hover,
 .locutores-section:hover,
 .eventos-section:hover,
 .contacto-section:hover,
 .podcasts-section:hover {
-  /* Elimina cambios de fondo y sombra en hover para evitar parpadeo */
-  box-shadow: var(--section-shadow) !important;
-  border-color: var(--section-border) !important;
-  background: var(--section-bg) !important;
+  border-color: var(--primary-dark) !important;
+  box-shadow: 0 4px 24px 0 rgba(255,0,0,0.07) !important;
+  background: var(--section-bg-contrast) !important;
 }
-
 .card::before,
 .programacion-section::before,
 .locutores-section::before,
 .eventos-section::before,
 .contacto-section::before,
 .podcasts-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.10;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(circle at 70% 30%, #ff000033 0%, transparent 70%);
-  /* No animaciones ni cambios en hover */
+  display: none !important; /* elimina decoraciones innecesarias */
 }
 
 /* =====================
-   Títulos y textos UNIFICADOS
+   7. Títulos y Textos de Sección
    ===================== */
 .card h3,
 .programacion-title,
@@ -256,25 +237,25 @@ html {
 .eventos-title,
 .contacto-title,
 .podcasts-title {
-  font-size: 2.3rem !important;
-  font-weight: 900 !important;
+  font-size: 2.1rem !important;
+  font-weight: 800 !important;
   color: var(--section-title) !important;
   margin-bottom: 0.7rem !important;
   text-align: center !important;
-  letter-spacing: 0.03em !important;
-  text-shadow: 0 2px 12px #ff000033 !important;
+  letter-spacing: 0.02em !important;
+  text-shadow: none !important;
   z-index: 1;
   transition: color 0.3s;
+  line-height: 1.15;
 }
-
 .locutores-desc-main,
 .eventos-desc-main,
 .contacto-desc-main,
 .programacion-desc-main {
-  font-size: 1.15rem !important;
+  font-size: 1.13rem !important;
   color: var(--section-text) !important;
   text-align: center !important;
-  margin-bottom: 2.2rem !important;
+  margin-bottom: 2rem !important;
   max-width: 36rem !important;
   line-height: 1.6 !important;
   opacity: 0.92 !important;
@@ -283,19 +264,7 @@ html {
 }
 
 /* =====================
-   Espaciado entre secciones
-   ===================== */
-.card,
-.programacion-section,
-.locutores-section,
-.eventos-section,
-.contacto-section,
-.podcasts-section {
-  margin-bottom: 2.5rem !important;
-}
-
-/* =====================
-   Inputs y Formularios Globales
+   8. Inputs y Formularios
    ===================== */
 input, textarea, button {
   font-size: 1rem;
@@ -312,11 +281,7 @@ button {
 }
 
 /* =====================
-   Header Global Styles
-   ===================== */
-
-/* =====================
-   Footer Global Styles
+   9. Footer
    ===================== */
 .app-footer {
   color: var(--footer-text);
@@ -329,7 +294,6 @@ button {
   z-index: 10;
   transition: background 0.2s, color 0.2s;
 }
-
 .app-footer a {
   color: var(--footer-link);
   text-decoration: none;
@@ -344,7 +308,6 @@ button {
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
 }
 .app-footer .footer-muted {
   color: var(--footer-muted);
@@ -352,7 +315,6 @@ button {
   text-align: center;
   margin-top: 1rem;
 }
-
 @media (max-width: 900px) {
   .app-footer { padding: 1.5rem 0.5rem; }
 }

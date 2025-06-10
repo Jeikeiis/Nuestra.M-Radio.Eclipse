@@ -2,11 +2,11 @@
 
 .app-footer {
   width: 100vw;
-  background: linear-gradient(90deg, #18181b 60%, #23232b 100%);
-  color: #ededed;
+  background: var(--footer-bg);
+  color: var(--footer-text);
   padding: 1.5rem 0.5rem 1rem 0.5rem;
-  border-top: 1.5px solid #23232b;
-  box-shadow: 0 -2px 16px 0 rgba(0,0,0,0.10);
+  border-top: 1.5px solid var(--footer-border);
+  /* box-shadow: 0 -2px 16px 0 rgba(0,0,0,0.10); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,6 +15,7 @@
   margin: 0;
   overflow-x: hidden;
   font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .footer-content {
@@ -26,7 +27,7 @@
   justify-content: space-between;
   gap: 2rem;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 1.5rem; /* Agrega espacio a izquierda y derecha */
 }
 
 .footer-logo {
@@ -35,13 +36,14 @@
   gap: 0.5rem;
 }
 .footer-logo img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;      /* Cambia a cover para que ocupe todo el espacio */
+  object-position: center;
   border-radius: 0.5rem;
   background: #23232b;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
   border: 1.5px solid #23232b;
+  display: block;
 }
 
 .footer-sponsors {
@@ -72,18 +74,19 @@
   font-size: 1rem;
   gap: 0.2rem;
   opacity: 0.92;
+  color: #18181b; /* Más oscuro en modo claro */
 }
 
 .footer-link {
-  color: #ff4d4f;
+  color: var(--footer-link);
   text-decoration: underline;
   font-size: 1rem;
   font-weight: 600;
   transition: color 0.2s, background 0.2s;
 }
 .footer-link:hover {
-  color: #fff;
-  background: #ff4d4f;
+  color: var(--footer-link-dark);
+  background: var(--footer-link);
   border-radius: 0.25rem;
 }
 
@@ -91,6 +94,7 @@
   font-size: 0.92rem;
   opacity: 0.7;
   margin-top: 0.1rem;
+  color: #111; /* Aún más oscuro en modo claro */
 }
 
 .footer-heart {
@@ -102,65 +106,97 @@
 .footer-sponsor-img {
   width: 60px;
   height: 60px;
-  object-fit: contain;
+  object-fit: cover;      /* Cambia a cover para que ocupe todo el espacio */
+  object-position: center;
   background: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
   border: 1.5px solid #eee;
   margin: 0;
   padding: 0;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition: border-color 0.2s;
+  display: block;
 }
 .footer-sponsor-img:hover {
-  box-shadow: 0 4px 16px 0 rgba(255,77,79,0.13);
+  /* box-shadow: 0 4px 16px 0 rgba(255,77,79,0.13); */
   border-color: #ff4d4f;
 }
 
 @media (max-width: 900px) {
   .footer-content {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 1.2rem;
+    justify-content: space-between;
+    gap: 0.7rem;
+    padding: 0 1rem; /* Menos espacio en tablet */
   }
   .footer-logo img {
-    width: 48px;
-    height: 48px;
-  }
-  .footer-credits {
-    align-items: center;
-    text-align: center;
-    font-size: 0.95rem;
-    gap: 0.1rem;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
   .sponsors-carousel-outer {
-    max-width: 120px;
+    max-width: 80px;
   }
   .footer-sponsor-img {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+  }
+  .footer-credits {
+    align-items: flex-end;
+    text-align: right;
+    font-size: 0.85rem;
+    gap: 0.1rem;
   }
 }
 
 @media (max-width: 600px) {
   .app-footer {
     min-height: 60px;
-    padding: 1rem 0.25rem 0.7rem 0.25rem;
+    padding: 0.7rem 0.15rem 0.7rem 0.15rem;
   }
   .footer-content {
-    gap: 0.7rem;
+    gap: 0.4rem;
+    padding: 0 0.5rem; /* Menos espacio en móvil */
   }
   .footer-logo img {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
+    object-fit: cover;
   }
   .sponsors-carousel-outer {
-    max-width: 70px;
+    max-width: 44px;
   }
   .footer-sponsor-img {
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
   }
   .footer-credits {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
+}
+
+/* Modo oscuro: usa variables, pero puedes personalizar detalles si lo deseas */
+.dark .app-footer {
+  background: var(--footer-bg-dark, #18181b);
+  color: var(--footer-text-dark, #ededed);
+  border-top: 1.5px solid var(--footer-border-dark, #23232b);
+}
+.dark .footer-link {
+  color: var(--footer-link-dark, #ff9800);
+}
+.dark .footer-link:hover {
+  color: var(--footer-link, #fd7a00);
+  background: var(--footer-link-dark, #ff9800);
+}
+.dark .footer-sponsor-img {
+  background: #23232b;
+  border: 1.5px solid #444;
+}
+.dark .footer-madeby {
+  color: #ededed; /* Claro en modo oscuro */
+}
+.dark .footer-credits {
+  color: #ededed; /* Claro en modo oscuro */
 }

@@ -4,7 +4,7 @@
   min-width: 0;
   -webkit-overflow-scrolling: touch;
   background: rgba(20,20,20,0.92);
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.28);
+  /* box-shadow: 0 8px 32px 0 rgba(0,0,0,0.28); */
   border-radius: 1.5rem; /* Redondeado en todos los bordes */
   left: 50%;
   transform: translateX(-50%);
@@ -91,8 +91,8 @@
   background: #dc2626;
   border-radius: 9999px;
   padding: 0.5rem;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: background 0.2s;
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.18); */
   border: 2px solid #b91c1c;
   min-width: 40px;
   min-height: 40px;
@@ -129,18 +129,18 @@
   align-items: center;
   justify-content: center;
   font-size: 1.375rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.18); */
   background: linear-gradient(135deg, #ff0000 0%, #b71c1c 100%) !important;
   color: #fff !important;
   border: 2px solid #b71c1c;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s;
 }
 .radio-dashboard-play:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  /* box-shadow: 0 4px 16px rgba(0,0,0,0.22); */
 }
 .radio-dashboard-play:active {
-  box-shadow: 0 0 0 4px #fca5a5;
+  /* box-shadow: 0 0 0 4px #fca5a5; */
 }
 .radio-dashboard-play svg,
 .radio-dashboard-close svg {
@@ -167,17 +167,17 @@
   color: #fff !important;
   font-weight: 900;
   font-size: 0.75rem;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s;
   min-width: 60px;
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 .radio-dashboard-live:hover {
   background: linear-gradient(90deg, #193763 0%, #0a2342 100%) !important;
   transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  /* box-shadow: 0 4px 16px rgba(0,0,0,0.22); */
 }
 .radio-dashboard-live:active {
-  box-shadow: 0 0 0 4px #bbf7d0;
+  /* box-shadow: 0 0 0 4px #bbf7d0; */
 }
 
 .radio-dashboard-live-dot {
@@ -186,7 +186,7 @@
   border-radius: 9999px;
   background: #22c55e; /* verde */
   animation: pulse 1.2s infinite;
-  box-shadow: 0 0 6px #22c55e;
+  /* box-shadow: 0 0 6px #22c55e; */
 }
 
 @keyframes pulse {

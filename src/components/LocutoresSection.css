@@ -13,7 +13,7 @@
   max-width: 48rem;
   background: rgba(35, 39, 47, 0.92);
   border-radius: 1.5rem;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 rgba(255,0,0,0.04);
+  /* box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 rgba(255,0,0,0.04); */
   border: 2.5px solid var(--color-accent-dark, #b71c1c);
   position: relative;
   overflow: hidden;
@@ -30,7 +30,7 @@
 }
 
 .locutores-section:hover {
-  box-shadow: 0 4px 16px 0 rgba(255,0,0,0.09), 0 2px 8px 0 rgba(0,0,0,0.09);
+  /* box-shadow: 0 4px 16px 0 rgba(255,0,0,0.09), 0 2px 8px 0 rgba(0,0,0,0.09); */
   border-color: var(--primary, #ff0000);
 }
 
@@ -82,7 +82,7 @@
 .locutores-profile {
   background: rgba(255,255,255,0.06);
   border-radius: 1rem;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
+  /* box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08); */
   border: 2px solid var(--color-accent-dark, #b71c1c);
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@
   color: var(--color-foreground);
 }
 .locutores-profile:hover {
-  box-shadow: 0 4px 12px 0 rgba(255,0,0,0.09);
+  /* box-shadow: 0 4px 12px 0 rgba(255,0,0,0.09); */
   border-color: var(--primary, #ff0000);
   background: rgba(255,255,255,0.12);
 }
@@ -110,7 +110,7 @@
   height: 80px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
+  /* box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08); */
   border: 2.5px solid var(--primary, #ff0000);
   background: #fff;
 }
@@ -160,4 +160,8 @@
     width: 60px;
     height: 60px;
   }
+}
+
+:root {
+  --section-shadow: none;
 }
