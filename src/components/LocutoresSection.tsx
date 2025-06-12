@@ -5,9 +5,10 @@ export default function LocutoresSection() {
     <section className="locutores-section">
       <h3 className="locutores-title">Nuestro Equipo de Locutores</h3>
       <p className="locutores-desc-main">
-        Conocé a las voces que acompañan cada día en Radio Eclipse. Profesionales
-        apasionados, cercanos y con gran trayectoria, listos para brindarte la
-        mejor compañía y la mejor música.
+            De lunes a viernes, Federico te acompaña en <b>Nuestra Mañana</b> por
+            Radio Eclipse FM 106.3. Un programa pensado para comenzar el día con
+            la mejor energía, información actualizada, buena música y la calidez
+            de un conductor cercano a su audiencia.
       </p>
       <div className="locutores-grid">
         <div className="locutores-profile">
@@ -18,12 +19,6 @@ export default function LocutoresSection() {
           />
           <span className="locutores-name">Federico Pinato</span>
           <span className="locutores-programa">Nuestra Mañana</span>
-          <span className="locutores-desc">
-            De lunes a viernes, Federico te acompaña en <b>Nuestra Mañana</b> por
-            Radio Eclipse FM 106.3. Un programa pensado para comenzar el día con
-            la mejor energía, información actualizada, buena música y la calidez
-            de un conductor cercano a su audiencia.
-          </span>
         </div>
       </div>
     </section>
