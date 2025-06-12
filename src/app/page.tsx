@@ -40,7 +40,7 @@ export default function Home() {
         <LocutoresSection />
         <PodcastsSection />
         <EventosSection />
-        <ContactoSection />
+        {/* <ContactoSection /> */}
       </main>
       {/* Panel de RadioDashboard fijo sobre el footer */}
       {hydrated && radioOpen && audio && (

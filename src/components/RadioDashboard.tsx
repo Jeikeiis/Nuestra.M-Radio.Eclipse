@@ -88,6 +88,7 @@ export default function RadioDashboard({
               }}
               className="custom-slider"
               aria-label="Volumen"
+              style={{ width: "8rem", maxWidth: 120, paddingRight: 9, paddingLeft: 9 }}
             />
             <button
               onClick={onSyncLive}

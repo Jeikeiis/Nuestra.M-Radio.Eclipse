@@ -12,8 +12,8 @@
   --primary-dark: #b71c1c;
 
   /* Secciones */
-  --section-bg: linear-gradient(120deg, #fff0f0 0%, #ffeaea 60%, #ffe3e3 100%); /* gradiente más colorido */
-  --section-bg-contrast: #fff6f6;
+  --section-bg: linear-gradient(120deg, #fff0f0cc 0%, #ffeaea99 60%, #ffe3e399 100%); /* gradiente translúcido */
+  --section-bg-contrast: #fff6f6cc;
   --section-text: #23272f;
   --section-title: #d60000;
   --section-shadow: 0 6px 32px 0 rgba(255,0,0,0.07);
@@ -28,8 +28,8 @@
   --appheader-bg: #fff;
   --appheader-text: #171717;
   --footer-bg: #fff;
-  --footer-bg-dark: #18181b;
   --footer-text: #171717;
+  --footer-bg-dark: #18181b;
   --footer-text-dark: #ededed;
   --footer-link: #fd7a00;
   --footer-link-dark: #ff9800;
@@ -315,6 +315,7 @@ button {
   text-align: center;
   margin-top: 1rem;
 }
+
 @media (max-width: 900px) {
   .app-footer { padding: 1.5rem 0.5rem; }
 }

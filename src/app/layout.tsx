@@ -133,8 +133,8 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/webp" href="/favicon.webp" />
         {/* Preload imágenes críticas */}
-        <link rel="preload" as="image" href="/NuestraManana2.0.webp" />
-        <link rel="preload" as="image" href="/RadioEclipse2.0.webp" />
+        {/* <link rel="preload" as="image" href="/NuestraManana2.0.webp" /> */}
+        {/* <link rel="preload" as="image" href="/RadioEclipse2.0.webp" /> */}
         {/* ...otros preloads si tienes más recursos críticos... */}
       </head>
       <body className="app-root">

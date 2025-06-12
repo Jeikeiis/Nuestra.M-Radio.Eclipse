@@ -12,6 +12,7 @@ function isMobile() {
 const sponsors = [
   { src: "/SanitariaNunez.webp", alt: "Sanitaria Nuñez" },
   { src: "/MirandaConstruccion.webp", alt: "Miranda Construcciones" },
+  { src: "/ChiariaPizzi.webp", alt: "Estudio Jurídico Notarial Chiara Pizzi" }, // Nuevo sponsor actualizado a webp
   // Puedes agregar más sponsors aquí
 ];
 
@@ -65,8 +66,9 @@ export default function SponsorsCarousel() {
 
     function animate() {
       pos += speed;
+      // Loop infinito suave: cuando el offset supera la mitad, restamos la mitad (ancho de un set de sponsors)
       if (trackWidth > 0 && pos >= trackWidth) {
-        pos = 0;
+        pos -= trackWidth;
       }
       setOffset(pos);
       raf = requestAnimationFrame(animate);
@@ -84,7 +86,6 @@ export default function SponsorsCarousel() {
         ref={trackRef}
         style={{
           transform: `translateX(-${offset}px)`,
-          transition: "none",
         }}
       >
         {sponsorsLoop.map((s, i) => (
