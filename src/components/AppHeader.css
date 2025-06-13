@@ -1,4 +1,4 @@
-/* Header styles migrados desde globals.css */
+/* Header moderno y responsivo */
 
 .app-header {
   color: var(--appheader-text);
@@ -9,21 +9,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
-  /* box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04); */
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   z-index: 100;
-  transition: background 0.15s linear, color 0.15s linear;
+  transition: background 0.15s, color 0.15s;
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 900px) {
-  .app-header { padding: 0 0.5rem; min-height: 38px; }
-}
-@media (max-width: 640px) {
-  .app-header { padding: 0 0.25rem; min-height: 32px; }
-}
+@media (max-width: 900px) { .app-header { padding: 0 0.5rem; min-height: 38px; } }
+@media (max-width: 640px) { .app-header { padding: 0 0.25rem; min-height: 32px; } }
 
 .app-header-inner {
   max-width: 1120px;
@@ -31,15 +25,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem;
 }
-
 @media (min-width: 640px) {
   .app-header-inner {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 2.5rem; /* Aumenta el gap entre info y acciones */
+    gap: 2.5rem;
     padding: 0.75rem 1.5rem;
   }
 }
@@ -60,45 +53,25 @@
   flex: 1;
   justify-content: center;
 }
-
-@media (min-width: 640px) {
-  .app-header-logo-info {
-    justify-content: flex-start;
-    gap: 2rem; /* Más espacio entre logo y textos */
-  }
-}
+@media (min-width: 640px) { .app-header-logo-info { justify-content: flex-start; gap: 2rem; } }
 
 .app-header-logo {
   border-radius: 0.5rem;
   flex-shrink: 0;
-  width: 96px;
-  height: 96px;
+  width: 96px; height: 96px;
 }
-
-@media (min-width: 640px) {
-  .app-header-logo {
-    width: 128px;
-    height: 128px;
-  }
-}
-@media (min-width: 1024px) {
-  .app-header-logo {
-    width: 160px;
-    height: 160px;
-  }
-}
+@media (min-width: 640px) { .app-header-logo { width: 128px; height: 128px; } }
+@media (min-width: 1024px) { .app-header-logo { width: 160px; height: 160px; } }
 
 .app-header-info {
   min-width: 0;
   margin-left: 0.5rem;
-  margin-right: 1.5rem; /* Añade margen derecho para separar del botón */
+  margin-right: 1.5rem;
 }
-
 @media (max-width: 640px) {
   .app-header-info {
     padding-right: 0.5rem;
     padding-left: 0.2rem;
-    min-width: 0;
     max-width: 100vw;
     box-sizing: border-box;
   }
@@ -114,20 +87,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-@media (min-width: 640px) {
-  .app-header-title {
-    font-size: 1.5rem;
-  }
-}
-@media (min-width: 1024px) {
-  .app-header-title {
-    font-size: 2rem;
-  }
-}
+@media (min-width: 640px) { .app-header-title { font-size: 1.5rem; } }
+@media (min-width: 1024px) { .app-header-title { font-size: 2rem; } }
 @media (max-width: 640px) {
-  .app-header-title,
-  .app-header-subtitle {
+  .app-header-title, .app-header-subtitle {
     max-width: 100vw;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -144,17 +107,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-@media (min-width: 640px) {
-  .app-header-subtitle {
-    font-size: 1rem;
-  }
-}
-@media (min-width: 768px) {
-  .app-header-subtitle {
-    font-size: 1.1rem;
-  }
-}
+@media (min-width: 640px) { .app-header-subtitle { font-size: 1rem; } }
+@media (min-width: 768px) { .app-header-subtitle { font-size: 1.1rem; } }
 
 .app-header-actions {
   display: flex;
@@ -164,7 +118,6 @@
   width: 100%;
   margin-top: 0.5rem;
 }
-
 @media (min-width: 640px) {
   .app-header-actions {
     flex-direction: row;
@@ -175,39 +128,23 @@
 }
 
 .app-header-radio-btn {
-  background: #e53935 !important; /* Rojo vivo */
-  color: #fff !important;         /* Texto blanco siempre */
+  background: #e53935 !important;
+  color: #fff !important;
   font-weight: 700;
   border-radius: 9999px;
   padding: 0.5rem 1.5rem;
   font-size: 1rem;
   border: none;
-  /* box-shadow: 0 2px 8px 0 rgba(229,57,53,0.08); */
   transition: background 0.2s;
   cursor: pointer;
   margin-bottom: 0.5rem;
 }
+.app-header-radio-btn:hover { background: #b71c1c !important; }
+@media (min-width: 640px) { .app-header-radio-btn { margin-bottom: 0; } }
 
-.app-header-radio-btn:hover {
-  background: #b71c1c !important; /* Rojo más oscuro al pasar el mouse */
-}
-
+.app-header-theme-toggle { margin-left: 0; margin-top: 0.5rem; }
 @media (min-width: 640px) {
-  .app-header-radio-btn {
-    margin-bottom: 0;
-  }
-}
-
-.app-header-theme-toggle {
-  margin-left: 0;
-  margin-top: 0.5rem;
-}
-
-@media (min-width: 640px) {
-  .app-header-theme-toggle {
-    margin-left: 1rem;
-    margin-top: 0;
-  }
+  .app-header-theme-toggle { margin-left: 1rem; margin-top: 0; }
 }
 
 .app-header,

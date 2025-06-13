@@ -11,9 +11,8 @@
   padding: 1.2rem 1.5rem 2.5rem 1.5rem; /* Menos padding arriba, igual abajo */
   width: 100%;
   max-width: 48rem;
-  background: rgba(35, 39, 47, 0.92);
+  background: rgba(35,39,47,0.92);
   border-radius: 1.5rem;
-  /* box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 rgba(255,0,0,0.04); */
   border: 2.5px solid var(--color-accent-dark, #b71c1c);
   position: relative;
   overflow: hidden;
@@ -23,16 +22,12 @@
   content: "";
   position: absolute;
   inset: 0;
-  /* background: linear-gradient(120deg, #ff000022 0%, #fd7a0022 100%); */
   opacity: 0.18;
   pointer-events: none;
   z-index: 0;
 }
 
-.locutores-section:hover {
-  /* box-shadow: 0 4px 16px 0 rgba(255,0,0,0.09), 0 2px 8px 0 rgba(0,0,0,0.09); */
-  border-color: var(--primary, #ff0000);
-}
+.locutores-section:hover { border-color: var(--primary, #ff0000); }
 
 .locutores-title {
   font-size: 2.3rem;
@@ -57,32 +52,17 @@
 .locutores-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;    /* Centra horizontalmente las tarjetas */
-  align-items: center;        /* Centra verticalmente si hay espacio */
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem 1.2rem;
   width: 100%;
   margin-top: 1.2rem;
   z-index: 1;
 }
 
-@media (min-width: 640px) {
-  .locutores-grid {
-    justify-content: center;  /* Mantiene centrado en tablet */
-    gap: 1.5rem 1.2rem;
-  }
-}
-@media (min-width: 900px) {
-  .locutores-grid {
-    justify-content: center;  /* Mantiene centrado en desktop */
-    gap: 1.5rem 1.2rem;
-  }
-}
-
-/* Perfil de locutor */
 .locutores-profile {
   background: rgba(255,255,255,0.06);
   border-radius: 1rem;
-  /* box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08); */
   border: 2px solid var(--color-accent-dark, #b71c1c);
   display: flex;
   flex-direction: column;
@@ -96,7 +76,6 @@
   color: var(--color-foreground);
 }
 .locutores-profile:hover {
-  /* box-shadow: 0 4px 12px 0 rgba(255,0,0,0.09); */
   border-color: var(--primary, #ff0000);
   background: rgba(255,255,255,0.12);
 }
@@ -110,13 +89,10 @@
   height: 80px;
   object-fit: cover;
   border-radius: 50%;
-  /* box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08); */
   border: 2.5px solid var(--primary, #ff0000);
   background: #fff;
 }
-.locutores-profile:hover .locutores-img {
-  border-color: #fff;
-}
+.locutores-profile:hover .locutores-img { border-color: #fff; }
 
 /* Nombre y programa */
 .locutores-name {
@@ -137,31 +113,19 @@
 }
 
 @media (max-width: 900px) {
-  .locutores-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem 0.7rem;
-  }
+  .locutores-grid { gap: 1rem 0.7rem; }
 }
-
 @media (max-width: 640px) {
   .locutores-section {
     padding: 0.7rem 0.5rem 1.2rem 0.5rem; /* Menos padding arriba en mobile */
     max-width: 98vw;
   }
-  .locutores-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.7rem;
-  }
+  .locutores-grid { gap: 0.7rem; }
   .locutores-profile {
     padding: 0.7rem 0.2rem 0.7rem 0.2rem;
     min-height: 80px;
   }
-  .locutores-img {
-    width: 60px;
-    height: 60px;
-  }
+  .locutores-img { width: 60px; height: 60px; }
 }
 
-:root {
-  --section-shadow: none;
-}
+:root { --section-shadow: none; }

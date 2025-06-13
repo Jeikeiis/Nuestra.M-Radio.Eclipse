@@ -181,6 +181,7 @@ export default function RootLayout({
               <AudioContext.Provider value={audioContextValue}>
                 <div>
                   {children}
+                  {/* Mueve el footer aquí como una sección más */}
                   <AppFooter />
                 </div>
               </AudioContext.Provider>
