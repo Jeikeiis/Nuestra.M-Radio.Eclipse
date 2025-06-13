@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { visitasPorIp } from "./visitasStore";
+import { Redis } from "@upstash/redis";
 
 const API_KEY = "pub_c0d1669584c7417b93361bfdc354b1c3";
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutos en ms
@@ -21,6 +21,11 @@ let cache: {
   timestamp: 0,
   errorMsg: undefined,
 };
+
+const REDIS_URL = process.env.REDIS_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
+const OYENTES_KEY = process.env.NODE_ENV === "development" ? "oyentes-dev" : "oyentes";
 
 async function fetchNoticias(region: string): Promise<{noticias: Noticia[], errorMsg?: string}> {
   const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;
@@ -52,16 +57,16 @@ function getIp(req: NextRequest): string {
   return req.ip || "127.0.0.1";
 }
 
+async function addOyente(ip: string) {
+  if (!redis) return;
+  await redis.sadd(OYENTES_KEY, ip);
+  await redis.expire(OYENTES_KEY, CACHE_DURATION / 1000); // TTL en segundos
+}
+
 export async function GET(req: NextRequest) {
   const now = Date.now();
-
-  // Trackeo por IP: si la IP no está o expiró, cuenta como nueva visita
   const ip = getIp(req);
-  let nuevaVisita = false;
-  if (!visitasPorIp[ip] || now - visitasPorIp[ip] > CACHE_DURATION) {
-    visitasPorIp[ip] = now;
-    nuevaVisita = true;
-  }
+  await addOyente(ip);
 
   if (
     (cache.noticias.length > 0 || cache.errorMsg) &&
@@ -70,8 +75,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       noticias: cache.noticias,
       cached: true,
-      errorMsg: cache.errorMsg,
-      sintonizado: !nuevaVisita ? false : true
+      errorMsg: cache.errorMsg
     });
   }
 
@@ -81,7 +85,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     noticias,
     cached: false,
-    errorMsg,
-    sintonizado: !nuevaVisita ? false : true
+    errorMsg
   });
 }
+

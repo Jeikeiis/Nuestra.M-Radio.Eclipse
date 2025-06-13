@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { visitasPorIp } from "../noticias/visitasStore";
+import { Redis } from "@upstash/redis";
 
-// Devuelve la cantidad de IPs únicas activas en los últimos 15 minutos
+const REDIS_URL = process.env.REDIS_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
+const OYENTES_KEY = process.env.NODE_ENV === "development" ? "oyentes-dev" : "oyentes";
+
 export async function GET(req: NextRequest) {
-  const now = Date.now();
-  const CACHE_DURATION = 15 * 60 * 1000;
-  let total = 0;
-  for (const ip in visitasPorIp) {
-    if (now - visitasPorIp[ip] < CACHE_DURATION) total++;
-  }
-  return NextResponse.json({ total });
+  if (!redis) return NextResponse.json({ total: 0 });
+  const total = await redis.scard(OYENTES_KEY);
+  return NextResponse.json({ total: total ?? 0 });
 }
+

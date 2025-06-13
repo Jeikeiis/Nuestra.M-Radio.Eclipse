@@ -59,6 +59,7 @@ export default function AppFooter() {
             Hecho por Jeikeiis con{" "}
             <span className="footer-heart">♥</span> y Next.js
           </span>
+          {/*
           <span
             className="footer-stats"
             style={{
@@ -72,6 +73,7 @@ export default function AppFooter() {
               ? `Oyentes: ${sintonizados}`
               : "Cargando estadísticas..."}
           </span>
+          */}
         </div>
       </div>
     </footer>
