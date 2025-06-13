@@ -38,9 +38,9 @@ export default function Home() {
       <main className="main-content">
         <ProgramacionSection />
         <LocutoresSection />
-        <PodcastsSection />
+        {/* <PodcastsSection />
         <EventosSection />
-        {/* <ContactoSection /> */}
+        <ContactoSection /> */}
       </main>
       {/* Panel de RadioDashboard fijo sobre el footer */}
       {hydrated && radioOpen && audio && (
