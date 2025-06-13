@@ -1,11 +1,7 @@
 "use client";
-import AppFooter from "../components/AppFooter";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import ProgramacionSection from "../components/ProgramacionSection";
 import LocutoresSection from "../components/LocutoresSection";
-import PodcastsSection from "../components/PodcastsSection";
-import EventosSection from "../components/EventosSection";
-import ContactoSection from "../components/ContactoSection";
 import RadioDashboard from "../components/RadioDashboard";
 import { HydrationContext, RadioDashboardContext } from "./layout";
 
@@ -57,7 +53,6 @@ export default function Home() {
         />
       )}
       {/* Pie de página */}
-      <AppFooter />
     </div>
   );
 }

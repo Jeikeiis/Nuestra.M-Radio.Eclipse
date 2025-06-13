@@ -3,6 +3,7 @@ import "./globals.css";
 import { AudioContext, AudioContextType } from "./page";
 import { createContext, useRef, useState, useEffect } from "react";
 import AppHeader from "../components/AppHeader";
+import AppFooter from "../components/AppFooter";
 
 // Nuevo contexto solo para el estado de hidratación
 export const HydrationContext = createContext(false);
@@ -180,6 +181,7 @@ export default function RootLayout({
               <AudioContext.Provider value={audioContextValue}>
                 <div>
                   {children}
+                  <AppFooter />
                 </div>
               </AudioContext.Provider>
             </HydrationContext.Provider>

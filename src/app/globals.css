@@ -81,9 +81,11 @@ html {
 }
 body, html {
   overflow-x: hidden !important;
-  margin: 0;
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
   padding: 0;
-  padding-bottom: 152px; /* Espacio extra para el footer fijo y su extensión */
+  padding-bottom: 110px; /* Ajusta este valor a la altura real del footer */
 }
 
 /* =====================
