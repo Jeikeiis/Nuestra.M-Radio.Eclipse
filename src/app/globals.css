@@ -8,16 +8,14 @@
   --foreground: #171717;
   --color-background: #fffdf8;
   --color-foreground: #1a1a1a;
-  --primary: #ff0000;
+  --primary: #e53935;           /* Rojo más vibrante y moderno */
   --primary-dark: #b71c1c;
-
-  /* Secciones */
   --section-bg: linear-gradient(120deg, #fff0f0cc 0%, #ffeaea99 60%, #ffe3e399 100%); /* gradiente translúcido */
   --section-bg-contrast: #fff6f6cc;
   --section-text: #23272f;
-  --section-title: #d60000;
+  --section-title: #e53935;     /* Rojo para títulos de sección */
   --section-shadow: 0 6px 32px 0 rgba(255,0,0,0.07);
-  --section-border: #ffb3b3; /* borde más vibrante */
+  --section-border: #ff6f60;    /* Borde más suave y vibrante */
 
   /* Fuentes */
   --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -330,6 +328,18 @@ button {
 }
 @media (max-width: 640px) {
   .app-footer { padding: 1rem 0.5rem; }
+}
+
+/* Asegura que los enlaces de noticias sean blancos en modo oscuro y oscuros en modo claro */
+.noticia-contenedor a,
+.noticia-contenedor .noticia-titulo {
+  color: var(--program-title, var(--section-title, #fff)) !important;
+  /* Si quieres que el texto común (no titular) sea blanco en modo oscuro: */
+}
+
+html.dark .noticia-contenedor a,
+html.dark .noticia-contenedor .noticia-titulo {
+  color: #fff !important;
 }
 
 

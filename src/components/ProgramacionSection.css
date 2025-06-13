@@ -58,20 +58,30 @@ html.dark {
   z-index: 1;
 }
 
+.programacion-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
 .programacion-item {
   background: var(--program-item-bg);
   border-radius: 0.7rem;
   border: 1.5px solid var(--program-border);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 1rem 0.5rem 0.9rem 0.5rem;
-  min-height: 90px;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  min-height: 60px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: background 0.18s, border-color 0.18s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
 
 .programacion-item:hover {
@@ -81,13 +91,14 @@ html.dark {
 
 .programacion-emoji {
   font-size: 2rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0;
   filter: none;
+  flex-shrink: 0;
 }
 
 .programacion-text {
   color: var(--program-text);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 500;
   letter-spacing: 0.01em;
   transition: color 0.2s;
@@ -95,6 +106,45 @@ html.dark {
 
 .main-content--with-header > .programacion-section:first-child {
   margin-top: 0 !important;
+}
+
+.programacion-noticias-section {
+  width: 100%;
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.noticia-contenedor {
+  background: var(--program-bg);
+  border: 1px solid var(--program-border);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  margin-left: 2.7rem;
+}
+
+.noticia-titulo {
+  font-weight: 600;
+  color: var(--program-title); /* Usa la variable para modo claro/oscuro */
+  margin-bottom: 0.2rem;
+}
+
+.noticia-resumen {
+  color: var(--program-text); /* Usa la variable para modo claro/oscuro */
+  font-size: 0.97rem;
+}
+
+/* Asegura que la descripción de la noticia sea blanca en modo oscuro */
+.noticia-contenedor > div,
+.noticia-contenedor > .noticia-description {
+  color: var(--program-text) !important;
+}
+
+/* Si la descripción está en un div sin clase, fuerza el color en modo oscuro */
+html.dark .noticia-contenedor > div,
+html.dark .noticia-contenedor > .noticia-description {
+  color: #fff !important;
 }
 
 @media (max-width: 900px) {
@@ -106,19 +156,40 @@ html.dark {
 
 @media (max-width: 640px) {
   .programacion-section {
-    padding: 0.7rem 0.5rem 1.2rem 0.5rem;
-    max-width: 98vw;
+    padding: 0.7rem 0.2rem 1.2rem 0.2rem;
+    max-width: 100vw;
   }
-  .programacion-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.7rem;
+  .programacion-list {
+    gap: 0.4rem;
   }
   .programacion-item {
-    padding: 0.7rem 0.2rem 0.7rem 0.2rem;
-    min-height: 70px;
+    padding: 0.5rem 0.3rem;
+    min-height: 38px;
+    font-size: 0.97rem;
   }
-  .main-content--with-header > .programacion-section:first-child {
-    margin-top: 0 !important;
+  .programacion-emoji {
+    font-size: 1.4rem;
+  }
+  .programacion-text {
+    font-size: 0.97rem;
+  }
+  .programacion-noticias-section {
+    margin-top: 0.4rem;
+    gap: 0.3rem;
+  }
+  .noticia-contenedor {
+    padding: 0.4rem 0.3rem;
+    margin-left: 1.2rem;
+  }
+  .noticia-titulo {
+    font-size: 0.97rem;
+  }
+  .noticia-resumen {
+    font-size: 0.85rem;
+  }
+  .noticia-contenedor > div,
+  .noticia-contenedor > .noticia-description {
+    font-size: 0.93rem;
   }
 }
 
