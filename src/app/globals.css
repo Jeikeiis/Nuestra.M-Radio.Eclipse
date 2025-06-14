@@ -73,6 +73,7 @@ html {
   text-rendering: optimizeLegibility;
   scrollbar-width: thin;
   scrollbar-color: #ff0000 #470100;
+  font-size: 15px; /* Más pequeño y profesional, escalable */
 }
 *, *::before, *::after {
   box-sizing: inherit;
@@ -158,31 +159,103 @@ body {
   margin: 0;
   padding: 0;
 }
+.site-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 13rem 1rem 2.5rem 1rem;
+  padding: 14rem 1rem 2.5rem 1rem; /* Más espacio arriba para el header */
   width: 100%;
-  max-width: 48rem;
+  max-width: 900px;
   margin: 0 auto;
   gap: 1rem;
 }
+@media (max-width: 1280px) {
+  .site-container {
+    max-width: 100vw;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+}
 @media (max-width: 900px) {
   .main-content {
-    padding-top: 16rem;
+    padding-top: 11rem; /* Espacio suficiente en tablets */
     padding-left: 0.7rem;
     padding-right: 0.7rem;
     padding-bottom: 2rem;
   }
 }
 @media (max-width: 640px) {
+  .site-container {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    max-width: 100vw;
+  }
   .main-content {
-    padding-top: 16rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 23rem; /* +3rem extra para asegurar visibilidad tras carga */
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 1rem;
+    max-width: 100vw;
+    gap: 0.5rem;
+  }
+  .card,
+  .programacion-section,
+  .locutores-section,
+  .eventos-section,
+  .contacto-section,
+  .podcasts-section {
+    padding: 0.7rem 0.1rem 1rem 0.1rem !important;
+    max-width: 100vw !important;
+    margin: 0 auto 0.7rem auto !important;
+    border-radius: 0.5rem !important;
+  }
+  .card h3,
+  .programacion-title,
+  .locutores-title,
+  .eventos-title,
+  .contacto-title,
+  .podcasts-title {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+  .app-header {
+    padding: 0.7rem 0.2rem 0.5rem 0.2rem !important;
+  }
+  .app-header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+  }
+  .app-header nav a {
+    font-size: 0.98rem !important;
+    padding: 0.4rem 0.2rem !important;
+    margin: 0.1rem 0 !important;
+    min-width: 100%;
+    text-align: left;
+  }
+  .app-header .radio-live-btn {
+    font-size: 1rem !important;
+    padding: 0.5rem 0.7rem !important;
+    margin: 0.5rem 0 0.2rem 0 !important;
+    width: 100%;
+  }
+  .app-footer {
+    padding: 0.5rem 0.1rem;
+    font-size: 0.93rem;
+  }
+  .app-footer .footer-card {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }
 

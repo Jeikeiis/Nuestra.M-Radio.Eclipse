@@ -136,66 +136,68 @@ export default function RootLayout({
         {/* ...otros preloads si tienes más recursos críticos... */}
       </head>
       <body className="app-root">
-        <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-          <RadioDashboardContext.Provider value={{ radioOpen, setRadioOpen }}>
-            <AppHeader radioOpen={radioOpen} setRadioOpen={setRadioOpen} />
-            <HydrationContext.Provider value={hydrated}>
-              {!hydrated && (
-                <div
-                  style={{
-                    position: "fixed",
-                    inset: 0,
-                    zIndex: 9999,
-                    background: "#000",
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "opacity 0.2s",
-                  }}
-                  aria-label="Cargando contenido"
-                >
-                  <div style={{ textAlign: "center" }}>
-                    <img src="/NuestraManana2.0.webp" alt="Cargando..." width={90} height={90} style={{ margin: "0 auto" }} />
-                    <div style={{ marginTop: 16, fontWeight: 700, fontSize: 18 }}>Cargando...</div>
+        <div className="site-container">
+          <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+            <RadioDashboardContext.Provider value={{ radioOpen, setRadioOpen }}>
+              <AppHeader radioOpen={radioOpen} setRadioOpen={setRadioOpen} />
+              <HydrationContext.Provider value={hydrated}>
+                {!hydrated && (
+                  <div
+                    style={{
+                      position: "fixed",
+                      inset: 0,
+                      zIndex: 9999,
+                      background: "#000",
+                      color: "#fff",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "opacity 0.2s",
+                    }}
+                    aria-label="Cargando contenido"
+                  >
+                    <div style={{ textAlign: "center" }}>
+                      <img src="/NuestraManana2.0.webp" alt="Cargando..." width={90} height={90} style={{ margin: "0 auto" }} />
+                      <div style={{ marginTop: 16, fontWeight: 700, fontSize: 18 }}>Cargando...</div>
+                    </div>
                   </div>
-                </div>
-              )}
-              {/* Audio global siempre presente */}
-              <audio
-                ref={audioRef}
-                src={streamUrl}
-                preload="auto"
-                style={{ display: "none" }}
-                onPlay={() => { setPlaying(true); setError(false); }}
-                onPause={() => setPlaying(false)}
-                onError={() => setError(true)}
-                controls={false}
-                crossOrigin="anonymous"
-                playsInline
-                autoPlay={playing}
-              />
-              <div>
-                {children}
-                {/* Panel de RadioDashboard fijo sobre el footer */}
-                {hydrated && radioOpen && (
-                  <RadioDashboard
-                    playing={playing}
-                    setPlaying={setPlaying}
-                    volume={volume}
-                    setVolume={setVolume}
-                    error={error}
-                    setError={setError}
-                    onClose={() => setRadioOpen(false)}
-                    onSyncLive={handleSyncLive}
-                    audioRef={audioRef}
-                  />
                 )}
-                <AppFooter />
-              </div>
-            </HydrationContext.Provider>
-          </RadioDashboardContext.Provider>
-        </ThemeContext.Provider>
+                {/* Audio global siempre presente */}
+                <audio
+                  ref={audioRef}
+                  src={streamUrl}
+                  preload="auto"
+                  style={{ display: "none" }}
+                  onPlay={() => { setPlaying(true); setError(false); }}
+                  onPause={() => setPlaying(false)}
+                  onError={() => setError(true)}
+                  controls={false}
+                  crossOrigin="anonymous"
+                  playsInline
+                  autoPlay={playing}
+                />
+                <div>
+                  {children}
+                  {/* Panel de RadioDashboard fijo sobre el footer */}
+                  {hydrated && radioOpen && (
+                    <RadioDashboard
+                      playing={playing}
+                      setPlaying={setPlaying}
+                      volume={volume}
+                      setVolume={setVolume}
+                      error={error}
+                      setError={setError}
+                      onClose={() => setRadioOpen(false)}
+                      onSyncLive={handleSyncLive}
+                      audioRef={audioRef}
+                    />
+                  )}
+                  <AppFooter />
+                </div>
+              </HydrationContext.Provider>
+            </RadioDashboardContext.Provider>
+          </ThemeContext.Provider>
+        </div>
       </body>
     </html>
   );
