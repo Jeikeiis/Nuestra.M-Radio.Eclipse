@@ -202,17 +202,35 @@ export default function ProgramacionNoticiasSection() {
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
-          style={{ padding: '6px 16px', borderRadius: 6, border: '1px solid #888', background: page === 1 ? '#333' : '#222', color: '#fff', cursor: page === 1 ? 'not-allowed' : 'pointer' }}
+          style={{
+            padding: '6px 16px',
+            borderRadius: 6,
+            border: '1px solid var(--section-border, #888)',
+            background: page === 1 ? 'var(--section-bg-contrast, #333)' : 'var(--section-bg, #222)',
+            color: 'var(--section-title, #fff)',
+            cursor: page === 1 ? 'not-allowed' : 'pointer',
+            fontWeight: 600,
+            transition: 'background 0.2s, color 0.2s',
+          }}
         >
           ◀ Anterior
         </button>
-        <span style={{ alignSelf: 'center', color: '#fff', fontWeight: 500 }}>
+        <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
           Página {page} de {maxPages}
         </span>
         {page < maxPages && (
           <button
             onClick={() => setPage((p) => Math.min(maxPages, p + 1))}
-            style={{ padding: '6px 16px', borderRadius: 6, border: '1px solid #888', background: '#222', color: '#fff', cursor: 'pointer' }}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 6,
+              border: '1px solid var(--section-border, #888)',
+              background: 'var(--section-bg, #222)',
+              color: 'var(--section-title, #fff)',
+              cursor: 'pointer',
+              fontWeight: 600,
+              transition: 'background 0.2s, color 0.2s',
+            }}
           >
             Siguiente ▶
           </button>
