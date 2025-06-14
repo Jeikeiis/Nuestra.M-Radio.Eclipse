@@ -26,8 +26,8 @@ let cache: NoticiasCache = {
 };
 let cacheFijo: Noticia[] = [];
 
-async function fetchNoticiasFarandula(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
-  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=farandula%20&language=es&category=entertainment&timezone=America/Montevideo`;
+async function fetchNoticiasMusica(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=musica&language=es&timezone=America/Montevideo`;
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -99,7 +99,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const { noticias, errorMsg } = await fetchNoticiasFarandula();
+    const { noticias, errorMsg } = await fetchNoticiasMusica();
     const noticiasValidas = filtrarYLimpiarNoticias(noticias);
 
     cache = {

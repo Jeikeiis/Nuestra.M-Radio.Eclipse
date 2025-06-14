@@ -34,7 +34,6 @@ let cacheFijo: Noticia[] = [];
 const REDIS_URL = process.env.REDIS_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
-const OYENTES_KEY = process.env.NODE_ENV === "development" ? "oyentes-dev" : "oyentes";
 
 // --- Utilidades ---
 function getIp(req: NextRequest): string {
@@ -42,12 +41,6 @@ function getIp(req: NextRequest): string {
   if (forwarded) return forwarded.split(",")[0].trim();
   // @ts-ignore
   return req.ip || "127.0.0.1";
-}
-
-async function addOyente(ip: string) {
-  if (!redis) return;
-  await redis.sadd(OYENTES_KEY, ip);
-  await redis.expire(OYENTES_KEY, CACHE_DURATION_MS / 1000);
 }
 
 async function fetchNoticias(region: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
@@ -101,107 +94,120 @@ async function registrarRecargaForzada(ip: string, region: string) {
 
 // --- Handler principal ---
 export async function GET(req: NextRequest) {
-  const now = Date.now();
-  const ip = getIp(req);
-  await addOyente(ip);
+  try {
+    const now = Date.now();
 
-  const { searchParams } = new URL(req.url);
-  const region = searchParams.get("region") || "Uruguay";
-  const force = searchParams.get("force") === "1";
-  let page = parseInt(searchParams.get("page") || "1", 10);
-  if (isNaN(page) || page < 1) page = 1;
-  const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "8", 10), 1), 30); // entre 1 y 30
-  // Solo aplicar caché y fallback si la región es Uruguay (no Montevideo ni otras)
-  const isDefaultRegion = !searchParams.get("region") || region.toLowerCase() === "uruguay";
-  const cacheValido = (cache.noticias.length > 0 || cache.errorMsg) && now - cache.timestamp < CACHE_DURATION_MS && isDefaultRegion;
-  const MAX_PAGES = 5;
+    const { searchParams } = new URL(req.url);
+    const region = searchParams.get("region") || "Uruguay";
+    const force = searchParams.get("force") === "1";
+    let page = parseInt(searchParams.get("page") || "1", 10);
+    if (isNaN(page) || page < 1) page = 1;
+    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "8", 10), 1), 30); // entre 1 y 30
+    // Solo aplicar caché y fallback si la región es Uruguay (no Montevideo ni otras)
+    const isDefaultRegion = !searchParams.get("region") || region.toLowerCase() === "uruguay";
+    const cacheValido = (cache.noticias.length > 0 || cache.errorMsg) && now - cache.timestamp < CACHE_DURATION_MS && isDefaultRegion;
+    const MAX_PAGES = 5;
 
-  if (force) {
-    await registrarRecargaForzada(ip, region);
-  }
+    if (force) {
+      const ip = getIp(req);
+      await registrarRecargaForzada(ip, region);
+    }
 
-  function paginarNoticias(noticias: Noticia[]) {
-    const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
-    const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
-    const start = (page - 1) * pageSize;
-    const end = Math.min(start + pageSize, totalNoticias);
-    return {
-      noticiasPaginadas: noticias.slice(start, end),
-      totalNoticias,
-      realMaxPages,
-    };
-  }
+    function paginarNoticias(noticias: Noticia[]) {
+      const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
+      const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
+      const start = (page - 1) * pageSize;
+      const end = Math.min(start + pageSize, totalNoticias);
+      return {
+        noticiasPaginadas: noticias.slice(start, end),
+        totalNoticias,
+        realMaxPages,
+      };
+    }
 
-  // 1. Responder desde caché temporal si corresponde
-  if (!force && cacheValido) {
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cache.noticias);
+    // 1. Responder desde caché temporal si corresponde
+    if (!force && cacheValido) {
+      const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cache.noticias);
+      return NextResponse.json({
+        noticias: noticiasPaginadas,
+        cached: true,
+        errorMsg: cache.errorMsg,
+        fallback: false,
+        meta: {
+          region,
+          page,
+          pageSize,
+          total: totalNoticias,
+          maxPages: realMaxPages,
+          updatedAt: new Date(cache.timestamp).toISOString(),
+          fromCache: true,
+        },
+      });
+    }
+
+    // 2. Obtener noticias frescas de la API
+    const { noticias, errorMsg } = await fetchNoticias(region);
+    const noticiasValidas = filtrarYLimpiarNoticias(noticias);
+
+    // 3. Actualizar caché temporal y fijo si es región por defecto (Uruguay)
+    if (isDefaultRegion) {
+      cache = {
+        noticias: noticiasValidas,
+        timestamp: now,
+        errorMsg,
+        lastValidNoticias: noticiasValidas.length > 0 ? noticiasValidas : cache.lastValidNoticias || [],
+      };
+      // Si hay noticias válidas nuevas, actualizar el caché fijo
+      if (noticiasValidas.length > 0) {
+        cacheFijo = noticiasValidas;
+      }
+    }
+
+    // 4. Si hay error y existen noticias válidas previas, usar el fallback temporal
+    let noticiasParaMostrar = noticiasValidas;
+    let usandoFallback = false;
+    if (errorMsg && isDefaultRegion && cache.lastValidNoticias && cache.lastValidNoticias.length > 0) {
+      noticiasParaMostrar = cache.lastValidNoticias;
+      usandoFallback = true;
+    }
+
+    // 5. Si sigue habiendo error y no hay noticias válidas temporales, usar el caché fijo
+    let usandoFallbackFijo = false;
+    if (errorMsg && isDefaultRegion && noticiasParaMostrar.length === 0 && cacheFijo.length > 0) {
+      noticiasParaMostrar = cacheFijo;
+      usandoFallback = true;
+      usandoFallbackFijo = true;
+    }
+
+    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaMostrar);
+
     return NextResponse.json({
       noticias: noticiasPaginadas,
-      cached: true,
-      errorMsg: cache.errorMsg,
-      fallback: false,
+      cached: false,
+      errorMsg: usandoFallback ? `Mostrando últimas noticias guardadas. ${errorMsg}` : errorMsg,
+      fallback: usandoFallbackFijo,
       meta: {
         region,
         page,
         pageSize,
         total: totalNoticias,
         maxPages: realMaxPages,
-        updatedAt: new Date(cache.timestamp).toISOString(),
-        fromCache: true,
+        updatedAt: new Date(now).toISOString(),
+        fromCache: usandoFallback,
       },
     });
+  } catch (err: any) {
+    // Manejo global de errores: siempre devolver JSON
+    return NextResponse.json({
+      noticias: [],
+      cached: false,
+      errorMsg: err?.message || "Error inesperado en el servidor.",
+      fallback: false,
+      meta: {
+        updatedAt: new Date().toISOString(),
+        fromCache: false,
+      },
+    }, { status: 500 });
   }
-
-  // 2. Obtener noticias frescas de la API
-  const { noticias, errorMsg } = await fetchNoticias(region);
-  const noticiasValidas = filtrarYLimpiarNoticias(noticias);
-
-  // 3. Actualizar caché temporal y fijo si es región por defecto (Uruguay)
-  if (isDefaultRegion) {
-    cache = {
-      noticias: noticiasValidas,
-      timestamp: now,
-      errorMsg,
-      lastValidNoticias: noticiasValidas.length > 0 ? noticiasValidas : cache.lastValidNoticias || [],
-    };
-    // Si hay noticias válidas nuevas, actualizar el caché fijo
-    if (noticiasValidas.length > 0) {
-      cacheFijo = noticiasValidas;
-    }
-  }
-
-  // 4. Si hay error y existen noticias válidas previas, usar el fallback temporal
-  let noticiasParaMostrar = noticiasValidas;
-  let usandoFallback = false;
-  if (errorMsg && isDefaultRegion && cache.lastValidNoticias && cache.lastValidNoticias.length > 0) {
-    noticiasParaMostrar = cache.lastValidNoticias;
-    usandoFallback = true;
-  }
-
-  // 5. Si sigue habiendo error y no hay noticias válidas temporales, usar el caché fijo
-  let usandoFallbackFijo = false;
-  if (errorMsg && isDefaultRegion && noticiasParaMostrar.length === 0 && cacheFijo.length > 0) {
-    noticiasParaMostrar = cacheFijo;
-    usandoFallback = true;
-    usandoFallbackFijo = true;
-  }
-
-  const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaMostrar);
-
-  return NextResponse.json({
-    noticias: noticiasPaginadas,
-    cached: false,
-    errorMsg: usandoFallback ? `Mostrando últimas noticias guardadas. ${errorMsg}` : errorMsg,
-    fallback: usandoFallbackFijo,
-    meta: {
-      region,
-      page,
-      pageSize,
-      total: totalNoticias,
-      maxPages: realMaxPages,
-      updatedAt: new Date(now).toISOString(),
-      fromCache: usandoFallback,
-    },
-  });
 }
 

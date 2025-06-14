@@ -1,14 +1,14 @@
 import "./ProgramacionSection.css";
 import ProgramacionNoticiasSection from "./ProgramacionNoticiasSection";
-// import ProgramacionFarandulaSection from "./ProgramacionFarandulaSection";
+import ProgramacionMusicaSection from "./ProgramacionMusicaSection";
+import ProgramacionFarandulaSection from "./ProgramacionFarandulaSection";
 
 const items = [
   { emoji: "📰", text: "Noticias", extra: <ProgramacionNoticiasSection /> },
   { emoji: "ℹ️", text: "Información" },
-  // { emoji: "🌟", text: "Farándula", extra: <ProgramacionFarandulaSection /> },
-  { emoji: "🌟", text: "Farándula" },
+  { emoji: "🌟", text: "Farándula", extra: <ProgramacionFarandulaSection /> },
   { emoji: "🎉", text: "Entretenimiento" },
-  { emoji: "🎵", text: "Música" },
+  { emoji: "🎵", text: "Música", extra: <ProgramacionMusicaSection /> },
   { emoji: "🔮", text: "Horóscopo" },
   { emoji: "🗣️", text: "Entrevistas" }
 ];

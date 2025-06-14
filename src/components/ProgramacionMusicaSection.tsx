@@ -11,11 +11,10 @@ type Noticia = {
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
   const d = new Date(fecha);
-  if (isNaN(d.getTime())) return "";
-  return d.toLocaleDateString("es-UY", { day: "2-digit", month: "short", year: "numeric" });
+  return d.toLocaleDateString("es-UY", { year: "numeric", month: "short", day: "numeric" });
 }
 
-export default function ProgramacionFarandulaSection() {
+export default function ProgramacionMusicaSection() {
   const [noticias, setNoticias] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +41,7 @@ export default function ProgramacionFarandulaSection() {
     setLoading(!forzar);
     setIsReloading(forzar);
     setError(null);
-    fetch(`/api/farandula?page=${nuevaPagina}&pageSize=${pageSize}${forzar ? '&force=1' : ''}`)
+    fetch(`/api/musica?page=${nuevaPagina}&pageSize=${pageSize}${forzar ? '&force=1' : ''}`)
       .then(res => res.json())
       .then(data => {
         let noticiasValidas = Array.isArray(data.noticias)
@@ -67,7 +66,7 @@ export default function ProgramacionFarandulaSection() {
         if (data.errorMsg) {
           setError(data.errorMsg);
         } else if (!noticiasValidas.length) {
-          setError("No se encontraron noticias de farándula relevantes.");
+          setError("No se encontraron noticias de música relevantes.");
         }
         if (forzar && data.cached === false) {
           setShowUpdated(true);
@@ -76,7 +75,7 @@ export default function ProgramacionFarandulaSection() {
         }
       })
       .catch((e) => {
-        setError(e.message || "No se pudieron obtener noticias de farándula.");
+        setError(e.message || "No se pudieron obtener noticias de música.");
         setLoading(false);
         setIsReloading(false);
         setFallback(false);
@@ -122,7 +121,7 @@ export default function ProgramacionFarandulaSection() {
         opacity: isReloading ? 0.5 : 0.7,
         transition: 'background 0.3s, opacity 0.3s',
       }}
-      title="Forzar recarga de farándula"
+      title="Forzar recarga de música"
       disabled={isReloading}
     >
       {isReloading ? 'Recargando...' : 'Recargar'}
@@ -134,7 +133,7 @@ export default function ProgramacionFarandulaSection() {
 
   const puntoIndicador = (
     <span
-      title={apiGastada ? "API gastada, usando farándula cacheada fija" : apiError ? "Error temporal, usando cache temporal" : "API disponible"}
+      title={apiGastada ? "API gastada, usando música cacheada fija" : apiError ? "Error temporal, usando cache temporal" : "API disponible"}
       style={{
         position: 'absolute',
         top: 6,
@@ -154,8 +153,8 @@ export default function ProgramacionFarandulaSection() {
 
   if (loading) {
     return (
-      <div className="programacion-farandula-section" aria-busy="true" style={{position:'relative'}}>
-        Cargando noticias de farándula...
+      <div className="programacion-musica-section" aria-busy="true" style={{position:'relative'}}>
+        Cargando noticias de música...
         {puntoIndicador}
         {botonRecargaManual}
       </div>
@@ -164,7 +163,7 @@ export default function ProgramacionFarandulaSection() {
 
   if (error) {
     return (
-      <div className="programacion-farandula-section" style={{ color: "#b71c1c", fontWeight: 500, position: 'relative' }} role="alert">
+      <div className="programacion-musica-section" style={{ color: "#b71c1c", fontWeight: 500, position: 'relative' }} role="alert">
         {error}
         {puntoIndicador}
         {botonRecargaManual}
@@ -173,7 +172,7 @@ export default function ProgramacionFarandulaSection() {
   }
 
   return (
-    <div className="programacion-farandula-section" style={{position:'relative'}}>
+    <div className="programacion-musica-section" style={{position:'relative'}}>
       {puntoIndicador}
       {botonRecargaManual}
       {showUpdated && (
@@ -191,7 +190,7 @@ export default function ProgramacionFarandulaSection() {
           zIndex: 20,
           animation: 'fadeinout 2.5s',
         }}>
-          ¡Farándula actualizada!
+          ¡Música actualizada!
         </div>
       )}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
