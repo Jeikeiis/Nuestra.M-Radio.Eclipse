@@ -67,6 +67,10 @@
   min-width: 0;
   margin-left: 0.5rem;
   margin-right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
 }
 @media (max-width: 640px) {
   .app-header-info {
@@ -109,6 +113,11 @@
 }
 @media (min-width: 640px) { .app-header-subtitle { font-size: 1rem; } }
 @media (min-width: 768px) { .app-header-subtitle { font-size: 1.1rem; } }
+@media (max-width: 640px) {
+  .app-header-subtitle {
+    margin-bottom: 0.5rem;
+  }
+}
 
 .app-header-actions {
   display: flex;
@@ -156,4 +165,73 @@
 .dark .app-header {
   background: var(--appheader-bg, #171717);
   color: var(--appheader-text, #fff);
+}
+
+/* ======== NAVBAR PROFESIONAL ======== */
+.app-header-nav {
+  width: 100%;
+  margin-top: 0.2rem;
+  border-bottom: 1.5px solid var(--section-border, #ff6f60);
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: flex-start;
+}
+.app-header-nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.app-header-nav-item {
+  display: flex;
+  align-items: center;
+}
+.app-header-nav-link {
+  color: var(--appheader-text, #171717);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.5rem;
+  transition: background 0.18s, color 0.18s;
+  position: relative;
+  outline: none;
+}
+.app-header-nav-link:hover,
+.app-header-nav-link:focus {
+  background: var(--primary, #e53935);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .app-header-nav-list {
+    gap: 1rem;
+  }
+  .app-header-nav-link {
+    font-size: 0.98rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+@media (max-width: 640px) {
+  .app-header-info {
+    align-items: stretch;
+  }
+  .app-header-nav {
+    justify-content: center;
+    border-bottom-width: 1px;
+    margin-bottom: 0.1rem;
+  }
+  .app-header-nav-list {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .app-header-nav-link {
+    font-size: 0.93rem;
+    padding: 0.18rem 0.4rem;
+  }
 }

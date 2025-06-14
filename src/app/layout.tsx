@@ -1,9 +1,9 @@
 "use client";
 import "./globals.css";
-import { AudioContext, AudioContextType } from "./page";
 import { createContext, useRef, useState, useEffect } from "react";
 import AppHeader from "../components/AppHeader";
 import AppFooter from "../components/AppFooter";
+import RadioDashboard from "../components/RadioDashboard";
 
 // Nuevo contexto solo para el estado de hidratación
 export const HydrationContext = createContext(false);
@@ -26,15 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // Estado global para el audio
-  const audioRef = useRef<HTMLAudioElement>(null); // sin null en el tipo genérico
+  const audioRef = useRef<HTMLAudioElement>(null);
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [error, setError] = useState(false);
-
   // Estado para controlar el preloader
   const [hydrated, setHydrated] = useState(false);
-
   // Estado global de tema
   const [darkMode, setDarkMode] = useState(true);
   const [radioOpen, setRadioOpen] = useState(false);
@@ -43,8 +41,6 @@ export default function RootLayout({
     // Forzar modo oscuro en el html al cargar
     document.documentElement.classList.add("dark");
     localStorage.setItem("theme", "dark");
-
-    // Solo mostrar el preloader hasta hidratar, sin manipular el scroll
     setHydrated(true);
   }, []);
 
@@ -116,18 +112,6 @@ export default function RootLayout({
     }
   }, [playing]);
 
-  // Proveer el contexto de audio a toda la app
-  const audioContextValue: AudioContextType = {
-    playing,
-    setPlaying,
-    volume,
-    setVolume,
-    error,
-    setError,
-    handleSyncLive,
-    audioRef: audioRef as React.RefObject<HTMLAudioElement>,
-  };
-
   return (
     <html lang="es" className={darkMode ? "dark" : ""}>
       <head>
@@ -178,13 +162,24 @@ export default function RootLayout({
                 playsInline
                 autoPlay={playing}
               />
-              <AudioContext.Provider value={audioContextValue}>
-                <div>
-                  {children}
-                  {/* Mueve el footer aquí como una sección más */}
-                  <AppFooter />
-                </div>
-              </AudioContext.Provider>
+              <div>
+                {children}
+                {/* Panel de RadioDashboard fijo sobre el footer */}
+                {hydrated && radioOpen && (
+                  <RadioDashboard
+                    playing={playing}
+                    setPlaying={setPlaying}
+                    volume={volume}
+                    setVolume={setVolume}
+                    error={error}
+                    setError={setError}
+                    onClose={() => setRadioOpen(false)}
+                    onSyncLive={handleSyncLive}
+                    audioRef={audioRef}
+                  />
+                )}
+                <AppFooter />
+              </div>
             </HydrationContext.Provider>
           </RadioDashboardContext.Provider>
         </ThemeContext.Provider>

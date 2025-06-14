@@ -24,7 +24,6 @@ export const ThemeContext = createContext({
 });
 
 export default function Home() {
-  const audio = useContext(AudioContext);
   const hydrated = useContext(HydrationContext);
   const { radioOpen, setRadioOpen } = useContext(RadioDashboardContext);
 
@@ -38,20 +37,6 @@ export default function Home() {
         <EventosSection />
         <ContactoSection /> */}
       </main>
-      {/* Panel de RadioDashboard fijo sobre el footer */}
-      {hydrated && radioOpen && audio && (
-        <RadioDashboard
-          playing={audio.playing}
-          setPlaying={audio.setPlaying}
-          volume={audio.volume}
-          setVolume={audio.setVolume}
-          error={audio.error}
-          setError={audio.setError}
-          onClose={() => setRadioOpen(false)}
-          onSyncLive={audio.handleSyncLive}
-          audioRef={audio.audioRef}
-        />
-      )}
       {/* Pie de página */}
     </div>
   );

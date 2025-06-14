@@ -117,40 +117,98 @@ html.dark {
 }
 
 .noticia-contenedor {
-  background: var(--program-bg);
-  border: 1px solid var(--program-border);
-  border-radius: 0.5rem;
-  padding: 0.6rem 0.8rem;
+  background: var(--program-item-bg);
+  border: 1.5px solid var(--program-border);
+  border-radius: 0.7rem;
+  padding: 1.1rem 1.3rem 1.1rem 1.3rem;
   margin-left: 2.7rem;
+  margin-bottom: 0.3rem;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
+  transition: box-shadow 0.18s, border-color 0.18s, background 0.18s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.noticia-contenedor:hover {
+  border-color: var(--program-border-hover);
+  box-shadow: 0 6px 24px 0 rgba(255,0,0,0.10);
+  background: var(--program-bg);
 }
 
 .noticia-titulo {
+  font-weight: 800;
+  color: var(--program-title);
+  font-size: 1.23rem;
+  margin-bottom: 0.08rem;
+  text-decoration: none;
+  transition: color 0.18s;
+  display: block;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+}
+
+.noticia-titulo:hover {
+  color: #e53935;
+  text-decoration: underline;
+}
+
+.noticia-titulo-text {
+  display: inline;
+}
+
+.noticia-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+  font-size: 1.01rem;
+  opacity: 0.85;
+  margin-bottom: 0.1rem;
+}
+
+.noticia-fuente {
+  color: #b71c1c;
   font-weight: 600;
-  color: var(--program-title); /* Usa la variable para modo claro/oscuro */
-  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
-.noticia-resumen {
-  color: var(--program-text); /* Usa la variable para modo claro/oscuro */
-  font-size: 0.97rem;
+.noticia-fecha {
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
-/* Asegura que la descripción de la noticia sea blanca en modo oscuro */
-.noticia-contenedor > div,
-.noticia-contenedor > .noticia-description {
-  color: var(--program-text) !important;
+.noticia-description {
+  color: var(--program-text);
+  font-size: 1.01rem;
+  opacity: 0.93;
+  margin-top: 0.1rem;
+  line-height: 1.5;
 }
 
-/* Si la descripción está en un div sin clase, fuerza el color en modo oscuro */
-html.dark .noticia-contenedor > div,
-html.dark .noticia-contenedor > .noticia-description {
-  color: #fff !important;
+html.dark .noticia-description {
+  color: #fff;
 }
 
 @media (max-width: 900px) {
   .programacion-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1rem 0.7rem;
+  }
+  .noticia-contenedor {
+    padding: 0.8rem 0.7rem 0.8rem 0.7rem;
+    margin-left: 1.2rem;
+  }
+  .noticia-titulo {
+    font-size: 1.09rem;
+  }
+  .noticia-meta {
+    font-size: 0.97rem;
   }
 }
 
@@ -178,11 +236,11 @@ html.dark .noticia-contenedor > .noticia-description {
     gap: 0.3rem;
   }
   .noticia-contenedor {
-    padding: 0.4rem 0.3rem;
-    margin-left: 1.2rem;
+    padding: 0.6rem 0.3rem 0.6rem 0.3rem;
+    margin-left: 0.2rem;
   }
   .noticia-titulo {
-    font-size: 0.97rem;
+    font-size: 1.01rem;
   }
   .noticia-resumen {
     font-size: 0.85rem;

@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 
 const API_KEY = "pub_c0d1669584c7417b93361bfdc354b1c3";
-const CACHE_DURATION = 15 * 60 * 1000; // 15 minutos en ms
+const CACHE_DURATION_MS = 15 * 60 * 1000; // 15 minutos
 
+// --- Tipos ---
 type Noticia = {
   title: string;
   link: string;
@@ -12,23 +13,44 @@ type Noticia = {
   description?: string;
 };
 
-let cache: {
+type NoticiasCache = {
   noticias: Noticia[];
   timestamp: number;
   errorMsg?: string;
-} = {
+  lastValidNoticias?: Noticia[];
+};
+
+// --- Estado de caché en memoria ---
+let cache: NoticiasCache = {
   noticias: [],
   timestamp: 0,
   errorMsg: undefined,
+  lastValidNoticias: [],
 };
 
+// --- Redis (opcional) ---
 const REDIS_URL = process.env.REDIS_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
 const OYENTES_KEY = process.env.NODE_ENV === "development" ? "oyentes-dev" : "oyentes";
 
-async function fetchNoticias(region: string): Promise<{noticias: Noticia[], errorMsg?: string}> {
-  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;
+// --- Utilidades ---
+function getIp(req: NextRequest): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  // @ts-ignore
+  return req.ip || "127.0.0.1";
+}
+
+async function addOyente(ip: string) {
+  if (!redis) return;
+  await redis.sadd(OYENTES_KEY, ip);
+  await redis.expire(OYENTES_KEY, CACHE_DURATION_MS / 1000);
+}
+
+async function fetchNoticias(region: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
+  // Usar la nueva URL sugerida por el usuario
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Uruguay`;
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -42,50 +64,96 @@ async function fetchNoticias(region: string): Promise<{noticias: Noticia[], erro
     if (!data.results || !Array.isArray(data.results)) {
       return { noticias: [], errorMsg: "La respuesta de la API de NewsData.io no contiene artículos." };
     }
-    return { noticias: data.results, errorMsg: undefined };
+    return { noticias: data.results };
   } catch (e: any) {
     return { noticias: [], errorMsg: "No se pudieron obtener noticias. Verifica tu conexión o la API key." };
   }
 }
 
-function getIp(req: NextRequest): string {
-  // X-Forwarded-For puede contener varias IP, tomamos la primera
-  const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0].trim();
-  // fallback: req.ip (Next.js edge), o localhost
-  // @ts-ignore
-  return req.ip || "127.0.0.1";
+function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
+  // Filtrar noticias válidas y eliminar duplicados
+  const titulosVistos = new Set<string>();
+  return noticias
+    .filter(n => n && n.title && n.link && n.title.length > 6)
+    .filter(n => {
+      if (titulosVistos.has(n.title)) return false;
+      titulosVistos.add(n.title);
+      return true;
+    })
+    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0))
+    .slice(0, 8);
 }
 
-async function addOyente(ip: string) {
+// --- Registro de recargas forzadas ---
+async function registrarRecargaForzada(ip: string, region: string) {
   if (!redis) return;
-  await redis.sadd(OYENTES_KEY, ip);
-  await redis.expire(OYENTES_KEY, CACHE_DURATION / 1000); // TTL en segundos
+  const key = `recargas-forzadas:${region}`;
+  await redis.zadd(key, { score: Date.now(), member: ip });
+  // Mantener solo las últimas 100 recargas por región
+  await redis.zremrangebyrank(key, 0, -101);
+  await redis.expire(key, 60 * 60 * 24 * 7); // 7 días de retención
 }
 
+// --- Handler principal ---
 export async function GET(req: NextRequest) {
   const now = Date.now();
   const ip = getIp(req);
   await addOyente(ip);
 
-  if (
-    (cache.noticias.length > 0 || cache.errorMsg) &&
-    now - cache.timestamp < CACHE_DURATION
-  ) {
+  const { searchParams } = new URL(req.url);
+  const region = searchParams.get("region") || "Montevideo Uruguay";
+  const force = searchParams.get("force") === "1";
+  const isDefaultRegion = !searchParams.get("region") || region === "Montevideo Uruguay";
+  const cacheValido = (cache.noticias.length > 0 || cache.errorMsg) && now - cache.timestamp < CACHE_DURATION_MS && isDefaultRegion;
+
+  // Registrar recarga forzada si corresponde
+  if (force) {
+    await registrarRecargaForzada(ip, region);
+  }
+
+  // --- Responder desde caché si corresponde ---
+  if (!force && cacheValido) {
+    if (cache.errorMsg && cache.errorMsg.includes("Límite de peticiones") && cache.lastValidNoticias && cache.lastValidNoticias.length > 0) {
+      return NextResponse.json({
+        noticias: cache.lastValidNoticias,
+        cached: true,
+        errorMsg: cache.errorMsg,
+      });
+    }
     return NextResponse.json({
       noticias: cache.noticias,
       cached: true,
-      errorMsg: cache.errorMsg
+      errorMsg: cache.errorMsg,
     });
   }
 
-  // Solo consulta Montevideo
-  const { noticias, errorMsg } = await fetchNoticias("Montevideo Uruguay");
-  cache = { noticias, timestamp: now, errorMsg };
+  // --- Obtener noticias frescas ---
+  const { noticias, errorMsg } = await fetchNoticias(region);
+  const noticiasValidas = filtrarYLimpiarNoticias(noticias);
+
+  // --- Actualizar caché si es región por defecto ---
+  if (isDefaultRegion) {
+    cache = {
+      noticias: noticiasValidas,
+      timestamp: now,
+      errorMsg,
+      lastValidNoticias: noticiasValidas.length > 0 ? noticiasValidas : cache.lastValidNoticias || [],
+    };
+  }
+
+  // --- Si hay error de límite pero hay noticias válidas cacheadas, mostrar esas ---
+  if (errorMsg && errorMsg.includes("Límite de peticiones") && cache.lastValidNoticias && cache.lastValidNoticias.length > 0) {
+    return NextResponse.json({
+      noticias: cache.lastValidNoticias,
+      cached: true,
+      errorMsg,
+    });
+  }
+
   return NextResponse.json({
-    noticias,
+    noticias: noticiasValidas,
     cached: false,
-    errorMsg
+    errorMsg,
   });
 }
 
