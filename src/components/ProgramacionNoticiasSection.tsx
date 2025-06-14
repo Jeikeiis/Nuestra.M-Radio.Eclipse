@@ -22,14 +22,28 @@ export default function ProgramacionNoticiasSection() {
   const [cached, setCached] = useState<boolean | null>(null);
   const [showUpdated, setShowUpdated] = useState(false);
   const [isReloading, setIsReloading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [maxPages, setMaxPages] = useState(5);
+  const [lastManualReload, setLastManualReload] = useState<number>(0);
+  const pageSize = 4;
   const reloadTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [fallback, setFallback] = useState(false);
 
-  // Recarga profesional: feedback visual, aviso de noticias nuevas, botón solo para admins
-  const cargarNoticias = (forzar = false) => {
+  const cargarNoticias = (forzar = false, nuevaPagina = page) => {
+    // Limitar recarga manual a una vez cada 2 minutos
+    if (forzar) {
+      const ahora = Date.now();
+      if (ahora - lastManualReload < 120000) {
+        setError("Debes esperar al menos 2 minutos entre recargas manuales.");
+        return;
+      }
+      setLastManualReload(ahora);
+    }
     setLoading(!forzar);
     setIsReloading(forzar);
     setError(null);
-    fetch(`/api/noticias${forzar ? '?force=1' : ''}`)
+    fetch(`/api/noticias?page=${nuevaPagina}&pageSize=${pageSize}${forzar ? '&force=1' : ''}`)
       .then(res => res.json())
       .then(data => {
         let noticiasValidas = Array.isArray(data.noticias)
@@ -44,8 +58,11 @@ export default function ProgramacionNoticiasSection() {
           return true;
         });
         noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
-        setNoticias(noticiasValidas.slice(0, 4));
+        setNoticias(noticiasValidas);
         setCached(data.cached);
+        setTotal(data.meta?.total || 0);
+        setMaxPages(data.meta?.maxPages || 5);
+        setFallback(!!data.fallback);
         setLoading(false);
         setIsReloading(false);
         if (data.errorMsg) {
@@ -53,7 +70,6 @@ export default function ProgramacionNoticiasSection() {
         } else if (!noticiasValidas.length) {
           setError("No se encontraron noticias relevantes para Montevideo.");
         }
-        // Mostrar aviso de noticias nuevas
         if (forzar && data.cached === false) {
           setShowUpdated(true);
           if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -64,22 +80,29 @@ export default function ProgramacionNoticiasSection() {
         setError(e.message || "No se pudieron obtener noticias.");
         setLoading(false);
         setIsReloading(false);
+        setFallback(false);
       });
   };
 
   useEffect(() => {
     let isMounted = true;
     cargarNoticias();
-    // Refresca cada 30 minutos (1800000 ms)
+    // Refresca cada 20 minutos (1200000 ms)
     const interval = setInterval(() => {
       if (isMounted) cargarNoticias();
-    }, 1800000);
+    }, 1200000);
     return () => {
       isMounted = false;
       clearInterval(interval);
       if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
     };
+    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    cargarNoticias(false, page);
+    // eslint-disable-next-line
+  }, [page]);
 
   // Solo muestra el botón si el usuario es admin/desarrollador (ejemplo: localStorage)
   const esAdmin = typeof window !== 'undefined' && localStorage.getItem('adminNoticias') === '1';
@@ -109,13 +132,13 @@ export default function ProgramacionNoticiasSection() {
     </button>
   );
 
-  // El punto será naranja ante cualquier error
-  const apiGastada = error !== null;
+  // Indicador: naranja ante cualquier error, rojo si es fallback (API gastada)
+  const apiGastada = fallback;
+  const apiError = error !== null && !fallback;
 
-  // Punto indicador siempre visible
   const puntoIndicador = (
     <span
-      title={apiGastada ? "API gastada, esperando nuevas noticias" : "API disponible"}
+      title={apiGastada ? "API gastada, usando noticias cacheadas fijas" : apiError ? "Error temporal, usando cache temporal" : "API disponible"}
       style={{
         position: 'absolute',
         top: 6,
@@ -123,13 +146,13 @@ export default function ProgramacionNoticiasSection() {
         width: 12,
         height: 12,
         borderRadius: '50%',
-        background: apiGastada ? 'orange' : '#888',
-        boxShadow: apiGastada ? '0 0 6px 2px #ff9800aa' : '0 0 4px 1px #8888',
+        background: apiGastada ? 'red' : apiError ? 'orange' : '#888',
+        boxShadow: apiGastada ? '0 0 8px 2px #ff0000cc' : apiError ? '0 0 6px 2px #ff9800aa' : '0 0 4px 1px #8888',
         zIndex: 10,
         display: 'inline-block',
         transition: 'background 0.3s',
       }}
-      aria-label={apiGastada ? "Indicador interno de API gastada" : "Indicador interno de API disponible"}
+      aria-label={apiGastada ? "Indicador de API gastada (cache fijo)" : apiError ? "Indicador de error temporal" : "API disponible"}
     />
   );
 
@@ -175,6 +198,26 @@ export default function ProgramacionNoticiasSection() {
           ¡Noticias actualizadas!
         </div>
       )}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
+        <button
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          disabled={page === 1}
+          style={{ padding: '6px 16px', borderRadius: 6, border: '1px solid #888', background: page === 1 ? '#333' : '#222', color: '#fff', cursor: page === 1 ? 'not-allowed' : 'pointer' }}
+        >
+          ◀ Anterior
+        </button>
+        <span style={{ alignSelf: 'center', color: '#fff', fontWeight: 500 }}>
+          Página {page} de {maxPages}
+        </span>
+        {page < maxPages && (
+          <button
+            onClick={() => setPage((p) => Math.min(maxPages, p + 1))}
+            style={{ padding: '6px 16px', borderRadius: 6, border: '1px solid #888', background: '#222', color: '#fff', cursor: 'pointer' }}
+          >
+            Siguiente ▶
+          </button>
+        )}
+      </div>
       {noticias.map((noticia, idx) => (
         <div className="noticia-contenedor" key={idx}>
           <a
