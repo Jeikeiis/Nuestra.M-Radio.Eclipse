@@ -1,55 +1,38 @@
 /* =====================
-   1. Variables Globales
+   1. Variables Globales y Temas
    ===================== */
-
 :root {
-  /* Colores base */
-  --background: #ffffff;
+  /* Paleta base */
+  --background: #fff;
   --foreground: #171717;
-  --color-background: #fffdf8;
-  --color-foreground: #1a1a1a;
-  --primary: #e53935;           /* Rojo más vibrante y moderno */
+  --primary: #e53935;
   --primary-dark: #b71c1c;
-  --section-bg: linear-gradient(120deg, #fff0f0cc 0%, #ffeaea99 60%, #ffe3e399 100%); /* gradiente translúcido */
+  --section-bg: linear-gradient(120deg, #fff0f0cc 0%, #ffeaea99 60%, #ffe3e399 100%);
   --section-bg-contrast: #fff6f6cc;
-  --section-text: #23272f;
-  --section-title: #e53935;     /* Rojo para títulos de sección */
+  --section-title: #e53935;
   --section-shadow: 0 6px 32px 0 rgba(255,0,0,0.07);
-  --section-border: #ff6f60;    /* Borde más suave y vibrante */
-
-  /* Fuentes */
+  --section-border: #ff6f60;
   --font-title: 'Montserrat', Arial, Helvetica, sans-serif;
   --font-body: 'Inter', Arial, Helvetica, sans-serif;
   --font-size-base: 16px;
-
-  /* Header y Footer */
   --appheader-bg: #fff;
   --appheader-text: #171717;
   --footer-bg: #fff;
   --footer-text: #171717;
-  --footer-bg-dark: #18181b;
-  --footer-text-dark: #ededed;
   --footer-link: #fd7a00;
   --footer-link-dark: #ff9800;
   --footer-border: #ececec;
-  --footer-border-dark: #23232b;
   --footer-card-bg: #fffbe6;
-  --footer-card-bg-dark: #18181b;
   --footer-muted: #000;
-  --footer-muted-dark: #bdbdbd;
 }
 
-.dark {
-  /* ...variables para modo oscuro... */
+.dark, html.dark {
   --background: #18181b;
   --foreground: #ededed;
-  --color-background: #18181b;
-  --color-foreground: #fff;
   --primary: #ff5252;
   --primary-dark: #b71c1c;
   --section-bg: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
   --section-bg-contrast: #2a0000;
-  --section-text: #fff;
   --section-title: #ff5252;
   --section-shadow: 0 8px 32px 0 rgba(255,0,0,0.18), 0 1.5px 8px 0 rgba(255,0,0,0.10);
   --section-border: #ff5252;
@@ -64,37 +47,33 @@
 }
 
 /* =====================
-   2. Reset y Box Sizing
+   2. Reset Moderno y Box Sizing
    ===================== */
 html {
   box-sizing: border-box;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scrollbar-width: thin;
-  scrollbar-color: #ff0000 #470100;
-  font-size: 15px; /* Más pequeño y profesional, escalable */
+  scrollbar-color: var(--primary) #470100;
 }
-*, *::before, *::after {
-  box-sizing: inherit;
-}
+*, *::before, *::after { box-sizing: inherit; }
 body, html {
-  overflow-x: hidden !important;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100vw;
+  margin: 0; padding: 0;
+  width: 100%; max-width: 100vw;
   min-height: 100vh;
-  padding-bottom: 110px; /* Ajusta este valor a la altura real del footer fijo */
+  overflow-x: hidden !important;
+  padding-bottom: 110px;
 }
 
 /* =====================
-   3. Tipografía Global
+   3. Tipografía Global Escalable
    ===================== */
 body {
   min-height: 100vh;
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: 400;
@@ -123,32 +102,33 @@ p, .text-base, .text-sm, .text-xs, span, label, li, input, textarea, button {
 strong, b { font-weight: 700; }
 
 /* =====================
-   4. Scrollbar Personalizado
+   4. Scrollbar Pro y Accesibilidad
    ===================== */
 ::-webkit-scrollbar {
   width: 10px;
   background: #470100;
 }
 ::-webkit-scrollbar-thumb {
-  background: #ff0000;
+  background: var(--primary);
   border-radius: 8px;
   border: 2px solid #470100;
+  transition: background 0.2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff5252;
+  background: var(--primary-dark);
 }
 body {
-  scrollbar-face-color: #ff0000;
+  scrollbar-face-color: var(--primary);
   scrollbar-track-color: #470100;
   scrollbar-arrow-color: #fff;
-  scrollbar-highlight-color: #b71c1c;
+  scrollbar-highlight-color: var(--primary-dark);
   scrollbar-shadow-color: #470100;
-  scrollbar-3dlight-color: #ff5252;
-  scrollbar-darkshadow-color: #b71c1c;
+  scrollbar-3dlight-color: var(--primary);
+  scrollbar-darkshadow-color: var(--primary-dark);
 }
 
 /* =====================
-   5. Layout General
+   5. Layout General Modular
    ===================== */
 .app-root {
   min-height: 100vh;
@@ -164,7 +144,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 14rem 1rem 2.5rem 1rem; /* Más espacio arriba para el header */
+  padding: 14rem 1rem 2.5rem 1rem;
   width: 100%;
   max-width: 120rem;
   margin: 0 auto;
@@ -172,7 +152,7 @@ body {
 }
 @media (max-width: 900px) {
   .main-content {
-    padding-top: 11rem; /* Espacio suficiente en tablets */
+    padding-top: 11rem;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
     padding-bottom: 2rem;
@@ -180,7 +160,7 @@ body {
 }
 @media (max-width: 640px) {
   .main-content {
-    padding-top: 23rem; /* +3rem extra para asegurar visibilidad tras carga */
+    padding-top: 23rem;
     padding-left: 0.1rem;
     padding-right: 0.1rem;
     padding-bottom: 1rem;
@@ -239,7 +219,6 @@ body {
   }
 }
 
-/* Espacio extra debajo de la última sección principal */
 .main-content > section:last-child {
   margin-bottom: 7.3rem !important;
 }
@@ -253,20 +232,16 @@ body {
 .eventos-section,
 .contacto-section,
 .podcasts-section {
-  /* El ancho y centrado lo controla ahora .main-section */
   background: var(--section-bg) !important;
   border-radius: 1rem !important;
   border: 1.5px solid var(--section-border) !important;
   padding: 1.5rem 1.2rem 2rem 1.2rem !important;
-  /* width: 100% !important; */
-  /* max-width: 48rem !important; */
-  /* margin: 0 auto 2.5rem auto !important; */
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   position: relative;
   overflow: hidden !important;
-  color: var(--section-text) !important;
+  color: var(--section-title) !important;
   box-shadow: var(--section-shadow) !important;
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s !important;
 }
@@ -286,7 +261,7 @@ body {
 .eventos-section::before,
 .contacto-section::before,
 .podcasts-section::before {
-  display: none !important; /* elimina decoraciones innecesarias */
+  display: none !important;
 }
 
 /* =====================
@@ -314,7 +289,7 @@ body {
 .contacto-desc-main,
 .programacion-desc-main {
   font-size: 1.13rem !important;
-  color: var(--section-text) !important;
+  color: var(--section-text, var(--foreground)) !important;
   text-align: center !important;
   margin-bottom: 2rem !important;
   max-width: 36rem !important;
@@ -325,24 +300,34 @@ body {
 }
 
 /* =====================
-   8. Inputs y Formularios
+   8. Inputs y Formularios Pro
    ===================== */
 input, textarea, button {
   font-size: 1rem;
   border-radius: 0.3rem;
   border: 1px solid #ccc;
   padding: 0.5em;
+  font-family: var(--font-body);
 }
 input:focus, textarea:focus {
   border: 1.5px solid var(--primary, #ff0000);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(229,57,53,0.08);
 }
 button {
   font-weight: 600;
   cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+button:hover, button:focus {
+  background: var(--primary-dark);
 }
 
 /* =====================
-   9. Footer
+   9. Footer Moderno
    ===================== */
 .app-footer {
   color: var(--footer-text);
@@ -376,7 +361,6 @@ button {
   text-align: center;
   margin-top: 1rem;
 }
-
 @media (max-width: 900px) {
   .app-footer { padding: 1.5rem 0.5rem; }
 }
@@ -384,20 +368,20 @@ button {
   .app-footer { padding: 1rem 0.5rem; }
 }
 
-/* Asegura que los enlaces de noticias sean blancos en modo oscuro y oscuros en modo claro */
+/* =====================
+   10. Noticias y Enlaces Adaptativos
+   ===================== */
 .noticia-contenedor a,
 .noticia-contenedor .noticia-titulo {
   color: var(--program-title, var(--section-title, #fff)) !important;
-  /* Si quieres que el texto común (no titular) sea blanco en modo oscuro: */
 }
-
 html.dark .noticia-contenedor a,
 html.dark .noticia-contenedor .noticia-titulo {
   color: #fff !important;
 }
 
 /* =====================
-   Sección Global para Ancho de Secciones Principales
+   11. Sección Global para Ancho de Secciones Principales
    ===================== */
 .main-section {
   max-width: 90rem;
@@ -410,7 +394,6 @@ html.dark .noticia-contenedor .noticia-titulo {
   align-items: center;
   justify-content: center;
 }
-
 @media (max-width: 1400px) {
   .main-section {
     max-width: 99vw;
@@ -425,6 +408,42 @@ html.dark .noticia-contenedor .noticia-titulo {
     padding-right: 0.5rem;
   }
 }
+
+/* =====================
+   12. Animaciones Sutiles (Pro)
+   ===================== */
+.card, .programacion-section, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
+  will-change: box-shadow, background, border-color;
+  transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+}
+
+/* =====================
+   13. Accesibilidad y Preferencias de Usuario
+   ===================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* =====================
+   14. Utilidades Avanzadas
+   ===================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Fin del CSS pro refactorizado */
 
 
 
