@@ -2,7 +2,7 @@ import './PodcastsSection.css';
 
 export default function PodcastsSection() {
   return (
-    <section className="podcasts-section">
+    <section className="podcasts-section main-section">
       <h3 className="podcasts-title">
         Podcasts Recientes
       </h3>

@@ -60,7 +60,7 @@ export default function SponsorsCarousel() {
     if (!mounted) return;
     let interval: number;
     let pos = offset;
-    const speed = 1.2; // px por frame
+    const speed = 0.3; // px por frame, mucho más lento
     const fps = 30; // Limitar a 30 FPS
     function animate() {
       pos += speed;
@@ -69,20 +69,21 @@ export default function SponsorsCarousel() {
       }
       setOffset(pos);
     }
-    interval = window.setInterval(animate, 1000 / fps);
+    interval = window.setInterval(animate, 1000 / fps); // 30 FPS
     return () => clearInterval(interval);
   }, [trackWidth, mounted]);
 
   if (!mounted) return null;
 
   return (
-    <div className="sponsors-carousel-outer">
+    <div className="sponsors-carousel-outer" style={{ overflowX: 'hidden', WebkitOverflowScrolling: 'auto' }}>
       <div
         className="sponsors-carousel-track"
         ref={trackRef}
         style={{
           transform: `translateX(-${offset}px)`,
           transition: "transform 0.2s cubic-bezier(.4,1.3,.6,1)",
+          minWidth: 0,
         }}
       >
         {sponsorsLoop.map((s, i) => (

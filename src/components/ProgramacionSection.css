@@ -21,10 +21,6 @@ html.dark {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 2.5rem auto;
-  padding: 1.2rem 1.5rem 2.5rem 1.5rem;
-  width: 100%;
-  max-width: 48rem;
   background: var(--program-bg);
   border-radius: 1rem;
   border: 1.5px solid var(--program-border);
@@ -259,5 +255,13 @@ html.dark .noticia-description {
   .noticia-contenedor > .noticia-description {
     font-size: 0.93rem;
   }
+}
+
+.main-section {
+  width: 95vw;
+  max-width: 90rem;
+  margin: 0 auto 2.5rem auto;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  box-sizing: border-box;
 }
 

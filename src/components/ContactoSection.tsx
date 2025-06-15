@@ -2,7 +2,7 @@ import "./ContactoSection.css";
 
 export default function ContactoSection() {
   return (
-    <section className="contacto-section">
+    <section className="contacto-section main-section">
       <h3 className="contacto-title">Contacto</h3>
       <form className="contacto-form">
         <input

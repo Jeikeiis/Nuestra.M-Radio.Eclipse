@@ -2,7 +2,7 @@ import "./EventosSection.css";
 
 export default function EventosSection() {
   return (
-    <section className="eventos-section">
+    <section className="eventos-section main-section">
       <h3 className="eventos-title">
         Galería de Eventos
       </h3>

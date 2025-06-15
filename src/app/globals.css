@@ -79,10 +79,10 @@ html {
   box-sizing: inherit;
 }
 body, html {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   margin: 0;
   padding: 0;
-  width: 100vw;
+  width: 100%;
   max-width: 100vw;
   min-height: 100vh;
   padding-bottom: 110px; /* Ajusta este valor a la altura real del footer fijo */
@@ -159,14 +159,6 @@ body {
   margin: 0;
   padding: 0;
 }
-.site-container {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  box-sizing: border-box;
-}
 .main-content {
   flex: 1;
   display: flex;
@@ -174,16 +166,9 @@ body {
   align-items: center;
   padding: 14rem 1rem 2.5rem 1rem; /* Más espacio arriba para el header */
   width: 100%;
-  max-width: 900px;
+  max-width: 120rem;
   margin: 0 auto;
   gap: 1rem;
-}
-@media (max-width: 1280px) {
-  .site-container {
-    max-width: 100vw;
-    padding-left: 0.7rem;
-    padding-right: 0.7rem;
-  }
 }
 @media (max-width: 900px) {
   .main-content {
@@ -194,11 +179,6 @@ body {
   }
 }
 @media (max-width: 640px) {
-  .site-container {
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
-    max-width: 100vw;
-  }
   .main-content {
     padding-top: 23rem; /* +3rem extra para asegurar visibilidad tras carga */
     padding-left: 0.1rem;
@@ -273,13 +253,14 @@ body {
 .eventos-section,
 .contacto-section,
 .podcasts-section {
+  /* El ancho y centrado lo controla ahora .main-section */
   background: var(--section-bg) !important;
   border-radius: 1rem !important;
   border: 1.5px solid var(--section-border) !important;
   padding: 1.5rem 1.2rem 2rem 1.2rem !important;
-  width: 100% !important;
-  max-width: 48rem !important;
-  margin: 0 auto 2.5rem auto !important;
+  /* width: 100% !important; */
+  /* max-width: 48rem !important; */
+  /* margin: 0 auto 2.5rem auto !important; */
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -413,6 +394,36 @@ button {
 html.dark .noticia-contenedor a,
 html.dark .noticia-contenedor .noticia-titulo {
   color: #fff !important;
+}
+
+/* =====================
+   Sección Global para Ancho de Secciones Principales
+   ===================== */
+.main-section {
+  max-width: 90rem;
+  width: 100%;
+  margin: 0 auto 2.5rem auto;
+  padding: 2.5rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1400px) {
+  .main-section {
+    max-width: 99vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+}
+@media (max-width: 900px) {
+  .main-section {
+    max-width: 100vw;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 

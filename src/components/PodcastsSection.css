@@ -5,8 +5,6 @@
   justify-content: center;
   margin: 0 auto 1.5rem auto;
   padding: 1.2rem 1.5rem 2rem 1.5rem;
-  width: 100%;
-  max-width: 48rem;
   background: rgba(35, 39, 47, 0.92);
   border-radius: 1.5rem;
   /* box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 rgba(255,0,0,0.04); */
@@ -117,4 +115,12 @@
     max-width: 98vw;
     height: 32px;
   }
+}
+
+.main-section {
+  width: 95vw;
+  max-width: 90rem;
+  margin: 0 auto 2.5rem auto;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  box-sizing: border-box;
 }

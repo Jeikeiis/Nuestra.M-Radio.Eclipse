@@ -11,7 +11,7 @@ const locutores = [
 
 export default function LocutoresSection() {
   return (
-    <section className="locutores-section" id="locutores">
+    <section className="locutores-section main-section" id="locutores">
       <h3 className="locutores-title">Nuestro Equipo de Locutores</h3>
       <p className="locutores-desc-main">
         De lunes a viernes, de 10 a 13 horas, Federico te acompaña en{" "}

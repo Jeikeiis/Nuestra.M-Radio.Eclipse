@@ -7,10 +7,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 2.5rem auto;
-  padding: 1.2rem 1.5rem 2.5rem 1.5rem; /* Menos padding arriba, igual abajo */
-  width: 100%;
-  max-width: 48rem;
   background: rgba(35,39,47,0.92);
   border-radius: 1.5rem;
   border: 2.5px solid var(--color-accent-dark, #b71c1c);
@@ -113,12 +109,14 @@
 }
 
 @media (max-width: 900px) {
+  .locutores-section {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  }
   .locutores-grid { gap: 1rem 0.7rem; }
 }
 @media (max-width: 640px) {
   .locutores-section {
-    padding: 0.7rem 0.5rem 1.2rem 0.5rem; /* Menos padding arriba en mobile */
-    max-width: 98vw;
+    padding: 0.7rem 0.2rem 1.2rem 0.2rem;
   }
   .locutores-grid { gap: 0.7rem; }
   .locutores-profile {
@@ -129,3 +127,11 @@
 }
 
 :root { --section-shadow: none; }
+
+.main-section {
+  width: 95vw;
+  max-width: 90rem;
+  margin: 0 auto 2.5rem auto;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  box-sizing: border-box;
+}
