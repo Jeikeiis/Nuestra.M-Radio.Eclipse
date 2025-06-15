@@ -30,23 +30,16 @@ export default function ProgramacionNoticiasSection() {
   const pageSize = 4;
   const reloadTimeout = useRef<NodeJS.Timeout | null>(null);
   const [fallback, setFallback] = useState(false);
+  const [primeraCarga, setPrimeraCarga] = useState(true);
 
-  const cargarNoticias = (forzar = false, nuevaPagina = page) => {
-    // Limitar recarga manual a una vez cada 2 minutos
-    if (forzar) {
-      const ahora = Date.now();
-      if (ahora - lastManualReload < 120000) {
-        setError("Debes esperar al menos 2 minutos entre recargas manuales.");
-        return;
-      }
-      setLastManualReload(ahora);
-    }
-    setLoading(!forzar);
-    setIsReloading(forzar);
-    setError(null);
-    fetch(`/api/noticias?page=${nuevaPagina}&pageSize=${pageSize}${forzar ? '&force=1' : ''}`)
+  // Carga rápida desde cache/local, luego actualiza en segundo plano
+  useEffect(() => {
+    let isMounted = true;
+    // 1. Cargar rápido desde cache/local (sin force)
+    fetch(`/api/noticias?page=${page}&pageSize=${pageSize}`)
       .then(res => res.json())
       .then(data => {
+        if (!isMounted) return;
         let noticiasValidas = Array.isArray(data.noticias)
           ? data.noticias.filter(
               (n: Noticia) => n && n.title && n.link && n.title.length > 6
@@ -60,50 +53,62 @@ export default function ProgramacionNoticiasSection() {
         });
         noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
         setNoticias(noticiasValidas);
-        setNoticiasPrevias(noticiasValidas); // Actualiza previas solo si carga exitosa
+        setNoticiasPrevias(noticiasValidas);
         setCached(data.cached);
         setTotal(data.meta?.total || 0);
         setMaxPages(data.meta?.maxPages || 5);
         setFallback(!!data.fallback);
         setLoading(false);
         setIsReloading(false);
-        if (data.errorMsg) {
-          setError(data.errorMsg);
-        } else if (!noticiasValidas.length) {
-          setError("No se encontraron noticias relevantes para Montevideo.");
-        }
-        if (forzar && data.cached === false) {
-          setShowUpdated(true);
-          if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
-          reloadTimeout.current = setTimeout(() => setShowUpdated(false), 2500);
-        }
+        setError(data.errorMsg || null);
+        setPrimeraCarga(false);
       })
       .catch((e) => {
+        if (!isMounted) return;
         setError(e.message || "No se pudieron obtener noticias.");
         setLoading(false);
         setIsReloading(false);
         setFallback(false);
-        // No actualiza noticiasPrevias en error
+        setPrimeraCarga(false);
       });
-  };
 
-  useEffect(() => {
-    let isMounted = true;
-    cargarNoticias();
-    // Refresca cada 20 minutos (1200000 ms)
-    const interval = setInterval(() => {
-      if (isMounted) cargarNoticias();
-    }, 1200000);
+    // 2. En segundo plano, intenta actualizar desde la API externa (force=1)
+    fetch(`/api/noticias?page=${page}&pageSize=${pageSize}&force=1`)
+      .then(res => res.json())
+      .then(data => {
+        if (!isMounted) return;
+        let noticiasValidas = Array.isArray(data.noticias)
+          ? data.noticias.filter(
+              (n: Noticia) => n && n.title && n.link && n.title.length > 6
+            )
+          : [];
+        const titulosVistos = new Set<string>();
+        noticiasValidas = noticiasValidas.filter((n: Noticia) => {
+          if (titulosVistos.has(n.title)) return false;
+          titulosVistos.add(n.title);
+          return true;
+        });
+        noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
+        // Solo actualiza si hay cambios
+        if (JSON.stringify(noticiasValidas) !== JSON.stringify(noticias)) {
+          setNoticias(noticiasValidas);
+          setNoticiasPrevias(noticiasValidas);
+          setCached(data.cached);
+          setTotal(data.meta?.total || 0);
+          setMaxPages(data.meta?.maxPages || 5);
+          setFallback(!!data.fallback);
+          setShowUpdated(true);
+          if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
+          reloadTimeout.current = setTimeout(() => setShowUpdated(false), 2500);
+        }
+        setError(data.errorMsg || null);
+      })
+      .catch(() => {});
+
     return () => {
       isMounted = false;
-      clearInterval(interval);
       if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
     };
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    cargarNoticias(false, page);
     // eslint-disable-next-line
   }, [page]);
 
@@ -316,14 +321,14 @@ export default function ProgramacionNoticiasSection() {
       <div className="paginacion-controles">
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
-          disabled={page === 1}
+          disabled={page === 1 || loading || primeraCarga}
           style={{
             padding: '6px 16px',
             borderRadius: 6,
             border: '1px solid var(--section-border, #888)',
             background: page === 1 ? 'var(--section-bg-contrast, #333)' : 'var(--section-bg, #222)',
             color: 'var(--section-title, #fff)',
-            cursor: page === 1 ? 'not-allowed' : 'pointer',
+            cursor: page === 1 || loading || primeraCarga ? 'not-allowed' : 'pointer',
             fontWeight: 600,
             transition: 'background 0.2s, color 0.2s',
           }}
@@ -336,13 +341,14 @@ export default function ProgramacionNoticiasSection() {
         {page < maxPages && (
           <button
             onClick={() => setPage((p) => Math.min(maxPages, p + 1))}
+            disabled={loading || primeraCarga}
             style={{
               padding: '6px 16px',
               borderRadius: 6,
               border: '1px solid var(--section-border, #888)',
               background: 'var(--section-bg, #222)',
               color: 'var(--section-title, #fff)',
-              cursor: 'pointer',
+              cursor: loading || primeraCarga ? 'not-allowed' : 'pointer',
               fontWeight: 600,
               transition: 'background 0.2s, color 0.2s',
             }}

@@ -33,6 +33,7 @@ let cacheFijo: Noticia[] = [];
 // --- Redis (opcional) ---
 const REDIS_URL = process.env.REDIS_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+// Solo inicializa si ambos existen y no son cadenas vacías
 const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
 
 // --- Utilidades ---
@@ -118,12 +119,17 @@ function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
 
 // --- Registro de recargas forzadas ---
 async function registrarRecargaForzada(ip: string, region: string) {
-  if (!redis) return;
-  const key = `recargas-forzadas:${region}`;
-  await redis.zadd(key, { score: Date.now(), member: ip });
-  // Mantener solo las últimas 100 recargas por región
-  await redis.zremrangebyrank(key, 0, -101);
-  await redis.expire(key, 60 * 60 * 24 * 7); // 7 días de retención
+  // Solo intenta si redis está correctamente configurado
+  if (!redis || !REDIS_URL || !REDIS_TOKEN) return;
+  try {
+    const key = `recargas-forzadas:${region}`;
+    await redis.zadd(key, { score: Date.now(), member: ip });
+    // Mantener solo las últimas 100 recargas por región
+    await redis.zremrangebyrank(key, 0, -101);
+    await redis.expire(key, 60 * 60 * 24 * 7); // 7 días de retención
+  } catch {
+    // Silencia cualquier error de redis para no romper la API
+  }
 }
 
 // --- Handler principal ---
