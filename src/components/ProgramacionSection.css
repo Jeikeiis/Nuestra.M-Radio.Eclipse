@@ -216,6 +216,14 @@ html.dark .noticia-description {
   .noticia-meta {
     font-size: 0.97rem;
   }
+  .programacion-text,
+  .noticia-titulo-text,
+  .noticia-description {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto;
+  }
 }
 
 @media (max-width: 640px) {
@@ -255,6 +263,32 @@ html.dark .noticia-description {
   .noticia-contenedor > .noticia-description {
     font-size: 0.93rem;
   }
+  .programacion-text,
+  .noticia-titulo-text,
+  .noticia-description {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto;
+  }
+
+  /* Títulos de sección en horizontal y adaptados */
+  .programacion-title {
+    writing-mode: initial !important;
+    text-align: left !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.01em;
+    white-space: normal !important;
+    word-break: break-word;
+    margin-bottom: 0.5rem;
+    display: block !important;
+  }
+}
+
+/* Evitar scroll horizontal en la sección principal */
+.programacion-section,
+.main-section {
+  overflow-x: hidden !important;
 }
 
 .main-section {
