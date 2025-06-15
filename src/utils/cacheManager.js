@@ -1,22 +1,20 @@
 // utils/cacheManager.js
-// Utilidades para exportar e importar caches de Redis automáticamente
-require('dotenv').config();
-const { Redis } = require('@upstash/redis');
-const fs = require('fs');
-const path = require('path');
+import { Redis } from '@upstash/redis';
+import fs from 'fs';
+import path from 'path';
 
 const REDIS_URL = process.env.REDIS_URL;
 const UPSTASH_REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-const API_USER_KEY = process.env.API_USER_KEY;
+export const API_USER_KEY = process.env.API_USER_KEY;
 const SECCIONES = ['farandula', 'musica', 'noticias'];
 const EXPORT_PATH = path.join('/tmp', 'caches_export.json');
 
-const redis = new Redis({
+export const redis = new Redis({
   url: REDIS_URL,
   token: UPSTASH_REDIS_REST_TOKEN,
 });
 
-async function exportarCaches() {
+export async function exportarCaches() {
   const exportData = {};
   for (const seccion of SECCIONES) {
     const keys = await redis.keys(`${seccion}:*`);
@@ -29,7 +27,7 @@ async function exportarCaches() {
   return EXPORT_PATH;
 }
 
-async function importarCaches() {
+export async function importarCaches() {
   if (!fs.existsSync(EXPORT_PATH)) {
     throw new Error('No se encontró el archivo de backup de cachés.');
   }
@@ -41,5 +39,3 @@ async function importarCaches() {
   }
   return true;
 }
-
-module.exports = { exportarCaches, importarCaches, EXPORT_PATH, API_USER_KEY };
