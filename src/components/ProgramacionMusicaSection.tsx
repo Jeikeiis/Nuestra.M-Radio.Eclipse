@@ -128,12 +128,20 @@ export default function ProgramacionMusicaSection() {
     </button>
   );
 
-  const apiGastada = fallback;
-  const apiError = error !== null && !fallback;
-
+  // Indicador: gris (ok), naranja (cache temporal), rojo (cache fijo)
+  let color = '#888', boxShadow = '0 0 4px 1px #8888', label = 'API disponible';
+  if (fallback) {
+    color = 'red';
+    boxShadow = '0 0 8px 2px #ff0000cc';
+    label = 'API tokens agotados, usando cache fijo';
+  } else if (error !== null) {
+    color = 'orange';
+    boxShadow = '0 0 6px 2px #ff9800aa';
+    label = 'API usando cache temporal';
+  }
   const puntoIndicador = (
     <span
-      title={apiGastada ? "API gastada, usando música cacheada fija" : apiError ? "Error temporal, usando cache temporal" : "API disponible"}
+      title={label}
       style={{
         position: 'absolute',
         top: 6,
@@ -141,13 +149,13 @@ export default function ProgramacionMusicaSection() {
         width: 12,
         height: 12,
         borderRadius: '50%',
-        background: apiGastada ? 'red' : apiError ? 'orange' : '#888',
-        boxShadow: apiGastada ? '0 0 8px 2px #ff0000cc' : apiError ? '0 0 6px 2px #ff9800aa' : '0 0 4px 1px #8888',
+        background: color,
+        boxShadow,
         zIndex: 10,
         display: 'inline-block',
         transition: 'background 0.3s',
       }}
-      aria-label={apiGastada ? "Indicador de API gastada (cache fijo)" : apiError ? "Indicador de error temporal" : "API disponible"}
+      aria-label={label}
     />
   );
 

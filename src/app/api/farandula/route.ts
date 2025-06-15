@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_KEY = "pub_c0d1669584c7417b93361bfdc354b1c3";
+const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666";
 const CACHE_DURATION_MS = 15 * 60 * 1000; // 15 minutos
 
 type Noticia = {
@@ -114,15 +114,18 @@ export async function GET(req: NextRequest) {
 
     let noticiasParaMostrar = noticiasValidas;
     let usandoFallback = false;
+    let apiStatus: 'ok' | 'fallback-temporal' | 'fallback-fijo' = 'ok';
     if (errorMsg && cache.lastValidNoticias && cache.lastValidNoticias.length > 0) {
       noticiasParaMostrar = cache.lastValidNoticias;
       usandoFallback = true;
+      apiStatus = 'fallback-temporal';
     }
     let usandoFallbackFijo = false;
     if (errorMsg && noticiasParaMostrar.length === 0 && cacheFijo.length > 0) {
       noticiasParaMostrar = cacheFijo;
       usandoFallback = true;
       usandoFallbackFijo = true;
+      apiStatus = 'fallback-fijo';
     }
 
     const { noticiasPaginadas, totalNoticias, maxPages } = paginarNoticias(noticiasParaMostrar);
@@ -132,6 +135,7 @@ export async function GET(req: NextRequest) {
       cached: false,
       errorMsg: usandoFallback ? `Mostrando últimas noticias guardadas. ${errorMsg}` : errorMsg,
       fallback: usandoFallbackFijo,
+      apiStatus,
       meta: {
         page,
         pageSize,

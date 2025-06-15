@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_KEY = "pub_c0d1669584c7417b93361bfdc354b1c3";
+const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666";
 
 // Lógica similar a noticias, pero para farándula/entretenimiento
 async function fetchFarandula(): Promise<{noticias: any[], errorMsg?: string}> {
