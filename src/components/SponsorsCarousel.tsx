@@ -48,6 +48,7 @@ export default function SponsorsCarousel() {
     if (!mounted) return;
     function updateWidths() {
       if (trackRef.current) {
+        // Usa el ancho real del track dividido por 2 (por el loop)
         setTrackWidth(trackRef.current.scrollWidth / 2);
       }
     }
@@ -76,14 +77,13 @@ export default function SponsorsCarousel() {
   if (!mounted) return null;
 
   return (
-    <div className="sponsors-carousel-outer" style={{ overflowX: 'hidden', WebkitOverflowScrolling: 'auto' }}>
+    <div className="sponsors-carousel-outer">
       <div
         className="sponsors-carousel-track"
         ref={trackRef}
         style={{
           transform: `translateX(-${offset}px)`,
-          transition: "transform 0.2s cubic-bezier(.4,1.3,.6,1)",
-          minWidth: 0,
+          minWidth: "100%",
         }}
       >
         {sponsorsLoop.map((s, i) => (
