@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import ProgramacionSection from "../components/ProgramacionSection";
 import LocutoresSection from "../components/LocutoresSection";
 import RadioDashboard from "../components/RadioDashboard";
+import ClasicosDelRecuerdoSection from "../components/ClasicosDelRecuerdoSection";
 import { HydrationContext, RadioDashboardContext } from "./layout";
 
 // Definir el tipo del contexto de audio
@@ -32,6 +33,7 @@ export default function Home() {
       {/* Secciones principales */}
       <main className="main-content">
         <LocutoresSection />
+        <ClasicosDelRecuerdoSection />
         <ProgramacionSection />
         {/* <PodcastsSection />
         <EventosSection />
