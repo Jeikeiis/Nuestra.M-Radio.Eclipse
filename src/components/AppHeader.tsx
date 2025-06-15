@@ -11,8 +11,8 @@ const RadioDashboard = dynamic(() => import("./RadioDashboard"), { ssr: false })
 // Menú de navegación profesional básico
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
-  { href: "#programacion", label: "Programación" },
   { href: "#locutores", label: "Locutores" },
+  { href: "#programacion", label: "Programación" },
 ];
 
 type AppHeaderProps = {
@@ -22,7 +22,7 @@ type AppHeaderProps = {
 
 const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
   ({ radioOpen, setRadioOpen }, ref) => {
-    // Scroll suave a la sección
+    // Scroll suave a la sección, compensando el header fijo
     const handleNavClick = useCallback(
       (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         if (href.startsWith("#")) {
@@ -30,7 +30,10 @@ const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
           const id = href.replace("#", "");
           const el = document.getElementById(id);
           if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Compensa el header fijo (ajusta el valor según tu header)
+            const yOffset = -100;
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
           }
         }
       },
