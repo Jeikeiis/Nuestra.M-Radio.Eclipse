@@ -303,6 +303,97 @@ export default function ProgramacionMusicaSection() {
     );
   }
 
+  if (error && noticiasPrevias.length > 0) {
+    return (
+      <div className="programacion-musica-section" style={{ position: 'relative' }}>
+        <div style={{ color: "#b71c1c", fontWeight: 500, marginBottom: 12 }} role="alert">
+          {error}
+        </div>
+        {puntoIndicador}
+        {botonRecargaManual}
+        <div className="paginacion-controles">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 6,
+              border: '1px solid var(--section-border, #888)',
+              background: page === 1 ? 'var(--section-bg-contrast, #333)' : 'var(--section-bg, #222)',
+              color: 'var(--section-title, #fff)',
+              cursor: page === 1 ? 'not-allowed' : 'pointer',
+              fontWeight: 600,
+              transition: 'background 0.2s, color 0.2s',
+            }}
+          >
+            ◀ Anterior
+          </button>
+          <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+            Página {page} de {maxPages}
+          </span>
+          {page < maxPages && (
+            <button
+              onClick={() => setPage((p) => Math.min(maxPages, p + 1))}
+              style={{
+                padding: '6px 16px',
+                borderRadius: 6,
+                border: '1px solid var(--section-border, #888)',
+                background: 'var(--section-bg, #222)',
+                color: 'var(--section-title, #fff)',
+                cursor: 'pointer',
+                fontWeight: 600,
+                transition: 'background 0.2s, color 0.2s',
+              }}
+            >
+              Siguiente ▶
+            </button>
+          )}
+        </div>
+        <div>
+          {noticiasPrevias.map((noticia, idx) => (
+            <div className="noticia-contenedor" key={idx}>
+              <a
+                href={noticia.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="noticia-titulo"
+                aria-label={noticia.title}
+                tabIndex={0}
+                onClick={e => {
+                  if (!noticia.link) {
+                    e.preventDefault();
+                    alert("Enlace no disponible");
+                  }
+                }}
+              >
+                <span className="noticia-titulo-text">{noticia.title}</span>
+              </a>
+              <div className="noticia-meta">
+                {noticia.source_id && (
+                  <span className="noticia-fuente" title="Fuente">
+                    <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><circle cx="10" cy="10" r="8" fill="#b71c1c"/><text x="10" y="15" textAnchor="middle" fontSize="10" fill="#fff">F</text></svg>
+                    {noticia.source_id}
+                  </span>
+                )}
+                {noticia.pubDate && (
+                  <span className="noticia-fecha" title="Fecha de publicación">
+                    <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><rect x="2" y="4" width="16" height="14" rx="3" fill="#888"/><rect x="5" y="8" width="10" height="2" fill="#fff"/></svg>
+                    {formatearFecha(noticia.pubDate)}
+                  </span>
+                )}
+              </div>
+              {noticia.description && (
+                <div className="noticia-description">
+                  {noticia.description}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (error) {
     return (
       <div className="programacion-musica-section" style={{ color: "#b71c1c", fontWeight: 500, position: 'relative' }} role="alert">
