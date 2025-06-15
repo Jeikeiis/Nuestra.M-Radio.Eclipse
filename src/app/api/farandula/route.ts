@@ -47,17 +47,50 @@ async function fetchNoticiasFarandula(): Promise<{ noticias: Noticia[]; errorMsg
   }
 }
 
+function normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/[^\w\s]/gi, '')
+    .trim();
+}
+
+function areSimilar(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  a = normalizeText(a);
+  b = normalizeText(b);
+  if (a === b) return true;
+  const aWords = new Set(a.split(' '));
+  const bWords = new Set(b.split(' '));
+  const intersection = [...aWords].filter(x => bWords.has(x));
+  return intersection.length >= Math.min(aWords.size, bWords.size) * 0.7;
+}
+
 function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
-  const titulosVistos = new Set<string>();
+  const vistos = new Set<string>();
+  const recientes: Noticia[] = [];
+  const ahora = Date.now();
   return noticias
-    .filter(n => n && n.title && n.link && n.title.length > 6)
+    .filter(n => n && n.title && n.link && n.title.length > 12)
     .filter(n => {
       const titulo = n.title.trim().toLowerCase();
-      if (titulosVistos.has(titulo)) return false;
-      titulosVistos.add(titulo);
+      if (!n.description || n.description.length < 35) return false;
+      if (titulo.includes('resumen') || titulo.includes('video:') || titulo.match(/^noticias(\s|:|$)/i)) return false;
+      if (n.pubDate) {
+        const fecha = new Date(n.pubDate).getTime();
+        if (isNaN(fecha) || ahora - fecha > 7 * 24 * 60 * 60 * 1000) return false;
+      }
+      const key = normalizeText(n.title) + '|' + normalizeText(n.link);
+      if (vistos.has(key)) return false;
+      for (const prev of recientes) {
+        if (areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || '')) return false;
+      }
+      vistos.add(key);
+      recientes.push(n);
       return true;
     })
-    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
+    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0))
+    .slice(0, 30);
 }
 
 export async function GET(req: NextRequest) {
