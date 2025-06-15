@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 
 const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666";
-const CACHE_DURATION_MS = 15 * 60 * 1000; // 15 minutos
+const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
 
 // --- Tipos ---
 type Noticia = {

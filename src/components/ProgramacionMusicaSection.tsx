@@ -201,7 +201,7 @@ export default function ProgramacionMusicaSection() {
           ¡Música actualizada!
         </div>
       )}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
+      <div className="paginacion-controles">
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
