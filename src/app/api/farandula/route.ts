@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Redis } from "@upstash/redis";
 
 const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666";
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
@@ -25,6 +26,37 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 let cacheFijo: Noticia[] = [];
+
+const REDIS_URL = process.env.REDIS_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
+
+// --- Cargar cache desde Redis al iniciar ---
+async function cargarCacheDesdeRedis() {
+  if (!redis) return;
+  try {
+    const cacheStr = await redis.get("cache:farandula");
+    let obj: any = null;
+    if (typeof cacheStr === 'string') {
+      obj = JSON.parse(cacheStr);
+    } else if (typeof cacheStr === 'object' && cacheStr !== null) {
+      obj = cacheStr;
+    }
+    if (obj) {
+      cache = obj.cache || cache;
+      cacheFijo = obj.cacheFijo || cacheFijo;
+    }
+  } catch {}
+}
+cargarCacheDesdeRedis();
+
+// --- Guardar cache en Redis tras actualizar ---
+async function guardarCacheEnRedis() {
+  if (!redis) return;
+  try {
+    await redis.set("cache:farandula", JSON.stringify({ cache, cacheFijo }));
+  } catch {}
+}
 
 async function fetchNoticiasFarandula(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
   const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Entretenimiento&language=es`;
@@ -144,6 +176,7 @@ export async function GET(req: NextRequest) {
     if (noticiasValidas.length > 0) {
       cacheFijo = noticiasValidas;
     }
+    await guardarCacheEnRedis();
 
     let noticiasParaMostrar = noticiasValidas;
     let usandoFallback = false;

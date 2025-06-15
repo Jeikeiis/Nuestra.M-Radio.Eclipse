@@ -27,14 +27,39 @@ let cache: NoticiasCache = {
   errorMsg: undefined,
   lastValidNoticias: [],
 };
-// Nuevo: caché fijo persistente en memoria
 let cacheFijo: Noticia[] = [];
 
 // --- Redis (opcional) ---
 const REDIS_URL = process.env.REDIS_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-// Solo inicializa si ambos existen y no son cadenas vacías
 const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
+
+// --- Cargar cache desde Redis al iniciar ---
+async function cargarCacheDesdeRedis() {
+  if (!redis) return;
+  try {
+    const cacheStr = await redis.get("cache:noticias");
+    let obj: any = null;
+    if (typeof cacheStr === 'string') {
+      obj = JSON.parse(cacheStr);
+    } else if (typeof cacheStr === 'object' && cacheStr !== null) {
+      obj = cacheStr;
+    }
+    if (obj) {
+      cache = obj.cache || cache;
+      cacheFijo = obj.cacheFijo || cacheFijo;
+    }
+  } catch {}
+}
+cargarCacheDesdeRedis();
+
+// --- Guardar cache en Redis tras actualizar ---
+async function guardarCacheEnRedis() {
+  if (!redis) return;
+  try {
+    await redis.set("cache:noticias", JSON.stringify({ cache, cacheFijo }));
+  } catch {}
+}
 
 // --- Utilidades ---
 function getIp(req: NextRequest): string {
@@ -197,10 +222,10 @@ export async function GET(req: NextRequest) {
         errorMsg,
         lastValidNoticias: noticiasValidas.length > 0 ? noticiasValidas : cache.lastValidNoticias || [],
       };
-      // Si hay noticias válidas nuevas, actualizar el caché fijo
       if (noticiasValidas.length > 0) {
         cacheFijo = noticiasValidas;
       }
+      await guardarCacheEnRedis();
     }
 
     // 4. Si hay error y existen noticias válidas previas, usar el fallback temporal
