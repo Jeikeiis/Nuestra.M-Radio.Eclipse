@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Redis } from "@upstash/redis";
 
 const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666";
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
@@ -27,26 +26,21 @@ let cache: NoticiasCache = {
 };
 let cacheFijo: Noticia[] = [];
 
-const REDIS_URL = process.env.REDIS_URL;
-const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-const redis = REDIS_URL && REDIS_TOKEN ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
-
-// --- Cargar cache desde Redis al iniciar ---
-async function cargarCacheDesdeRedis() {
-  if (!redis) return;
-  try {
-    const cacheStr = await redis.get("cache:musica");
-    if (cacheStr) {
-      const obj = JSON.parse(cacheStr);
-      cache = obj.cache || cache;
-      cacheFijo = obj.cacheFijo || cacheFijo;
-    }
-  } catch {}
+function getIp(req: NextRequest): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  // @ts-ignore
+  return req.ip || "127.0.0.1";
 }
-cargarCacheDesdeRedis();
 
-async function fetchNoticiasMusica(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
-  const url = "https://newsdata.io/api/1/latest?apikey=pub_151f47e41b2f4d94946766a4c0ef7666&q=Musica&language=es";
+async function registrarRecargaForzada(ip: string, tema: string) {
+  // No se implementa almacenamiento en este caso
+}
+
+async function fetchNoticiasMusica(tema: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
+  // Permitir cambiar el tema dinámicamente
+  const queryTema = tema || "Musica";
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(queryTema)}&language=es`;
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -54,15 +48,15 @@ async function fetchNoticiasMusica(): Promise<{ noticias: Noticia[]; errorMsg?: 
       if (msg.includes("rate limit") || msg.includes("limit exceeded")) {
         return { noticias: [], errorMsg: "Límite de peticiones de la API alcanzado. Intenta más tarde." };
       }
-      return { noticias: [], errorMsg: "No se pudo obtener noticias de NewsData.io." };
+      return { noticias: [], errorMsg: `Error ${res.status}: ${msg}` };
     }
     const data = await res.json();
     if (!data.results || !Array.isArray(data.results)) {
       return { noticias: [], errorMsg: "La respuesta de la API de NewsData.io no contiene artículos." };
     }
-    return { noticias: data.results, errorMsg: undefined };
+    return { noticias: data.results };
   } catch (e: any) {
-    return { noticias: [], errorMsg: "No se pudieron obtener noticias. Verifica tu conexión o la API key." };
+    return { noticias: [], errorMsg: `Error de red o API: ${e?.message || e}` };
   }
 }
 
@@ -90,11 +84,11 @@ function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
   const recientes: Noticia[] = [];
   const ahora = Date.now();
   return noticias
-    .filter(n => n && n.title && n.link && n.title.length > 12)
+    .filter(n => n && n.title && n.link && n.title.length > 15)
     .filter(n => {
-      const titulo = n.title.trim().toLowerCase();
-      if (!n.description || n.description.length < 35) return false;
+      const titulo = n.title.toLowerCase();
       if (titulo.includes('resumen') || titulo.includes('video:') || titulo.match(/^noticias(\s|:|$)/i)) return false;
+      if (!n.description || n.description.length < 40) return false;
       if (n.pubDate) {
         const fecha = new Date(n.pubDate).getTime();
         if (isNaN(fecha) || ahora - fecha > 7 * 24 * 60 * 60 * 1000) return false;
@@ -116,86 +110,58 @@ export async function GET(req: NextRequest) {
   try {
     const now = Date.now();
     const { searchParams } = new URL(req.url);
+    const tema = searchParams.get("tema") || "Musica";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
-    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 30);
-    const cacheValido = (cache.noticias.length > 0 || cache.errorMsg) && now - cache.timestamp < CACHE_DURATION_MS;
-
+    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "8", 10), 1), 30);
+    const MAX_PAGES = 5;
     function paginarNoticias(noticias: Noticia[]) {
-      const totalNoticias = noticias.length;
-      const maxPages = Math.max(1, Math.ceil(totalNoticias / pageSize));
+      const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
+      const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
       const start = (page - 1) * pageSize;
       const end = Math.min(start + pageSize, totalNoticias);
       return {
         noticiasPaginadas: noticias.slice(start, end),
         totalNoticias,
-        maxPages,
+        realMaxPages,
       };
     }
-
-    if (cacheValido) {
-      const { noticiasPaginadas, totalNoticias, maxPages } = paginarNoticias(cache.noticias);
-      return NextResponse.json({
-        noticias: noticiasPaginadas,
-        cached: true,
-        errorMsg: cache.errorMsg,
-        fallback: false,
-        meta: {
-          page,
-          pageSize,
-          total: totalNoticias,
-          maxPages,
-          updatedAt: new Date(cache.timestamp).toISOString(),
-          fromCache: true,
-        },
-      });
-    }
-
-    const { noticias, errorMsg } = await fetchNoticiasMusica();
-    const noticiasValidas = filtrarYLimpiarNoticias(noticias);
-
-    cache = {
-      noticias: noticiasValidas,
-      timestamp: now,
-      errorMsg,
-      lastValidNoticias: noticiasValidas.length > 0 ? noticiasValidas : cache.lastValidNoticias || [],
-    };
-    if (noticiasValidas.length > 0) {
-      cacheFijo = noticiasValidas;
-    }
-    await guardarCacheEnRedis();
-
-    let noticiasParaMostrar = noticiasValidas;
-    let usandoFallback = false;
-    let apiStatus: 'ok' | 'fallback-temporal' | 'fallback-fijo' = 'ok';
-    if (errorMsg && cache.lastValidNoticias && cache.lastValidNoticias.length > 0) {
-      noticiasParaMostrar = cache.lastValidNoticias;
-      usandoFallback = true;
-      apiStatus = 'fallback-temporal';
-    }
-    let usandoFallbackFijo = false;
-    if (errorMsg && noticiasParaMostrar.length === 0 && cacheFijo.length > 0) {
-      noticiasParaMostrar = cacheFijo;
-      usandoFallback = true;
-      usandoFallbackFijo = true;
-      apiStatus = 'fallback-fijo';
-    }
-
-    const { noticiasPaginadas, totalNoticias, maxPages } = paginarNoticias(noticiasParaMostrar);
-
+    // 1. Siempre responder desde cacheFijo
+    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cacheFijo);
+    // 2. Lanzar actualización en segundo plano (no espera)
+    (async () => {
+      try {
+        const { noticias, errorMsg } = await fetchNoticiasMusica(tema);
+        const noticiasValidas = filtrarYLimpiarNoticias(noticias);
+        if (noticiasValidas.length > 0) {
+          cache = {
+            noticias: noticiasValidas,
+            timestamp: Date.now(),
+            errorMsg: undefined,
+            lastValidNoticias: noticiasValidas,
+          };
+          cacheFijo = noticiasValidas;
+        } else if (errorMsg) {
+          cache.errorMsg = errorMsg;
+        }
+      } catch (e) {
+        // Silenciar errores de actualización en segundo plano
+      }
+    })();
     return NextResponse.json({
       noticias: noticiasPaginadas,
-      cached: false,
-      errorMsg: usandoFallback ? `Mostrando últimas noticias guardadas. ${errorMsg}` : errorMsg,
-      fallback: usandoFallbackFijo,
-      apiStatus,
+      cached: true,
+      errorMsg: null,
+      fallback: false,
+      apiStatus: 'cache-fijo',
       meta: {
+        tema,
         page,
         pageSize,
         total: totalNoticias,
-        maxPages,
+        maxPages: realMaxPages,
         updatedAt: new Date(now).toISOString(),
-        fromCache: usandoFallback,
+        fromCache: true,
       },
     });
   } catch (err: any) {
@@ -212,9 +178,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// Endpoint para contar artículos en cache nuevo y viejo
 export async function GET_CACHE_COUNT(req: NextRequest) {
-  // Elimina duplicados por título
   const titulosNuevo = new Set(cache.noticias.map(n => n.title));
   const titulosViejo = new Set(cacheFijo.map(n => n.title));
   return NextResponse.json({

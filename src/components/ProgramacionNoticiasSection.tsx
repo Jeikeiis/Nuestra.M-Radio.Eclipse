@@ -61,7 +61,10 @@ export default function ProgramacionNoticiasSection() {
         });
         noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
         setNoticias(noticiasValidas);
-        setNoticiasPrevias(noticiasValidas);
+        // Siempre actualiza previas si hay datos, aunque haya error
+        if (noticiasValidas.length > 0) {
+          setNoticiasPrevias(noticiasValidas);
+        }
         setCached(data.cached);
         setTotal(data.meta?.total || 0);
         setMaxPages(data.meta?.maxPages || 5);
