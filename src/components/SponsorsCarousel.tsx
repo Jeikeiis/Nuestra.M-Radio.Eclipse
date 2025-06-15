@@ -13,6 +13,7 @@ const sponsors = [
   { src: "/SanitariaNunez.webp", alt: "Sanitaria Nuñez" },
   { src: "/MirandaConstruccion.webp", alt: "Miranda Construcciones" },
   { src: "/ChiariaPizzi.webp", alt: "Estudio Jurídico Notarial Chiara Pizzi" }, // Nuevo sponsor actualizado a webp
+  { src: "/GiannattasioAcademia.webp", alt: "Academia de Choferes Giannattasio" }, // Sponsor agregado
   // Puedes agregar más sponsors aquí
 ];
 
