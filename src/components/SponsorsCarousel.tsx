@@ -35,14 +35,13 @@ export default function SponsorsCarousel() {
   const [offset, setOffset] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const [trackWidth, setTrackWidth] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [mounted, setMounted] = useState(false); // NUEVO
+  const [mounted, setMounted] = useState(false);
 
   // Duplicar sponsors para loop infinito
   const sponsorsLoop = [...sponsors, ...sponsors];
 
   useEffect(() => {
-    setMounted(true); // Marca como montado en cliente
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -50,7 +49,6 @@ export default function SponsorsCarousel() {
     function updateWidths() {
       if (trackRef.current) {
         setTrackWidth(trackRef.current.scrollWidth / 2);
-        setContainerWidth(trackRef.current.parentElement?.offsetWidth || 0);
       }
     }
     updateWidths();
@@ -60,24 +58,22 @@ export default function SponsorsCarousel() {
 
   useEffect(() => {
     if (!mounted) return;
-    let raf: number;
+    let interval: number;
     let pos = offset;
-    const speed = isMobile() ? 0.2 : 0.7;
-
+    const speed = 1.2; // px por frame
+    const fps = 30; // Limitar a 30 FPS
     function animate() {
       pos += speed;
-      // Loop infinito suave: cuando el offset supera la mitad, restamos la mitad (ancho de un set de sponsors)
       if (trackWidth > 0 && pos >= trackWidth) {
         pos -= trackWidth;
       }
       setOffset(pos);
-      raf = requestAnimationFrame(animate);
     }
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
+    interval = window.setInterval(animate, 1000 / fps);
+    return () => clearInterval(interval);
   }, [trackWidth, mounted]);
 
-  if (!mounted) return null; // No renderizar en SSR
+  if (!mounted) return null;
 
   return (
     <div className="sponsors-carousel-outer">
@@ -86,6 +82,7 @@ export default function SponsorsCarousel() {
         ref={trackRef}
         style={{
           transform: `translateX(-${offset}px)`,
+          transition: "transform 0.2s cubic-bezier(.4,1.3,.6,1)",
         }}
       >
         {sponsorsLoop.map((s, i) => (
