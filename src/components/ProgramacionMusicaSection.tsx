@@ -99,6 +99,30 @@ export default function ProgramacionMusicaSection() {
     // eslint-disable-next-line
   }, []);
 
+  // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo y placeholders
+  function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
+    const MAX_PAGES = 5;
+    // Unir ambos caches sin duplicados (prioridad: nuevas)
+    const titulos = new Set<string>();
+    const todas = [
+      ...noticiasNuevas,
+      ...noticiasViejas.filter(n => !noticiasNuevas.some(n2 => n2.title === n.title))
+    ];
+    // Limitar a 5 páginas
+    const maxNoticias = MAX_PAGES * pageSize;
+    const todasLimitadas = todas.slice(0, maxNoticias);
+    // Calcular rango de la página
+    const inicio = (pagina - 1) * pageSize;
+    const fin = inicio + pageSize;
+    let resultado = todasLimitadas.slice(inicio, fin);
+    // Si faltan, agregar placeholders
+    while (resultado.length < pageSize) {
+      resultado.push({ title: 'Cargando...', link: '', description: 'Esperando más noticias...', source_id: '', pubDate: '' });
+    }
+    return resultado;
+  }
+
+  // Cambia la lógica de paginación y llenado
   useEffect(() => {
     cargarNoticias(false, page);
     // eslint-disable-next-line
@@ -161,6 +185,8 @@ export default function ProgramacionMusicaSection() {
       aria-label={label}
     />
   );
+
+  const noticiasPagina = obtenerNoticiasPagina(noticias, noticiasPrevias, page, pageSize);
 
   if (loading && noticiasPrevias.length > 0) {
     return (
@@ -347,7 +373,7 @@ export default function ProgramacionMusicaSection() {
           </button>
         )}
       </div>
-      {noticias.map((noticia, idx) => (
+      {noticiasPagina.map((noticia, idx) => (
         <div className="noticia-contenedor" key={idx}>
           <a
             href={noticia.link}

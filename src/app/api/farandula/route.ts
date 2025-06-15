@@ -191,3 +191,13 @@ export async function GET(req: NextRequest) {
     }, { status: 500 });
   }
 }
+
+// Endpoint para contar artículos en cache nuevo y viejo
+export async function GET_CACHE_COUNT(req: NextRequest) {
+  const titulosNuevo = new Set(cache.noticias.map(n => n.title));
+  const titulosViejo = new Set(cacheFijo.map(n => n.title));
+  return NextResponse.json({
+    cacheNuevo: titulosNuevo.size,
+    cacheViejo: titulosViejo.size
+  });
+}
