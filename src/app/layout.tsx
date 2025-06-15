@@ -34,20 +34,16 @@ export default function RootLayout({
   // Estado para controlar el preloader
   const [hydrated, setHydrated] = useState(false);
   // Estado global de tema
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") !== "light";
+    }
+    return true;
+  });
   const [radioOpen, setRadioOpen] = useState(false);
 
   useEffect(() => {
-    // Forzar modo oscuro en el html al cargar
-    document.documentElement.classList.add("dark");
-    localStorage.setItem("theme", "dark");
     setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "light") setDarkMode(false);
-    else setDarkMode(true);
   }, []);
 
   useEffect(() => {

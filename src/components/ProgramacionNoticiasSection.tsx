@@ -32,14 +32,22 @@ export default function ProgramacionNoticiasSection() {
   const [fallback, setFallback] = useState(false);
   const [primeraCarga, setPrimeraCarga] = useState(true);
 
-  // Carga rápida desde cache/local, luego actualiza en segundo plano
-  useEffect(() => {
-    let isMounted = true;
-    // 1. Cargar rápido desde cache/local (sin force)
-    fetch(`/api/noticias?page=${page}&pageSize=${pageSize}`)
+  // Extrae función para recarga manual
+  const cargarNoticias = (forzar = false, nuevaPagina = page) => {
+    if (forzar) {
+      const ahora = Date.now();
+      if (ahora - lastManualReload < 120000) {
+        setError("Debes esperar al menos 2 minutos entre recargas manuales.");
+        return;
+      }
+      setLastManualReload(ahora);
+    }
+    setLoading(!forzar);
+    setIsReloading(forzar);
+    setError(null);
+    fetch(`/api/noticias?page=${nuevaPagina}&pageSize=${pageSize}${forzar ? '&force=1' : ''}`)
       .then(res => res.json())
       .then(data => {
-        if (!isMounted) return;
         let noticiasValidas = Array.isArray(data.noticias)
           ? data.noticias.filter(
               (n: Noticia) => n && n.title && n.link && n.title.length > 6
@@ -62,53 +70,24 @@ export default function ProgramacionNoticiasSection() {
         setIsReloading(false);
         setError(data.errorMsg || null);
         setPrimeraCarga(false);
+        if (forzar && data.cached === false) {
+          setShowUpdated(true);
+          if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
+          reloadTimeout.current = setTimeout(() => setShowUpdated(false), 2500);
+        }
       })
       .catch((e) => {
-        if (!isMounted) return;
         setError(e.message || "No se pudieron obtener noticias.");
         setLoading(false);
         setIsReloading(false);
         setFallback(false);
         setPrimeraCarga(false);
       });
+  };
 
-    // 2. En segundo plano, intenta actualizar desde la API externa (force=1)
-    fetch(`/api/noticias?page=${page}&pageSize=${pageSize}&force=1`)
-      .then(res => res.json())
-      .then(data => {
-        if (!isMounted) return;
-        let noticiasValidas = Array.isArray(data.noticias)
-          ? data.noticias.filter(
-              (n: Noticia) => n && n.title && n.link && n.title.length > 6
-            )
-          : [];
-        const titulosVistos = new Set<string>();
-        noticiasValidas = noticiasValidas.filter((n: Noticia) => {
-          if (titulosVistos.has(n.title)) return false;
-          titulosVistos.add(n.title);
-          return true;
-        });
-        noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
-        // Solo actualiza si hay cambios
-        if (JSON.stringify(noticiasValidas) !== JSON.stringify(noticias)) {
-          setNoticias(noticiasValidas);
-          setNoticiasPrevias(noticiasValidas);
-          setCached(data.cached);
-          setTotal(data.meta?.total || 0);
-          setMaxPages(data.meta?.maxPages || 5);
-          setFallback(!!data.fallback);
-          setShowUpdated(true);
-          if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
-          reloadTimeout.current = setTimeout(() => setShowUpdated(false), 2500);
-        }
-        setError(data.errorMsg || null);
-      })
-      .catch(() => {});
-
-    return () => {
-      isMounted = false;
-      if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
-    };
+  // Carga rápida desde cache/local, luego actualiza en segundo plano
+  useEffect(() => {
+    cargarNoticias(false, page);
     // eslint-disable-next-line
   }, [page]);
 
@@ -274,14 +253,6 @@ export default function ProgramacionNoticiasSection() {
           ))}
         </div>
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',fontWeight:600,color:'#888'}}>Cargando noticias...</div>
-        <style>{`
-          @keyframes fadeinout {
-            0% { opacity: 0; transform: translateY(-10px); }
-            10% { opacity: 1; transform: translateY(0); }
-            90% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
-          }
-        `}</style>
       </div>
     );
   }
@@ -396,14 +367,6 @@ export default function ProgramacionNoticiasSection() {
           )}
         </div>
       ))}
-      <style>{`
-        @keyframes fadeinout {
-          0% { opacity: 0; transform: translateY(-10px); }
-          10% { opacity: 1; transform: translateY(0); }
-          90% { opacity: 1; transform: translateY(0); }
-          100% { opacity: 0; transform: translateY(-10px); }
-        }
-      `}</style>
     </div>
   );
 }

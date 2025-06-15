@@ -11,7 +11,8 @@ type Noticia = {
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
   const d = new Date(fecha);
-  return d.toLocaleDateString("es-UY", { year: "numeric", month: "short", day: "numeric" });
+  if (isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("es-UY", { day: "2-digit", month: "short", year: "numeric" });
 }
 
 export default function ProgramacionMusicaSection() {
