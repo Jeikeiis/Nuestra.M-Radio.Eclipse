@@ -12,16 +12,40 @@ const PROGRAMAS = [
     contenido: <ProgramacionNoticiasSection />,
   },
   {
-    key: "musica",
-    icon: "🎵",
-    titulo: "Música",
-    contenido: <ProgramacionMusicaSection />,
+    key: "informacion",
+    icon: "ℹ️",
+    titulo: "Información",
+    contenido: <div style={{ padding: 16 }}>Sin datos disponibles.</div>,
   },
   {
     key: "farandula",
     icon: "🎤",
     titulo: "Farándula",
     contenido: <ProgramacionFarandulaSection />,
+  },
+  {
+    key: "entretenimiento",
+    icon: "🎬",
+    titulo: "Entretenimiento",
+    contenido: <div style={{ padding: 16 }}>Sin datos disponibles.</div>,
+  },
+  {
+    key: "musica",
+    icon: "🎵",
+    titulo: "Música",
+    contenido: <ProgramacionMusicaSection />,
+  },
+  {
+    key: "horoscopo",
+    icon: "🔮",
+    titulo: "Horóscopo",
+    contenido: <div style={{ padding: 16 }}>Sin datos disponibles.</div>,
+  },
+  {
+    key: "entrevistas",
+    icon: "👤",
+    titulo: "Entrevistas",
+    contenido: <div style={{ padding: 16 }}>Sin datos disponibles.</div>,
   },
   // ...agrega más si tienes otras secciones...
 ];
@@ -33,22 +57,25 @@ export default function ProgramacionSection() {
     <section className="programacion-section" id="programacion">
       <h2 className="programacion-title">Programación</h2>
       <ul className="programacion-list">
-        {PROGRAMAS.map((prog) => (
-          <li
-            key={prog.key}
-            className="programacion-item"
-            onClick={() => setModal(prog.key)}
-            tabIndex={0}
-            style={{ cursor: "pointer" }}
-            aria-label={`Abrir ${prog.titulo}`}
-          >
-            <span className="programacion-emoji">{prog.icon}</span>
-            <span className="programacion-text">{prog.titulo}</span>
-          </li>
-        ))}
+        {PROGRAMAS.map((prog) => {
+          const esInteractivo = ["noticias", "musica", "farandula"].includes(prog.key);
+          return (
+            <li
+              key={prog.key}
+              className={`programacion-item${esInteractivo ? '' : ' programacion-item-disabled'}`}
+              onClick={esInteractivo ? () => setModal(prog.key) : undefined}
+              tabIndex={esInteractivo ? 0 : -1}
+              style={{ cursor: esInteractivo ? "pointer" : "not-allowed", opacity: esInteractivo ? 1 : 0.5 }}
+              aria-label={esInteractivo ? `Abrir ${prog.titulo}` : `${prog.titulo} (no disponible)`}
+            >
+              <span className="programacion-emoji">{prog.icon}</span>
+              <span className="programacion-text">{prog.titulo}</span>
+            </li>
+          );
+        })}
       </ul>
-      {/* Ventana flotante/modal */}
-      {PROGRAMAS.map(
+      {/* Ventana flotante/modal solo para secciones configuradas */}
+      {PROGRAMAS.filter((prog) => ["noticias", "musica", "farandula"].includes(prog.key)).map(
         (prog) =>
           modal === prog.key && (
             <div
@@ -77,7 +104,6 @@ export default function ProgramacionSection() {
                 style={{
                   background: "var(--program-item-bg, #fff)",
                   borderRadius: "1rem",
-                  // Cambia aquí: más ancho y alto en escritorio
                   width:
                     typeof window !== "undefined" && window.innerWidth <= 640
                       ? "99vw"
@@ -106,7 +132,6 @@ export default function ProgramacionSection() {
                       ? "1.1rem 0.3rem 0.7rem 0.3rem"
                       : "2rem 2.5rem 2rem 2.5rem",
                   border: "none",
-                  // ...otros estilos si necesitas...
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
