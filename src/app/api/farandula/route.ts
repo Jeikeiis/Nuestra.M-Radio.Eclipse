@@ -27,7 +27,7 @@ let cache: NoticiasCache = {
 let cacheFijo: Noticia[] = [];
 
 async function fetchNoticiasFarandula(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
-  const url = "https://newsdata.io/api/1/latest?apikey=pub_151f47e41b2f4d94946766a4c0ef7666&q=Entretenimiento";
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Entretenimiento&language=es`;
   try {
     const res = await fetch(url);
     if (!res.ok) {

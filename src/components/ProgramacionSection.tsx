@@ -63,12 +63,10 @@ export default function ProgramacionSection() {
                 left: 0,
                 width: "100vw",
                 height: "100vh",
-                background: "rgba(0,0,0,0.45)",
                 zIndex: 2000,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                // Para mobile: scroll vertical si overflow
                 overflowY: "auto",
                 padding: 0,
               }}
@@ -79,24 +77,36 @@ export default function ProgramacionSection() {
                 style={{
                   background: "var(--program-item-bg, #fff)",
                   borderRadius: "1rem",
-                  maxWidth: 600,
-                  width: "95vw",
-                  maxHeight: "90vh",
+                  // Cambia aquí: más ancho y alto en escritorio
+                  width:
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                      ? "99vw"
+                      : "90vw",
+                  maxWidth:
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                      ? "99vw"
+                      : "1200px",
+                  minWidth:
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                      ? undefined
+                      : "600px",
+                  height:
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                      ? "auto"
+                      : "90vh",
+                  maxHeight:
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                      ? "98vh"
+                      : "90vh",
                   overflowY: "auto",
                   boxShadow: "0 8px 32px 0 rgba(0,0,0,0.18)",
                   position: "relative",
-                  padding: "2rem 1.2rem 1.2rem 1.2rem",
-                  // Mobile: menos padding y bordes más suaves
-                  ...(typeof window !== "undefined" && window.innerWidth <= 640
-                    ? {
-                        borderRadius: "0.7rem",
-                        padding: "1.1rem 0.3rem 0.7rem 0.3rem",
-                        width: "99vw",
-                        maxWidth: "99vw",
-                        minHeight: "60vh",
-                        maxHeight: "98vh",
-                      }
-                    : {}),
+                  padding:
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                      ? "1.1rem 0.3rem 0.7rem 0.3rem"
+                      : "2rem 2.5rem 2rem 2.5rem",
+                  border: "none",
+                  // ...otros estilos si necesitas...
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -146,3 +156,5 @@ export default function ProgramacionSection() {
     </section>
   );
 }
+
+

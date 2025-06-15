@@ -5,6 +5,7 @@
   --program-border-hover: #ff0000;
   --program-title: #23272f;
   --program-text: #23272f;
+  --program-modal-bg: #fff; /* fondo sólido claro, sin transparencia */
 }
 
 html.dark {
@@ -14,6 +15,7 @@ html.dark {
   --program-border-hover: #ff0000;
   --program-title: #fff;
   --program-text: #fff;
+  --program-modal-bg: #1e2026; /* fondo sólido oscuro, sin transparencia */
 }
 
 .programacion-section {
@@ -25,7 +27,8 @@ html.dark {
   border-radius: 1rem;
   border: 1.5px solid var(--program-border);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: auto;
   transition: background 0.2s, border-color 0.2s;
 }
 
@@ -295,30 +298,38 @@ html.dark .noticia-description {
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0,0,0,0.45);
+    background: var(--program-modal-bg, #fff) !important;
   }
 
   .programacion-modal-content {
     background: var(--program-item-bg, #fff);
     border-radius: 1rem;
-    max-width: 600px;
-    width: 95vw;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
-    position: relative;
-    padding: 2rem 1.2rem 1.2rem 1.2rem;
-    animation: modalIn 0.18s cubic-bezier(.77,0,.18,1.01);
+    width: 88vw !important;
+    max-width: 88vw !important;
+    min-width: 320px !important;
+    height: 80vh !important;
+    max-height: 80vh !important;
+    min-height: 60vh !important;
+    margin: 6vh auto !important;
+    border-radius: 1.2rem !important;
+    padding: 2.5rem 2rem 2rem 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    background: var(--program-modal-bg, #fff) !important;
   }
 
   @media (max-width: 640px) {
     .programacion-modal-content {
-      border-radius: 0.7rem;
-      padding: 1.1rem 0.3rem 0.7rem 0.3rem;
-      width: 99vw;
-      max-width: 99vw;
-      min-height: 60vh;
-      max-height: 98vh;
+      width: 95vw !important;
+      max-width: 95vw !important;
+      min-width: unset !important;
+      height: 90vh !important;
+      max-height: 90vh !important;
+      min-height: 60vh !important;
+      margin: 3vh auto !important;
+      border-radius: 0.7rem !important;
+      padding: 1.1rem 0.3rem 0.7rem 0.3rem !important;
     }
     .programacion-modal {
       align-items: flex-end;
@@ -336,3 +347,5 @@ html.dark .noticia-description {
   0% { opacity: 0; transform: translateY(40px) scale(0.98);}
   100% { opacity: 1; transform: translateY(0) scale(1);}
 }
+
+
