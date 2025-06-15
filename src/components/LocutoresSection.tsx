@@ -2,17 +2,17 @@ import "./LocutoresSection.css";
 
 const locutores = [
   {
-    nombre: "Federico Pinato",
+    nombre: "Fede Pinato",
     programa: "Nuestra Mañana",
     img: "/NuestraManana2.0.webp",
-    alt: "Federico Pinato - Nuestra Mañana",
+    alt: "Fede Pinato - Nuestra Mañana",
   },
 ];
 
 export default function LocutoresSection() {
   return (
     <section className="locutores-section main-section" id="locutores">
-      <h3 className="locutores-title">Nuestro Equipo de Locutores</h3>
+      <h3 className="locutores-title">Nuestro Locutor</h3>
       <p className="locutores-desc-main">
         De lunes a viernes, de 10 a 13 horas, Federico te acompaña en{" "}
         <b>Nuestra Mañana</b> por Radio Eclipse FM 106.3. Un programa pensado
@@ -22,7 +22,14 @@ export default function LocutoresSection() {
       <div className="locutores-grid">
         {locutores.map((l) => (
           <div className="locutores-profile" key={l.nombre}>
-            <img src={l.img} alt={l.alt} className="locutores-img" />
+            <a
+              href="https://www.instagram.com/federico.pinato.9/"
+              target="_blank"
+              rel="noopener noreferrer external nofollow"
+              referrerPolicy="no-referrer"
+            >
+              <img src={l.img} alt={l.alt} className="locutores-img" />
+            </a>
             <span className="locutores-name">{l.nombre}</span>
             <span className="locutores-programa">{l.programa}</span>
           </div>

@@ -31,8 +31,8 @@ export default function Home() {
     <div>
       {/* Secciones principales */}
       <main className="main-content">
-        <ProgramacionSection />
         <LocutoresSection />
+        <ProgramacionSection />
         {/* <PodcastsSection />
         <EventosSection />
         <ContactoSection /> */}
