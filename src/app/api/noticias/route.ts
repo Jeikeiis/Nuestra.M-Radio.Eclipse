@@ -200,6 +200,28 @@ export async function GET(req: NextRequest) {
     } else {
       noticiasParaResponder = cacheFijo;
       fromCache = true;
+      // --- Actualización en segundo plano, NO afecta la respuesta actual ---
+      (async () => {
+        try {
+          const { noticias, errorMsg: apiError } = await fetchNoticias(region);
+          const noticiasValidas = filtrarYLimpiarNoticias(noticias);
+          const titulosCache = new Set(cacheFijo.map(n => n.title));
+          if (
+            noticiasValidas.length > 0 &&
+            (noticiasValidas.length !== cacheFijo.length ||
+              noticiasValidas.some(n => !titulosCache.has(n.title)))
+          ) {
+            cache = {
+              noticias: noticiasValidas,
+              timestamp: Date.now(),
+              errorMsg: undefined,
+              lastValidNoticias: noticiasValidas,
+            };
+            cacheFijo = noticiasValidas;
+            guardarCacheEnArchivo(noticiasValidas);
+          }
+        } catch {}
+      })();
     }
 
     const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
@@ -222,7 +244,6 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (err: any) {
-    // Manejo global de errores: siempre devolver JSON
     return NextResponse.json({
       noticias: [],
       cached: false,
