@@ -3,8 +3,8 @@ import fs from "fs";
 import path from "path";
 
 const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
-const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
 const CACHE_FILE = path.resolve(process.cwd(), "farandula-cache.json");
+const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 
 type Noticia = {
   title: string;
@@ -43,9 +43,7 @@ function cargarCacheDesdeArchivo() {
         cache.lastValidNoticias = json.noticias;
       }
     }
-  } catch (e) {
-    // Ignorar errores de lectura
-  }
+  } catch {}
 }
 
 // --- Guardar cache a archivo ---
@@ -56,9 +54,7 @@ function guardarCacheEnArchivo(noticias: Noticia[]) {
       JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
       "utf-8"
     );
-  } catch (e) {
-    // Ignorar errores de escritura
-  }
+  } catch {}
 }
 
 // Cargar cache al iniciar
@@ -168,16 +164,17 @@ export async function GET(req: NextRequest) {
     let errorMsg: string | null = null;
     let fromCache = true;
     let huboCambio = false;
-
-    // --- NUEVO: Si el cacheFijo está vacío, consulta la API externa directamente ---
     let noticiasParaResponder: Noticia[] = [];
-    if (cacheFijo.length === 0) {
+
+    const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
+
+    if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula(region);
       const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
-          timestamp: Date.now(),
+          timestamp: now,
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
@@ -188,56 +185,22 @@ export async function GET(req: NextRequest) {
         huboCambio = true;
       } else {
         errorMsg = apiError || "No se encontraron noticias de farándula válidas.";
-        noticiasParaResponder = [];
+        noticiasParaResponder = cacheFijo.length > 0 ? cacheFijo : [];
+        fromCache = true;
       }
     } else {
       noticiasParaResponder = cacheFijo;
+      fromCache = true;
     }
 
     const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
-
-    // Lanzar actualización en segundo plano (no espera)
-    (async () => {
-      try {
-        const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula(region);
-        const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
-        const titulosCache = new Set(cacheFijo.map(n => n.title));
-        if (
-          noticiasValidas.length > 0 &&
-          (noticiasValidas.length !== cacheFijo.length ||
-            noticiasValidas.some(n => !titulosCache.has(n.title)))
-        ) {
-          cache = {
-            noticias: noticiasValidas,
-            timestamp: Date.now(),
-            errorMsg: undefined,
-            lastValidNoticias: noticiasValidas,
-          };
-          cacheFijo = noticiasValidas;
-          guardarCacheEnArchivo(noticiasValidas);
-        } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
-          cache = {
-            noticias: noticiasValidas,
-            timestamp: Date.now(),
-            errorMsg: undefined,
-            lastValidNoticias: noticiasValidas,
-          };
-          cacheFijo = noticiasValidas;
-          guardarCacheEnArchivo(noticiasValidas);
-        } else if (apiError) {
-          cache.errorMsg = apiError;
-        }
-      } catch (e) {
-        // Silenciar errores de actualización en segundo plano
-      }
-    })();
 
     return NextResponse.json({
       noticias: noticiasPaginadas,
       cached: fromCache,
       huboCambio,
       errorMsg,
-      fallback: false,
+      fallback: fromCache,
       apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
         region,
@@ -245,7 +208,7 @@ export async function GET(req: NextRequest) {
         pageSize,
         total: totalNoticias,
         maxPages: realMaxPages,
-        updatedAt: new Date(now).toISOString(),
+        updatedAt: new Date(cache.timestamp || now).toISOString(),
         fromCache,
       },
     });

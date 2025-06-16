@@ -2,10 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
-const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
-const CACHE_FILE = path.resolve(process.cwd(), "noticias-cache.json");
-
 // --- Tipos ---
 type Noticia = {
   title: string;
@@ -21,6 +17,10 @@ type NoticiasCache = {
   errorMsg?: string;
   lastValidNoticias?: Noticia[];
 };
+
+const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
+const CACHE_FILE = path.resolve(process.cwd(), "noticias-cache.json");
+const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 
 // --- Estado de caché en memoria ---
 let cache: NoticiasCache = {
@@ -44,9 +44,7 @@ function cargarCacheDesdeArchivo() {
         cache.lastValidNoticias = json.noticias;
       }
     }
-  } catch (e) {
-    // Si hay error, ignora y sigue con cache vacío
-  }
+  } catch {}
 }
 
 // --- Guardar cache a archivo ---
@@ -57,9 +55,7 @@ function guardarCacheEnArchivo(noticias: Noticia[]) {
       JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
       "utf-8"
     );
-  } catch (e) {
-    // Si hay error, ignora (en serverless puede fallar)
-  }
+  } catch {}
 }
 
 // Cargar cache al iniciar
@@ -174,60 +170,46 @@ export async function GET(req: NextRequest) {
       };
     }
 
-    // Siempre consultar la API externa
     let errorMsg: string | null = null;
     let fromCache = true;
     let huboCambio = false;
+    let noticiasParaResponder: Noticia[] = [];
 
-    const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticias(region);
-    const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+    const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
 
-    // Compara con el cache actual
-    const titulosCache = new Set(cacheFijo.map(n => n.title));
-    if (
-      noticiasValidas.length > 0 &&
-      (noticiasValidas.length !== cacheFijo.length ||
-        noticiasValidas.some(n => !titulosCache.has(n.title)))
-    ) {
-      // Hay cambios, actualiza el cache y el archivo
-      cache = {
-        noticias: noticiasValidas,
-        timestamp: Date.now(),
-        errorMsg: undefined,
-        lastValidNoticias: noticiasValidas,
-      };
-      cacheFijo = noticiasValidas;
-      guardarCacheEnArchivo(noticiasValidas);
-      fromCache = false;
-      huboCambio = true;
-    } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
-      // Primer llenado de cache
-      cache = {
-        noticias: noticiasValidas,
-        timestamp: Date.now(),
-        errorMsg: undefined,
-        lastValidNoticias: noticiasValidas,
-      };
-      cacheFijo = noticiasValidas;
-      guardarCacheEnArchivo(noticiasValidas);
-      fromCache = false;
-      huboCambio = true;
-    } else if (cacheFijo.length === 0 && noticiasValidas.length === 0) {
-      // No hay datos en cache ni en API
-      errorMsg = apiError || "No se encontraron noticias válidas.";
-    } else if (apiError) {
-      errorMsg = apiError;
+    if (cacheExpirado) {
+      const { noticias, errorMsg: apiError } = await fetchNoticias(region);
+      const noticiasValidas = filtrarYLimpiarNoticias(noticias);
+      if (noticiasValidas.length > 0) {
+        cache = {
+          noticias: noticiasValidas,
+          timestamp: now,
+          errorMsg: undefined,
+          lastValidNoticias: noticiasValidas,
+        };
+        cacheFijo = noticiasValidas;
+        guardarCacheEnArchivo(noticiasValidas);
+        noticiasParaResponder = noticiasValidas;
+        fromCache = false;
+        huboCambio = true;
+      } else {
+        errorMsg = apiError || "No se encontraron noticias válidas.";
+        noticiasParaResponder = cacheFijo.length > 0 ? cacheFijo : [];
+        fromCache = true;
+      }
+    } else {
+      noticiasParaResponder = cacheFijo;
+      fromCache = true;
     }
 
-    // Siempre responde desde el cache (actualizado si hubo cambios)
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cacheFijo);
+    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
 
     return NextResponse.json({
       noticias: noticiasPaginadas,
       cached: fromCache,
       huboCambio,
       errorMsg,
-      fallback: false,
+      fallback: fromCache,
       apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
         region,
@@ -235,7 +217,7 @@ export async function GET(req: NextRequest) {
         pageSize,
         total: totalNoticias,
         maxPages: realMaxPages,
-        updatedAt: new Date(now).toISOString(),
+        updatedAt: new Date(cache.timestamp || now).toISOString(),
         fromCache,
       },
     });
