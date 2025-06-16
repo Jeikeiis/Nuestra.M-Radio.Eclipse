@@ -30,9 +30,7 @@ export default function ProgramacionNoticiasSection() {
   const pageSize = 4;
   const reloadTimeout = useRef<NodeJS.Timeout | null>(null);
   const [fallback, setFallback] = useState(false);
-  const [primeraCarga, setPrimeraCarga] = useState(true);
 
-  // Extrae función para recarga manual
   const cargarNoticias = (forzar = false, nuevaPagina = page) => {
     if (forzar) {
       const ahora = Date.now();
@@ -61,7 +59,6 @@ export default function ProgramacionNoticiasSection() {
         });
         noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
         setNoticias(noticiasValidas);
-        // Siempre actualiza previas si hay datos, aunque haya error
         if (noticiasValidas.length > 0) {
           setNoticiasPrevias(noticiasValidas);
         }
@@ -71,8 +68,11 @@ export default function ProgramacionNoticiasSection() {
         setFallback(!!data.fallback);
         setLoading(false);
         setIsReloading(false);
-        setError(data.errorMsg || null);
-        setPrimeraCarga(false);
+        if (data.errorMsg) {
+          setError(data.errorMsg);
+        } else if (!noticiasValidas.length) {
+          setError("No se encontraron noticias relevantes.");
+        }
         if (forzar && data.cached === false) {
           setShowUpdated(true);
           if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -84,34 +84,25 @@ export default function ProgramacionNoticiasSection() {
         setLoading(false);
         setIsReloading(false);
         setFallback(false);
-        setPrimeraCarga(false);
       });
   };
 
-  // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo
   function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
-    // Unir ambos caches sin duplicados (prioridad: nuevas)
-    const titulos = new Set<string>();
     const todas = [
       ...noticiasNuevas,
       ...noticiasViejas.filter(n => !noticiasNuevas.some(n2 => n2.title === n.title))
     ];
     const maxNoticias = 5 * pageSize;
     const todasLimitadas = todas.slice(0, maxNoticias);
-    // Calcular páginas reales
     const totalUnicos = todasLimitadas.length;
     const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
-    // Si la página actual es mayor al máximo, volver a la última válida
     if (page > paginasReales) setPage(paginasReales);
-    // Calcular rango de la página
     const inicio = (pagina - 1) * pageSize;
     const fin = inicio + pageSize;
     return todasLimitadas.slice(inicio, fin);
   }
 
-  // Actualiza maxPages dinámicamente según los artículos únicos
   useEffect(() => {
-    const titulos = new Set<string>();
     const todas = [
       ...noticias,
       ...noticiasPrevias.filter(n => !noticias.some(n2 => n2.title === n.title))
@@ -122,9 +113,28 @@ export default function ProgramacionNoticiasSection() {
     const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
     setMaxPages(paginasReales);
     if (page > paginasReales) setPage(paginasReales);
-  }, [noticias, noticiasPrevias, pageSize]);
+    // eslint-disable-next-line
+  }, [noticias, noticiasPrevias, pageSize, page]);
 
-  // Solo muestra el botón si el usuario es admin/desarrollador (ejemplo: localStorage)
+  useEffect(() => {
+    let isMounted = true;
+    cargarNoticias();
+    const interval = setInterval(() => {
+      if (isMounted) cargarNoticias();
+    }, 1200000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    cargarNoticias(false, page);
+    // eslint-disable-next-line
+  }, [page]);
+
   const esAdmin = typeof window !== 'undefined' && localStorage.getItem('adminNoticias') === '1';
 
   const botonRecargaManual = esAdmin && (
@@ -152,7 +162,6 @@ export default function ProgramacionNoticiasSection() {
     </button>
   );
 
-  // Indicador: gris (ok), naranja (cache temporal), rojo (cache fijo)
   let color = '#888', boxShadow = '0 0 4px 1px #8888', label = 'API disponible';
   if (fallback) {
     color = 'red';
@@ -288,6 +297,14 @@ export default function ProgramacionNoticiasSection() {
           ))}
         </div>
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',fontWeight:600,color:'#888'}}>Cargando noticias...</div>
+        <style>{`
+          @keyframes fadeinout {
+            0% { opacity: 0; transform: translateY(-10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -393,6 +410,15 @@ export default function ProgramacionNoticiasSection() {
     );
   }
 
+  if (!loading && noticiasPagina.length === 0) {
+    return (
+      <div className="programacion-noticias-section" style={{ color: '#b71c1c', fontWeight: 500, textAlign: 'center', padding: 32 }}>
+        No hay noticias para mostrar.
+        {botonRecargaManual}
+      </div>
+    );
+  }
+
   return (
     <div className="programacion-noticias-section" style={{position:'relative'}}>
       {puntoIndicador}
@@ -418,14 +444,14 @@ export default function ProgramacionNoticiasSection() {
       <div className="paginacion-controles">
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
-          disabled={page === 1 || loading || primeraCarga}
+          disabled={page === 1}
           style={{
             padding: '6px 16px',
             borderRadius: 6,
             border: '1px solid var(--section-border, #888)',
             background: page === 1 ? 'var(--section-bg-contrast, #333)' : 'var(--section-bg, #222)',
             color: 'var(--section-title, #fff)',
-            cursor: page === 1 || loading || primeraCarga ? 'not-allowed' : 'pointer',
+            cursor: page === 1 ? 'not-allowed' : 'pointer',
             fontWeight: 600,
             transition: 'background 0.2s, color 0.2s',
           }}
@@ -438,14 +464,13 @@ export default function ProgramacionNoticiasSection() {
         {page < maxPages && (
           <button
             onClick={() => setPage((p) => Math.min(maxPages, p + 1))}
-            disabled={loading || primeraCarga}
             style={{
               padding: '6px 16px',
               borderRadius: 6,
               border: '1px solid var(--section-border, #888)',
               background: 'var(--section-bg, #222)',
               color: 'var(--section-title, #fff)',
-              cursor: loading || primeraCarga ? 'not-allowed' : 'pointer',
+              cursor: 'pointer',
               fontWeight: 600,
               transition: 'background 0.2s, color 0.2s',
             }}
@@ -493,6 +518,14 @@ export default function ProgramacionNoticiasSection() {
           )}
         </div>
       ))}
+      <style>{`
+        @keyframes fadeinout {
+          0% { opacity: 0; transform: translateY(-10px); }
+          10% { opacity: 1; transform: translateY(0); }
+          90% { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-10px); }
+        }
+      `}</style>
     </div>
   );
 }

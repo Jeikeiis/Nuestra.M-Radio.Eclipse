@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
+const API_KEY = process.env.API_USER_KEY as string;
 const CACHE_FILE = path.resolve(process.cwd(), "musica-cache.json");
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 

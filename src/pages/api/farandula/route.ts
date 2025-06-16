@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
+const API_KEY = process.env.API_USER_KEY as string;
 
 // --- Tipos ---
 type Noticia = {

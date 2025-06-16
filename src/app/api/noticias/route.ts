@@ -2,42 +2,36 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-// --- Tipos ---
+const API_KEY = process.env.API_USER_KEY as string;
+const CACHE_FILE = path.join(process.cwd(), "noticias_cache.json");
+const CACHE_DURATION_MS = 1000 * 60 * 10; // 10 minutos
+
 type Noticia = {
   title: string;
   link: string;
-  source_id?: string;
-  pubDate?: string;
   description?: string;
+  pubDate?: string;
 };
 
-type NoticiasCache = {
+let cache: {
   noticias: Noticia[];
-  timestamp: number;
+  timestamp?: number;
   errorMsg?: string;
   lastValidNoticias?: Noticia[];
-};
-
-const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
-const CACHE_FILE = path.resolve(process.cwd(), "noticias-cache.json");
-const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
-
-// --- Estado de caché en memoria ---
-let cache: NoticiasCache = {
+} = {
   noticias: [],
   timestamp: 0,
   errorMsg: undefined,
   lastValidNoticias: [],
 };
 
-// --- Cargar cache desde archivo al iniciar ---
+// --- Cargar cache desde archivo ---
 function cargarCacheDesdeArchivo() {
   try {
     if (fs.existsSync(CACHE_FILE)) {
       const data = fs.readFileSync(CACHE_FILE, "utf-8");
       const json = JSON.parse(data);
       if (Array.isArray(json.noticias)) {
-        // Limitar a 20 artículos únicos
         const noticiasUnicas = deduplicarNoticias(json.noticias).slice(0, 20);
         cache.noticias = noticiasUnicas;
         cache.timestamp = json.timestamp || Date.now();
@@ -50,7 +44,6 @@ function cargarCacheDesdeArchivo() {
 // --- Guardar cache a archivo ---
 function guardarCacheEnArchivo(noticias: Noticia[]) {
   try {
-    // Limitar a 20 artículos únicos
     const noticiasUnicas = deduplicarNoticias(noticias).slice(0, 20);
     fs.writeFileSync(
       CACHE_FILE,
@@ -71,20 +64,58 @@ function deduplicarNoticias(noticias: Noticia[]): Noticia[] {
   });
 }
 
-// Cargar cache al iniciar
-cargarCacheDesdeArchivo();
-
-// --- Utilidades ---
-function getIp(req: NextRequest): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0].trim();
-  // @ts-ignore
-  return req.ip || "127.0.0.1";
+// --- Normalizar texto ---
+function normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/[^\w\s]/gi, '')
+    .trim();
 }
 
-async function fetchNoticias(region: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
-  // Usar filtro local: país Uruguay y búsqueda por Uruguay
-  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Uruguay&country=uy`;
+// --- Filtrar y limpiar noticias ---
+function areSimilar(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  a = normalizeText(a);
+  b = normalizeText(b);
+  if (a === b) return true;
+  const aWords = new Set(a.split(' '));
+  const bWords = new Set(b.split(' '));
+  const intersection = [...aWords].filter(x => bWords.has(x));
+  return intersection.length >= Math.min(aWords.size, bWords.size) * 0.7;
+}
+
+function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
+  const vistos = new Set<string>();
+  const recientes: Noticia[] = [];
+  const ahora = Date.now();
+  return noticias
+    .filter(n => n && n.title && n.link && n.title.length > 15)
+    .filter(n => {
+      const titulo = n.title.toLowerCase();
+      if (titulo.includes('resumen') || titulo.includes('video:') || titulo.match(/^noticias(\s|:|$)/i)) return false;
+      if (!n.description || n.description.length < 40) return false;
+      if (n.pubDate) {
+        const fecha = new Date(n.pubDate).getTime();
+        if (isNaN(fecha) || ahora - fecha > 7 * 24 * 60 * 60 * 1000) return false;
+      }
+      const key = normalizeText(n.title) + '|' + normalizeText(n.link);
+      if (vistos.has(key)) return false;
+      for (const prev of recientes) {
+        if (areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || '')) return false;
+      }
+      vistos.add(key);
+      recientes.push(n);
+      return true;
+    })
+    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0))
+    .slice(0, 30);
+}
+
+// --- Fetch noticias generales ---
+async function fetchNoticiasGenerales(tema: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
+  const queryTema = tema || "noticias";
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(queryTema)}&language=es`;
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -104,68 +135,15 @@ async function fetchNoticias(region: string): Promise<{ noticias: Noticia[]; err
   }
 }
 
-function normalizeText(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .replace(/[^\w\s]/gi, '')
-    .trim();
-}
+// --- Cargar cache al iniciar ---
+cargarCacheDesdeArchivo();
 
-function areSimilar(a: string, b: string): boolean {
-  if (!a || !b) return false;
-  a = normalizeText(a);
-  b = normalizeText(b);
-  if (a === b) return true;
-  // Si la diferencia de longitud es muy pequeña y comparten muchas palabras
-  const aWords = new Set(a.split(' '));
-  const bWords = new Set(b.split(' '));
-  const intersection = [...aWords].filter(x => bWords.has(x));
-  return intersection.length >= Math.min(aWords.size, bWords.size) * 0.7;
-}
-
-function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
-  const recientes: Noticia[] = [];
-  const ahora = Date.now();
-  return noticias
-    .filter(n => n && n.title && n.link && n.title.length > 15)
-    .filter(n => {
-      // Excluir títulos genéricos o poco informativos
-      const titulo = n.title.toLowerCase();
-      if (titulo.includes('resumen') || titulo.includes('video:') || titulo.match(/^noticias(\s|:|$)/i)) return false;
-      if (!n.description || n.description.length < 40) return false;
-      // Excluir noticias sin fecha o con fecha muy antigua (más de 7 días)
-      if (n.pubDate) {
-        const fecha = new Date(n.pubDate).getTime();
-        if (isNaN(fecha) || ahora - fecha > 7 * 24 * 60 * 60 * 1000) return false;
-      }
-      // Detección de duplicados por título y enlace normalizados
-      const key = normalizeText(n.title) + '|' + normalizeText(n.link);
-      if (vistos.has(key)) return false;
-      // Detección de similitud con noticias ya aceptadas
-      for (const prev of recientes) {
-        if (areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || '')) return false;
-      }
-      vistos.add(key);
-      recientes.push(n);
-      return true;
-    })
-    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0))
-    .slice(0, 30); // máximo 30 para paginación local
-}
-
-// --- Registro de recargas forzadas ---
-async function registrarRecargaForzada(ip: string, region: string) {
-  // No se implementa almacenamiento en este caso
-}
-
-// --- Handler principal ---
+// --- Endpoint principal GET ---
 export async function GET(req: NextRequest) {
   try {
     const now = Date.now();
     const { searchParams } = new URL(req.url);
-    const region = searchParams.get("region") || "Uruguay";
+    const tema = searchParams.get("tema") || "noticias";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
     const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4); // Fijo en 4
@@ -190,8 +168,8 @@ export async function GET(req: NextRequest) {
     const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
 
     if (cacheExpirado) {
-      const { noticias, errorMsg: apiError } = await fetchNoticias(region);
-      const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticias)).slice(0, 20);
+      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasGenerales(tema);
+      const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, 20);
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -214,8 +192,8 @@ export async function GET(req: NextRequest) {
       // --- Actualización en segundo plano, NO afecta la respuesta actual ---
       (async () => {
         try {
-          const { noticias } = await fetchNoticias(region);
-          const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticias)).slice(0, 20);
+          const { noticias: noticiasApi } = await fetchNoticiasGenerales(tema);
+          const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, 20);
           const titulosCache = new Set(cache.noticias.map(n => n.title));
           if (
             noticiasValidas.length > 0 &&
@@ -246,7 +224,7 @@ export async function GET(req: NextRequest) {
       fallback: fromCache,
       apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
-        region,
+        tema,
         page,
         pageSize,
         total: totalNoticias,
@@ -269,7 +247,6 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// Endpoint para contar artículos en cache nuevo y viejo
 export async function GET_CACHE_COUNT(req: NextRequest) {
   const titulosNuevo = new Set(cache.noticias.map((n: Noticia) => n.title));
   const titulosViejo = new Set((cache.lastValidNoticias || []).map((n: Noticia) => n.title));
@@ -278,4 +255,3 @@ export async function GET_CACHE_COUNT(req: NextRequest) {
     cacheViejo: titulosViejo.size
   });
 }
-
