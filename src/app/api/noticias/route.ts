@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666";
+const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
 
 // --- Tipos ---

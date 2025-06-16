@@ -1,4 +1,4 @@
-const API_KEY = "pub_151f47e41b2f4d94946766a4c0ef7666"; // API key pública de NewsData.io
+const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9"; // API key pública de NewsData.io
 
 export async function fetchNoticiasNewsData(region: string) {
   const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;

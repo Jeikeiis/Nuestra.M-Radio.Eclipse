@@ -1,12 +1,12 @@
 .clasicos-section {
   margin: 1.5rem 0;
   padding: 1.2rem 1rem;
-  border: 2px solid #ff4d4d;
+  border: 2px solid var(--section-border);
   border-radius: 16px;
-  background: linear-gradient(180deg, #1a1a1a 80%, #ff4d4d22 100%);
+  background: var(--section-bg);
   text-align: center;
-  color: #fff;
-  box-shadow: 0 0 12px #ff4d4d33;
+  color: var(--foreground);
+  box-shadow: var(--section-shadow);
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
@@ -14,21 +14,21 @@
 
 .clasicos-title {
   font-size: 1.5rem;
-  color: #ff4d4d;
+  color: var(--section-title);
   margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
 .clasicos-subtitle {
   font-size: 1.1rem;
-  color: #ffb3b3;
+  color: var(--primary);
   margin-bottom: 0.7rem;
   font-weight: 500;
 }
 
 .clasicos-desc-main {
   font-size: 1rem;
-  color: #eee;
+  color: var(--foreground);
   margin: 0 auto;
   max-width: 350px;
 }
