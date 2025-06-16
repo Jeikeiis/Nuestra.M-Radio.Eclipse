@@ -312,9 +312,7 @@ export default function ProgramacionNoticiasSection() {
   if (error && noticiasPrevias.length > 0) {
     return (
       <div className="programacion-noticias-section" style={{ position: 'relative' }}>
-        <div style={{ color: "#b71c1c", fontWeight: 500, marginBottom: 12 }} role="alert">
-          {error}
-        </div>
+        {/* El error ya no se muestra al usuario, solo el punto indicador */}
         {puntoIndicador}
         {botonRecargaManual}
         <div className="paginacion-controles">
@@ -402,8 +400,8 @@ export default function ProgramacionNoticiasSection() {
 
   if (error) {
     return (
-      <div className="programacion-noticias-section" style={{ color: "#b71c1c", fontWeight: 500, position: 'relative' }} role="alert">
-        {error}
+      <div className="programacion-noticias-section" style={{ position: 'relative' }}>
+        {/* El error ya no se muestra al usuario, solo el punto indicador */}
         {puntoIndicador}
         {botonRecargaManual}
       </div>
