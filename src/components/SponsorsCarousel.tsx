@@ -18,6 +18,27 @@ const sponsors = [
 ];
 
 function SponsorItem({ src, alt }: { src: string; alt: string }) {
+  // Si es el logo de Miranda Construcción, lo envolvemos en un enlace
+  if (src === "/MirandaConstruccion.webp") {
+    return (
+      <div className="sponsor-carousel-item">
+        <a
+          href="https://www.instagram.com/miranda_construccion/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={src}
+            alt={alt}
+            width={160}
+            height={160}
+            className="footer-sponsor-img"
+            draggable={false}
+          />
+        </a>
+      </div>
+    );
+  }
   return (
     <div className="sponsor-carousel-item">
       <Image

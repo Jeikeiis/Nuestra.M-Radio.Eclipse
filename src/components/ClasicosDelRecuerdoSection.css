@@ -13,10 +13,12 @@
 }
 
 .clasicos-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 800;
   color: var(--section-title);
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.03em;
 }
 
 .clasicos-subtitle {
@@ -27,8 +29,13 @@
 }
 
 .clasicos-desc-main {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--foreground);
-  margin: 0 auto;
-  max-width: 350px;
+  text-align: left;
+  margin-bottom: 2rem;
+  max-width: 36rem;
+  line-height: 1.6;
+  opacity: 0.92;
+  margin-left: auto;
+  margin-right: auto;
 }

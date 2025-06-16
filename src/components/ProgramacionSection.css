@@ -43,10 +43,13 @@ html.dark {
 }
 
 .programacion-title {
-  color: var(--program-title);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  margin-bottom: 0.5rem;
+  color: var(--primary, #ff0000);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  text-shadow: 0 2px 12px #ff000033;
   transition: color 0.2s;
 }
 
