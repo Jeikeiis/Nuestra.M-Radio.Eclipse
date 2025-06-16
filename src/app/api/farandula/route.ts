@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
+const CACHE_FILE = path.resolve(process.cwd(), "farandula-cache.json");
 
 type Noticia = {
   title: string;
@@ -18,6 +21,7 @@ type NoticiasCache = {
   lastValidNoticias?: Noticia[];
 };
 
+// --- Estado de caché en memoria ---
 let cache: NoticiasCache = {
   noticias: [],
   timestamp: 0,
@@ -25,6 +29,40 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 let cacheFijo: Noticia[] = [];
+
+// --- Cargar cache desde archivo al iniciar ---
+function cargarCacheDesdeArchivo() {
+  try {
+    if (fs.existsSync(CACHE_FILE)) {
+      const data = fs.readFileSync(CACHE_FILE, "utf-8");
+      const json = JSON.parse(data);
+      if (Array.isArray(json.noticias)) {
+        cacheFijo = json.noticias;
+        cache.noticias = json.noticias;
+        cache.timestamp = json.timestamp || Date.now();
+        cache.lastValidNoticias = json.noticias;
+      }
+    }
+  } catch (e) {
+    // Ignorar errores de lectura
+  }
+}
+
+// --- Guardar cache a archivo ---
+function guardarCacheEnArchivo(noticias: Noticia[]) {
+  try {
+    fs.writeFileSync(
+      CACHE_FILE,
+      JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
+      "utf-8"
+    );
+  } catch (e) {
+    // Ignorar errores de escritura
+  }
+}
+
+// Cargar cache al iniciar
+cargarCacheDesdeArchivo();
 
 function getIp(req: NextRequest): string {
   const forwarded = req.headers.get("x-forwarded-for");
@@ -141,6 +179,7 @@ export async function GET(req: NextRequest) {
             lastValidNoticias: noticiasValidas,
           };
           cacheFijo = noticiasValidas;
+          guardarCacheEnArchivo(noticiasValidas);
         } else if (errorMsg) {
           cache.errorMsg = errorMsg;
         }

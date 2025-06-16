@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
+const CACHE_FILE = path.resolve(process.cwd(), "noticias-cache.json");
 
 // --- Tipos ---
 type Noticia = {
@@ -27,6 +30,40 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 let cacheFijo: Noticia[] = [];
+
+// --- Cargar cache desde archivo al iniciar ---
+function cargarCacheDesdeArchivo() {
+  try {
+    if (fs.existsSync(CACHE_FILE)) {
+      const data = fs.readFileSync(CACHE_FILE, "utf-8");
+      const json = JSON.parse(data);
+      if (Array.isArray(json.noticias)) {
+        cacheFijo = json.noticias;
+        cache.noticias = json.noticias;
+        cache.timestamp = json.timestamp || Date.now();
+        cache.lastValidNoticias = json.noticias;
+      }
+    }
+  } catch (e) {
+    // Si hay error, ignora y sigue con cache vacío
+  }
+}
+
+// --- Guardar cache a archivo ---
+function guardarCacheEnArchivo(noticias: Noticia[]) {
+  try {
+    fs.writeFileSync(
+      CACHE_FILE,
+      JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
+      "utf-8"
+    );
+  } catch (e) {
+    // Si hay error, ignora (en serverless puede fallar)
+  }
+}
+
+// Cargar cache al iniciar
+cargarCacheDesdeArchivo();
 
 // --- Utilidades ---
 function getIp(req: NextRequest): string {
@@ -137,35 +174,61 @@ export async function GET(req: NextRequest) {
       };
     }
 
-    // 1. Siempre responder desde cacheFijo
+    // Siempre consultar la API externa
+    let errorMsg: string | null = null;
+    let fromCache = true;
+    let huboCambio = false;
+
+    const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticias(region);
+    const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+
+    // Compara con el cache actual
+    const titulosCache = new Set(cacheFijo.map(n => n.title));
+    if (
+      noticiasValidas.length > 0 &&
+      (noticiasValidas.length !== cacheFijo.length ||
+        noticiasValidas.some(n => !titulosCache.has(n.title)))
+    ) {
+      // Hay cambios, actualiza el cache y el archivo
+      cache = {
+        noticias: noticiasValidas,
+        timestamp: Date.now(),
+        errorMsg: undefined,
+        lastValidNoticias: noticiasValidas,
+      };
+      cacheFijo = noticiasValidas;
+      guardarCacheEnArchivo(noticiasValidas);
+      fromCache = false;
+      huboCambio = true;
+    } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
+      // Primer llenado de cache
+      cache = {
+        noticias: noticiasValidas,
+        timestamp: Date.now(),
+        errorMsg: undefined,
+        lastValidNoticias: noticiasValidas,
+      };
+      cacheFijo = noticiasValidas;
+      guardarCacheEnArchivo(noticiasValidas);
+      fromCache = false;
+      huboCambio = true;
+    } else if (cacheFijo.length === 0 && noticiasValidas.length === 0) {
+      // No hay datos en cache ni en API
+      errorMsg = apiError || "No se encontraron noticias válidas.";
+    } else if (apiError) {
+      errorMsg = apiError;
+    }
+
+    // Siempre responde desde el cache (actualizado si hubo cambios)
     const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cacheFijo);
-    // 2. Lanzar actualización en segundo plano (no espera)
-    (async () => {
-      try {
-        const { noticias, errorMsg } = await fetchNoticias(region);
-        const noticiasValidas = filtrarYLimpiarNoticias(noticias);
-        if (noticiasValidas.length > 0) {
-          cache = {
-            noticias: noticiasValidas,
-            timestamp: Date.now(),
-            errorMsg: undefined,
-            lastValidNoticias: noticiasValidas,
-          };
-          cacheFijo = noticiasValidas;
-        } else if (errorMsg) {
-          cache.errorMsg = errorMsg;
-        }
-      } catch (e) {
-        // Silenciar errores de actualización en segundo plano
-      }
-    })();
 
     return NextResponse.json({
       noticias: noticiasPaginadas,
-      cached: true,
-      errorMsg: null,
+      cached: fromCache,
+      huboCambio,
+      errorMsg,
       fallback: false,
-      apiStatus: 'cache-fijo',
+      apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
         region,
         page,
@@ -173,7 +236,7 @@ export async function GET(req: NextRequest) {
         total: totalNoticias,
         maxPages: realMaxPages,
         updatedAt: new Date(now).toISOString(),
-        fromCache: true,
+        fromCache,
       },
     });
   } catch (err: any) {

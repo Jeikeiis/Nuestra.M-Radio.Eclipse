@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 const API_KEY = "pub_8484afa6b57a48fdbbebf04b313ba4f9";
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutos
+const CACHE_FILE = path.resolve(process.cwd(), "musica-cache.json");
 
 type Noticia = {
   title: string;
@@ -18,6 +21,7 @@ type NoticiasCache = {
   lastValidNoticias?: Noticia[];
 };
 
+// --- Estado de caché en memoria ---
 let cache: NoticiasCache = {
   noticias: [],
   timestamp: 0,
@@ -25,6 +29,40 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 let cacheFijo: Noticia[] = [];
+
+// --- Cargar cache desde archivo al iniciar ---
+function cargarCacheDesdeArchivo() {
+  try {
+    if (fs.existsSync(CACHE_FILE)) {
+      const data = fs.readFileSync(CACHE_FILE, "utf-8");
+      const json = JSON.parse(data);
+      if (Array.isArray(json.noticias)) {
+        cacheFijo = json.noticias;
+        cache.noticias = json.noticias;
+        cache.timestamp = json.timestamp || Date.now();
+        cache.lastValidNoticias = json.noticias;
+      }
+    }
+  } catch (e) {
+    // Ignorar errores de lectura
+  }
+}
+
+// --- Guardar cache a archivo ---
+function guardarCacheEnArchivo(noticias: Noticia[]) {
+  try {
+    fs.writeFileSync(
+      CACHE_FILE,
+      JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
+      "utf-8"
+    );
+  } catch (e) {
+    // Ignorar errores de escritura
+  }
+}
+
+// Cargar cache al iniciar
+cargarCacheDesdeArchivo();
 
 function getIp(req: NextRequest): string {
   const forwarded = req.headers.get("x-forwarded-for");
@@ -127,33 +165,55 @@ export async function GET(req: NextRequest) {
       };
     }
     // 1. Siempre responder desde cacheFijo
+    let errorMsg: string | null = null;
+    let fromCache = true;
+    let huboCambio = false;
+
+    const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
+    const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+
+    const titulosCache = new Set(cacheFijo.map(n => n.title));
+    if (
+      noticiasValidas.length > 0 &&
+      (noticiasValidas.length !== cacheFijo.length ||
+        noticiasValidas.some(n => !titulosCache.has(n.title)))
+    ) {
+      cache = {
+        noticias: noticiasValidas,
+        timestamp: Date.now(),
+        errorMsg: undefined,
+        lastValidNoticias: noticiasValidas,
+      };
+      cacheFijo = noticiasValidas;
+      guardarCacheEnArchivo(noticiasValidas);
+      fromCache = false;
+      huboCambio = true;
+    } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
+      cache = {
+        noticias: noticiasValidas,
+        timestamp: Date.now(),
+        errorMsg: undefined,
+        lastValidNoticias: noticiasValidas,
+      };
+      cacheFijo = noticiasValidas;
+      guardarCacheEnArchivo(noticiasValidas);
+      fromCache = false;
+      huboCambio = true;
+    } else if (cacheFijo.length === 0 && noticiasValidas.length === 0) {
+      errorMsg = apiError || "No se encontraron noticias de música válidas.";
+    } else if (apiError) {
+      errorMsg = apiError;
+    }
+
     const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cacheFijo);
-    // 2. Lanzar actualización en segundo plano (no espera)
-    (async () => {
-      try {
-        const { noticias, errorMsg } = await fetchNoticiasMusica(tema);
-        const noticiasValidas = filtrarYLimpiarNoticias(noticias);
-        if (noticiasValidas.length > 0) {
-          cache = {
-            noticias: noticiasValidas,
-            timestamp: Date.now(),
-            errorMsg: undefined,
-            lastValidNoticias: noticiasValidas,
-          };
-          cacheFijo = noticiasValidas;
-        } else if (errorMsg) {
-          cache.errorMsg = errorMsg;
-        }
-      } catch (e) {
-        // Silenciar errores de actualización en segundo plano
-      }
-    })();
+
     return NextResponse.json({
       noticias: noticiasPaginadas,
-      cached: true,
-      errorMsg: null,
+      cached: fromCache,
+      huboCambio,
+      errorMsg,
       fallback: false,
-      apiStatus: 'cache-fijo',
+      apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
         tema,
         page,
@@ -161,7 +221,7 @@ export async function GET(req: NextRequest) {
         total: totalNoticias,
         maxPages: realMaxPages,
         updatedAt: new Date(now).toISOString(),
-        fromCache: true,
+        fromCache,
       },
     });
   } catch (err: any) {
