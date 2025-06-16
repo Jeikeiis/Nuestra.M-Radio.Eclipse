@@ -164,48 +164,73 @@ export async function GET(req: NextRequest) {
         realMaxPages,
       };
     }
-    // 1. Siempre responder desde cacheFijo
+
     let errorMsg: string | null = null;
     let fromCache = true;
     let huboCambio = false;
 
-    const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
-    const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
-
-    const titulosCache = new Set(cacheFijo.map(n => n.title));
-    if (
-      noticiasValidas.length > 0 &&
-      (noticiasValidas.length !== cacheFijo.length ||
-        noticiasValidas.some(n => !titulosCache.has(n.title)))
-    ) {
-      cache = {
-        noticias: noticiasValidas,
-        timestamp: Date.now(),
-        errorMsg: undefined,
-        lastValidNoticias: noticiasValidas,
-      };
-      cacheFijo = noticiasValidas;
-      guardarCacheEnArchivo(noticiasValidas);
-      fromCache = false;
-      huboCambio = true;
-    } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
-      cache = {
-        noticias: noticiasValidas,
-        timestamp: Date.now(),
-        errorMsg: undefined,
-        lastValidNoticias: noticiasValidas,
-      };
-      cacheFijo = noticiasValidas;
-      guardarCacheEnArchivo(noticiasValidas);
-      fromCache = false;
-      huboCambio = true;
-    } else if (cacheFijo.length === 0 && noticiasValidas.length === 0) {
-      errorMsg = apiError || "No se encontraron noticias de música válidas.";
-    } else if (apiError) {
-      errorMsg = apiError;
+    // --- NUEVO: Si el cacheFijo está vacío, consulta la API externa directamente ---
+    let noticiasParaResponder: Noticia[] = [];
+    if (cacheFijo.length === 0) {
+      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
+      const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+      if (noticiasValidas.length > 0) {
+        cache = {
+          noticias: noticiasValidas,
+          timestamp: Date.now(),
+          errorMsg: undefined,
+          lastValidNoticias: noticiasValidas,
+        };
+        cacheFijo = noticiasValidas;
+        guardarCacheEnArchivo(noticiasValidas);
+        noticiasParaResponder = noticiasValidas;
+        fromCache = false;
+        huboCambio = true;
+      } else {
+        errorMsg = apiError || "No se encontraron noticias de música válidas.";
+        noticiasParaResponder = [];
+      }
+    } else {
+      noticiasParaResponder = cacheFijo;
     }
 
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cacheFijo);
+    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
+
+    // Lanzar actualización en segundo plano (no espera)
+    (async () => {
+      try {
+        const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
+        const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+        const titulosCache = new Set(cacheFijo.map(n => n.title));
+        if (
+          noticiasValidas.length > 0 &&
+          (noticiasValidas.length !== cacheFijo.length ||
+            noticiasValidas.some(n => !titulosCache.has(n.title)))
+        ) {
+          cache = {
+            noticias: noticiasValidas,
+            timestamp: Date.now(),
+            errorMsg: undefined,
+            lastValidNoticias: noticiasValidas,
+          };
+          cacheFijo = noticiasValidas;
+          guardarCacheEnArchivo(noticiasValidas);
+        } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
+          cache = {
+            noticias: noticiasValidas,
+            timestamp: Date.now(),
+            errorMsg: undefined,
+            lastValidNoticias: noticiasValidas,
+          };
+          cacheFijo = noticiasValidas;
+          guardarCacheEnArchivo(noticiasValidas);
+        } else if (apiError) {
+          cache.errorMsg = apiError;
+        }
+      } catch (e) {
+        // Silenciar errores de actualización en segundo plano
+      }
+    })();
 
     return NextResponse.json({
       noticias: noticiasPaginadas,

@@ -164,14 +164,49 @@ export async function GET(req: NextRequest) {
         realMaxPages,
       };
     }
-    // 1. Siempre responder desde cacheFijo
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(cacheFijo);
-    // 2. Lanzar actualización en segundo plano (no espera)
+
+    let errorMsg: string | null = null;
+    let fromCache = true;
+    let huboCambio = false;
+
+    // --- NUEVO: Si el cacheFijo está vacío, consulta la API externa directamente ---
+    let noticiasParaResponder: Noticia[] = [];
+    if (cacheFijo.length === 0) {
+      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula(region);
+      const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+      if (noticiasValidas.length > 0) {
+        cache = {
+          noticias: noticiasValidas,
+          timestamp: Date.now(),
+          errorMsg: undefined,
+          lastValidNoticias: noticiasValidas,
+        };
+        cacheFijo = noticiasValidas;
+        guardarCacheEnArchivo(noticiasValidas);
+        noticiasParaResponder = noticiasValidas;
+        fromCache = false;
+        huboCambio = true;
+      } else {
+        errorMsg = apiError || "No se encontraron noticias de farándula válidas.";
+        noticiasParaResponder = [];
+      }
+    } else {
+      noticiasParaResponder = cacheFijo;
+    }
+
+    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
+
+    // Lanzar actualización en segundo plano (no espera)
     (async () => {
       try {
-        const { noticias, errorMsg } = await fetchNoticiasFarandula(region);
-        const noticiasValidas = filtrarYLimpiarNoticias(noticias);
-        if (noticiasValidas.length > 0) {
+        const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula(region);
+        const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+        const titulosCache = new Set(cacheFijo.map(n => n.title));
+        if (
+          noticiasValidas.length > 0 &&
+          (noticiasValidas.length !== cacheFijo.length ||
+            noticiasValidas.some(n => !titulosCache.has(n.title)))
+        ) {
           cache = {
             noticias: noticiasValidas,
             timestamp: Date.now(),
@@ -180,19 +215,30 @@ export async function GET(req: NextRequest) {
           };
           cacheFijo = noticiasValidas;
           guardarCacheEnArchivo(noticiasValidas);
-        } else if (errorMsg) {
-          cache.errorMsg = errorMsg;
+        } else if (cacheFijo.length === 0 && noticiasValidas.length > 0) {
+          cache = {
+            noticias: noticiasValidas,
+            timestamp: Date.now(),
+            errorMsg: undefined,
+            lastValidNoticias: noticiasValidas,
+          };
+          cacheFijo = noticiasValidas;
+          guardarCacheEnArchivo(noticiasValidas);
+        } else if (apiError) {
+          cache.errorMsg = apiError;
         }
       } catch (e) {
         // Silenciar errores de actualización en segundo plano
       }
     })();
+
     return NextResponse.json({
       noticias: noticiasPaginadas,
-      cached: true,
-      errorMsg: null,
+      cached: fromCache,
+      huboCambio,
+      errorMsg,
       fallback: false,
-      apiStatus: 'cache-fijo',
+      apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
         region,
         page,
@@ -200,7 +246,7 @@ export async function GET(req: NextRequest) {
         total: totalNoticias,
         maxPages: realMaxPages,
         updatedAt: new Date(now).toISOString(),
-        fromCache: true,
+        fromCache,
       },
     });
   } catch (err: any) {
