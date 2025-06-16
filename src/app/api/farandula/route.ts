@@ -147,19 +147,23 @@ export async function GET(req: NextRequest) {
     const region = searchParams.get("region") || "Entretenimiento";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
-    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "8", 10), 1), 30);
+    const pageSize = 4;
     const MAX_PAGES = 5;
-    function paginarNoticias(noticias: Noticia[]) {
-      const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
-      const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
-      const start = (page - 1) * pageSize;
-      const end = Math.min(start + pageSize, totalNoticias);
-      return {
-        noticiasPaginadas: noticias.slice(start, end),
-        totalNoticias,
-        realMaxPages,
-      };
-    }
+
+    // Unir caches sin duplicados (prioridad: nuevo)
+    const titulos = new Set<string>();
+    const todas = [
+      ...cache.noticias,
+      ...cacheFijo.filter(n => !cache.noticias.some(n2 => n2.title === n.title))
+    ];
+    const todasLimitadas = todas.slice(0, MAX_PAGES * pageSize);
+
+    // Calcular paginación real
+    const totalNoticias = todasLimitadas.length;
+    const realMaxPages = Math.max(1, Math.ceil(totalNoticias / pageSize));
+    const start = (page - 1) * pageSize;
+    const end = Math.min(start + pageSize, totalNoticias);
+    const noticiasPaginadas = todasLimitadas.slice(start, end);
 
     let errorMsg: string | null = null;
     let fromCache = true;

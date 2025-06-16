@@ -104,33 +104,39 @@ export default function ProgramacionMusicaSection() {
 
   // Unificación de lógica con ProgramacionNoticiasSection
   // (filtrado, paginación, recarga manual, feedback visual, placeholders, etc.)
+  // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo
   function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
-    const MAX_PAGES = 5;
     // Unir ambos caches sin duplicados (prioridad: nuevas)
     const titulos = new Set<string>();
     const todas = [
       ...noticiasNuevas,
       ...noticiasViejas.filter(n => !noticiasNuevas.some(n2 => n2.title === n.title))
     ];
-    // Limitar a 5 páginas
-    const maxNoticias = MAX_PAGES * pageSize;
+    const maxNoticias = 5 * pageSize;
     const todasLimitadas = todas.slice(0, maxNoticias);
-    // Calcular rango de la página
+    // Calcular páginas reales
+    const totalUnicos = todasLimitadas.length;
+    const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
+    if (page > paginasReales) setPage(paginasReales);
     const inicio = (pagina - 1) * pageSize;
     const fin = inicio + pageSize;
-    let resultado = todasLimitadas.slice(inicio, fin);
-    // Si faltan, agregar placeholders
-    while (resultado.length < pageSize) {
-      resultado.push({ title: 'Cargando...', link: '', description: 'Esperando más noticias...', source_id: '', pubDate: '' });
-    }
-    return resultado;
+    return todasLimitadas.slice(inicio, fin);
   }
 
-  // Cambia la lógica de paginación y llenado
+  // Actualiza maxPages dinámicamente según los artículos únicos
   useEffect(() => {
-    cargarNoticias(false, page);
-    // eslint-disable-next-line
-  }, [page]);
+    const titulos = new Set<string>();
+    const todas = [
+      ...noticias,
+      ...noticiasPrevias.filter(n => !noticias.some(n2 => n2.title === n.title))
+    ];
+    const maxNoticias = 5 * pageSize;
+    const todasLimitadas = todas.slice(0, maxNoticias);
+    const totalUnicos = todasLimitadas.length;
+    const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
+    setMaxPages(paginasReales);
+    if (page > paginasReales) setPage(paginasReales);
+  }, [noticias, noticiasPrevias, pageSize]);
 
   const esAdmin = typeof window !== 'undefined' && localStorage.getItem('adminNoticias') === '1';
 
