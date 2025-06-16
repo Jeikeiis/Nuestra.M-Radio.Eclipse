@@ -1,4 +1,4 @@
-const API_KEY = process.env.API_USER_KEY as string; // API key pública de NewsData.io
+const API_KEY = "pub_b99564d2bb0e4b77b00b36d54202807d"; // API key pública de NewsData.io
 
 export async function fetchNoticiasNewsData(region: string) {
   // Usa el endpoint /latest y la nueva API key

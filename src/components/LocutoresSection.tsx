@@ -4,7 +4,7 @@ const locutores = [
   {
     nombre: "Fede Pinato",
     programa: "Nuestra Mañana",
-    img: "/NuestraManana2.0.webp",
+    img: "/FedePerfil.webp", // Actualizado para mostrar la nueva foto
     alt: "Fede Pinato - Nuestra Mañana",
   },
 ];
