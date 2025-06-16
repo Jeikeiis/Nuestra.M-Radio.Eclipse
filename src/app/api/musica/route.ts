@@ -28,7 +28,6 @@ let cache: NoticiasCache = {
   errorMsg: undefined,
   lastValidNoticias: [],
 };
-let cacheFijo: Noticia[] = [];
 
 // --- Cargar cache desde archivo al iniciar ---
 function cargarCacheDesdeArchivo() {
@@ -37,10 +36,11 @@ function cargarCacheDesdeArchivo() {
       const data = fs.readFileSync(CACHE_FILE, "utf-8");
       const json = JSON.parse(data);
       if (Array.isArray(json.noticias)) {
-        cacheFijo = json.noticias;
-        cache.noticias = json.noticias;
+        // Limitar a 20 artículos únicos
+        const noticiasUnicas = deduplicarNoticias(json.noticias).slice(0, 20);
+        cache.noticias = noticiasUnicas;
         cache.timestamp = json.timestamp || Date.now();
-        cache.lastValidNoticias = json.noticias;
+        cache.lastValidNoticias = noticiasUnicas;
       }
     }
   } catch {}
@@ -49,12 +49,25 @@ function cargarCacheDesdeArchivo() {
 // --- Guardar cache a archivo ---
 function guardarCacheEnArchivo(noticias: Noticia[]) {
   try {
+    // Limitar a 20 artículos únicos
+    const noticiasUnicas = deduplicarNoticias(noticias).slice(0, 20);
     fs.writeFileSync(
       CACHE_FILE,
-      JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
+      JSON.stringify({ noticias: noticiasUnicas, timestamp: Date.now() }, null, 2),
       "utf-8"
     );
   } catch {}
+}
+
+// --- Deduplicar noticias por título y link ---
+function deduplicarNoticias(noticias: Noticia[]): Noticia[] {
+  const vistos = new Set<string>();
+  return noticias.filter(n => {
+    const key = normalizeText(n.title) + '|' + normalizeText(n.link);
+    if (vistos.has(key)) return false;
+    vistos.add(key);
+    return true;
+  });
 }
 
 // Cargar cache al iniciar
@@ -147,7 +160,7 @@ export async function GET(req: NextRequest) {
     const tema = searchParams.get("tema") || "Musica";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
-    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "8", 10), 1), 30);
+    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4); // Fijo en 4
     const MAX_PAGES = 5;
     function paginarNoticias(noticias: Noticia[]) {
       const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
@@ -170,7 +183,7 @@ export async function GET(req: NextRequest) {
 
     if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
-      const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+      const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, 20);
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -178,28 +191,27 @@ export async function GET(req: NextRequest) {
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
-        cacheFijo = noticiasValidas;
         guardarCacheEnArchivo(noticiasValidas);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
         huboCambio = true;
       } else {
         errorMsg = apiError || "No se encontraron noticias de música válidas.";
-        noticiasParaResponder = cacheFijo.length > 0 ? cacheFijo : [];
+        noticiasParaResponder = cache.lastValidNoticias || [];
         fromCache = true;
       }
     } else {
-      noticiasParaResponder = cacheFijo;
+      noticiasParaResponder = cache.noticias;
       fromCache = true;
       // --- Actualización en segundo plano, NO afecta la respuesta actual ---
       (async () => {
         try {
-          const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
-          const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
-          const titulosCache = new Set(cacheFijo.map(n => n.title));
+          const { noticias: noticiasApi } = await fetchNoticiasMusica(tema);
+          const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, 20);
+          const titulosCache = new Set(cache.noticias.map(n => n.title));
           if (
             noticiasValidas.length > 0 &&
-            (noticiasValidas.length !== cacheFijo.length ||
+            (noticiasValidas.length !== cache.noticias.length ||
               noticiasValidas.some(n => !titulosCache.has(n.title)))
           ) {
             cache = {
@@ -208,20 +220,21 @@ export async function GET(req: NextRequest) {
               errorMsg: undefined,
               lastValidNoticias: noticiasValidas,
             };
-            cacheFijo = noticiasValidas;
             guardarCacheEnArchivo(noticiasValidas);
           }
         } catch {}
       })();
     }
 
+    // No mostrar páginas vacías
     const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
+    const hayNoticias = noticiasPaginadas.length > 0;
 
     return NextResponse.json({
       noticias: noticiasPaginadas,
       cached: fromCache,
       huboCambio,
-      errorMsg,
+      errorMsg: hayNoticias ? errorMsg : "No hay noticias disponibles.",
       fallback: fromCache,
       apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
       meta: {
@@ -249,8 +262,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function GET_CACHE_COUNT(req: NextRequest) {
-  const titulosNuevo = new Set(cache.noticias.map(n => n.title));
-  const titulosViejo = new Set(cacheFijo.map(n => n.title));
+  const titulosNuevo = new Set(cache.noticias.map((n: Noticia) => n.title));
+  const titulosViejo = new Set((cache.lastValidNoticias || []).map((n: Noticia) => n.title));
   return NextResponse.json({
     cacheNuevo: titulosNuevo.size,
     cacheViejo: titulosViejo.size

@@ -219,8 +219,6 @@ export async function GET(req: NextRequest) {
       })();
     }
 
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
-
     return NextResponse.json({
       noticias: noticiasPaginadas,
       cached: fromCache,
