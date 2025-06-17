@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const API_KEY = process.env.API_KEY as string;
+console.log('API_KEY en Vercel:', process.env.API_KEY);
 
 // --- Tipos ---
 type Noticia = {
@@ -31,7 +32,6 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 
-// --- Cargar cache desde archivo al iniciar ---
 function cargarCacheDesdeArchivo() {
   try {
     if (fs.existsSync(CACHE_FILE)) {

@@ -269,3 +269,5 @@ export async function GET_CACHE_COUNT(req: NextRequest) {
     cacheViejo: titulosViejo.size
   });
 }
+
+console.log('API_KEY en Vercel:', process.env.API_KEY);
