@@ -221,7 +221,7 @@ export default function ProgramacionMusicaSection() {
             ¡Música actualizada!
           </div>
         )}
-        <div className="paginacion-controles">
+        <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
@@ -238,7 +238,7 @@ export default function ProgramacionMusicaSection() {
           >
             ◀ Anterior
           </button>
-          <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+          <span style={{ color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
             Página {page} de {maxPages}
           </span>
           {page < maxPages && (
@@ -321,7 +321,7 @@ export default function ProgramacionMusicaSection() {
         </div>
         {puntoIndicador}
         {botonRecargaManual}
-        <div className="paginacion-controles">
+        <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
@@ -338,7 +338,7 @@ export default function ProgramacionMusicaSection() {
           >
             ◀ Anterior
           </button>
-          <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+          <span style={{ color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
             Página {page} de {maxPages}
           </span>
           {page < maxPages && (
@@ -436,7 +436,7 @@ export default function ProgramacionMusicaSection() {
           ¡Música actualizada!
         </div>
       )}
-      <div className="paginacion-controles">
+      <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
@@ -453,7 +453,7 @@ export default function ProgramacionMusicaSection() {
         >
           ◀ Anterior
         </button>
-        <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+        <span style={{ color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
           Página {page} de {maxPages}
         </span>
         {page < maxPages && (

@@ -1,9 +1,6 @@
-const API_KEY = process.env.API_USER_KEY || ""; // Ahora toma la API key de la variable de entorno
-
-console.log("[DEBUG] API_USER_KEY:", process.env.API_USER_KEY);
+const API_KEY = process.env.API_KEY || ""; // Unifica el nombre de la variable
 
 export async function fetchNoticiasNewsData(region: string) {
-  // Usa el endpoint /latest y la nueva API key
   const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;
   try {
     const res = await fetch(url);
@@ -26,6 +23,9 @@ export async function fetchNoticiasNewsData(region: string) {
     }
     return data.results;
   } catch (e: any) {
+    throw new Error("No se pudieron obtener noticias. Verifica tu conexión, la API key o el límite de uso. " + (e?.message || ""));
+  }
+}
     throw new Error("No se pudieron obtener noticias. Verifica tu conexión, la API key o el límite de uso. " + (e?.message || ""));
   }
 }

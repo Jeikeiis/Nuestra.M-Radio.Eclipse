@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const API_KEY = process.env.API_KEY as string;
+const API_KEY = process.env.API_USER_KEY as string;
 const CACHE_FILE = path.resolve(process.cwd(), "farandula-cache.json");
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 
@@ -47,11 +47,12 @@ function cargarCacheDesdeArchivo() {
 }
 
 // --- Guardar cache a archivo ---
-function guardarCacheEnArchivo(noticias: Noticia[]) {
+function guardarCacheEnArchivo(noticias: Noticia[], pageSize: number = 4, maxPages: number = 5) {
   try {
+    const noticiasUnicas = deduplicarNoticias(noticias).slice(0, maxPages * pageSize);
     fs.writeFileSync(
       CACHE_FILE,
-      JSON.stringify({ noticias, timestamp: Date.now() }, null, 2),
+      JSON.stringify({ noticias: noticiasUnicas, timestamp: Date.now() }, null, 2),
       "utf-8"
     );
   } catch {}
@@ -140,6 +141,16 @@ function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
     .slice(0, 30);
 }
 
+function deduplicarNoticias(noticias: Noticia[]): Noticia[] {
+  const vistos = new Set<string>();
+  return noticias.filter(n => {
+    const key = normalizeText(n.title) + '|' + normalizeText(n.link);
+    if (vistos.has(key)) return false;
+    vistos.add(key);
+    return true;
+  });
+}
+
 export async function GET(req: NextRequest) {
   try {
     const now = Date.now();
@@ -147,7 +158,7 @@ export async function GET(req: NextRequest) {
     const region = searchParams.get("region") || "Entretenimiento";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
-    const pageSize = 4;
+    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
     const MAX_PAGES = 5;
 
     // Unir caches sin duplicados (prioridad: nuevo)
@@ -174,7 +185,7 @@ export async function GET(req: NextRequest) {
 
     if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula(region);
-      const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+      const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi).slice(0, MAX_PAGES * pageSize);
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -183,7 +194,7 @@ export async function GET(req: NextRequest) {
           lastValidNoticias: noticiasValidas,
         };
         cacheFijo = noticiasValidas;
-        guardarCacheEnArchivo(noticiasValidas);
+        guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
         huboCambio = true;
@@ -193,13 +204,13 @@ export async function GET(req: NextRequest) {
         fromCache = true;
       }
     } else {
-      noticiasParaResponder = cache.noticias; // <-- usar cache.noticias en vez de cacheFijo
+      noticiasParaResponder = cache.noticias;
       fromCache = true;
       // --- Actualización en segundo plano, NO afecta la respuesta actual ---
       (async () => {
         try {
           const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula(region);
-          const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi);
+          const noticiasValidas = filtrarYLimpiarNoticias(noticiasApi).slice(0, MAX_PAGES * pageSize);
           const titulosCache = new Set(cacheFijo.map(n => n.title));
           if (
             noticiasValidas.length > 0 &&
@@ -213,19 +224,21 @@ export async function GET(req: NextRequest) {
               lastValidNoticias: noticiasValidas,
             };
             cacheFijo = noticiasValidas;
-            guardarCacheEnArchivo(noticiasValidas);
+            guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
           }
         } catch {}
       })();
     }
 
+    const hayNoticias = noticiasPaginadas.length > 0;
+
     return NextResponse.json({
       noticias: noticiasPaginadas,
       cached: fromCache,
       huboCambio,
-      errorMsg,
+      errorMsg: hayNoticias ? errorMsg : "No hay noticias disponibles.",
       fallback: fromCache,
-      apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
+      apiStatus: errorMsg && !hayNoticias ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
       meta: {
         region,
         page,
@@ -258,5 +271,3 @@ export async function GET_CACHE_COUNT(req: NextRequest) {
     cacheViejo: titulosViejo.size
   });
 }
-
-console.log('API_KEY en Vercel:', process.env.API_KEY);

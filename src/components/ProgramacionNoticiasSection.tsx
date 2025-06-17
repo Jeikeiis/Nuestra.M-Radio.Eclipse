@@ -217,7 +217,7 @@ export default function ProgramacionNoticiasSection() {
             ¡Noticias actualizadas!
           </div>
         )}
-        <div className="paginacion-controles">
+        <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
@@ -234,7 +234,7 @@ export default function ProgramacionNoticiasSection() {
           >
             ◀ Anterior
           </button>
-          <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+          <span style={{ color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
             Página {page} de {maxPages}
           </span>
           {page < maxPages && (
@@ -315,7 +315,7 @@ export default function ProgramacionNoticiasSection() {
         {/* El error ya no se muestra al usuario, solo el punto indicador */}
         {puntoIndicador}
         {botonRecargaManual}
-        <div className="paginacion-controles">
+        <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
@@ -332,7 +332,7 @@ export default function ProgramacionNoticiasSection() {
           >
             ◀ Anterior
           </button>
-          <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+          <span style={{ color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
             Página {page} de {maxPages}
           </span>
           {page < maxPages && (
@@ -439,7 +439,7 @@ export default function ProgramacionNoticiasSection() {
           ¡Noticias actualizadas!
         </div>
       )}
-      <div className="paginacion-controles">
+      <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
@@ -456,7 +456,7 @@ export default function ProgramacionNoticiasSection() {
         >
           ◀ Anterior
         </button>
-        <span style={{ alignSelf: 'center', color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
+        <span style={{ color: 'var(--section-title, #fff)', fontWeight: 700, fontSize: 16 }}>
           Página {page} de {maxPages}
         </span>
         {page < maxPages && (

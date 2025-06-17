@@ -1,30 +1,34 @@
 {
   "noticias": [
     {
-      "article_id": "4c5a86787ac6d3b2649976c8b6c51fcb",
-      "title": "Todo sobre elrow en Ibiza 2025: DJs, fechas y por qué todo el mundo habla de [UNVRS]",
-      "link": "https://www.vozpopuli.com/altavoz/cultura/todo-sobre-elrow-en-ibiza-2025-djs-fechas-y-por-que-todo-el-mundo-habla-de-unvrs.html",
+      "article_id": "44e8f4fd9ef1a40c720e7251fadb695e",
+      "title": "Semana del Orgullo en Pereira, celebración por la diversidad",
+      "link": "https://www.eldiario.com.co/noticias/risaralda/pereira/semana-del-orgullo-en-pereira-celebracion-por-la-diversidad/",
       "keywords": [
-        "cultura"
+        "lgbti",
+        "p4",
+        "pereira"
       ],
-      "creator": null,
-      "description": "Música electrónica, temáticas inmersivas y confeti en un formato reinventado para el público de la isla en San Rafael",
+      "creator": [
+        "Sofía García Arango"
+      ],
+      "description": "Con una amplia programación de actividades culturales, pedagógicas y deportivas, Pereira celebra la Semana del Orgullo de Ser, una iniciativa liderada por la Secretaría de Desarrollo Social y Político, dando cumplimiento a la política pública de diversidad sexual. El evento, que inició ayer, busca visibilizar y garantizar los derechos de la comunidad LGBTIQ+ en el [...]",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-16 02:45:05",
+      "pubDate": "2025-06-17 09:00:09",
       "pubDateTZ": "UTC",
-      "image_url": "https://d2x3b4b4wxwlxb.cloudfront.net/articulos/articulos-1760910.jpg",
+      "image_url": "https://www.eldiario.com.co/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-16-at-6.50.22-PM-300x199.jpeg",
       "video_url": null,
-      "source_id": "vozpopuli",
-      "source_name": "Vozpópul",
-      "source_priority": 159064,
-      "source_url": "https://www.vozpopuli.com",
-      "source_icon": "https://n.bytvi.com/vozpopuli.png",
+      "source_id": "eldiario",
+      "source_name": "El Diario",
+      "source_priority": 307799,
+      "source_url": "https://www.eldiario.com.co",
+      "source_icon": "https://n.bytvi.com/eldiario.png",
       "language": "spanish",
       "country": [
-        "spain"
+        "colombia"
       ],
       "category": [
-        "other"
+        "top"
       ],
       "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
       "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -34,27 +38,97 @@
       "duplicate": false
     },
     {
-      "article_id": "f162c02ff840c03f292d34d91d4ea92a",
-      "title": "Clausuran 43 chelerías clandestinas en CDMX que operaban sin permiso y vendían alcohol a menores",
-      "link": "https://www.elimparcial.com/mexico/2025/06/16/clausuran-43-chelerias-clandestinas-en-cdmx-que-operaban-sin-permiso-y-vendian-alcohol-a-menores/",
+      "article_id": "1e808c225b2efe2ff36d1911d5aa0054",
+      "title": "Paradoja en el paraíso: Miami, Hialeah y Fort Lauderdale, entre las peores ciudades de EEUU para criar una familia",
+      "link": "https://www.infobae.com/estados-unidos/2025/06/17/paradoja-en-el-paraiso-miami-hialeah-y-fort-lauderdale-entre-las-peores-ciudades-de-eeuu-para-criar-una-familia/",
       "keywords": null,
       "creator": [
-        "Claudia Ulloa"
+        "Opy Morales"
       ],
-      "description": "Además, se sancionó a dos negocios reincidentes, a pesar de previas clausuras.",
+      "description": "Mientras atraen millones de turistas cada año, estas tres urbes del sur de Florida figuran entre las 20 peores ciudades estadounidenses para establecerse con hijos, según revela un nuevo estudio de WalletHub que evalúa factores como educación, seguridad y costo de vida",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-16 02:32:53",
+      "pubDate": "2025-06-17 09:00:01",
       "pubDateTZ": "UTC",
-      "image_url": null,
+      "image_url": "https://www.infobae.com/resizer/v2/NOOPI7X6LZDVBMR4L63TV6S2VU.png?auth=dfd5b1c2feda10c53554359246b580f23a12efc08651ec3a7bce624df2f39bd2&height=411&smart=true&width=730",
       "video_url": null,
-      "source_id": "elimparcial",
-      "source_name": "El Imparcial",
-      "source_priority": 25219,
-      "source_url": "https://www.elimparcial.com",
-      "source_icon": "https://n.bytvi.com/elimparcial.png",
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
       "language": "spanish",
       "country": [
-        "mexico"
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "847322d38baa732f69f118e95ff33f4e",
+      "title": "Así luce hoy el actor que interpretó al hijo de Sherezade en “Las mil y una noches”",
+      "link": "https://www.infobae.com/entretenimiento/2025/06/17/asi-luce-hoy-el-actor-que-interpreto-al-hijo-de-sherezade-en-las-mil-y-una-noches/",
+      "keywords": null,
+      "creator": [
+        "Nazareno Rosen"
+      ],
+      "description": "Efe Çınar, quien interpretó a Kaan en la famosa serie cuando era un niño, lleva una vida discreta lejos de las cámaras en Canadá",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-17 09:00:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/54FT5CBOXFHW7BZSDD33RYMR4U.jpg?auth=4e2777bd990be359cc8fb5c3c738e52a8a18f0e9484ee7abefc24d20fb753425&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "ac86dbb1ab541d7271d70d9537ed86f7",
+      "title": "¡Ofertas imperdibles en Carrefour! Hoy es el último día para aprovechar estos descuentos en tecnología",
+      "link": "https://www.ambito.com/economia/ofertas-imperdibles-carrefour-hoy-es-el-ultimo-dia-aprovechar-estos-descuentos-tecnologia-n6156507",
+      "keywords": null,
+      "creator": null,
+      "description": "Celulares, tablets y smartwatches con grandes rebajas y diferentes planes de pago para cuidar tu bolsillo.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-17 09:00:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.ambito.com/css-custom/239/lazy.svg",
+      "video_url": null,
+      "source_id": "ambito",
+      "source_name": "Ambito",
+      "source_priority": 37705,
+      "source_url": "https://www.ambito.com",
+      "source_icon": "https://n.bytvi.com/ambito.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
       ],
       "category": [
         "business"
@@ -67,30 +141,176 @@
       "duplicate": false
     },
     {
-      "article_id": "8c2fccf0e4ad548e75d5ae84eb6c36cd",
-      "title": "¿Debe Colombia prohibir el uso de redes sociales en menores de 15 años?",
-      "link": "https://www.eltiempo.com/opinion/columnistas/debe-colombia-prohibir-el-uso-de-redes-sociales-en-menores-de-15-anos-3463572",
+      "article_id": "f78230b9eb7bf63f20a35049ae79e079",
+      "title": "Microsoft instalará en València su centro de tecnología para el deporte, el entretenimiento y la salud",
+      "link": "https://www.europapress.es/comunitat-valenciana/noticia-microsoft-instalara-valencia-centro-tecnologia-deporte-entretenimiento-salud-20250617105943.html",
       "keywords": [
-        "columnistas"
+        "c. valenciana"
       ],
       "creator": null,
-      "description": "Debemos encontrar un camino para brindarles un entorno más seguro a nuestros jóvenes.",
+      "description": "La alcaldesa de València, María José Catalá, ha anunciado este martes que Microsoft va a instalar en la ciudad, en el edificio de la Harinera, su centro de operaciones para el desarrollo y testeo a nivel mundial de tecnología aplicada al deporte, el entretenimiento y la salud.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-16 02:30:00",
+      "pubDate": "2025-06-17 08:59:43",
       "pubDateTZ": "UTC",
-      "image_url": "https://imagenes.eltiempo.com/files/og_thumbnail//uploads/2024/11/26/67462fc68a4d5.png",
+      "image_url": "https://img.europapress.es/fotoweb/fotonoticia_20250617105943_120.jpg",
       "video_url": null,
-      "source_id": "eltiempocl",
-      "source_name": "Eltiempo",
-      "source_priority": 3806,
-      "source_url": "https://www.eltiempo.com",
-      "source_icon": "https://n.bytvi.com/eltiempocl.png",
+      "source_id": "europapress",
+      "source_name": "Europa Press",
+      "source_priority": 79621,
+      "source_url": "https://www.europapress.es",
+      "source_icon": "https://n.bytvi.com/europapress.png",
       "language": "spanish",
       "country": [
-        "singapore"
+        "spain"
       ],
       "category": [
-        "other"
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "747dc1c70e0a53351c9e1adf9ad8e0c2",
+      "title": "Catalá afirma que no hay \"ninguna posibilidad\" de que deje de ser alcaldesa de Valencia",
+      "link": "https://www.vozpopuli.com/espana/comunidad-valenciana/catala-afirma-que-no-hay-ninguna-posibilidad-de-que-deje-de-ser-alcaldesa-de-valencia.html",
+      "keywords": [
+        "comunidad valenciana"
+      ],
+      "creator": null,
+      "description": "Niega su futuro como candidata a la Generalitat y quiere volver a presentarse a las elecciones de 2027 porque \"no quiero dejar nada pendiente\"",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-17 08:51:24",
+      "pubDateTZ": "UTC",
+      "image_url": "https://d2x3b4b4wxwlxb.cloudfront.net/articulos/articulos-1770723.jpg",
+      "video_url": null,
+      "source_id": "vozpopuli",
+      "source_name": "Vozpópul",
+      "source_priority": 159064,
+      "source_url": "https://www.vozpopuli.com",
+      "source_icon": "https://n.bytvi.com/vozpopuli.png",
+      "language": "spanish",
+      "country": [
+        "spain"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "c6d9f430033e552cb5d9ee7604a109b1",
+      "title": "Colegio de Psicología de Santa Cruz de Tenerife alerta del \"abuso de pantallas\" en menores durante las vacaciones",
+      "link": "https://www.europapress.es/islas-canarias/noticia-colegio-psicologia-santa-cruz-tenerife-alerta-abuso-pantallas-menores-vacaciones-20250617104840.html",
+      "keywords": [
+        "islas canarias"
+      ],
+      "creator": null,
+      "description": "El Colegio Oficial de Psicología de Santa Cruz de Tenerife advierte del previsible \"abuso de pantallas\" en menores con la llegada del verano debido al aumento del tiempo libre como un factor de riesgo para incrementar el uso de estos dispositivos, produciendo así efectos negativos en su desarrollo emocional, físico y social.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-17 08:48:40",
+      "pubDateTZ": "UTC",
+      "image_url": "https://img.europapress.es/fotoweb/fotonoticia_20250617104840_120.jpg",
+      "video_url": null,
+      "source_id": "europapress",
+      "source_name": "Europa Press",
+      "source_priority": 79621,
+      "source_url": "https://www.europapress.es",
+      "source_icon": "https://n.bytvi.com/europapress.png",
+      "language": "spanish",
+      "country": [
+        "spain"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "a9ed0b747fd6a2825066e677ffe0df63",
+      "title": "Camilo Ibrahim Issa y el resurgir de los centros comerciales tras Black Friday",
+      "link": "https://www.alertadigital.com/2025/06/17/camilo-ibrahim-issa-y-el-resurgir-de-los-centros-comerciales-tras-black-friday/",
+      "keywords": [
+        "otras noticias"
+      ],
+      "creator": [
+        "REDACCION"
+      ],
+      "description": "Durante el más reciente Black Friday, los centros comerciales en Venezuela registraron un incremento del 30% en el número de visitantes en comparación con el año anterior, según datos de la Cámara Venezolana de Centros Comerciales (Cavececo). Dicho crecimiento refleja el importante resurgimiento que ha experimentado el sector en los últimos años, consolidándose como un [...]",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-17 08:41:31",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.alertadigital.com/wp-content/uploads/2025/06/phpHpFhhH685120c688a92-700x452.jpg",
+      "video_url": null,
+      "source_id": "alertadigital",
+      "source_name": "Alerta Digital",
+      "source_priority": 3021063,
+      "source_url": "http://www.alertadigital.com",
+      "source_icon": "https://n.bytvi.com/alertadigital.png",
+      "language": "spanish",
+      "country": [
+        "spain"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "4367ad4f7c8205005dcaf057a1d7d4ac",
+      "title": "Guía paso a paso para descargar Magis TV en Android, iOS, Fire Stick y más dispositivos",
+      "link": "https://www.elboletin.com/guia-paso-a-paso-para-descargar-magis-tv-en-android-ios-fire-stick-y-mas-dispositivos/",
+      "keywords": [
+        "tecnología",
+        "entretenimiento",
+        "aplicaciones",
+        "medios",
+        "hoy en la red",
+        "streaming",
+        "suscripción",
+        "contenido",
+        "dispositivos",
+        "instalación",
+        "consejos"
+      ],
+      "creator": [
+        "E.B."
+      ],
+      "description": "El entretenimiento digital se ha convertido en una parte esencial de la vida moderna. Las personas buscan cada vez más alternativas a la televisión tradicional, y Magis TV Oficial es una de las plataformas más destacadas en este campo. Su facilidad de uso, su amplia oferta de contenido en español y su compatibilidad con múltiples [...]La entrada Guía paso a paso para descargar Magis TV en Android, iOS, Fire Stick y más dispositivos se publicó primero en EL BOLETIN.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-17 08:33:30",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.elboletin.com/wp-content/uploads/2025/06/Captura-de-pantalla-2025-06-17-a-las-10.26.28.png",
+      "video_url": null,
+      "source_id": "elboletin",
+      "source_name": "El Boletin",
+      "source_priority": 272876,
+      "source_url": "http://www.elboletin.com",
+      "source_icon": null,
+      "language": "spanish",
+      "country": [
+        "spain"
+      ],
+      "category": [
+        "top"
       ],
       "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
       "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -100,5 +320,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750085893024
+  "timestamp": 1750194226478
 }

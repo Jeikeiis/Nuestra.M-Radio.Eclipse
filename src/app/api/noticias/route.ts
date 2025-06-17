@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const API_KEY = process.env.API_KEY as string;
-console.log('API_KEY en Vercel:', process.env.API_KEY);
+const API_KEY = process.env.API_USER_KEY as string;
+console.log('API_KEY en Vercel:', process.env.API_USER_KEY);
 const CACHE_FILE = path.join(process.cwd(), "noticias_cache.json");
 const CACHE_DURATION_MS = 1000 * 60 * 10; // 10 minutos
 
@@ -43,9 +43,9 @@ function cargarCacheDesdeArchivo() {
 }
 
 // --- Guardar cache a archivo ---
-function guardarCacheEnArchivo(noticias: Noticia[]) {
+function guardarCacheEnArchivo(noticias: Noticia[], pageSize: number = 4, maxPages: number = 5) {
   try {
-    const noticiasUnicas = deduplicarNoticias(noticias).slice(0, 20);
+    const noticiasUnicas = deduplicarNoticias(noticias).slice(0, maxPages * pageSize);
     fs.writeFileSync(
       CACHE_FILE,
       JSON.stringify({ noticias: noticiasUnicas, timestamp: Date.now() }, null, 2),
@@ -147,7 +147,7 @@ export async function GET(req: NextRequest) {
     const tema = searchParams.get("tema") || "noticias";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
-    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4); // Fijo en 4
+    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
     const MAX_PAGES = 5;
     function paginarNoticias(noticias: Noticia[]) {
       const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
@@ -170,7 +170,7 @@ export async function GET(req: NextRequest) {
 
     if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasGenerales(tema);
-      const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, 20);
+      const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, MAX_PAGES * pageSize);
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -178,7 +178,7 @@ export async function GET(req: NextRequest) {
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
-        guardarCacheEnArchivo(noticiasValidas);
+        guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
         huboCambio = true;
@@ -194,7 +194,7 @@ export async function GET(req: NextRequest) {
       (async () => {
         try {
           const { noticias: noticiasApi } = await fetchNoticiasGenerales(tema);
-          const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, 20);
+          const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, MAX_PAGES * pageSize);
           const titulosCache = new Set(cache.noticias.map(n => n.title));
           if (
             noticiasValidas.length > 0 &&
@@ -207,7 +207,7 @@ export async function GET(req: NextRequest) {
               errorMsg: undefined,
               lastValidNoticias: noticiasValidas,
             };
-            guardarCacheEnArchivo(noticiasValidas);
+            guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
           }
         } catch {}
       })();
@@ -223,7 +223,7 @@ export async function GET(req: NextRequest) {
       huboCambio,
       errorMsg: hayNoticias ? errorMsg : "No hay noticias disponibles.",
       fallback: fromCache,
-      apiStatus: fromCache ? 'cache-fijo' : 'api-directa',
+      apiStatus: errorMsg && !hayNoticias ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
       meta: {
         tema,
         page,
