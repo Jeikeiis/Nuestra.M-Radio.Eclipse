@@ -31,6 +31,23 @@ export default function ProgramacionFarandulaSection() {
   const reloadTimeout = useRef<NodeJS.Timeout | null>(null);
   const [fallback, setFallback] = useState(false);
 
+  // Utilidad para persistir y recuperar caché local
+  const CACHE_KEY = 'farandulaCacheLocal';
+  function guardarCacheLocal(noticias: Noticia[]) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify(noticias));
+    } catch {}
+  }
+  function cargarCacheLocal(): Noticia[] {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return [];
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
+  }
+
   const cargarNoticias = (forzar = false, nuevaPagina = page) => {
     if (forzar) {
       const ahora = Date.now();
@@ -58,20 +75,24 @@ export default function ProgramacionFarandulaSection() {
           return true;
         });
         noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
+        // --- NUEVO: combinar con caché local para rellenar hasta 5 páginas ---
+        let cacheLocal = cargarCacheLocal();
+        const titulosActuales = new Set<string>(noticiasValidas.map((n: Noticia) => n.title));
+        const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
+        let combinadas = [...noticiasValidas, ...viejasNoRepetidas];
+        combinadas = combinadas.slice(0, 5 * pageSize);
+        guardarCacheLocal(combinadas);
         setNoticias(noticiasValidas);
-        // Siempre actualiza previas si hay datos, aunque haya error
-        if (noticiasValidas.length > 0) {
-          setNoticiasPrevias(noticiasValidas);
-        }
+        setNoticiasPrevias(viejasNoRepetidas);
         setCached(data.cached);
         setTotal(data.meta?.total || 0);
-        setMaxPages(data.meta?.maxPages || 5);
+        setMaxPages(Math.max(1, Math.ceil(combinadas.length / pageSize)));
         setFallback(!!data.fallback);
         setLoading(false);
         setIsReloading(false);
         if (data.errorMsg) {
           setError(data.errorMsg);
-        } else if (!noticiasValidas.length) {
+        } else if (!noticiasValidas.length && !viejasNoRepetidas.length) {
           setError("No se encontraron noticias de farándula relevantes.");
         }
         if (forzar && data.cached === false) {
@@ -90,18 +111,11 @@ export default function ProgramacionFarandulaSection() {
 
   // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo
   function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
-    // Unir ambos caches sin duplicados (prioridad: nuevas)
-    const titulos = new Set<string>();
     const todas = [
       ...noticiasNuevas,
-      ...noticiasViejas.filter(n => !noticiasNuevas.some(n2 => n2.title === n.title))
+      ...noticiasViejas
     ];
-    const maxNoticias = 5 * pageSize;
-    const todasLimitadas = todas.slice(0, maxNoticias);
-    // Calcular páginas reales
-    const totalUnicos = todasLimitadas.length;
-    const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
-    if (page > paginasReales) setPage(paginasReales);
+    const todasLimitadas = todas.slice(0, 5 * pageSize);
     const inicio = (pagina - 1) * pageSize;
     const fin = inicio + pageSize;
     return todasLimitadas.slice(inicio, fin);
