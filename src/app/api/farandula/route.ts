@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const API_KEY = process.env.API_USER_KEY as string;
+const API_KEY = process.env.API_KEY as string;
 const CACHE_FILE = path.resolve(process.cwd(), "farandula-cache.json");
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 
