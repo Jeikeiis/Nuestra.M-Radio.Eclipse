@@ -32,6 +32,7 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 
+// --- Cargar cache desde archivo al iniciar ---
 function cargarCacheDesdeArchivo() {
   try {
     if (fs.existsSync(CACHE_FILE)) {
