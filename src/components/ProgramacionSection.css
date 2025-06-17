@@ -188,13 +188,16 @@ html.dark {
 }
 
 .noticia-description {
-  color: var(--program-text);
+  background: var(--program-item-bg);
   font-size: 1.01rem;
   opacity: 0.93;
   margin-top: 0.1rem;
   line-height: 1.5;
   padding: 1em 1.3em;
-  border-radius: 0.6em;
+  border-radius: 0.7em;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  border: 1.5px solid var(--program-border);
+  transition: background 0.2s, color 0.2s;
 }
 
 @media (max-width: 640px) {

@@ -30,7 +30,7 @@
 
 .clasicos-desc-main {
   font-size: 1.1rem;
-  color: var(--foreground);
+  color: var(--primary);
   text-align: left;
   margin-bottom: 2rem;
   max-width: 36rem;
