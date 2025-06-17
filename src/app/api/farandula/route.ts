@@ -74,12 +74,12 @@ async function registrarRecargaForzada(ip: string, region: string) {
 
 async function fetchNoticiasFarandula(region: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
   // Usar variable de entorno para la API key
-  const NEWS_API_KEY = process.env.NEWSDATA_API_KEY || '';
-  if (!NEWS_API_KEY) {
-    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (NEWSDATA_API_KEY).' };
+  const API_KEY = process.env.API_KEY || '';
+  if (!API_KEY) {
+    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_KEY).' };
   }
   // Filtro fijo para farándula/entretenimiento en Argentina y Uruguay
-  const url = `https://newsdata.io/api/1/latest?apikey=${NEWS_API_KEY}&q=Entretenimiento&country=ar,uy`;
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Entretenimiento&country=ar,uy`;
   try {
     const res = await fetch(url);
     if (!res.ok) {

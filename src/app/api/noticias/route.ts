@@ -116,11 +116,11 @@ function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
 // --- Fetch noticias generales ---
 async function fetchNoticiasGenerales(tema: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
   // Usar variable de entorno para la API key
-  const NEWS_API_KEY = process.env.NEWSDATA_API_KEY || '';
-  if (!NEWS_API_KEY) {
-    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (NEWSDATA_API_KEY).' };
+  const API_KEY = process.env.API_KEY || '';
+  if (!API_KEY) {
+    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_KEY).' };
   }
-  const url = `https://newsdata.io/api/1/latest?apikey=${NEWS_API_KEY}&q=Noticias%20Uruguay&country=uy,ar`;
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Noticias%20Uruguay&country=uy,ar`;
   try {
     const res = await fetch(url);
     if (!res.ok) {
