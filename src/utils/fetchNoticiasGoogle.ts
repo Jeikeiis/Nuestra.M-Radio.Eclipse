@@ -1,4 +1,5 @@
 const API_KEY = process.env.API_USER_KEY || ""; // Ahora toma la API key de la variable de entorno
+console.log("[DEBUG] API_USER_KEY:", process.env.API_USER_KEY);
 
 export async function fetchNoticiasNewsData(region: string) {
   // Usa el endpoint /latest y la nueva API key
