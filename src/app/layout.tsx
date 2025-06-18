@@ -4,6 +4,7 @@ import { createContext, useRef, useState, useEffect } from "react";
 import AppHeader from "../components/AppHeader";
 import AppFooter from "../components/AppFooter";
 import RadioDashboard from "../components/RadioDashboard";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 
 // Nuevo contexto solo para el estado de hidratación
 export const HydrationContext = createContext(false);
@@ -113,19 +114,8 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/webp" href="/favicon.webp" />
-        {/* Google Analytics GA4 */}
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NZ314JCHX"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-1NZ314JCHX');
-            `,
-          }}
-        />
+        {/* Google Analytics profesional */}
+        <GoogleAnalytics />
         {/* Preload imágenes críticas */}
         {/* <link rel="preload" as="image" href="/NuestraManana2.0.webp" /> */}
         {/* <link rel="preload" as="image" href="/RadioEclipse2.0.webp" /> */}
