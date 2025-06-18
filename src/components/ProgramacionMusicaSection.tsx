@@ -1,12 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
-type Noticia = {
-  title: string;
-  link: string;
-  source_id?: string;
-  pubDate?: string;
-  description?: string;
-};
+import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia, normalizeText, areSimilar } from "@/utils/noticiasUtils";
 
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
@@ -79,7 +72,7 @@ export default function ProgramacionMusicaSection() {
         let cacheLocal = cargarCacheLocal();
         const titulosActuales = new Set<string>(noticiasValidas.map((n: Noticia) => n.title));
         const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-        let combinadas = [...noticiasValidas, ...viejasNoRepetidas];
+        let combinadas = dedupNoticiasFrontend([...noticiasValidas, ...viejasNoRepetidas]);
         combinadas = combinadas.slice(0, 5 * pageSize);
         guardarCacheLocal(combinadas);
         setNoticias(noticiasValidas);
@@ -537,4 +530,17 @@ export default function ProgramacionMusicaSection() {
       `}</style>
     </div>
   );
+}
+
+function dedupNoticiasFrontend(noticias: Noticia[]): Noticia[] {
+  const vistos = new Set<string>();
+  const resultado: Noticia[] = [];
+  for (const n of noticias) {
+    const key = normalizeText(n.title) + "|" + normalizeText(n.link);
+    if (vistos.has(key)) continue;
+    if (resultado.some((prev) => areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || ''))) continue;
+    vistos.add(key);
+    resultado.push(n);
+  }
+  return resultado;
 }

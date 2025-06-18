@@ -1,18 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia } from "@/utils/noticiasUtils";
 
-const API_KEY = process.env.API_USER_KEY as string;
+const API_KEY = process.env.API_KEY || '';
 const CACHE_FILE = path.resolve(process.cwd(), "musica-cache.json");
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
-
-type Noticia = {
-  title: string;
-  link: string;
-  source_id?: string;
-  pubDate?: string;
-  description?: string;
-};
 
 type NoticiasCache = {
   noticias: Noticia[];
@@ -21,7 +14,6 @@ type NoticiasCache = {
   lastValidNoticias?: Noticia[];
 };
 
-// --- Estado de caché en memoria ---
 let cache: NoticiasCache = {
   noticias: [],
   timestamp: 0,
@@ -29,14 +21,12 @@ let cache: NoticiasCache = {
   lastValidNoticias: [],
 };
 
-// --- Cargar cache desde archivo al iniciar ---
 function cargarCacheDesdeArchivo() {
   try {
     if (fs.existsSync(CACHE_FILE)) {
       const data = fs.readFileSync(CACHE_FILE, "utf-8");
       const json = JSON.parse(data);
       if (Array.isArray(json.noticias)) {
-        // Limitar a 20 artículos únicos
         const noticiasUnicas = deduplicarNoticias(json.noticias).slice(0, 20);
         cache.noticias = noticiasUnicas;
         cache.timestamp = json.timestamp || Date.now();
@@ -46,7 +36,6 @@ function cargarCacheDesdeArchivo() {
   } catch {}
 }
 
-// --- Guardar cache a archivo ---
 function guardarCacheEnArchivo(noticias: Noticia[], pageSize: number = 4, maxPages: number = 5) {
   try {
     const noticiasUnicas = deduplicarNoticias(noticias).slice(0, maxPages * pageSize);
@@ -58,38 +47,12 @@ function guardarCacheEnArchivo(noticias: Noticia[], pageSize: number = 4, maxPag
   } catch {}
 }
 
-// --- Deduplicar noticias por título y link ---
-function deduplicarNoticias(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
-  return noticias.filter(n => {
-    const key = normalizeText(n.title) + '|' + normalizeText(n.link);
-    if (vistos.has(key)) return false;
-    vistos.add(key);
-    return true;
-  });
-}
-
-// Cargar cache al iniciar
 cargarCacheDesdeArchivo();
 
-function getIp(req: NextRequest): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0].trim();
-  // @ts-ignore
-  return req.ip || "127.0.0.1";
-}
-
-async function registrarRecargaForzada(ip: string, tema: string) {
-  // No se implementa almacenamiento en este caso
-}
-
-async function fetchNoticiasMusica(tema: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
-  // Usar variable de entorno para la API key
-  const API_KEY = process.env.API_KEY || '';
+async function fetchNoticiasMusica(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
   if (!API_KEY) {
     return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_KEY).' };
   }
-  // Filtro fijo para música en Argentina y Uruguay
   const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=musica&country=ar,uy`;
   try {
     const res = await fetch(url);
@@ -110,57 +73,10 @@ async function fetchNoticiasMusica(tema: string): Promise<{ noticias: Noticia[];
   }
 }
 
-function normalizeText(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .replace(/[^\w\s]/gi, '')
-    .trim();
-}
-
-function areSimilar(a: string, b: string): boolean {
-  if (!a || !b) return false;
-  a = normalizeText(a);
-  b = normalizeText(b);
-  if (a === b) return true;
-  const aWords = new Set(a.split(' '));
-  const bWords = new Set(b.split(' '));
-  const intersection = [...aWords].filter(x => bWords.has(x));
-  return intersection.length >= Math.min(aWords.size, bWords.size) * 0.7;
-}
-
-function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
-  const recientes: Noticia[] = [];
-  const ahora = Date.now();
-  return noticias
-    .filter(n => n && n.title && n.link && n.title.length > 15)
-    .filter(n => {
-      const titulo = n.title.toLowerCase();
-      if (titulo.includes('resumen') || titulo.includes('video:') || titulo.match(/^noticias(\s|:|$)/i)) return false;
-      if (!n.description || n.description.length < 40) return false;
-      if (n.pubDate) {
-        const fecha = new Date(n.pubDate).getTime();
-        if (isNaN(fecha) || ahora - fecha > 7 * 24 * 60 * 60 * 1000) return false;
-      }
-      const key = normalizeText(n.title) + '|' + normalizeText(n.link);
-      if (vistos.has(key)) return false;
-      for (const prev of recientes) {
-        if (areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || '')) return false;
-      }
-      vistos.add(key);
-      recientes.push(n);
-      return true;
-    })
-    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0))
-    .slice(0, 30);
-}
-
 export async function GET(req: NextRequest) {
   try {
     const now = Date.now();
     const { searchParams } = new URL(req.url);
-    const tema = searchParams.get("tema") || "Musica";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
     const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
@@ -181,11 +97,10 @@ export async function GET(req: NextRequest) {
     let fromCache = true;
     let huboCambio = false;
     let noticiasParaResponder: Noticia[] = [];
-
     const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
 
     if (cacheExpirado) {
-      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica(tema);
+      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasMusica();
       const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, MAX_PAGES * pageSize);
       if (noticiasValidas.length > 0) {
         cache = {
@@ -209,7 +124,7 @@ export async function GET(req: NextRequest) {
       // --- Actualización en segundo plano, NO afecta la respuesta actual ---
       (async () => {
         try {
-          const { noticias: noticiasApi } = await fetchNoticiasMusica(tema);
+          const { noticias: noticiasApi } = await fetchNoticiasMusica();
           const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, MAX_PAGES * pageSize);
           const titulosCache = new Set(cache.noticias.map(n => n.title));
           if (
@@ -229,7 +144,6 @@ export async function GET(req: NextRequest) {
       })();
     }
 
-    // No mostrar páginas vacías
     const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
     const hayNoticias = noticiasPaginadas.length > 0;
 
@@ -241,7 +155,6 @@ export async function GET(req: NextRequest) {
       fallback: fromCache,
       apiStatus: errorMsg && !hayNoticias ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
       meta: {
-        tema,
         page,
         pageSize,
         total: totalNoticias,
@@ -272,5 +185,3 @@ export async function GET_CACHE_COUNT(req: NextRequest) {
     cacheViejo: titulosViejo.size
   });
 }
-
-console.log('API_KEY en Vercel:', process.env.API_USER_KEY);

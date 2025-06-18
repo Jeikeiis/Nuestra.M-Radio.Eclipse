@@ -1,18 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia } from "@/utils/noticiasUtils";
 
 const API_KEY = process.env.API_USER_KEY as string;
 console.log('API_KEY en Vercel:', process.env.API_USER_KEY);
 const CACHE_FILE = path.join(process.cwd(), "noticias_cache.json");
 const CACHE_DURATION_MS = 1000 * 60 * 10; // 10 minutos
-
-type Noticia = {
-  title: string;
-  link: string;
-  description?: string;
-  pubDate?: string;
-};
 
 let cache: {
   noticias: Noticia[];
@@ -33,6 +27,7 @@ function cargarCacheDesdeArchivo() {
       const data = fs.readFileSync(CACHE_FILE, "utf-8");
       const json = JSON.parse(data);
       if (Array.isArray(json.noticias)) {
+        // Limitar a 20 artículos únicos
         const noticiasUnicas = deduplicarNoticias(json.noticias).slice(0, 20);
         cache.noticias = noticiasUnicas;
         cache.timestamp = json.timestamp || Date.now();
@@ -54,18 +49,9 @@ function guardarCacheEnArchivo(noticias: Noticia[], pageSize: number = 4, maxPag
   } catch {}
 }
 
-// --- Deduplicar noticias por título y link ---
-function deduplicarNoticias(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
-  return noticias.filter(n => {
-    const key = normalizeText(n.title) + '|' + normalizeText(n.link);
-    if (vistos.has(key)) return false;
-    vistos.add(key);
-    return true;
-  });
-}
+// Cargar cache al iniciar
+cargarCacheDesdeArchivo();
 
-// --- Normalizar texto ---
 function normalizeText(text: string): string {
   return text
     .toLowerCase()
@@ -74,7 +60,6 @@ function normalizeText(text: string): string {
     .trim();
 }
 
-// --- Filtrar y limpiar noticias ---
 function areSimilar(a: string, b: string): boolean {
   if (!a || !b) return false;
   a = normalizeText(a);
@@ -86,32 +71,7 @@ function areSimilar(a: string, b: string): boolean {
   return intersection.length >= Math.min(aWords.size, bWords.size) * 0.7;
 }
 
-function filtrarYLimpiarNoticias(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
-  const recientes: Noticia[] = [];
-  const ahora = Date.now();
-  return noticias
-    .filter(n => n && n.title && n.link && n.title.length > 15)
-    .filter(n => {
-      const titulo = n.title.toLowerCase();
-      if (titulo.includes('resumen') || titulo.includes('video:') || titulo.match(/^noticias(\s|:|$)/i)) return false;
-      if (!n.description || n.description.length < 40) return false;
-      if (n.pubDate) {
-        const fecha = new Date(n.pubDate).getTime();
-        if (isNaN(fecha) || ahora - fecha > 7 * 24 * 60 * 60 * 1000) return false;
-      }
-      const key = normalizeText(n.title) + '|' + normalizeText(n.link);
-      if (vistos.has(key)) return false;
-      for (const prev of recientes) {
-        if (areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || '')) return false;
-      }
-      vistos.add(key);
-      recientes.push(n);
-      return true;
-    })
-    .sort((a, b) => (b.description ? 1 : 0) - (a.description ? 1 : 0))
-    .slice(0, 30);
-}
+// Elimino la función duplicada, ya que ahora se importa desde '@/utils/noticiasUtils'
 
 // --- Fetch noticias generales ---
 async function fetchNoticiasGenerales(tema: string): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
@@ -139,9 +99,6 @@ async function fetchNoticiasGenerales(tema: string): Promise<{ noticias: Noticia
     return { noticias: [], errorMsg: `Error de red o API: ${e?.message || e}` };
   }
 }
-
-// --- Cargar cache al iniciar ---
-cargarCacheDesdeArchivo();
 
 // --- Endpoint principal GET ---
 export async function GET(req: NextRequest) {

@@ -1,12 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
-type Noticia = {
-  title: string;
-  link: string;
-  source_id?: string;
-  pubDate?: string;
-  description?: string;
-};
+import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia, normalizeText, areSimilar } from "@/utils/noticiasUtils";
 
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
@@ -79,7 +72,7 @@ export default function ProgramacionFarandulaSection() {
         let cacheLocal = cargarCacheLocal();
         const titulosActuales = new Set<string>(noticiasValidas.map((n: Noticia) => n.title));
         const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-        let combinadas = [...noticiasValidas, ...viejasNoRepetidas];
+        let combinadas = dedupNoticiasFrontend([...noticiasValidas, ...viejasNoRepetidas]);
         combinadas = combinadas.slice(0, 5 * pageSize);
         guardarCacheLocal(combinadas);
         setNoticias(noticiasValidas);
@@ -109,20 +102,48 @@ export default function ProgramacionFarandulaSection() {
       });
   };
 
-  // Recuperar caché local
   useEffect(() => {
-    const cacheLocal = JSON.parse(localStorage.getItem('farandula_cache') || '[]');
-    // Set de títulos de las noticias nuevas
-    const titulosActuales = new Set(noticias.map((n: Noticia) => n.title));
-    // Filtrar viejas no repetidas
-    const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-    // Combinar nuevas y viejas, sin duplicados
-    let combinadas = [...noticias, ...viejasNoRepetidas];
-    combinadas = combinadas.slice(0, 5 * pageSize);
-    // Guardar en caché local
-    localStorage.setItem('farandula_cache', JSON.stringify(combinadas));
-    setNoticiasPrevias(viejasNoRepetidas);
-  }, [noticias, pageSize]);
+    let isMounted = true;
+    cargarNoticias();
+    const interval = setInterval(() => {
+      if (isMounted) cargarNoticias();
+    }, 1200000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  // Unificación de lógica con ProgramacionMusicaSection
+  // (filtrado, paginación, recarga manual, feedback visual, placeholders, etc.)
+  // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo
+  function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
+    const todas = [
+      ...noticiasNuevas,
+      ...noticiasViejas
+    ];
+    const todasLimitadas = todas.slice(0, 5 * pageSize);
+    const inicio = (pagina - 1) * pageSize;
+    const fin = inicio + pageSize;
+    return todasLimitadas.slice(inicio, fin);
+  }
+
+  // Actualiza maxPages dinámicamente según los artículos únicos
+  useEffect(() => {
+    const titulos = new Set<string>();
+    const todas = [
+      ...noticias,
+      ...noticiasPrevias.filter(n => !noticias.some(n2 => n2.title === n.title))
+    ];
+    const maxNoticias = 5 * pageSize;
+    const todasLimitadas = todas.slice(0, maxNoticias);
+    const totalUnicos = todasLimitadas.length;
+    const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
+    setMaxPages(paginasReales);
+    if (page > paginasReales) setPage(paginasReales);
+  }, [noticias, noticiasPrevias, pageSize]);
 
   const esAdmin = typeof window !== 'undefined' && localStorage.getItem('adminNoticias') === '1';
 
@@ -399,7 +420,7 @@ export default function ProgramacionFarandulaSection() {
   }
 
   // Renderizado: usa la función para llenar la página
-  const noticiasPagina = obtenerNoticiasPagina(page);
+  const noticiasPagina = obtenerNoticiasPagina(noticias, noticiasPrevias, page, pageSize);
 
   return (
     <div className="programacion-farandula-section" style={{position:'relative'}}>
@@ -510,4 +531,17 @@ export default function ProgramacionFarandulaSection() {
       `}</style>
     </div>
   );
+}
+
+function dedupNoticiasFrontend(noticias: Noticia[]): Noticia[] {
+  const vistos = new Set<string>();
+  const resultado: Noticia[] = [];
+  for (const n of noticias) {
+    const key = normalizeText(n.title) + "|" + normalizeText(n.link);
+    if (vistos.has(key)) continue;
+    if (resultado.some((prev) => areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || ''))) continue;
+    vistos.add(key);
+    resultado.push(n);
+  }
+  return resultado;
 }

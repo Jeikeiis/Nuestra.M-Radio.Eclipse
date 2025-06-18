@@ -1,12 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
-type Noticia = {
-  title: string;
-  link: string;
-  source_id?: string;
-  pubDate?: string;
-  description?: string;
-};
+import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia, normalizeText, areSimilar } from "@/utils/noticiasUtils";
 
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
@@ -77,14 +70,13 @@ export default function ProgramacionNoticiasSection() {
         noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
         // --- NUEVO: combinar con caché local para rellenar hasta 5 páginas ---
         let cacheLocal = cargarCacheLocal();
-        // Quitar duplicados (por título)
         const titulosActuales = new Set<string>(noticiasValidas.map((n: Noticia) => n.title));
         const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-        let combinadas = [...noticiasValidas, ...viejasNoRepetidas];
+        let combinadas = dedupNoticiasFrontend([...noticiasValidas, ...viejasNoRepetidas]);
         combinadas = combinadas.slice(0, 5 * pageSize);
         guardarCacheLocal(combinadas);
         setNoticias(noticiasValidas);
-        setNoticiasPrevias(viejasNoRepetidas); // solo las viejas no repetidas
+        setNoticiasPrevias(viejasNoRepetidas);
         setCached(data.cached);
         setTotal(data.meta?.total || 0);
         setMaxPages(Math.max(1, Math.ceil(combinadas.length / pageSize)));
@@ -105,48 +97,10 @@ export default function ProgramacionNoticiasSection() {
       .catch((e) => {
         setError(e.message || "No se pudieron obtener noticias.");
         setLoading(false);
+        setIsReloading(false);
+        setFallback(false);
       });
   };
-
-  useEffect(() => {
-    // Recuperar caché local
-    const cacheLocal = JSON.parse(localStorage.getItem('noticias_cache') || '[]');
-    // Set de títulos de las noticias nuevas
-    const titulosActuales = new Set(noticias.map((n: Noticia) => n.title));
-    // Filtrar viejas no repetidas
-    const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-    // Combinar nuevas y viejas, sin duplicados
-    let combinadas = [...noticias, ...viejasNoRepetidas];
-    combinadas = combinadas.slice(0, 5 * pageSize);
-    // Guardar en caché local
-    localStorage.setItem('noticias_cache', JSON.stringify(combinadas));
-    setNoticiasPrevias(viejasNoRepetidas);
-  }, [noticias, pageSize]);
-
-  function obtenerNoticiasPagina(pagina: number) {
-    const cacheLocal = JSON.parse(localStorage.getItem('noticias_cache') || '[]');
-    const titulosActuales = new Set(noticias.map((n: Noticia) => n.title));
-    const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-    let combinadas = [...noticias, ...viejasNoRepetidas];
-    combinadas = combinadas.slice(0, 5 * pageSize);
-    const inicio = (pagina - 1) * pageSize;
-    const fin = inicio + pageSize;
-    return combinadas.slice(inicio, fin);
-  }
-
-  useEffect(() => {
-    const todas = [
-      ...noticias,
-      ...noticiasPrevias.filter(n => !noticias.some(n2 => n2.title === n.title))
-    ];
-    const maxNoticias = 5 * pageSize;
-    const todasLimitadas = todas.slice(0, maxNoticias);
-    const totalUnicos = todasLimitadas.length;
-    const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
-    setMaxPages(paginasReales);
-    if (page > paginasReales) setPage(paginasReales);
-    // eslint-disable-next-line
-  }, [noticias, noticiasPrevias, pageSize, page]);
 
   useEffect(() => {
     let isMounted = true;
@@ -161,6 +115,35 @@ export default function ProgramacionNoticiasSection() {
     };
     // eslint-disable-next-line
   }, []);
+
+  // Unificación de lógica con ProgramacionMusicaSection
+  // (filtrado, paginación, recarga manual, feedback visual, placeholders, etc.)
+  // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo
+  function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
+    const todas = [
+      ...noticiasNuevas,
+      ...noticiasViejas
+    ];
+    const todasLimitadas = todas.slice(0, 5 * pageSize);
+    const inicio = (pagina - 1) * pageSize;
+    const fin = inicio + pageSize;
+    return todasLimitadas.slice(inicio, fin);
+  }
+
+  // Actualiza maxPages dinámicamente según los artículos únicos
+  useEffect(() => {
+    const titulos = new Set<string>();
+    const todas = [
+      ...noticias,
+      ...noticiasPrevias.filter(n => !noticias.some(n2 => n2.title === n.title))
+    ];
+    const maxNoticias = 5 * pageSize;
+    const todasLimitadas = todas.slice(0, maxNoticias);
+    const totalUnicos = todasLimitadas.length;
+    const paginasReales = Math.max(1, Math.ceil(totalUnicos / pageSize));
+    setMaxPages(paginasReales);
+    if (page > paginasReales) setPage(paginasReales);
+  }, [noticias, noticiasPrevias, pageSize, page]);
 
   useEffect(() => {
     cargarNoticias(false, page);
@@ -558,4 +541,17 @@ export default function ProgramacionNoticiasSection() {
       `}</style>
     </div>
   );
+}
+
+function dedupNoticiasFrontend(noticias: Noticia[]): Noticia[] {
+  const vistos = new Set<string>();
+  const resultado: Noticia[] = [];
+  for (const n of noticias) {
+    const key = normalizeText(n.title) + "|" + normalizeText(n.link);
+    if (vistos.has(key)) continue;
+    if (resultado.some((prev) => areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || ''))) continue;
+    vistos.add(key);
+    resultado.push(n);
+  }
+  return resultado;
 }
