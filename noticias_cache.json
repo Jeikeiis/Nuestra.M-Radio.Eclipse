@@ -1,30 +1,30 @@
 {
   "noticias": [
     {
-      "article_id": "efe6dc692cccef865c89c2dde148859e",
-      "title": "Con una novedad en el equipo titular, Russo ya piensa en el partido de Boca ante el Bayern Munich",
-      "link": "https://www.elterritorio.com.ar/noticias/2025/06/18/857668-con-una-novedad-en-el-equipo-titular-russo-ya-piensa-en-el-partido-de-boca-ante-el-bayern-munich",
-      "keywords": null,
-      "creator": [
-        "redaccion@elterritorio.com.ar (El Territorio)"
+      "article_id": "c83235cf7addbd2f239026c16a99e697",
+      "title": "Festeja Orfila: Zalazar será el primer refuerzo",
+      "link": "https://www.eldia.com/nota/2025-6-19-1-41-18-festeja-orfila-zalazar-sera-el-primer-refuerzo-deportes",
+      "keywords": [
+        "deportes"
       ],
-      "description": "Después del empate ante Benfica, el DT del Xeneize recupera soldados para el choque decisivo por el Mundial de Clubes.",
+      "creator": null,
+      "description": "El ex Boca se sumaría mañana a las prácticas. Un extremo, un volante y un mediapunta, las prioridades en este mercado de pases",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 13:30:32",
+      "pubDate": "2025-06-19 08:46:56",
       "pubDateTZ": "UTC",
-      "image_url": "https://elterritorio-s3.cdn.net.ar/s3i233/2025/06/elterritorio/images/02/08/76/2087684_0f3e4cba5d81fcea29983c67e1ea09f922ad1eadf68990dd5201ce5e09bedae8/md.webp",
+      "image_url": "https://cdn1.eldia.com/062025/1750308322529.jpg",
       "video_url": null,
-      "source_id": "elterritorio",
-      "source_name": "El Territorio",
-      "source_priority": 1548937,
-      "source_url": "https://www.elterritorio.com.ar",
-      "source_icon": "https://n.bytvi.com/elterritorio.png",
+      "source_id": "eldia_ar",
+      "source_name": "Eldia",
+      "source_priority": 51608,
+      "source_url": "https://www.eldia.com",
+      "source_icon": "https://n.bytvi.com/eldia_ar.png",
       "language": "spanish",
       "country": [
         "argentina"
       ],
       "category": [
-        "sports"
+        "top"
       ],
       "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
       "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -34,16 +34,159 @@
       "duplicate": false
     },
     {
-      "article_id": "d2c7a72ccfdccfb08d00517a6fb69db6",
-      "title": "Dólar: cotización de apertura hoy 18 de junio en Uruguay",
-      "link": "https://www.infobae.com/noticias/2025/06/18/dolar-cotizacion-de-apertura-hoy-18-de-junio-en-uruguay/",
+      "article_id": "2f71f0dd4f71ce971b8cf026977e345a",
+      "title": "Rating. Cuánto midió la gala de eliminación de Gran Hermano que dejó afuera a un personaje clave",
+      "link": "https://www.lanacion.com.ar/espectaculos/television/rating-cuanto-midio-la-gala-de-eliminacion-de-gran-hermano-que-dejo-afuera-a-un-personaje-clave-nid19062025/",
+      "keywords": [
+        "televisión"
+      ],
+      "creator": [
+        "Ariel López Cucatto"
+      ],
+      "description": "Falta menos de una semana para que se defina quién es el ganador de Gran Hermano y el público con su voto dejó el camino a un personaje clave",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 03:51:43",
+      "pubDateTZ": "UTC",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/MC4WHO7FSZF7FGOFUTCBV5MJRA.jpg?auth=e2753a54d2ac57d1acab50f55c4b8af6ec5a5a71e2e6e4e130dd236c687a6e58&height=607&smart=true&width=1143",
+      "video_url": null,
+      "source_id": "lanacion",
+      "source_name": "La Nacion",
+      "source_priority": 7204,
+      "source_url": "https://www.lanacion.com.ar",
+      "source_icon": "https://n.bytvi.com/lanacion.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "47e0391e9cd79e6e4d322151f3e966f1",
+      "title": "Se conocieron los cuatro finalistas de Gran Hermano: quién fue la última jugadora en abandonar la casa",
+      "link": "https://www.infobae.com/teleshow/2025/06/19/se-conocieron-los-cuatro-finalistas-de-gran-hermano-quien-fue-la-ultima-jugadora-en-abandonar-la-casa/",
+      "keywords": null,
+      "creator": [
+        "Sol de María"
+      ],
+      "description": "Selva quedó fuera de la gran final del reality tras perder en la votación. Así, quedó definido quienes buscarán consagrarse como ganadores",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 02:31:38",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/JQD5TYPLIZCRFLJBYVV5YADHK4.png?auth=6cbbeafaa60b2271e26e069f3a141d0bff4fc71ed6289dc2b1dbeb651eea705f&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "90e95fee67e87c0decb5e923e05a7eec",
+      "title": "Gran Hermano: quién fue eliminado este miércoles 18 de junio",
+      "link": "https://www.clarin.com/fama/gran-hermano-eliminado-miercoles-18-junio_0_mcg68ZojR1.html",
+      "keywords": null,
+      "creator": [
+        "Clarin.com - Home"
+      ],
+      "description": "Un nuevo participante dejó la casa por decisión del público.Quiénes son los cuatro semifinalistas.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 01:58:08",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.clarin.com/img/2025/06/18/_lzQsC3l1_2000x1500__1.jpg",
+      "video_url": null,
+      "source_id": "clarin",
+      "source_name": "Clarin",
+      "source_priority": 1115,
+      "source_url": "https://www.clarin.com",
+      "source_icon": "https://n.bytvi.com/clarin.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "other"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "f31992f256bfd3b3e7fbd273fc0d32b0",
+      "title": "Mundial de Clubes 2025: Javier Gil Navarro confirmó al árbitro y sus ayudantes del encuentro entre River y Monterrey",
+      "link": "https://elintransigente.com/2025/06/mundial-de-clubes-2025-javier-gil-navarro-confirmo-al-arbitro-y-sus-ayudantes-del-encuentro-entre-river-y-monterrey/",
+      "keywords": [
+        "rayados de monterrey",
+        "river plate",
+        "river",
+        "javier gil navarro",
+        "mundial de clubes"
+      ],
+      "creator": [
+        "Mariano Huguet"
+      ],
+      "description": "Los Rayados igualaron ante Inter por 1 a 1. Por lo que ambos equipos llegan al duelo con confianza. The post Mundial de Clubes 2025: Javier Gil Navarro confirmó al árbitro y sus ayudantes del encuentro entre River y Monterrey appeared first on El Intransigente.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-18 22:09:41",
+      "pubDateTZ": "UTC",
+      "image_url": "https://elintransigente.com/wp-content/uploads/2025/06/River-4.jpg",
+      "video_url": null,
+      "source_id": "elintransigente",
+      "source_name": "El Intransigente",
+      "source_priority": 3446332,
+      "source_url": "https://elintransigente.com",
+      "source_icon": "https://n.bytvi.com/elintransigente.jpg",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "55a3943b06b74c6033bce99b5eb9a612",
+      "title": "Uruguay: cotización de cierre del dólar hoy 18 de junio de USD a UYU",
+      "link": "https://www.infobae.com/noticias/2025/06/18/uruguay-cotizacion-de-cierre-del-dolar-hoy-18-de-junio-de-usd-a-uyu/",
       "keywords": null,
       "creator": [
         "Infobae Noticias"
       ],
-      "description": "Este fue el comportamiento de la divisa estadounidense durante los primeros minutos de la jornada",
+      "description": "Este es el comportamiento de la divisa estadounidense durante los últimos minutos de la jornada",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 12:16:26",
+      "pubDate": "2025-06-18 18:16:13",
       "pubDateTZ": "UTC",
       "image_url": "https://www.infobae.com/resizer/v2/ZA43P5V52VD2BDOYZI5RSADS5Y.jpg?auth=796f0117df61c7f7148549b76d628aed2b1041f924cec1fbd758323b4d24f74e&height=1080&smart=true&width=1920",
       "video_url": null,
@@ -70,16 +213,18 @@
       "duplicate": false
     },
     {
-      "article_id": "866fcd0f96651475bf64a086b223faff",
-      "title": "Real Madrid tendrá su debut en el Mundial de Clubes frente al Al Hilal: hora, TV y formaciones",
-      "link": "https://www.infobae.com/deportes/2025/06/18/real-madrid-tendra-su-debut-en-el-mundial-de-clubes-frente-al-al-hilal-hora-tv-y-formaciones/",
+      "article_id": "cc787b5db7a18c92b8bfebec1b7e1de7",
+      "title": "Euro: cotización de cierre hoy 18 de junio en Uruguay",
+      "link": "https://www.infobae.com/noticias/2025/06/18/euro-cotizacion-de-cierre-hoy-18-de-junio-en-uruguay/",
       "keywords": null,
-      "creator": null,
-      "description": "En lo que será el estreno de Xabi Alonso como DT, el Merengue comenzará su camino en el Grupo H. Transmite DAZN",
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Este fue el comportamiento de la divisa europea durante los últimos minutos de la jornada",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 10:48:17",
+      "pubDate": "2025-06-18 18:15:39",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/JZQVSUAPKNF4LGBY4IHBOUTAYQ.jpg?auth=909ce82edbc08973836b4ed020197d3e8a78704061f289dddede687b1f25e377&height=1080&smart=true&width=1920",
+      "image_url": "https://www.infobae.com/resizer/v2/A4A3OEDLTJC5XDDWPWGF5JTO2E.jpg?auth=35f92c6bccaa8c598198f50d04059aadaec88eb013ef0ee6d251b7f7854928ca&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -104,124 +249,18 @@
       "duplicate": false
     },
     {
-      "article_id": "1efc740da226bb7ea9dffc69aabd22f9",
-      "title": "Sofía Viola vuelve a Bariloche, ahora con “Alma gitana”",
-      "link": "https://www.elcordillerano.com.ar/noticias/2025/06/18/215292-sofia-viola-vuelve-a-bariloche-ahora-con-alma-gitana",
+      "article_id": "8f5185092361d5101eecdaed0ecd2649",
+      "title": "Los 10 podcasts más escuchados de Apple Uruguay este día",
+      "link": "https://www.infobae.com/noticias/2025/06/18/los-10-podcasts-mas-escuchados-de-apple-uruguay-este-dia/",
       "keywords": null,
       "creator": [
-        "(Diario El Cordillerano)"
+        "Infobae Noticias"
       ],
-      "description": "La cantautora hasta se animó al autotune en su álbum más reciente. Está de gira por el noroeste patagónico.",
+      "description": "Estos podcasts de Apple han logrado mantenerse en el gusto del público uruguayo",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 07:00:17",
+      "pubDate": "2025-06-18 16:30:41",
       "pubDateTZ": "UTC",
-      "image_url": "https://elcordillerano-s3.cdn.net.ar/s3i233/2025/06/elcordillerano/images/02/07/18/2071892_d8fbf0eb4f1035158c754109e5119189c846afeb972dd0fcad60f3f6194ec0ae/md.webp",
-      "video_url": null,
-      "source_id": "elcordillerano",
-      "source_name": "Diario El Cordillerano",
-      "source_priority": 79460,
-      "source_url": "https://www.elcordillerano.com.ar",
-      "source_icon": "https://n.bytvi.com/elcordillerano.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "entertainment"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "cf94b0f936fa4d380f0ecaf669313bd6",
-      "title": "Argentina, Chile, Uruguay, Brasil, Bolivia, México y Rusia evacuaron sus embajadas en Teherán por la ofensiva aérea israelí",
-      "link": "https://www.perfil.com/noticias/internacional/argentina-chile-uruguay-brasil-bolivia-y-mexico-evacuaron-sus-embajadas-en-teheran-por-la-ofensiva-aerea-israeli.phtml",
-      "keywords": [
-        "teherán",
-        "israel",
-        "irán",
-        "embajadores",
-        "bombardeos",
-        "diplomacia"
-      ],
-      "creator": [
-        "Hernán Martín"
-      ],
-      "description": "Frente al incremento de la ofensiva militar israelí, estos países decidieron proteger a su personal diplomático antes de tener que lamentar mayores tragedias. Leer más",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 05:10:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://fotos.perfil.com/2025/06/13/trim/540/304/iran-levanta-la-bandera-roja-de-venganza-tras-ataque-israeli-20250613-2042652.jpg",
-      "video_url": null,
-      "source_id": "perfil",
-      "source_name": "Perfil",
-      "source_priority": 56989,
-      "source_url": "https://www.perfil.com",
-      "source_icon": "https://n.bytvi.com/perfil.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "d6fecb724712e4ef9011daf7f6671ab5",
-      "title": "Netflix pagará 100 millones de dólares por los derechos de las negociaciones entre Tenfield y la AUF",
-      "link": "https://ladiaria.com.uy/humor/articulo/2025/6/netflix-pagara-100-millones-de-dolares-por-los-derechos-de-las-negociaciones-entre-tenfield-y-la-auf/",
-      "keywords": [
-        "humor"
-      ],
-      "creator": null,
-      "description": "Los tejemanejes relacionados con la venta de derechos de televisación del fútbol uruguayo despertaron el interés de la plataforma de streaming, que producirá una ambiciosa serie sobre el tema. La buena noticia para el fútbol uruguayo es que Netflix pagará 100 millones de dólares por los derechos de la serie. Según explicaron los responsables del proyecto, “las negociaciones entre Tenfield, la Mesa...Continuar leyendo...",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 03:09:05",
-      "pubDateTZ": "UTC",
-      "image_url": null,
-      "video_url": null,
-      "source_id": "ladiaria",
-      "source_name": "La Diaria",
-      "source_priority": 56100,
-      "source_url": "https://ladiaria.com.uy",
-      "source_icon": "https://n.bytvi.com/ladiaria.png",
-      "language": "spanish",
-      "country": [
-        "uruguay"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "17489a7b868c9245d9d6b042fde32c0e",
-      "title": "Christian Cueva jugaría con otro peruano en Emelec: “El presidente le dijo que era un proyecto del club”",
-      "link": "https://www.infobae.com/peru/deportes/2025/06/18/christian-cueva-jugaria-con-otro-peruano-en-emelec-el-presidente-le-dijo-que-era-un-proyecto-del-club/",
-      "keywords": null,
-      "creator": [
-        "Joaquín Parra"
-      ],
-      "description": "'Aladino' tendría como compañero a un exjugador de Universitario que milita en el extranjero, según contó Diego Penny. El DT lo quiere y el mandatario le ofreció un contrato importante",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 01:54:57",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/UPB367YUBRD65OTSKKXPUC22XM.jpg?auth=4907dad1ca3210426a3293644223c4a96182506489bca4fcc68cc6cc9865fe5f&height=1080&smart=true&width=1920",
+      "image_url": "https://www.infobae.com/resizer/v2/BBP6EL4KQZFW3EBGUO2DWMZPZA.jpg?auth=f685684c66ee856b76087a7cefef2eeb0feb0dd179c00f97caf6dd70db4c330a&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -233,6 +272,37 @@
         "united states of america",
         "colombia",
         "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "31a69e2552e06fb5c653ceef1f937ae4",
+      "title": "Cambia el transporte público: el Gobierno anunció la medida más esperada por los usuarios",
+      "link": "https://www.cronista.com/economia-politica/cambia-el-transporte-publico-el-gobierno-anuncio-la-medida-mas-esperada-por-los-usuarios-del-subte/",
+      "keywords": null,
+      "creator": null,
+      "description": "El servicio de subte de Buenos Aires incorpora nueva flota a dos líneas que transportan más de 400.000 personas por día.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-18 14:27:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.cronista.com/files/image/1186/1186786/6852c9cc5499a_800_!.jpg?d=1750215600&s=d7ba7aec69113052036591d8de30fd96",
+      "video_url": null,
+      "source_id": "cronista",
+      "source_name": "El Cronista",
+      "source_priority": 17097,
+      "source_url": "https://www.cronista.com",
+      "source_icon": "https://n.bytvi.com/cronista.png",
+      "language": "spanish",
+      "country": [
         "argentina"
       ],
       "category": [
@@ -246,5 +316,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750298141282
+  "timestamp": 1750367689702
 }

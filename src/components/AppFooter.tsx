@@ -1,6 +1,6 @@
 import Image from "next/image";
 import "./AppFooter.css";
-import SponsorsCarousel from "./SponsorsCarousel";
+import SponsorsCarousel from "@/components/SponsorsCarousel";
 
 export default function AppFooter() {
   return (

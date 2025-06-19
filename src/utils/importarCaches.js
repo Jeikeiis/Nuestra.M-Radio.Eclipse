@@ -1,9 +1,4 @@
-// Script para importar las caches desde un archivo JSON a Redis
-const fs = require('fs');
-const path = require('path');
-const Redis = require('ioredis');
-
-const redis = new Redis('redis://default:Ax25ie83tq25ocdvmi30klrnmm2oon5a8t5jziufojqt9zhvl7@redis-xxxx:6379'); // Cambia el host si es necesario
+const redis = new Redis('redis://default:Ax25ie83tq25ocdvmi30klrnmm2oon5a8t5jziufojqt9zhvl7@redis-xxxx:6379');
 
 const IMPORT_PATH = path.join('/tmp', 'caches_export.json');
 
@@ -18,7 +13,6 @@ async function importarCaches() {
       await redis.set(key, data[seccion][key]);
     }
   }
-  console.log('Caches importadas correctamente.');
   process.exit(0);
 }
 

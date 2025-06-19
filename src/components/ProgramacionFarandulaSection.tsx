@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia, normalizeText, areSimilar } from "@/utils/noticiasUtils";
+import { deduplicarCombinado, Dato } from "@/utils/deduplicar";
 
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
@@ -9,8 +9,8 @@ function formatearFecha(fecha?: string) {
 }
 
 export default function ProgramacionFarandulaSection() {
-  const [noticias, setNoticias] = useState<Noticia[]>([]);
-  const [noticiasPrevias, setNoticiasPrevias] = useState<Noticia[]>([]);
+  const [noticias, setNoticias] = useState<Dato[]>([]);
+  const [noticiasPrevias, setNoticiasPrevias] = useState<Dato[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [cached, setCached] = useState<boolean | null>(null);
@@ -26,12 +26,12 @@ export default function ProgramacionFarandulaSection() {
 
   // Utilidad para persistir y recuperar caché local
   const CACHE_KEY = 'farandulaCacheLocal';
-  function guardarCacheLocal(noticias: Noticia[]) {
+  function guardarCacheLocal(noticias: Dato[]) {
     try {
       localStorage.setItem(CACHE_KEY, JSON.stringify(noticias));
     } catch {}
   }
-  function cargarCacheLocal(): Noticia[] {
+  function cargarCacheLocal(): Dato[] {
     try {
       const raw = localStorage.getItem(CACHE_KEY);
       if (!raw) return [];
@@ -58,22 +58,20 @@ export default function ProgramacionFarandulaSection() {
       .then(data => {
         let noticiasValidas = Array.isArray(data.noticias)
           ? data.noticias.filter(
-              (n: Noticia) => n && n.title && n.link && n.title.length > 6
+              (n: Dato) => n && n.title && n.link && n.title.length > 6
             )
           : [];
-        const titulosVistos = new Set<string>();
-        noticiasValidas = noticiasValidas.filter((n: Noticia) => {
-          if (titulosVistos.has(n.title)) return false;
-          titulosVistos.add(n.title);
-          return true;
-        });
-        noticiasValidas.sort((a: Noticia, b: Noticia) => (b.description ? 1 : 0) - (a.description ? 1 : 0));
-        // --- NUEVO: combinar con caché local para rellenar hasta 5 páginas ---
         let cacheLocal = cargarCacheLocal();
-        const titulosActuales = new Set<string>(noticiasValidas.map((n: Noticia) => n.title));
-        const viejasNoRepetidas = cacheLocal.filter((n: Noticia) => !titulosActuales.has(n.title));
-        let combinadas = dedupNoticiasFrontend([...noticiasValidas, ...viejasNoRepetidas]);
-        combinadas = combinadas.slice(0, 5 * pageSize);
+        let combinadas = deduplicarCombinado(
+          noticiasValidas,
+          cacheLocal,
+          ['title','link'],
+          'pubDate',
+          5 * pageSize,
+          ['description','image_url','source_id','link']
+        );
+        const titulosActuales = new Set<string>(noticiasValidas.map((n: Dato) => n.title));
+        const viejasNoRepetidas = cacheLocal.filter((n: Dato) => !titulosActuales.has(n.title));
         guardarCacheLocal(combinadas);
         setNoticias(noticiasValidas);
         setNoticiasPrevias(viejasNoRepetidas);
@@ -94,7 +92,7 @@ export default function ProgramacionFarandulaSection() {
           reloadTimeout.current = setTimeout(() => setShowUpdated(false), 2500);
         }
       })
-      .catch((e) => {
+      .catch((e: any) => {
         setError(e.message || "No se pudieron obtener noticias de farándula.");
         setLoading(false);
         setIsReloading(false);
@@ -119,7 +117,7 @@ export default function ProgramacionFarandulaSection() {
   // Unificación de lógica con ProgramacionMusicaSection
   // (filtrado, paginación, recarga manual, feedback visual, placeholders, etc.)
   // Utilidad para llenar hasta 5 páginas combinando cache nuevo, cache viejo
-  function obtenerNoticiasPagina(noticiasNuevas: Noticia[], noticiasViejas: Noticia[], pagina: number, pageSize: number) {
+  function obtenerNoticiasPagina(noticiasNuevas: Dato[], noticiasViejas: Dato[], pagina: number, pageSize: number) {
     const todas = [
       ...noticiasNuevas,
       ...noticiasViejas
@@ -531,17 +529,4 @@ export default function ProgramacionFarandulaSection() {
       `}</style>
     </div>
   );
-}
-
-function dedupNoticiasFrontend(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
-  const resultado: Noticia[] = [];
-  for (const n of noticias) {
-    const key = normalizeText(n.title) + "|" + normalizeText(n.link);
-    if (vistos.has(key)) continue;
-    if (resultado.some((prev) => areSimilar(n.title, prev.title) || areSimilar(n.description || '', prev.description || ''))) continue;
-    vistos.add(key);
-    resultado.push(n);
-  }
-  return resultado;
 }

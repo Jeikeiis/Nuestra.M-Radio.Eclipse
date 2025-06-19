@@ -5,9 +5,6 @@
 // const UPSTASH_REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 export const API_USER_KEY = process.env.API_KEY; // Unifica el nombre de la variable
 // const SECCIONES = ['farandula', 'musica', 'noticias'];
-// const fs = require('fs');
-// const path = require('path');
-// const EXPORT_PATH = path.join('/tmp', 'caches_export.json');
 
 // export const redis = new Redis({
 //   url: REDIS_URL,

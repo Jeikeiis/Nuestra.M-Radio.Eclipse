@@ -1,10 +1,10 @@
 "use client";
 import "./globals.css";
 import { createContext, useRef, useState, useEffect } from "react";
-import AppHeader from "../components/AppHeader";
-import AppFooter from "../components/AppFooter";
-import RadioDashboard from "../components/RadioDashboard";
-import GoogleAnalytics from "../components/GoogleAnalytics";
+import AppHeader from "@/components/AppHeader";
+import AppFooter from "@/components/AppFooter";
+import RadioDashboard from "@/components/RadioDashboard";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 // Nuevo contexto solo para el estado de hidratación
 export const HydrationContext = createContext(false);

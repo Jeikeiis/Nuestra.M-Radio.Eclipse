@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { deduplicarNoticias, filtrarYLimpiarNoticias, Noticia } from "@/utils/noticiasUtils";
+import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/deduplicar";
 
 const API_KEY = process.env.API_KEY || '';
 const CACHE_FILE = path.resolve(process.cwd(), "farandula-cache.json");
@@ -9,10 +9,10 @@ const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 
 // --- Estado de caché en memoria ---
 let cache: {
-  noticias: Noticia[];
+  noticias: Dato[];
   timestamp: number;
   errorMsg?: string;
-  lastValidNoticias?: Noticia[];
+  lastValidNoticias?: Dato[];
 } = {
   noticias: [],
   timestamp: 0,
@@ -27,8 +27,12 @@ function cargarCacheDesdeArchivo() {
       const data = fs.readFileSync(CACHE_FILE, "utf-8");
       const json = JSON.parse(data);
       if (Array.isArray(json.noticias)) {
-        // Limitar a 20 artículos únicos
-        const noticiasUnicas = deduplicarNoticias(json.noticias).slice(0, 20);
+        const noticiasUnicas = filtrarYLimpiarDatos(json.noticias, {
+          camposClave: ["title","link"],
+          campoFecha: "pubDate",
+          maxItems: 20,
+          camposMezcla: ["description","image_url","source_id","link"]
+        });
         cache.noticias = noticiasUnicas;
         cache.timestamp = json.timestamp || Date.now();
         cache.lastValidNoticias = noticiasUnicas;
@@ -38,9 +42,14 @@ function cargarCacheDesdeArchivo() {
 }
 
 // --- Guardar cache a archivo ---
-function guardarCacheEnArchivo(noticias: Noticia[], pageSize: number = 4, maxPages: number = 5) {
+function guardarCacheEnArchivo(noticias: Dato[], pageSize: number = 4, maxPages: number = 5) {
   try {
-    const noticiasUnicas = deduplicarNoticias(noticias).slice(0, maxPages * pageSize);
+    const noticiasUnicas = filtrarYLimpiarDatos(noticias, {
+      camposClave: ["title","link"],
+      campoFecha: "pubDate",
+      maxItems: maxPages * pageSize,
+      camposMezcla: ["description","image_url","source_id","link"]
+    });
     fs.writeFileSync(
       CACHE_FILE,
       JSON.stringify({ noticias: noticiasUnicas, timestamp: Date.now() }, null, 2),
@@ -60,7 +69,7 @@ async function registrarRecargaForzada(ip: string, region: string) {
   // No se implementa almacenamiento en este caso
 }
 
-async function fetchNoticiasFarandula(): Promise<{ noticias: Noticia[]; errorMsg?: string }> {
+async function fetchNoticiasFarandula(): Promise<{ noticias: Dato[]; errorMsg?: string }> {
   if (!API_KEY) {
     return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_KEY).' };
   }
@@ -95,7 +104,7 @@ export async function GET(req: NextRequest) {
     if (isNaN(page) || page < 1) page = 1;
     const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
     const MAX_PAGES = 5;
-    function paginarNoticias(noticias: Noticia[]) {
+    function paginarNoticias(noticias: Dato[]) {
       const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
       const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
       const start = (page - 1) * pageSize;
@@ -110,13 +119,23 @@ export async function GET(req: NextRequest) {
     let errorMsg: string | null = null;
     let fromCache = true;
     let huboCambio = false;
-    let noticiasParaResponder: Noticia[] = [];
+    let noticiasParaResponder: Dato[] = [];
 
     const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
 
     if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula();
-      const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, MAX_PAGES * pageSize);
+      const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
+        (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
+      );
+      const noticiasValidas = deduplicarCombinado(
+        noticiasFiltradas,
+        [],
+        ["title","link"],
+        "pubDate",
+        MAX_PAGES * pageSize,
+        ["description","image_url","source_id","link"]
+      );
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -136,11 +155,20 @@ export async function GET(req: NextRequest) {
     } else {
       noticiasParaResponder = cache.noticias;
       fromCache = true;
-      // --- Actualización en segundo plano, NO afecta la respuesta actual ---
       (async () => {
         try {
           const { noticias: noticiasApi } = await fetchNoticiasFarandula();
-          const noticiasValidas = deduplicarNoticias(filtrarYLimpiarNoticias(noticiasApi)).slice(0, MAX_PAGES * pageSize);
+          const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
+            (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
+          );
+          const noticiasValidas = deduplicarCombinado(
+            noticiasFiltradas,
+            [],
+            ["title","link"],
+            "pubDate",
+            MAX_PAGES * pageSize,
+            ["description","image_url","source_id","link"]
+          );
           const titulosCache = new Set(cache.noticias.map(n => n.title));
           if (
             noticiasValidas.length > 0 &&
@@ -195,8 +223,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function GET_CACHE_COUNT(req: NextRequest) {
-  const titulosNuevo = new Set(cache.noticias.map((n: Noticia) => n.title));
-  const titulosViejo = new Set((cache.lastValidNoticias || []).map((n: Noticia) => n.title));
+  const titulosNuevo = new Set(cache.noticias.map((n: Dato) => n.title));
+  const titulosViejo = new Set((cache.lastValidNoticias || []).map((n: Dato) => n.title));
   return NextResponse.json({
     cacheNuevo: titulosNuevo.size,
     cacheViejo: titulosViejo.size

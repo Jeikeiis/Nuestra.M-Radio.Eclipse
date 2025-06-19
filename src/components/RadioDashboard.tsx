@@ -1,3 +1,6 @@
+// VERSIÓN ANTERIOR (sin Modal, panel flotante propio)
+// IMPORTANTE: Si quieres volver a la versión profesionalizada con Modal, descomenta el bloque inferior.
+
 import React, { useEffect, useRef } from "react";
 import "./RadioDashboard.css";
 
@@ -14,7 +17,7 @@ export interface RadioDashboardProps {
 }
 
 /**
- * Panel de control para la radio en vivo.
+ * Panel de control para la radio en vivo (versión anterior, sin Modal).
  */
 const RadioDashboard: React.FC<RadioDashboardProps> = ({
   playing,
@@ -42,12 +45,16 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
   /**
    * Alterna la reproducción/pausa del audio.
    */
-  const handlePlayPause = () => {
+  const handlePlayPause = async () => {
     if (!audioRef.current) return;
     if (audioRef.current.paused) {
-      audioRef.current.play();
-      setPlaying(true);
-      setError(false);
+      try {
+        await audioRef.current.play();
+        setPlaying(true);
+        setError(false);
+      } catch (err) {
+        setError(true);
+      }
     } else {
       audioRef.current.pause();
       setPlaying(false);
@@ -102,7 +109,6 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
           </svg>
         </button>
       </div>
-
       <div className="radio-dashboard-controls">
         <div className="radio-dashboard-controls-row">
           <button
@@ -151,3 +157,22 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
 };
 
 export default RadioDashboard;
+
+/*
+// VERSIÓN PROFESIONALIZADA CON MODAL (descomenta para usar)
+import Modal from "./Modal";
+...
+return (
+  <Modal
+    open={true}
+    onClose={onClose || (() => {})}
+    title="Radio en vivo Nuestra Mañana FM 106.3"
+    ariaLabel="Radio en vivo Nuestra Mañana FM 106.3"
+    className="radio-dashboard-modal"
+    maxWidth={480}
+    minWidth={320}
+  >
+    ...contenido...
+  </Modal>
+);
+*/

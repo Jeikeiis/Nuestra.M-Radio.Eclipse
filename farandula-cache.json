@@ -1,18 +1,225 @@
 {
   "noticias": [
     {
-      "article_id": "0f8800bc9645cf76babb409189637a48",
-      "title": "Biblioteca Cajamag abre espacio de memoria y verdad sobre la negritud samaria",
-      "link": "https://www.elinformador.com.co/index.php/sociales/54-entretenimiento/335729-biblioteca-cajamag-abre-espacio-de-memoria-y-verdad-sobre-la-negritud-samaria",
+      "article_id": "dfd912f1b36370e00e374545896a58c0",
+      "title": "¿De qué nos reímos en España?",
+      "link": "https://www.laopinioncoruna.es/sociedad/2025/06/19/de-que-nos-reimos-espana-118789490.html",
+      "keywords": null,
+      "creator": [
+        "Doina Repede"
+      ],
+      "description": "Desde que el ser humano empezó a vivir en comunidad, el humor ha estado presente como una herramienta de crítica, unión o incluso liberación. Reír no solo es un reflejo biológico; es un hecho cultural que revela lo que una sociedad tolera, celebra o reprime. También sabemos que la risa es universal, pero los motivos por los que reímos cada uno son diferentes y van cambiando con el tiempo.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 08:59:56",
+      "pubDateTZ": "UTC",
+      "image_url": "https://estaticos-cdn.prensaiberica.es/clip/e1d1cbd1-f27e-47d1-976c-51ea7f16a498_16-9-aspect-ratio_default_0.jpg",
+      "video_url": null,
+      "source_id": "laopinioncoruna",
+      "source_name": "La Opinión A Coruña",
+      "source_priority": 50098,
+      "source_url": "https://www.laopinioncoruna.es",
+      "source_icon": "https://n.bytvi.com/laopinioncoruna.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "47e50976e9237d0210f157ee4e74a0db",
+      "title": "Adiós a Jorge Javier Vázquez: Telecinco escoge a esta inesperada periodista para presentar 'El Diario de Jorge'",
+      "link": "https://www.laopinioncoruna.es/ocio/tv/2025/06/19/telecinco-escoge-nueva-presentadora-diario-jorge-nunca-trabajado-canal-verano-dv-118689358.html",
+      "keywords": null,
+      "creator": [
+        "Carlos Merenciano"
+      ],
+      "description": "Cristina Lasvignes regresa a la televisión para ponerse al frente de ‘El diario de verano’, la versión estival del formato que actualmente presenta Jorge Javier Vázquez en las tardes de Telecinco. El nuevo espacio llegará próximamente a la parrilla como relevo de ‘El Diario de Jorge’, y estará producido por Mediaset España en colaboración con Boomerang TV.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 08:57:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://estaticos-cdn.prensaiberica.es/clip/60373d12-97b6-4056-9c5f-a6bbb8d6b5f9_16-9-aspect-ratio_default_0.jpg",
+      "video_url": null,
+      "source_id": "laopinioncoruna",
+      "source_name": "La Opinión A Coruña",
+      "source_priority": 50098,
+      "source_url": "https://www.laopinioncoruna.es",
+      "source_icon": "https://n.bytvi.com/laopinioncoruna.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "459ef7835dce8b6a47439ff9560dc581",
+      "title": "ChatGPT, Gemini y Meta AI: cuál es la inteligencia artificial más usada y cómo está el top 5 global",
+      "link": "https://www.clarin.com/tecnologia/chatgpt-gemini-meta-ai-inteligencia-artificial-usada-top-5-global_0_tMc9JW7TcX.html",
+      "keywords": null,
+      "creator": [
+        "Clarin.com - Home"
+      ],
+      "description": "La IA se convirtió en el nuevo frente de batalla entre los gigantes tecnológicos. Mientras se define el modelo de negocio, crece la disputa por presencia, usuarios e influencia.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 08:45:18",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.clarin.com/img/2025/01/28/pqJryjKV4_2000x1500__1.jpg",
+      "video_url": null,
+      "source_id": "clarin",
+      "source_name": "Clarin",
+      "source_priority": 1115,
+      "source_url": "https://www.clarin.com",
+      "source_icon": "https://n.bytvi.com/clarin.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "technology"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "c97923f99b9e453da108f7c7e3570732",
+      "title": "‘Una película de Minecraft’ llega a plataformas: cuándo y dónde ver la adaptación cinematográfica del popular videojuego",
+      "link": "https://www.infobae.com/espana/cultura/2025/06/19/una-pelicula-de-minecraft-llega-a-plataformas-cuando-y-donde-ver-la-adaptacion-cinematografica-del-popular-videojuego/",
+      "keywords": null,
+      "creator": [
+        "David Pardillos"
+      ],
+      "description": "Con actores como Jason Momoa o Jack Black en su reparto, la película traslada a gran pantalla el amplio universo de bloques",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 08:08:23",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/KGLMMM6I6RF55PXXEMV2GYDDRE.jpg?auth=0e32d3fdcf210026b74419a5a263c4ec91dfe0c7d4f0d3b3d912f10d97c0e227&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "27f058de323c04ab17568fdc132ea699",
+      "title": "El día que Marlon Brando rechazó el Oscar por El Padrino y escandalizó a Hollywood",
+      "link": "https://www.infobae.com/entretenimiento/2025/06/19/el-dia-que-marlon-brando-rechazo-el-oscar-por-el-padrino-y-escandalizo-a-hollywood/",
+      "keywords": null,
+      "creator": [
+        "Francisco González Tomadin"
+      ],
+      "description": "El actor envió en su lugar a una inesperada representante y convirtió la gala en el escenario de una denuncia que incomodó a toda la industria",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 08:05:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/HC4ZA5CLTFAT3OIAKLEJPKFPHU.jpg?auth=d4f71bc31db8d65589248be68989c84444e9f7cbeb4f483d415213e36b5e0e30&height=2160&smart=true&width=3840",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "a72b99f1a9ebf8186fed0d5b2dcd064e",
+      "title": "Ese divino tesoro que está cambiando para siempre el negocio del deporte",
+      "link": "https://www.infobae.com/opinion/2025/06/19/ese-divino-tesoro-que-esta-cambiando-para-siempre-el-negocio-del-deporte/",
+      "keywords": null,
+      "creator": [
+        "Aleksan Kurt"
+      ],
+      "description": "La relación con los clientes y la comunidad, claves para la rentabilidad futura",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 06:35:12",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/RXNJCF5JCJEMNCOIMSBAW7M6WA.jpg?auth=ffebda78471e9b57f71309547592f70bd0c6a753038c23feef16ddb4f7bfeca3&height=816&smart=true&width=1456",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "647e901922be80e109c6e14bc9bf37db",
+      "title": "Día mundial de la anemia falciforme",
+      "link": "https://www.elinformador.com.co/index.php/sociales/54-entretenimiento/335771-dia-mundial-de-la-anemia-falciforme",
       "keywords": null,
       "creator": [
         "Jorge Cabana"
       ],
-      "description": "La Biblioteca Cajamag lidera una reflexión profunda sobre la exclusión histórica de la población afrodescendiente en Santa Marta, a través del conversatorio “La invisibilidad de los afrodescendientes en Santa Marta”, que se realizará este viernes 20 de junio de 2025 de forma presencial y virtual.",
+      "description": "Cada año, el 19 de junio, el mundo se une para conmemorar el Día Mundial de la Anemia Falciforme.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 05:20:03",
+      "pubDate": "2025-06-19 05:00:00",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.elinformador.com.co/images/stories/magdalena/2025/06-junio/18DIST_3.jpg",
+      "image_url": "https://www.elinformador.com.co/images/stories/sociales/2025/06-junio/19GENE_2.jpg",
       "video_url": null,
       "source_id": "elinformador",
       "source_name": "El Informador",
@@ -34,129 +241,24 @@
       "duplicate": false
     },
     {
-      "article_id": "f41f067a39b34e096303a916c46e7154",
-      "title": "Cuánto cuesta el OnlyFans de Sian Chiong, ex integrante de La Casa de los Famosos México",
-      "link": "https://www.infobae.com/mexico/2025/06/18/cuanto-cuesta-el-onlyfans-de-sian-chiong-ex-integrante-de-la-casa-de-los-famosos-mexico/",
+      "article_id": "60c1d75f2cc5de8cb42e520d140d86e7",
+      "title": "Denunciaron a Tyler Perry por acoso y violencia sexual",
+      "link": "https://www.elcordillerano.com.ar/noticias/2025/06/19/215405-denunciaron-a-tyler-perry-por-acoso-y-violencia-sexual",
       "keywords": null,
       "creator": [
-        "Mariana L. Martínez"
+        "(Diario El Cordillerano)"
       ],
-      "description": "La plataforma de contenidos exclusivos se puede usar para conectar de forma más cercana con admiradores",
+      "description": "El director enfrenta una demanda por 260 millones de dólares.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 03:46:32",
+      "pubDate": "2025-06-19 04:30:17",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/HXJ6HSJOC5BJVPZR3NK5KIPDQI.JPG?auth=cdf05fa462844befd8a3a56d44bcc904cce1b2ef312a5fe4ff802493eb9e5c18&height=2552&smart=true&width=4536",
+      "image_url": "https://elcordillerano-s3.cdn.net.ar/s3i233/2025/06/elcordillerano/images/02/09/88/2098817_2da2ebff7466e120bb8139edf549bba987eaf8555c35ab6637bbdd674f6f60a9/md.webp",
       "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "63cf688e49453c33a7f156b510286923",
-      "title": "\"La Fiesta del Poncho está para todo el país, todos quieren estar en el evento\"",
-      "link": "https://www.elancasti.com.ar/edicion-impresa/la-fiesta-del-poncho-esta-todo-el-pais-todos-quieren-estar-el-evento-n586414",
-      "keywords": [
-        "edición impresa"
-      ],
-      "creator": null,
-      "description": "Daiana Roldán, al frente del Ministerio, visitó el Multimedios Ancasti y contó detalles de la fiesta más grande de invierno. También hizo anuncios.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 03:30:18",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.elancasti.com.ar/css-custom/325/lazy.svg",
-      "video_url": null,
-      "source_id": "elancasti_ar",
-      "source_name": "Elancasti Ar",
-      "source_priority": 2635729,
-      "source_url": "https://www.elancasti.com.ar",
-      "source_icon": "https://n.bytvi.com/elancasti_ar.jpg",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "b4244cb583f05b2ec4bb1675f110d15b",
-      "title": "Pelea entre Yina Calderón y Andrea Valdiri en ‘Stream Fighters 4′: la huilense seguirá los consejos de su padre",
-      "link": "https://www.infobae.com/colombia/2025/06/18/pelea-entre-yina-calderon-y-andrea-valdiri-en-stream-fighters-4-la-huilense-seguira-los-consejos-de-su-padre/",
-      "keywords": null,
-      "creator": [
-        "David Garzón"
-      ],
-      "description": "Uno de los aspectos que genera controversia en torno al combate es la solicitud de la influenciadora y empresaria barranquillera de que la pelea se realice sin casco",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:52:20",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/N45UHIMFJZALRPH3BZZA64SQWM.jpeg?auth=52ee00181f9722a805f8ae9c95a6cd53281cf78b231e23a5c755f67949683f29&height=676&smart=true&width=1200",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "68ab7a659ca99e23056c0c1d40edf9bf",
-      "title": "La importante oferta laboral que recibió Sol Perez",
-      "link": "https://www.minutouno.com/espectaculos/la-importante-oferta-laboral-que-recibio-sol-perez-n6157528",
-      "keywords": [
-        "espectáculos"
-      ],
-      "creator": null,
-      "description": "Una vez que finalice el certamen conducido por Santiago del Moro, la panelista se despedirá del debate y asumirá un nuevo rol dentro de los medios.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:47:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://media.minutouno.com/p/ac95ea3a2714f644afe03e3e5e18adbe/adjuntos/150/imagenes/042/079/0042079641/sol-perez.jpg",
-      "video_url": null,
-      "source_id": "minutouno",
-      "source_name": "Minutouno",
-      "source_priority": 348441,
-      "source_url": "https://www.minutouno.com",
-      "source_icon": "https://n.bytvi.com/minutouno.png",
+      "source_id": "elcordillerano",
+      "source_name": "Diario El Cordillerano",
+      "source_priority": 79460,
+      "source_url": "https://www.elcordillerano.com.ar",
+      "source_icon": "https://n.bytvi.com/elcordillerano.png",
       "language": "spanish",
       "country": [
         "argentina"
@@ -172,126 +274,18 @@
       "duplicate": false
     },
     {
-      "article_id": "1bd07beaf9c7c5d987ccc6df4ea3a181",
-      "title": "Estos podcasts encabezan la lista de los más escuchados en Spotify Colombia",
-      "link": "https://www.infobae.com/colombia/2025/06/18/estos-podcasts-encabezan-la-lista-de-los-mas-escuchados-en-spotify-colombia/",
+      "article_id": "9926f7c2c008862193508977f35e07e7",
+      "title": "Ernesto Laguardia pide ayuda en redes sociales tras sufrir un aparatoso accidente en las calles de CDMX",
+      "link": "https://www.infobae.com/mexico/2025/06/19/ernesto-laguardia-pide-ayuda-en-redes-sociales-tras-sufrir-un-aparatoso-accidente-en-las-calles-de-cdmx/",
       "keywords": null,
       "creator": [
-        "Infobae Noticias"
+        "Jazmín González"
       ],
-      "description": "Las producciones de terror y de ficción, como Caso 63, se han posicionado entre los favoritos del público colombiano en Spotify",
+      "description": "El conocido actor de melodramas pidió la ayuda de sus seguidores desde su automóvil",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:30:57",
+      "pubDate": "2025-06-19 04:08:00",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/BPWU6RMGSJCT3GDWA32BVUIRCQ.jpg?auth=5a04a0019658585b217baf2dd853b423fdf6896a744162d594fbc797943e47f4&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "b4fc3be60032f2f36c6cbc8a37d62b64",
-      "title": "El regreso de ‘Dora La Exploradora’ al cine incluye a colombianos en el elenco: vea de quiénes se trata",
-      "link": "https://www.infobae.com/colombia/2025/06/18/el-regreso-de-dora-la-exploradora-al-cine-incluye-a-colombianos-en-el-elenco-vea-de-quienes-se-trata/",
-      "keywords": null,
-      "creator": [
-        "Daniel Ospina"
-      ],
-      "description": "‘Dora y la búsqueda del Sol Dorado’ grabada en Colombia, se estrenará en plataformas digitales el próximo 2 de julio en los Estados Unidos",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:30:08",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/LSXH5HGSINEGFCDUNWVLZYABIM.jpg?auth=863f6e764554343f064cb9d198912724ad7d22665554c88ace0b143d3f16d2e2&height=517&smart=true&width=776",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "b7904e5dbcc091c43049cf1a189e8741",
-      "title": "Nieto de ‘Don Ramón’ habla sobre la enfermedad que llevó a la muerte al actor de Chespirito",
-      "link": "https://www.infobae.com/mexico/2025/06/18/nieto-de-don-ramon-habla-sobre-la-enfermedad-que-llevo-a-la-muerte-al-actor-de-chespirito/",
-      "keywords": null,
-      "creator": [
-        "Armando Guadarrama"
-      ],
-      "description": "Miguel Valdés aclaró el rumor de que Ramón Valdés murió a causa de un león en un circo",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:26:07",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/VOGRWMEXKZDMLNNQCPB2L7IXAI.jpg?auth=6a22d90354333f300640cfa1fd9bba54b5634868ff9548ce256a256b54e76e15&height=697&smart=true&width=1214",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "bff4e2401695eeefbcde4268da29fc7b",
-      "title": "El peculiar nombre que Megan Fox y Machine Gun Kelly eligieron para su bebé",
-      "link": "https://www.infobae.com/entretenimiento/2025/06/18/el-peculiar-nombre-que-megan-fox-y-machine-gun-kelly-eligieron-para-su-bebe/",
-      "keywords": null,
-      "creator": [
-        "Antonela Rabanal"
-      ],
-      "description": "La actriz y el músico comparten la crianza de su hija tras confirmar su separación semanas después del anuncio del embarazo",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:14:53",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/GWZQ4SB2HRED3MDZ2JTHHP2EYY.jpg?auth=a7a01dc80bcbb18e7d574d97441eb72c351b105ab3500d70e3d037de9d6a2d47&height=1080&smart=true&width=1920",
+      "image_url": "https://www.infobae.com/resizer/v2/6PQUSEYG5JBT5NUWDOHUXJWJFE.jpg?auth=78e471e1cc633a09426df14d6fa05bc0f7fc1fdad80b59c251e8ae3c3bd00761&height=1080&smart=true&width=1960",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -316,5 +310,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750269194798
+  "timestamp": 1750368114530
 }

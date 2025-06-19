@@ -1,24 +1,26 @@
 {
   "noticias": [
     {
-      "article_id": "4bb4a2cfdd9d7cbec4b3861fe3ae4f0c",
-      "title": "El barrio de CABA que cada domingo se transforma en una fiesta con locro, empanadas, pastelitos y música en vivo",
-      "link": "https://www.clarin.com/informacion-general/barrio-caba-domingo-transforma-fiesta-locro-empanadas-pastelitos-musica-vivo_0_csSOUagpNB.html",
-      "keywords": null,
-      "creator": [
-        "Clarin.com - Home"
+      "article_id": "c388d09ccdc1221908f7826e2b573a02",
+      "title": "Jesse Malin, el pionero del hardcore y amigo de Bruce Springsteen que busca volver a caminar en Buenos Aires",
+      "link": "https://www.lanacion.com.ar/espectaculos/musica/jesse-malin-el-pionero-del-hardcore-y-amigo-de-bruce-springsteen-que-busca-volver-a-caminar-en-nid19062025/",
+      "keywords": [
+        "música"
       ],
-      "description": "Talleres abiertos, guitarreadas y sabores bien criollos en una feria que celebra la cultura argentina.Un paseo gratuito donde se cruzan las raíces del interior con el ritmo porteño.",
+      "creator": [
+        "Daniel Bajarlía"
+      ],
+      "description": "Músico de culto, perdió la movilidad tras sufrir un raro infarto en la médula ósea y encontró aquí un tratamiento médico experimental con células madre; se presentará por primera vez en el país",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 11:00:00",
+      "pubDate": "2025-06-19 09:00:00",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.clarin.com/img/2025/06/17/YE1x5r1w-_2000x1500__1.jpg",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/E574YCDHTJD2ZHORMMX4OADRY4.jpg?auth=9b9ae0d95ebc0e481af5dfdd5c1b083456ed5b0edf5721e769d3822a8d626c3b&height=1333&smart=true&width=2000",
       "video_url": null,
-      "source_id": "clarin",
-      "source_name": "Clarin",
-      "source_priority": 1115,
-      "source_url": "https://www.clarin.com",
-      "source_icon": "https://n.bytvi.com/clarin.png",
+      "source_id": "lanacion",
+      "source_name": "La Nacion",
+      "source_priority": 7204,
+      "source_url": "https://www.lanacion.com.ar",
+      "source_icon": "https://n.bytvi.com/lanacion.png",
       "language": "spanish",
       "country": [
         "argentina"
@@ -34,24 +36,26 @@
       "duplicate": false
     },
     {
-      "article_id": "e59e2563a5e7d09ba73c765ab70789f3",
-      "title": "Premios Gardel 2025: dónde ver la entrega, cuáles serán los shows en vivo y quiénes son los nominados",
-      "link": "https://www.clarin.com/espectaculos/premios-gardel-2025-ver-entrega-shows-vivo-nominados_0_Z2tOomPIs0.html",
-      "keywords": null,
-      "creator": [
-        "Clarin.com - Home"
+      "article_id": "8d9e9ab73b4c3a1a4b337f210060f168",
+      "title": "Los Premios Gardel rompieron su regla de oro",
+      "link": "https://www.lanacion.com.ar/espectaculos/musica/los-premios-gardel-rompieron-su-regla-de-oro-nid19062025/",
+      "keywords": [
+        "música"
       ],
-      "description": "La ceremonia de premiación de los rubros principales será este miércoles 18 de junio, a la noche, en el teatro Coliseo.Se anunciarán algunos ganadores por la tarde, en una previa en el Broadway.",
+      "creator": [
+        "Sebastián Espósito"
+      ],
+      "description": "Anoche se realizó la edición número 27 de los galardones a la música argentina; ganadores, perdedores y un gesto que no debe pasar inadvertido",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 09:01:02",
+      "pubDate": "2025-06-19 06:24:14",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.clarin.com/img/2025/04/24/7xsZkosyL_2000x1500__1.jpg",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/5IR2D6EMXZFXHOEDSOJTQJM6AQ.JPG?auth=507536e718e55776ba566cb70d39f5db67f5709bd954cc67ce8f8177ba013323&height=1334&smart=true&width=2000",
       "video_url": null,
-      "source_id": "clarin",
-      "source_name": "Clarin",
-      "source_priority": 1115,
-      "source_url": "https://www.clarin.com",
-      "source_icon": "https://n.bytvi.com/clarin.png",
+      "source_id": "lanacion",
+      "source_name": "La Nacion",
+      "source_priority": 7204,
+      "source_url": "https://www.lanacion.com.ar",
+      "source_icon": "https://n.bytvi.com/lanacion.png",
       "language": "spanish",
       "country": [
         "argentina"
@@ -67,54 +71,18 @@
       "duplicate": false
     },
     {
-      "article_id": "8765fdcea71437a06dd08c6452a18562",
-      "title": "Los grandes robos de la historia de la música: instrumentos desaparecidos, fanáticos dispuestos a todo y reliquias musicales que cambian de manos",
-      "link": "https://www.infobae.com/entretenimiento/2025/06/18/los-grandes-robos-de-la-historia-de-la-musica-instrumentos-desaparecidos-fanaticos-dispuestos-a-todo-y-reliquias-musicales-que-cambian-de-manos/",
+      "article_id": "9f00f77b3dd52eb0588b667bdff1fcc1",
+      "title": "Karol G reveló cómo se debe disfrutar su nuevo álbum ‘Tropicoqueta’: “No es de escuchar una vez”",
+      "link": "https://www.infobae.com/colombia/2025/06/19/karol-g-revelo-como-se-debe-disfrutar-su-nuevo-album-tropicoqueta-no-es-de-escuchar-una-vez/",
       "keywords": null,
       "creator": [
-        "Brisa Bujakiewicz"
+        "Katherine Lancheros"
       ],
-      "description": "Objetos que trascienden lo material y se convierten en tesoros codiciados. Historias de búsquedas incansables y el valor oculto detrás de cada pieza",
+      "description": "En la antesala del lanzamiento de su nuevo “hijo” musical, la paisa compartió un mensaje en el que reveló detalles sobre la concepción de este proyecto, que no es tan personal como ‘Mañana será bonito’",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 08:05:00",
+      "pubDate": "2025-06-19 02:47:51",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/R7RMGO3B3HKUVBYTCAVFNLCN2Q.jpg?auth=456ad13c5f5ebc8b8e97d95fbee55cb14586d046e13f6043573bac46e1ac3d73&height=3668&smart=true&width=5500",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "87b83b47dec0c931c7767803ef078b8d",
-      "title": "Luis Gerardo Méndez “traicionó” al creador de ‘Mentiras’ para ganar protagonismo en la serie, según Jorge Carbajal",
-      "link": "https://www.infobae.com/mexico/2025/06/18/luis-gerardo-mendez-traiciono-al-creador-de-mentiras-para-ganar-protagonismo-en-la-serie-segun-jorge-carbajal/",
-      "keywords": null,
-      "creator": [
-        "Ignacio Izquierdo"
-      ],
-      "description": "El periodista de espectáculos aseguró que el actor alejó del proyecto al creador original de la obra",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-18 02:06:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/HWRDK3THQBDODPJTRZEIU47NF4.jpg?auth=16892843920ca6bbdae4c450294f76c5fedf643514109e9f4d09eec6ee1fedb2&height=1080&smart=true&width=1920",
+      "image_url": "https://www.infobae.com/resizer/v2/Z5K3EZCWJJBWDC6O7RQAMVBF3E.png?auth=b29c9e2322cbc9bc84cd26e8088c9eb845cedd1942ec372c5fa94ccb5e048e1f&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -139,18 +107,123 @@
       "duplicate": false
     },
     {
-      "article_id": "0de617c2f9d469e8e6a49015a6b7a793",
-      "title": "Cazzu defendió a Emilia Mernes de las críticas de una influencer: “Escuchá otra música, amor”",
-      "link": "https://www.infobae.com/teleshow/2025/06/17/cazzu-defendio-a-emilia-mernes-de-las-criticas-de-una-influencer-escucha-otra-musica-amor/",
+      "article_id": "be3b10fa000c4ef6c24b41abf88c0c6f",
+      "title": "Top 10 de Prime Video en Estados Unidos: Estas son las películas más vistas en la plataforma",
+      "link": "https://www.infobae.com/noticias/2025/06/19/top-10-de-prime-video-en-estados-unidos-estas-son-las-peliculas-mas-vistas-en-la-plataforma/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Prime Video busca mantenerse en el gusto de su audiencia a través de estas narrativas",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 02:16:26",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/NL2CHEVSFNERTC64BGGVIRJ52E.png?auth=9bf4bcebb430c97985dff9d73bea3ad4485f90371ef8b5803978ec2e5d7121f5&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "a071436d5c9e1ee983a5e0723aa72e76",
+      "title": "Premios Gardel 2025: todos los ganadores",
+      "link": "https://www.lanacion.com.ar/espectaculos/musica/premios-gardel-2025-todos-los-ganadores-nid18062025/",
+      "keywords": [
+        "música"
+      ],
+      "creator": null,
+      "description": "La ceremonia se realizó en el Teatro Coliseo",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 02:08:49",
+      "pubDateTZ": "UTC",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/G7SXZ6SJ3FHDXJJ4L3YKCSEWKY.JPEG?auth=bbe6ca0456bca630da7a9c2921e657b96d7c2d016e61040ba9d674bf73b30a09&height=1098&smart=true&width=1464",
+      "video_url": null,
+      "source_id": "lanacion",
+      "source_name": "La Nacion",
+      "source_priority": 7204,
+      "source_url": "https://www.lanacion.com.ar",
+      "source_icon": "https://n.bytvi.com/lanacion.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "3531e10c9bc0ef2da9386d8904709e41",
+      "title": "Estas son las películas que están de moda en Prime Video México este día",
+      "link": "https://www.infobae.com/mexico/2025/06/19/estas-son-las-peliculas-que-estan-de-moda-en-prime-video-mexico-este-dia/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Con estas historias, Prime Video busca mantenerse en el gusto de la gente",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 02:01:29",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/LBZROJVIGFHZLMM6YNXKDUYF7E.jpg?auth=2a452ec646ab510e534a2cd00fb191b1c910cbaedb2114fbd1f485597361746b&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "aa374c524e9a58f6fdb6bd3eccee0ce2",
+      "title": "En vivo: uno por uno, todos los primeros ganadores de los Premios Gardel 2025",
+      "link": "https://www.infobae.com/teleshow/2025/06/18/se-conocieron-los-primeros-ganadores-de-los-premios-gardel-2025/",
       "keywords": null,
       "creator": [
         "Sol de María"
       ],
-      "description": "La cantante respaldó a su colega tras cuestionamientos de una influencer sobre el uso de autotune y los mensajes de sus canciones",
+      "description": "Esta es la edición número 27 de los premios. Con grandes sorpresas y shows en vivo, arrancó el evento que CAPIF organiza en el Teatro Coliseo",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-17 23:28:28",
+      "pubDate": "2025-06-19 01:46:06",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/DAHWPGOH4JG4BDGDD5IWNZDT3E.jpg?auth=3fa8798b0df93c95c56133063e497ee1d98ea3eefded377930be20643c3c1ce0&height=405&smart=true&width=235",
+      "image_url": "https://www.infobae.com/resizer/v2/H2AL57HFKJCRXN6APURSWK55RM.jpg?auth=04edbd59c77dd3657aecebc015e9e13a1eec6ed82aee8a7e255f218457a9acc1&height=1279&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -175,28 +248,64 @@
       "duplicate": false
     },
     {
-      "article_id": "3cdb6477d192e1f1efaaf1c7265bf08c",
-      "title": "C.R.O en el Movistar Arena: la fiesta rockera del \"hijo de la noche\"",
-      "link": "https://www.pagina12.com.ar/834922-c-r-o-en-el-movistar-arena-la-fiesta-rockera-del-hijo-de-la-",
+      "article_id": "2a90724ec3b20d0f880ad9d471778009",
+      "title": "Premios Gardel 2025: Teresa Parodi dedicó su premio a Cristina Kirchner y habló de vaciamiento cultural",
+      "link": "https://www.lanacion.com.ar/espectaculos/musica/premios-gardel-2025-comenzo-la-fiesta-de-la-musica-argentina-y-ya-se-conocen-los-primeros-ganadores-nid18062025/",
       "keywords": [
-        "normal"
+        "música"
       ],
       "creator": [
-        "Yumber Vera Rojas"
+        "Mauro Apicella"
       ],
-      "description": "| El neuquino amalgamó sus influencias en un show alrededor de su disco \"Malos cantores\"",
+      "description": "Lali, CA7RIEL y Paco Amoroso, Dillom, Charly García, Trueno y Peteco Carabajal son algunos de los que ya recibieron estatuillas",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-17 23:15:46",
+      "pubDate": "2025-06-19 01:16:03",
       "pubDateTZ": "UTC",
-      "image_url": "https://images.pagina12.com.ar/styles/width960/public/2025-06/947177-c-r-o-20en-20el-20movistar-20arena-20prensa-201.jpg?itok=27e84khG",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/D4DRDOLEJNEH5P7BNTIHDZNWT4.JPEG?auth=0362d26fcc758378a36594ba40abd2fcbc52e8475170ee4ce136506a382254de&height=1666&smart=true&width=2500",
       "video_url": null,
-      "source_id": "pagina12",
-      "source_name": "Pagina12",
-      "source_priority": 6107,
-      "source_url": "https://www.pagina12.com.ar",
-      "source_icon": "https://n.bytvi.com/pagina12.png",
+      "source_id": "lanacion",
+      "source_name": "La Nacion",
+      "source_priority": 7204,
+      "source_url": "https://www.lanacion.com.ar",
+      "source_icon": "https://n.bytvi.com/lanacion.png",
       "language": "spanish",
       "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "91562a87ae8065619d254055b6ecefb8",
+      "title": "Las mejores películas en Prime Video en Colombia hoy",
+      "link": "https://www.infobae.com/noticias/2025/06/19/las-mejores-peliculas-en-prime-video-en-colombia-hoy/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "El cine ha experimentado una transformación total desde la llegada de plataformas de streaming, pues ha revolucionado la forma de hacer y mirar películas",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 01:16:01",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/RPLVV73FS5FZBKO63RXHAOWFPI.jpg?auth=10b798e62753f1786399b273d506fb14f7b60c7d0fb581e667be7180039788f9&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
         "argentina"
       ],
       "category": [
@@ -210,5 +319,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750297415735
+  "timestamp": 1750368178461
 }
