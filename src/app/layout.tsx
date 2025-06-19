@@ -78,9 +78,7 @@ export default function RootLayout({
       handleSyncLive();
       setRadioSyncDone(true);
     }
-    if (!radioOpen) {
-      setRadioSyncDone(false); // Permite re-sincronizar si se cierra y vuelve a abrir
-    }
+    // Eliminado el reset de radioSyncDone al cerrar el panel
   }, [radioOpen]);
 
   // Sincronizar con el vivo
