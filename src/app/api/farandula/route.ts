@@ -6,6 +6,9 @@ import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/dedupli
 const API_KEY = process.env.API_KEY || '';
 const CACHE_FILE = path.resolve(process.cwd(), "farandula-cache.json");
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
+const COOLDOWN_MS = 61 * 60 * 1000;
+
+let lastApiSuccess: number = 0;
 
 // --- Estado de caché en memoria ---
 let cache: {
@@ -133,9 +136,11 @@ export async function GET(req: NextRequest) {
         [],
         ["title","link"],
         "pubDate",
-        MAX_PAGES * pageSize,
+        5 * 4,
         ["description","image_url","source_id","link"]
       );
+      // Marcar siempre el timestamp de último acceso a la API, aunque no haya datos nuevos
+      lastApiSuccess = now;
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -143,18 +148,19 @@ export async function GET(req: NextRequest) {
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
-        guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
+        guardarCacheEnArchivo(noticiasValidas);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
         huboCambio = true;
       } else {
-        errorMsg = apiError || "No se encontraron noticias de farándula válidas.";
+        errorMsg = apiError || "No se encontraron noticias válidas.";
         noticiasParaResponder = cache.lastValidNoticias || [];
         fromCache = true;
       }
     } else {
       noticiasParaResponder = cache.noticias;
       fromCache = true;
+      // Actualización en segundo plano
       (async () => {
         try {
           const { noticias: noticiasApi } = await fetchNoticiasFarandula();
@@ -166,46 +172,35 @@ export async function GET(req: NextRequest) {
             [],
             ["title","link"],
             "pubDate",
-            MAX_PAGES * pageSize,
+            5 * 4,
             ["description","image_url","source_id","link"]
           );
-          const titulosCache = new Set(cache.noticias.map(n => n.title));
-          if (
-            noticiasValidas.length > 0 &&
-            (noticiasValidas.length !== cache.noticias.length ||
-              noticiasValidas.some(n => !titulosCache.has(n.title)))
-          ) {
+          if (noticiasValidas.length > 0) {
+            lastApiSuccess = Date.now();
             cache = {
               noticias: noticiasValidas,
               timestamp: Date.now(),
               errorMsg: undefined,
               lastValidNoticias: noticiasValidas,
             };
-            guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
+            guardarCacheEnArchivo(noticiasValidas);
           }
         } catch {}
       })();
     }
-
-    // No mostrar páginas vacías
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
-    const hayNoticias = noticiasPaginadas.length > 0;
-
+    const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < COOLDOWN_MS);
     return NextResponse.json({
-      noticias: noticiasPaginadas,
+      noticias: noticiasParaResponder,
       cached: fromCache,
       huboCambio,
-      errorMsg: hayNoticias ? errorMsg : "No hay noticias disponibles.",
+      errorMsg: errorMsg,
       fallback: fromCache,
-      apiStatus: errorMsg && !hayNoticias ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
+      apiStatus: errorMsg && !noticiasParaResponder.length ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
       meta: {
-        region,
-        page,
-        pageSize,
-        total: totalNoticias,
-        maxPages: realMaxPages,
         updatedAt: new Date(cache.timestamp || now).toISOString(),
         fromCache,
+        lastApiSuccess: lastApiSuccess ? new Date(lastApiSuccess).toISOString() : null,
+        cooldownActive,
       },
     });
   } catch (err: any) {
@@ -217,6 +212,8 @@ export async function GET(req: NextRequest) {
       meta: {
         updatedAt: new Date().toISOString(),
         fromCache: false,
+        lastApiSuccess: null,
+        cooldownActive: false,
       },
     }, { status: 500 });
   }

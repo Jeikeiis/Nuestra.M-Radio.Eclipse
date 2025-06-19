@@ -6,6 +6,7 @@ import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/dedupli
 const API_KEY = process.env.API_USER_KEY as string;
 const CACHE_FILE = path.join(process.cwd(), "noticias_cache.json");
 const CACHE_DURATION_MS = 1000 * 60 * 10;
+const COOLDOWN_MS = 61 * 60 * 1000;
 
 let cache: {
   noticias: Dato[];
@@ -18,6 +19,8 @@ let cache: {
   errorMsg: undefined,
   lastValidNoticias: [],
 };
+
+let lastApiSuccess: number = 0;
 
 // --- Cargar cache desde archivo ---
 function cargarCacheDesdeArchivo() {
@@ -116,6 +119,7 @@ export async function GET(req: NextRequest) {
     let noticiasParaResponder: Dato[] = [];
 
     const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
+    const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < COOLDOWN_MS);
 
     if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasGenerales(tema);
@@ -137,6 +141,7 @@ export async function GET(req: NextRequest) {
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
+        lastApiSuccess = now;
         guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
@@ -201,6 +206,8 @@ export async function GET(req: NextRequest) {
         maxPages: realMaxPages,
         updatedAt: new Date(cache.timestamp || now).toISOString(),
         fromCache,
+        lastApiSuccess: lastApiSuccess ? new Date(lastApiSuccess).toISOString() : null,
+        cooldownActive,
       },
     });
   } catch (err: any) {

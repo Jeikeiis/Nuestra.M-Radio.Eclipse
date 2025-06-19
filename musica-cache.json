@@ -1,6 +1,37 @@
 {
   "noticias": [
     {
+      "article_id": "7b1ca2e549653f15711e9273ddd8a1e3",
+      "title": "Jueves, fiesta feriado en Crashon: música, promos y una noche para no parar",
+      "link": "https://diariopanorama.com/noticia/520696/jueves-fiesta-feriado-crashon-musica-promos-noche-para-no-parar",
+      "keywords": null,
+      "creator": null,
+      "description": "Este jueves 19 de junio, víspera de feriado, Crashon reabre con una fiesta explosiva en la Autopista La Banda-Santiago. DJs en vivo, entrada gratis hasta la 1 y sorteos VIP junto a Diario Panorama.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 09:35:00",
+      "pubDateTZ": "UTC",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "diariopanorama",
+      "source_name": "Diario Panorama",
+      "source_priority": 685478,
+      "source_url": "https://diariopanorama.com",
+      "source_icon": "https://n.bytvi.com/diariopanorama.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
       "article_id": "c388d09ccdc1221908f7826e2b573a02",
       "title": "Jesse Malin, el pionero del hardcore y amigo de Bruce Springsteen que busca volver a caminar en Buenos Aires",
       "link": "https://www.lanacion.com.ar/espectaculos/musica/jesse-malin-el-pionero-del-hardcore-y-amigo-de-bruce-springsteen-que-busca-volver-a-caminar-en-nid19062025/",
@@ -281,43 +312,7 @@
       "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
       "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
       "duplicate": false
-    },
-    {
-      "article_id": "91562a87ae8065619d254055b6ecefb8",
-      "title": "Las mejores películas en Prime Video en Colombia hoy",
-      "link": "https://www.infobae.com/noticias/2025/06/19/las-mejores-peliculas-en-prime-video-en-colombia-hoy/",
-      "keywords": null,
-      "creator": [
-        "Infobae Noticias"
-      ],
-      "description": "El cine ha experimentado una transformación total desde la llegada de plataformas de streaming, pues ha revolucionado la forma de hacer y mirar películas",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 01:16:01",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/RPLVV73FS5FZBKO63RXHAOWFPI.jpg?auth=10b798e62753f1786399b273d506fb14f7b60c7d0fb581e667be7180039788f9&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
     }
   ],
-  "timestamp": 1750368178461
+  "timestamp": 1750369676626
 }

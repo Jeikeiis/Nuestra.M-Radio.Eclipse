@@ -1,6 +1,41 @@
 {
   "noticias": [
     {
+      "article_id": "66a8fbfdca006f4542748fd09660dece",
+      "title": "Amantes de la cerveza desconocen a Messi: la polémica del momento",
+      "link": "https://titulares.ar/amantes-de-la-cerveza-desconocen-a-messi-la-polemica-del-momento/",
+      "keywords": [
+        "ultimo momento"
+      ],
+      "creator": [
+        "Titulares"
+      ],
+      "description": "El Espíritu Deportivo de Atlanta El centro de Atlanta es un lugar que combina historia, cultura y deporte. Desde el legado olímpico de 1996 hasta el famoso acuario y el museo de Coca Cola, la ciudad ofrece una amplia gama de actividades para los visitantes. Sin embargo, el deporte más tradicional en esta extensa y [...]",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-19 09:25:09",
+      "pubDateTZ": "UTC",
+      "image_url": "https://titulares.ar/wp-content/themes/jnews/assets/img/jeg-empty.png",
+      "video_url": null,
+      "source_id": "titulares",
+      "source_name": "Titulares",
+      "source_priority": 10683503,
+      "source_url": "https://titulares.ar",
+      "source_icon": "https://n.bytvi.com/titulares.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
       "article_id": "dfd912f1b36370e00e374545896a58c0",
       "title": "¿De qué nos reímos en España?",
       "link": "https://www.laopinioncoruna.es/sociedad/2025/06/19/de-que-nos-reimos-espana-118789490.html",
@@ -272,43 +307,7 @@
       "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
       "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
       "duplicate": false
-    },
-    {
-      "article_id": "9926f7c2c008862193508977f35e07e7",
-      "title": "Ernesto Laguardia pide ayuda en redes sociales tras sufrir un aparatoso accidente en las calles de CDMX",
-      "link": "https://www.infobae.com/mexico/2025/06/19/ernesto-laguardia-pide-ayuda-en-redes-sociales-tras-sufrir-un-aparatoso-accidente-en-las-calles-de-cdmx/",
-      "keywords": null,
-      "creator": [
-        "Jazmín González"
-      ],
-      "description": "El conocido actor de melodramas pidió la ayuda de sus seguidores desde su automóvil",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 04:08:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/6PQUSEYG5JBT5NUWDOHUXJWJFE.jpg?auth=78e471e1cc633a09426df14d6fa05bc0f7fc1fdad80b59c251e8ae3c3bd00761&height=1080&smart=true&width=1960",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
     }
   ],
-  "timestamp": 1750368114530
+  "timestamp": 1750369672997
 }
