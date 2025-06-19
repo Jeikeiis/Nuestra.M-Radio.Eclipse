@@ -1,47 +1,20 @@
-# Nuestra.M-Radio.Eclipse
+Nuestra Mañana - Radio Eclipse
+¡Bienvenido/a a Nuestra Mañana!
+Este proyecto es una plataforma web moderna para la programación radial de Radio Eclipse, desarrollada con Next.js y TypeScript.
 
-¡Bienvenido/a a **Nuestra.M-Radio.Eclipse**!  
-Este proyecto está construido con [Next.js](https://nextjs.org) y fue iniciado con [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🎙️ ¿Qué es Nuestra Mañana?
+"Nuestra Mañana" es un espacio digital donde los oyentes pueden acceder a la programación, noticias, podcasts, eventos y mucho más de Radio Eclipse. El sitio está optimizado para ofrecer una experiencia rápida, visualmente atractiva y fácil de navegar, tanto en computadoras como en dispositivos móviles.
 
----
-
-## 🚀 Primeros pasos
-
-Para iniciar el servidor de desarrollo:
-
-```bash
-npm run dev
-# o
-yarn dev
-# o
-pnpm dev
-# o
-bun dev
-```
-
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
-
-Puedes comenzar a editar la página modificando `app/page.tsx`.  
-La página se actualiza automáticamente a medida que editas el archivo.
-
-Este proyecto utiliza [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) para optimizar y cargar [Geist](https://vercel.com/font), una nueva familia tipográfica de Vercel.
-
----
-
-## 📚 Aprende más
-
-- [Documentación de Next.js](https://nextjs.org/docs) — Aprende sobre las características y API de Next.js.
-- [Tutorial interactivo de Next.js](https://nextjs.org/learn)
-- [Repositorio de Next.js en GitHub](https://github.com/vercel/next.js)
-
----
-
-## ☁️ Despliegue en Vercel
-
-La forma más sencilla de desplegar tu app Next.js es usando la [plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Consulta la [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
-
----
-
-¡Gracias por ser parte de este proyecto! 🎶✨
+🚀 Características principales
+Programación radial actualizada y dinámica.
+Secciones de noticias, música, farándula y eventos.
+Integración con podcasts y locutores destacados.
+Panel de administración para gestionar contenidos.
+Optimización SEO y carga rápida gracias a Next.js.
+Recursos multimedia y carrusel de sponsors.
+🛠️ Tecnologías utilizadas
+Next.js (React)
+TypeScript
+CSS Modules
+API Routes para manejo de datos y caché
+Integración con Vercel para despliegue
