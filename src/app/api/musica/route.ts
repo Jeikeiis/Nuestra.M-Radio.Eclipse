@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/deduplicar";
+import { loadCache, saveCache } from "@/utils/cacheFileManager";
+import { API_USER_KEY } from "@/utils/cacheManager";
 
-const API_KEY = process.env.API_KEY || '';
-const CACHE_FILE = path.resolve(process.cwd(), "musica-cache.json");
+const SECCION = "musica";
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
 const COOLDOWN_MS = 61 * 60 * 1000;
 
@@ -23,46 +22,36 @@ let cache: {
 let lastApiSuccess: number = 0;
 
 function cargarCacheDesdeArchivo() {
-  try {
-    if (fs.existsSync(CACHE_FILE)) {
-      const data = fs.readFileSync(CACHE_FILE, "utf-8");
-      const json = JSON.parse(data);
-      if (Array.isArray(json.noticias)) {
-        const noticiasUnicas = filtrarYLimpiarDatos(json.noticias, {
-          camposClave: ["title","link"],
-          campoFecha: "pubDate",
-          maxItems: 20,
-          camposMezcla: ["description","image_url","source_id","link"]
-        });
-        cache.noticias = noticiasUnicas;
-        cache.timestamp = json.timestamp || Date.now();
-        cache.lastValidNoticias = noticiasUnicas;
-      }
-    }
-  } catch {}
+  const loaded = loadCache(SECCION);
+  if (loaded) {
+    const noticiasUnicas = filtrarYLimpiarDatos(loaded.noticias, {
+      camposClave: ["title","link"],
+      campoFecha: "pubDate",
+      maxItems: 20,
+      camposMezcla: ["description","image_url","source_id","link"]
+    });
+    cache.noticias = noticiasUnicas;
+    cache.timestamp = loaded.timestamp;
+    cache.lastValidNoticias = noticiasUnicas;
+  }
 }
 
 function guardarCacheEnArchivo(noticias: Dato[], pageSize: number = 4, maxPages: number = 5) {
-  try {
-    const noticiasUnicas = filtrarYLimpiarDatos(noticias, {
-      camposClave: ["title","link"],
-      campoFecha: "pubDate",
-      maxItems: maxPages * pageSize,
-      camposMezcla: ["description","image_url","source_id","link"]
-    });
-    fs.writeFileSync(
-      CACHE_FILE,
-      JSON.stringify({ noticias: noticiasUnicas, timestamp: Date.now() }, null, 2),
-      "utf-8"
-    );
-  } catch {}
+  const noticiasUnicas = filtrarYLimpiarDatos(noticias, {
+    camposClave: ["title","link"],
+    campoFecha: "pubDate",
+    maxItems: maxPages * pageSize,
+    camposMezcla: ["description","image_url","source_id","link"]
+  });
+  saveCache(SECCION, noticiasUnicas);
 }
 
 cargarCacheDesdeArchivo();
 
 async function fetchNoticiasMusica(): Promise<{ noticias: Dato[]; errorMsg?: string }> {
+  const API_KEY = process.env.API_USER_KEY || '';
   if (!API_KEY) {
-    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_KEY).' };
+    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_USER_KEY).' };
   }
   const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=musica&country=ar,uy`;
   try {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { deduplicarCombinado, Dato } from "@/utils/deduplicar";
 import ApiStatusIndicator, { ApiStatus } from "./ApiStatusIndicator";
+import { useLocalCache } from "@/utils/useLocalCache";
 
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
@@ -42,20 +43,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
   const [fallback, setFallback] = useState(false);
   const [cooldown, setCooldown] = useState(false);
 
-  function guardarCacheLocal(noticias: Dato[]) {
-    try {
-      localStorage.setItem(cacheKey, JSON.stringify(noticias));
-    } catch {}
-  }
-  function cargarCacheLocal(): Dato[] {
-    try {
-      const raw = localStorage.getItem(cacheKey);
-      if (!raw) return [];
-      return JSON.parse(raw);
-    } catch {
-      return [];
-    }
-  }
+  const { guardarCache, cargarCache } = useLocalCache<Dato[]>(cacheKey);
 
   const cargarNoticias = (forzar = false, nuevaPagina = page) => {
     if (forzar) {
@@ -75,7 +63,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         let noticiasValidas = Array.isArray(data.noticias)
           ? data.noticias.filter((n: Dato) => n && n.title && n.link && n.title.length > 6)
           : [];
-        let cacheLocal = cargarCacheLocal();
+        let cacheLocal = cargarCache() || [];
         let combinadas = deduplicarCombinado(
           noticiasValidas,
           cacheLocal,
@@ -86,7 +74,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         );
         const titulosActuales = new Set<string>(noticiasValidas.map((n: Dato) => n.title));
         const viejasNoRepetidas = cacheLocal.filter((n: Dato) => !titulosActuales.has(n.title));
-        guardarCacheLocal(combinadas);
+        guardarCache(combinadas);
         setNoticias(noticiasValidas);
         setNoticiasPrevias(viejasNoRepetidas);
         setCached(data.cached);
