@@ -168,9 +168,9 @@ body {
 }
 @media (max-width: 640px) {
   .main-content {
-    padding-top: 21rem; /* Antes: 23rem */
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
+    padding-top: 21rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-bottom: 1rem;
     max-width: 100vw;
     gap: 0.5rem;
@@ -263,10 +263,8 @@ body {
   .contacto-section,
   .podcasts-section,
   .main-section {
-    padding: 1rem 0.2rem 1.2rem 0.2rem !important;
-    max-width: 100vw !important;
-    margin: 0 auto 0.7rem auto !important;
-    border-radius: 0.5rem !important;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
@@ -463,7 +461,7 @@ html.dark .noticia-contenedor .noticia-titulo {
   border: 0;
 }
 
-/* Fin del CSS pro refactorizado */
+/* Eliminados estilos de modal, ahora están en ProgramacionSection.css */
 
 
 

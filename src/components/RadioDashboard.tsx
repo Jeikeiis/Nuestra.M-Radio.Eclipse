@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./RadioDashboard.css";
 
 export interface RadioDashboardProps {
@@ -27,6 +27,18 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
   onSyncLive,
   audioRef,
 }) => {
+  // Manejo de Escape para cerrar el panel
+  const panelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && onClose) {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   /**
    * Alterna la reproducción/pausa del audio.
    */
@@ -57,6 +69,10 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
     <section
       className="radio-dashboard"
       aria-label="Radio en vivo Nuestra Mañana FM 106.3"
+      role="dialog"
+      aria-modal="true"
+      tabIndex={-1}
+      ref={panelRef}
     >
       <div className="radio-dashboard-header">
         <div className="radio-dashboard-header-texts">

@@ -42,6 +42,7 @@ export default function RootLayout({
     return true;
   });
   const [radioOpen, setRadioOpen] = useState(false);
+  const [radioSyncDone, setRadioSyncDone] = useState(false);
 
   useEffect(() => {
     setHydrated(true);
@@ -57,6 +58,30 @@ export default function RootLayout({
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
+
+  // Persistencia de volumen
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("radioVolume");
+      if (saved !== null) setVolume(Number(saved));
+    }
+  }, []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("radioVolume", String(volume));
+    }
+  }, [volume]);
+
+  // Sincronización automática al abrir el panel por primera vez
+  useEffect(() => {
+    if (radioOpen && !radioSyncDone) {
+      handleSyncLive();
+      setRadioSyncDone(true);
+    }
+    if (!radioOpen) {
+      setRadioSyncDone(false); // Permite re-sincronizar si se cierra y vuelve a abrir
+    }
+  }, [radioOpen]);
 
   // Sincronizar con el vivo
   const handleSyncLive = () => {
