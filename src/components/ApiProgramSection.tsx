@@ -171,6 +171,19 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
 
   const noticiasPagina = obtenerNoticiasPagina(noticias, noticiasPrevias, page, PAGE_SIZE);
 
+  // Limpia scripts y HTML peligroso de un string
+  function limpiarDescripcion(texto: string): string {
+    if (!texto) return "";
+    // Elimina <script> y <style> y su contenido
+    let limpio = texto.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "");
+    // Elimina el resto de etiquetas HTML
+    limpio = limpio.replace(/<[^>]+>/g, "");
+    // Opcional: decodifica entidades HTML básicas
+    const txt = document.createElement('textarea');
+    txt.innerHTML = limpio;
+    return txt.value;
+  }
+
   if (loading && noticiasPrevias.length > 0) {
     return (
       <div className={sectionClass} aria-busy="true" style={{position:'relative'}}>
@@ -325,7 +338,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
           </div>
           {noticia.description && (
             <div className="noticia-description">
-              {noticia.description}
+              {limpiarDescripcion(noticia.description)}
             </div>
           )}
         </div>
