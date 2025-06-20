@@ -55,16 +55,24 @@ const Modal: React.FC<ModalProps> = ({
       const originalOverflow = document.body.style.overflow;
       const originalPosition = document.body.style.position;
       const originalWidth = document.body.style.width;
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.width = "100vw";
-      // Prevenir scroll en iOS/Safari
-      document.body.addEventListener('touchmove', preventScroll, { passive: false });
+      // Solo bloquear el body si no es móvil
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
+      if (!isMobile) {
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100vw";
+      }
+      // Prevenir scroll en iOS/Safari solo si no es móvil
+      if (!isMobile) {
+        document.body.addEventListener('touchmove', preventScroll, { passive: false });
+      }
       return () => {
         document.body.style.overflow = originalOverflow;
         document.body.style.position = originalPosition;
         document.body.style.width = originalWidth;
-        document.body.removeEventListener('touchmove', preventScroll);
+        if (!isMobile) {
+          document.body.removeEventListener('touchmove', preventScroll);
+        }
       };
     }
     function preventScroll(e: TouchEvent) {
@@ -73,6 +81,9 @@ const Modal: React.FC<ModalProps> = ({
   }, [open]);
 
   if (!open) return null;
+
+  // Detectar móvil
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
 
   return (
     <div
@@ -95,22 +106,24 @@ const Modal: React.FC<ModalProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow: "hidden"
+        overflow: isMobile ? 'auto' : 'hidden', // Permitir scroll en móviles
+        WebkitOverflowScrolling: isMobile ? 'touch' : undefined,
       }}
     >
       <div
         className="programacion-modal-content"
         style={{
-          maxWidth: typeof window !== "undefined" && window.innerWidth <= 640 ? "99vw" : maxWidth,
-          minWidth: typeof window !== "undefined" && window.innerWidth <= 640 ? "98vw" : minWidth,
-          width: typeof window !== "undefined" && window.innerWidth <= 640 ? "99vw" : undefined,
-          maxHeight: "90vh",
+          maxWidth: isMobile ? "99vw" : maxWidth,
+          minWidth: isMobile ? "98vw" : minWidth,
+          width: isMobile ? "99vw" : undefined,
+          maxHeight: isMobile ? "98vh" : "90vh",
           height: "auto",
           overflowY: "auto",
           position: "relative",
           animation: "modalIn 0.22s cubic-bezier(.4,1.2,.6,1)",
-          padding: typeof window !== "undefined" && window.innerWidth <= 640 ? "1.1rem 0.3rem 0.7rem 0.3rem" : "2rem 2.5rem 2rem 2.5rem",
+          padding: isMobile ? "1.1rem 0.3rem 0.7rem 0.3rem" : "2rem 2.5rem 2rem 2.5rem",
           border: "none",
+          WebkitOverflowScrolling: 'touch',
         }}
         onClick={e => e.stopPropagation()}
       >

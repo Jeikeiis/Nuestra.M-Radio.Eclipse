@@ -18,15 +18,12 @@ function normalizeText(text: string): string {
     .trim();
 }
 
-// Compara similitud de textos (exacto, substring largo, o Levenshtein <=3)
+// Compara similitud de textos (solo exacto, más estricto)
 function areSimilar(a: string, b: string): boolean {
   if (!a || !b) return false;
   const na = normalizeText(a);
   const nb = normalizeText(b);
-  if (na === nb) return true;
-  if (na.length > 20 && nb.length > 20 && (na.includes(nb) || nb.includes(na))) return true;
-  if (na.length > 20 && nb.length > 20 && levenshtein(na, nb) <= 3) return true;
-  return false;
+  return na === nb;
 }
 
 // Distancia de Levenshtein para similitud flexible
@@ -72,9 +69,12 @@ export function deduplicarCombinado(
   const resultado: Dato[] = [];
   const vistos = new Set<string>();
   for (const n of todas) {
-    // Buscar si ya hay uno similar en resultado
+    // Clave única combinando todos los campos clave normalizados
+    const key = camposClave.map(c => normalizeText(n[c] || '')).join('|');
+    if (vistos.has(key)) continue;
+    // Buscar si ya hay uno similar en resultado (solo exacto)
     const idx = resultado.findIndex(prev =>
-      camposClave.some(c => areSimilar(n[c], prev[c]))
+      camposClave.every(c => areSimilar(n[c], prev[c]))
     );
     if (idx !== -1) {
       // Mezclar información útil
@@ -94,9 +94,6 @@ export function deduplicarCombinado(
       resultado[idx] = mezclado;
       continue;
     }
-    // Si no hay similar, agregar
-    const key = camposClave.map(c => normalizeText(n[c] || '')).join('|');
-    if (vistos.has(key)) continue;
     vistos.add(key);
     resultado.push(n);
     if (resultado.length >= maxItems) break;
