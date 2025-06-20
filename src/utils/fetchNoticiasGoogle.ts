@@ -5,15 +5,15 @@
  * @returns {Promise<any[]>} Array de noticias obtenidas.
  * @throws {Error} Si la API responde con error, formato inesperado o problemas de red.
  *
- * Dependencias: requiere variable de entorno API_KEY.
+ * Dependencias: requiere variable de entorno USER_API_KEY.
  *
  * Ejemplo:
  *   const noticias = await fetchNoticiasNewsData('montevideo');
  */
-const API_KEY = process.env.API_KEY || ""; // Variable de entorno obligatoria
+const USER_API_KEY = process.env.USER_API_KEY || ""; // Variable de entorno obligatoria
 
 export async function fetchNoticiasNewsData(region: string) {
-  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;
+  const url = `https://newsdata.io/api/1/latest?apikey=${USER_API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;
   try {
     const res = await fetch(url);
     if (!res.ok) {

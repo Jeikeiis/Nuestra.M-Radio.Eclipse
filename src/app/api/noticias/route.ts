@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/deduplicar";
 import { loadCache, saveCache } from "@/utils/cacheFileManager";
-import { API_USER_KEY } from "@/utils/cacheManager";
+import { USER_API_KEY } from "@/utils/cacheManager";
 import { limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
 import { guardarCacheEnArchivo, respuestaApiEstandar } from '@/utils/cacheHelpers';
 import { paginar } from '@/utils/paginacion';
@@ -42,11 +42,11 @@ function cargarCacheDesdeArchivo() {
 
 // --- Fetch noticias generales desde NewsData.io ---
 async function fetchNoticiasGenerales(): Promise<{ noticias: Dato[]; errorMsg?: string }> {
-  const API_KEY = process.env.API_USER_KEY || '';
-  if (!API_KEY) {
-    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_USER_KEY).' };
+  const USER_API_KEY = process.env.USER_API_KEY || '';
+  if (!USER_API_KEY) {
+    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (USER_API_KEY).' };
   }
-  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=noticias&country=ar,uy&language=es&category=top`;
+  const url = `https://newsdata.io/api/1/latest?apikey=${USER_API_KEY}&q=noticias&country=ar,uy&language=es&category=top`;
   try {
     const res = await fetch(url);
     if (!res.ok) {

@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { importarCaches, limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
-import { API_USER_KEY } from '@/utils/cacheManager';
+import { USER_API_KEY } from '@/utils/cacheManager';
 import { respuestaApiEstandar } from '@/utils/cacheHelpers';
 
 const SECCIONES = ['farandula', 'musica', 'noticias'];
 
 export async function POST(request: Request) {
   const auth = request.headers.get('authorization');
-  if (!auth || auth !== `Bearer ${API_USER_KEY}`) {
+  if (!auth || auth !== `Bearer ${USER_API_KEY}`) {
     return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: 'No autorizado', cached: false, huboCambio: false, fallback: false, apiStatus: 'unauthorized', meta: {} }), { status: 401 });
   }
   try {

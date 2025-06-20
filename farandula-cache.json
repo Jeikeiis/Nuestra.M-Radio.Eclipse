@@ -1,18 +1,123 @@
 {
   "noticias": [
     {
-      "article_id": "66a8fbfdca006f4542748fd09660dece",
-      "title": "Amantes de la cerveza desconocen a Messi: la polémica del momento",
-      "link": "https://titulares.ar/amantes-de-la-cerveza-desconocen-a-messi-la-polemica-del-momento/",
+      "article_id": "b69ffd98e14c516202e2adacb249c820",
+      "title": "Las 10 mujeres más ricas del mundo que construyeron su fortuna sin herencias",
+      "link": "https://www.infobae.com/america/mundo/2025/06/20/las-10-mujeres-mas-ricas-del-mundo-que-construyeron-su-fortuna-sin-herencias/",
+      "keywords": null,
+      "creator": [
+        "Dante Martignoni"
+      ],
+      "description": "Por primera vez, Forbes elaboró un ranking global que identifica a las principales empresarias que amasaron riquezas millonarias por cuenta propia. La lista abarca 13 países y sectores como la tecnología, la cosmética y la logística",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 08:05:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/USYFKLRMMBFRBF6PLHUPKXA5EI.jpg?auth=2d3e9fafbcb0fbb6b693e9e93997761685e3e95cd3db3880317e17b6116a077f&height=1024&smart=true&width=1792",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "475d2b266bd6fd77d878f98344b11a4e",
+      "title": "El ritual esencial de Julianne Hough para cuidar su cuerpo",
+      "link": "https://www.infobae.com/tendencias/2025/06/20/el-ritual-esencial-de-julianne-hough-para-cuidar-su-cuerpo/",
+      "keywords": null,
+      "creator": [
+        "Fausto Urriste"
+      ],
+      "description": "La actriz y bailarina compartió el simple consejo que transformó su rutina diaria, priorizando el autocuidado auténtico y la salud",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 08:05:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/A6ABEMPGAPYICKF6JV4AQCQKJM.jpg?auth=f716f94346a9fbc87d87945de19fcf5155c0560b8229306dda0259a9a5380f75&height=2440&smart=true&width=3660",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "2c498f1219b641193dafeaa85fbfe409",
+      "title": "La historia de Nico Occhiato: soñaba con ser futbolista, trabajó de lo que no quiso, se metió en un reality, fundó un canal de streaming y ahora llega a La Voz Argentina",
+      "link": "https://www.clarin.com/espectaculos/historia-nico-occhiato-sonaba-futbolista-trabajo-quiso-metio-reality-fundo-canal-streaming-ahora-llega-voz-argentina_0_0gdjHnpKDN.html",
+      "keywords": null,
+      "creator": [
+        "Clarin.com - Home"
+      ],
+      "description": "Tiene 32 años y parece haber vivido muchas vidas: los botines lo colgaron a él, tuvo que salir a repartir pan de madrugada, después manejó un flete, trabajó en un bingo y un día descubrió la TV.Creador de Luzu, desde el lunes estará en el prime time de Telefe.Su gran referente en la conducción, sus abuelos, su demostración afectiva, su modo de meditar.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 06:35:41",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.clarin.com/img/2025/06/20/exo41B8A2_2000x1500__1.jpg",
+      "video_url": null,
+      "source_id": "clarin",
+      "source_name": "Clarin",
+      "source_priority": 1115,
+      "source_url": "https://www.clarin.com",
+      "source_icon": "https://n.bytvi.com/clarin.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "entertainment"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "695a63cb1dca169e80a0a729c82c4bc0",
+      "title": "Fernanda Iglesias cruzó a Marcela Feudale tras revelarse cuánto le costará al Gobierno limpiar tras el acto de Cristina Kirchner",
+      "link": "https://titulares.ar/fernanda-iglesias-cruzo-a-marcela-feudale-tras-revelarse-cuanto-le-costara-al-gobierno-limpiar-tras-el-acto-de-cristina-kirchner/",
       "keywords": [
-        "ultimo momento"
+        "entretenimiento"
       ],
       "creator": [
-        "Titulares"
+        "Marisol Medrano"
       ],
-      "description": "El Espíritu Deportivo de Atlanta El centro de Atlanta es un lugar que combina historia, cultura y deporte. Desde el legado olímpico de 1996 hasta el famoso acuario y el museo de Coca Cola, la ciudad ofrece una amplia gama de actividades para los visitantes. Sin embargo, el deporte más tradicional en esta extensa y [...]",
+      "description": "En las últimas horas, se desató un enfrentamiento en las redes sociales entre dos reconocidas figuras del espectáculo argentino: Marcela Feudale y Fernanda Iglesias. Todo comenzó cuando Feudale realizó una publicación en su cuenta oficial de X tras el multitudinario acto de Cristina Kirchner, en la que mostraba su opinión de manera despreocupada. Fernanda Iglesias [...]",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 09:25:09",
+      "pubDate": "2025-06-20 06:15:18",
       "pubDateTZ": "UTC",
       "image_url": "https://titulares.ar/wp-content/themes/jnews/assets/img/jeg-empty.png",
       "video_url": null,
@@ -36,57 +141,24 @@
       "duplicate": false
     },
     {
-      "article_id": "dfd912f1b36370e00e374545896a58c0",
-      "title": "¿De qué nos reímos en España?",
-      "link": "https://www.laopinioncoruna.es/sociedad/2025/06/19/de-que-nos-reimos-espana-118789490.html",
-      "keywords": null,
-      "creator": [
-        "Doina Repede"
+      "article_id": "546d8a1523b9bfc6d8596cdcced2d73a",
+      "title": "Los mejores reality shows sobre real estate",
+      "link": "https://www.lanacion.com.ar/propiedades/casas-y-departamentos/los-mejores-reality-shows-sobre-real-estate-nid20062025/",
+      "keywords": [
+        "casas y departamentos"
       ],
-      "description": "Desde que el ser humano empezó a vivir en comunidad, el humor ha estado presente como una herramienta de crítica, unión o incluso liberación. Reír no solo es un reflejo biológico; es un hecho cultural que revela lo que una sociedad tolera, celebra o reprime. También sabemos que la risa es universal, pero los motivos por los que reímos cada uno son diferentes y van cambiando con el tiempo.",
+      "creator": null,
+      "description": "Los programas sobre propiedades ganan cada vez más terreno. Estos son los más populares entre los fanáticos del diseño, la compraventa y el mercado inmobiliario",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 08:59:56",
+      "pubDate": "2025-06-20 05:00:00",
       "pubDateTZ": "UTC",
-      "image_url": "https://estaticos-cdn.prensaiberica.es/clip/e1d1cbd1-f27e-47d1-976c-51ea7f16a498_16-9-aspect-ratio_default_0.jpg",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/PCIHT5GU3VDY7JGQ7IPZYGMJGY.jpg?auth=e4c0dd194f3c91acef9efecdb91002c8bf0975d531f0dbdf2c1c2c225ed82c8e&height=1333&smart=true&width=2000",
       "video_url": null,
-      "source_id": "laopinioncoruna",
-      "source_name": "La Opinión A Coruña",
-      "source_priority": 50098,
-      "source_url": "https://www.laopinioncoruna.es",
-      "source_icon": "https://n.bytvi.com/laopinioncoruna.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": true
-    },
-    {
-      "article_id": "47e50976e9237d0210f157ee4e74a0db",
-      "title": "Adiós a Jorge Javier Vázquez: Telecinco escoge a esta inesperada periodista para presentar 'El Diario de Jorge'",
-      "link": "https://www.laopinioncoruna.es/ocio/tv/2025/06/19/telecinco-escoge-nueva-presentadora-diario-jorge-nunca-trabajado-canal-verano-dv-118689358.html",
-      "keywords": null,
-      "creator": [
-        "Carlos Merenciano"
-      ],
-      "description": "Cristina Lasvignes regresa a la televisión para ponerse al frente de ‘El diario de verano’, la versión estival del formato que actualmente presenta Jorge Javier Vázquez en las tardes de Telecinco. El nuevo espacio llegará próximamente a la parrilla como relevo de ‘El Diario de Jorge’, y estará producido por Mediaset España en colaboración con Boomerang TV.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 08:57:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://estaticos-cdn.prensaiberica.es/clip/60373d12-97b6-4056-9c5f-a6bbb8d6b5f9_16-9-aspect-ratio_default_0.jpg",
-      "video_url": null,
-      "source_id": "laopinioncoruna",
-      "source_name": "La Opinión A Coruña",
-      "source_priority": 50098,
-      "source_url": "https://www.laopinioncoruna.es",
-      "source_icon": "https://n.bytvi.com/laopinioncoruna.png",
+      "source_id": "lanacion",
+      "source_name": "La Nacion",
+      "source_priority": 7204,
+      "source_url": "https://www.lanacion.com.ar",
+      "source_icon": "https://n.bytvi.com/lanacion.png",
       "language": "spanish",
       "country": [
         "argentina"
@@ -102,51 +174,18 @@
       "duplicate": false
     },
     {
-      "article_id": "459ef7835dce8b6a47439ff9560dc581",
-      "title": "ChatGPT, Gemini y Meta AI: cuál es la inteligencia artificial más usada y cómo está el top 5 global",
-      "link": "https://www.clarin.com/tecnologia/chatgpt-gemini-meta-ai-inteligencia-artificial-usada-top-5-global_0_tMc9JW7TcX.html",
+      "article_id": "2c335472c0f57a5b05f68b3b01036a0f",
+      "title": "Qué se celebra este 20 de junio en el Perú: felicidad, figuras del folclore criollo, pioneros radiales y lucha sanitaria",
+      "link": "https://www.infobae.com/peru/2025/06/20/que-se-celebra-este-20-de-junio-en-el-peru-felicidad-figuras-del-folclore-criollo-pioneros-radiales-y-lucha-sanitaria/",
       "keywords": null,
       "creator": [
-        "Clarin.com - Home"
+        "Manoel Obando"
       ],
-      "description": "La IA se convirtió en el nuevo frente de batalla entre los gigantes tecnológicos. Mientras se define el modelo de negocio, crece la disputa por presencia, usuarios e influencia.",
+      "description": "Las conmemoraciones de esta fecha ofrecen una oportunidad para analizar la evolución de la identidad nacional y los retos pendientes en salud, cultura y bienestar social",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 08:45:18",
+      "pubDate": "2025-06-20 05:00:00",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.clarin.com/img/2025/01/28/pqJryjKV4_2000x1500__1.jpg",
-      "video_url": null,
-      "source_id": "clarin",
-      "source_name": "Clarin",
-      "source_priority": 1115,
-      "source_url": "https://www.clarin.com",
-      "source_icon": "https://n.bytvi.com/clarin.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "technology"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "c97923f99b9e453da108f7c7e3570732",
-      "title": "‘Una película de Minecraft’ llega a plataformas: cuándo y dónde ver la adaptación cinematográfica del popular videojuego",
-      "link": "https://www.infobae.com/espana/cultura/2025/06/19/una-pelicula-de-minecraft-llega-a-plataformas-cuando-y-donde-ver-la-adaptacion-cinematografica-del-popular-videojuego/",
-      "keywords": null,
-      "creator": [
-        "David Pardillos"
-      ],
-      "description": "Con actores como Jason Momoa o Jack Black en su reparto, la película traslada a gran pantalla el amplio universo de bloques",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 08:08:23",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/KGLMMM6I6RF55PXXEMV2GYDDRE.jpg?auth=0e32d3fdcf210026b74419a5a263c4ec91dfe0c7d4f0d3b3d912f10d97c0e227&height=1080&smart=true&width=1920",
+      "image_url": "https://www.infobae.com/resizer/v2/AJWCKMDZA5AARPUYXZGILHHC6Q.jpg?auth=85ba9545d82c6d1cd53ceeb8a2d181312dcbbccd2620bb13315327a08ca23fad&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -171,18 +210,18 @@
       "duplicate": false
     },
     {
-      "article_id": "27f058de323c04ab17568fdc132ea699",
-      "title": "El día que Marlon Brando rechazó el Oscar por El Padrino y escandalizó a Hollywood",
-      "link": "https://www.infobae.com/entretenimiento/2025/06/19/el-dia-que-marlon-brando-rechazo-el-oscar-por-el-padrino-y-escandalizo-a-hollywood/",
+      "article_id": "3ac2e4cbd8607fd718fbd3ef40aae0cd",
+      "title": "Faitelson vuelve a atacar a Martinoli por su transmisión con Luis García: “Yo no produzco desperdicios”",
+      "link": "https://www.infobae.com/mexico/deportes/2025/06/20/faitelson-vuelve-a-atacar-a-martinoli-por-su-transmision-con-luis-garcia-yo-no-produzco-desperdicios/",
       "keywords": null,
       "creator": [
-        "Francisco González Tomadin"
+        "Luz Coello"
       ],
-      "description": "El actor envió en su lugar a una inesperada representante y convirtió la gala en el escenario de una denuncia que incomodó a toda la industria",
+      "description": "El comentarista de TUDN demeritó el trabajo que hacen sus ex compañeros en nuevas plataformas",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 08:05:00",
+      "pubDate": "2025-06-20 02:35:23",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/HC4ZA5CLTFAT3OIAKLEJPKFPHU.jpg?auth=d4f71bc31db8d65589248be68989c84444e9f7cbeb4f483d415213e36b5e0e30&height=2160&smart=true&width=3840",
+      "image_url": "https://www.infobae.com/resizer/v2/22PNK7Y36RG5FIOV3SLOJ65IGE.jpg?auth=56c60b6fc367f8ce83ac0dd42b61be73c7cfc607a0fb8e4fa7f9912f3da52bf4&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -207,18 +246,18 @@
       "duplicate": false
     },
     {
-      "article_id": "a72b99f1a9ebf8186fed0d5b2dcd064e",
-      "title": "Ese divino tesoro que está cambiando para siempre el negocio del deporte",
-      "link": "https://www.infobae.com/opinion/2025/06/19/ese-divino-tesoro-que-esta-cambiando-para-siempre-el-negocio-del-deporte/",
+      "article_id": "196e092c9dd6cda14eedcfcc404f86dc",
+      "title": "Juliana Oxenford renunció al podcast Madi y niega que haya sido por polémica entrevista a Philip Butters",
+      "link": "https://www.infobae.com/peru/2025/06/20/juliana-oxenford-renuncio-al-podcast-madi-y-niega-que-haya-sido-por-polemica-entrevista-a-philip-butters/",
       "keywords": null,
       "creator": [
-        "Aleksan Kurt"
+        "Pilar Cuya"
       ],
-      "description": "La relación con los clientes y la comunidad, claves para la rentabilidad futura",
+      "description": "La extrovertida periodista confirmó su renuncia al podcast Madi y aseguró que la decisión no está relacionada con la entrevista a Phillip Butters, sino por motivos profesionales.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 06:35:12",
+      "pubDate": "2025-06-20 02:23:09",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/RXNJCF5JCJEMNCOIMSBAW7M6WA.jpg?auth=ffebda78471e9b57f71309547592f70bd0c6a753038c23feef16ddb4f7bfeca3&height=816&smart=true&width=1456",
+      "image_url": "https://www.infobae.com/resizer/v2/T3SM2LGCHBCFJNDFS4IDWLIOYE.jpg?auth=b05cf38285c9b9824b490d82beee56c6f280dcef54911e0de0741ca423a6b1a5&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -234,72 +273,6 @@
       ],
       "category": [
         "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "647e901922be80e109c6e14bc9bf37db",
-      "title": "Día mundial de la anemia falciforme",
-      "link": "https://www.elinformador.com.co/index.php/sociales/54-entretenimiento/335771-dia-mundial-de-la-anemia-falciforme",
-      "keywords": null,
-      "creator": [
-        "Jorge Cabana"
-      ],
-      "description": "Cada año, el 19 de junio, el mundo se une para conmemorar el Día Mundial de la Anemia Falciforme.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 05:00:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.elinformador.com.co/images/stories/sociales/2025/06-junio/19GENE_2.jpg",
-      "video_url": null,
-      "source_id": "elinformador",
-      "source_name": "El Informador",
-      "source_priority": 369879,
-      "source_url": "https://www.elinformador.com.co",
-      "source_icon": "https://n.bytvi.com/elinformador.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "60c1d75f2cc5de8cb42e520d140d86e7",
-      "title": "Denunciaron a Tyler Perry por acoso y violencia sexual",
-      "link": "https://www.elcordillerano.com.ar/noticias/2025/06/19/215405-denunciaron-a-tyler-perry-por-acoso-y-violencia-sexual",
-      "keywords": null,
-      "creator": [
-        "(Diario El Cordillerano)"
-      ],
-      "description": "El director enfrenta una demanda por 260 millones de dólares.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 04:30:17",
-      "pubDateTZ": "UTC",
-      "image_url": "https://elcordillerano-s3.cdn.net.ar/s3i233/2025/06/elcordillerano/images/02/09/88/2098817_2da2ebff7466e120bb8139edf549bba987eaf8555c35ab6637bbdd674f6f60a9/md.webp",
-      "video_url": null,
-      "source_id": "elcordillerano",
-      "source_name": "Diario El Cordillerano",
-      "source_priority": 79460,
-      "source_url": "https://www.elcordillerano.com.ar",
-      "source_icon": "https://n.bytvi.com/elcordillerano.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "entertainment"
       ],
       "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
       "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -309,5 +282,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750369672997
+  "timestamp": 1750452275908
 }
