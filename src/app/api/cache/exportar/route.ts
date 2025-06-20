@@ -1,15 +1,17 @@
 import { NextResponse } from 'next/server';
-import { exportarCaches, API_USER_KEY } from '@/utils/cacheManager';
+import { exportarCaches } from '@/utils/cacheWorkflowManager';
+import { API_USER_KEY } from '@/utils/cacheManager';
+import { respuestaApiEstandar } from '@/utils/cacheHelpers';
 
-export async function POST(request) {
+export async function POST(request: Request) {
   const auth = request.headers.get('authorization');
   if (!auth || auth !== `Bearer ${API_USER_KEY}`) {
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: 'No autorizado', cached: false, huboCambio: false, fallback: false, apiStatus: 'unauthorized', meta: {} }), { status: 401 });
   }
   try {
-    await exportarCaches();
-    return NextResponse.json({ ok: true, message: 'Caches exportadas correctamente.' });
-  } catch (e) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+    const data = await exportarCaches();
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], data, cached: true, huboCambio: false, fallback: false, apiStatus: 'ok', meta: { exportedAt: new Date().toISOString() } }));
+  } catch (e: any) {
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: e?.message || 'Error desconocido', cached: false, huboCambio: false, fallback: false, apiStatus: 'error', meta: {} }), { status: 500 });
   }
 }

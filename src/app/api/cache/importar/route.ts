@@ -1,15 +1,25 @@
 import { NextResponse } from 'next/server';
-import { importarCaches, API_USER_KEY } from '@/utils/cacheManager';
+import { importarCaches, limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
+import { API_USER_KEY } from '@/utils/cacheManager';
+import { respuestaApiEstandar } from '@/utils/cacheHelpers';
 
-export async function POST(request) {
+const SECCIONES = ['farandula', 'musica', 'noticias'];
+
+export async function POST(request: Request) {
   const auth = request.headers.get('authorization');
   if (!auth || auth !== `Bearer ${API_USER_KEY}`) {
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: 'No autorizado', cached: false, huboCambio: false, fallback: false, apiStatus: 'unauthorized', meta: {} }), { status: 401 });
   }
   try {
-    await importarCaches();
-    return NextResponse.json({ ok: true, message: 'Caches importadas correctamente.' });
-  } catch (e) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+    const data = await request.json();
+    await importarCaches(data);
+    for (const seccion of SECCIONES) {
+      if (data[seccion]?.noticias?.length > 5 * 20) {
+        limpiarCacheSiExcede(seccion, 5, 20);
+      }
+    }
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], cached: true, huboCambio: true, fallback: false, apiStatus: 'ok', meta: { importedAt: new Date().toISOString() } }));
+  } catch (e: any) {
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: e?.message || 'Error desconocido', cached: false, huboCambio: false, fallback: false, apiStatus: 'error', meta: {} }), { status: 500 });
   }
 }

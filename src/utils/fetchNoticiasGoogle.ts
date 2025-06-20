@@ -1,4 +1,16 @@
-const API_KEY = process.env.API_KEY || ""; // Unifica el nombre de la variable
+/**
+ * Obtiene noticias desde NewsData.io para una región específica.
+ *
+ * @param {string} region Región o término de búsqueda.
+ * @returns {Promise<any[]>} Array de noticias obtenidas.
+ * @throws {Error} Si la API responde con error, formato inesperado o problemas de red.
+ *
+ * Dependencias: requiere variable de entorno API_KEY.
+ *
+ * Ejemplo:
+ *   const noticias = await fetchNoticiasNewsData('montevideo');
+ */
+const API_KEY = process.env.API_KEY || ""; // Variable de entorno obligatoria
 
 export async function fetchNoticiasNewsData(region: string) {
   const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${encodeURIComponent(region)}&country=uy&language=es&category=top`;
@@ -23,9 +35,6 @@ export async function fetchNoticiasNewsData(region: string) {
     }
     return data.results;
   } catch (e: any) {
-    throw new Error("No se pudieron obtener noticias. Verifica tu conexión, la API key o el límite de uso. " + (e?.message || ""));
-  }
-}
     throw new Error("No se pudieron obtener noticias. Verifica tu conexión, la API key o el límite de uso. " + (e?.message || ""));
   }
 }

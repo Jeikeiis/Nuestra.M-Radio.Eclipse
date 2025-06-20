@@ -2,10 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/deduplicar";
 import { loadCache, saveCache } from "@/utils/cacheFileManager";
 import { API_USER_KEY } from "@/utils/cacheManager";
+import { limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
+import { guardarCacheEnArchivo, respuestaApiEstandar } from '@/utils/cacheHelpers';
+import { paginar } from '@/utils/paginacion';
 
 const SECCION = "noticias";
-const CACHE_DURATION_MS = 10 * 60 * 1000;
-const COOLDOWN_MS = 61 * 60 * 1000;
+const CACHE_DURATION_MS = parseInt(process.env.CACHE_DURATION_MS || '') || 10 * 60 * 1000;
+const COOLDOWN_MS = parseInt(process.env.COOLDOWN_MS || '') || 61 * 60 * 1000;
 
 let cache: {
   noticias: Dato[];
@@ -37,28 +40,13 @@ function cargarCacheDesdeArchivo() {
   }
 }
 
-// --- Guardar cache a archivo ---
-function guardarCacheEnArchivo(noticias: Dato[], pageSize: number = 4, maxPages: number = 5) {
-  const noticiasUnicas = filtrarYLimpiarDatos(noticias, {
-    camposClave: ["title","link"],
-    campoFecha: "pubDate",
-    maxItems: maxPages * pageSize,
-    camposMezcla: ["description","image_url","source_id","link"]
-  });
-  saveCache(SECCION, noticiasUnicas);
-}
-
-// Cargar cache al iniciar
-cargarCacheDesdeArchivo();
-
-// --- Fetch noticias generales ---
-async function fetchNoticiasGenerales(tema: string): Promise<{ noticias: Dato[]; errorMsg?: string }> {
-  // Usar variable de entorno para la API key
-  const API_KEY = process.env.API_KEY || '';
+// --- Fetch noticias generales desde NewsData.io ---
+async function fetchNoticiasGenerales(): Promise<{ noticias: Dato[]; errorMsg?: string }> {
+  const API_KEY = process.env.API_USER_KEY || '';
   if (!API_KEY) {
-    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_KEY).' };
+    return { noticias: [], errorMsg: 'API key de NewsData.io no configurada en el entorno (API_USER_KEY).' };
   }
-  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=Noticias%20Uruguay&country=uy,ar`;
+  const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=noticias&country=ar,uy&language=es&category=top`;
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -78,38 +66,41 @@ async function fetchNoticiasGenerales(tema: string): Promise<{ noticias: Dato[];
   }
 }
 
+// Cargar cache al iniciar
+cargarCacheDesdeArchivo();
+
+/**
+ * Responde con formato profesional y consistente para errores y datos.
+ * Siempre incluye meta, estado y mensajes claros.
+ */
+function respuestaNoticias({ noticias, cached, huboCambio, errorMsg, fallback, apiStatus, meta }: any) {
+  return NextResponse.json({
+    noticias,
+    cached,
+    huboCambio,
+    errorMsg: noticias.length ? errorMsg : 'No hay noticias disponibles.',
+    fallback,
+    apiStatus,
+    meta,
+  });
+}
+
 // --- Endpoint principal GET ---
 export async function GET(req: NextRequest) {
   try {
     const now = Date.now();
     const { searchParams } = new URL(req.url);
-    const tema = searchParams.get("tema") || "noticias";
     let page = parseInt(searchParams.get("page") || "1", 10);
     if (isNaN(page) || page < 1) page = 1;
     const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
     const MAX_PAGES = 5;
-    function paginarNoticias(noticias: Dato[]) {
-      const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
-      const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
-      const start = (page - 1) * pageSize;
-      const end = Math.min(start + pageSize, totalNoticias);
-      return {
-        noticiasPaginadas: noticias.slice(start, end),
-        totalNoticias,
-        realMaxPages,
-      };
-    }
-
     let errorMsg: string | null = null;
     let fromCache = true;
     let huboCambio = false;
     let noticiasParaResponder: Dato[] = [];
-
     const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
-    const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < COOLDOWN_MS);
-
     if (cacheExpirado) {
-      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasGenerales(tema);
+      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasGenerales();
       const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
         (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
       );
@@ -118,9 +109,10 @@ export async function GET(req: NextRequest) {
         [],
         ["title","link"],
         "pubDate",
-        MAX_PAGES * pageSize,
+        5 * 4,
         ["description","image_url","source_id","link"]
       );
+      lastApiSuccess = now;
       if (noticiasValidas.length > 0) {
         cache = {
           noticias: noticiasValidas,
@@ -128,8 +120,7 @@ export async function GET(req: NextRequest) {
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
-        lastApiSuccess = now;
-        guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
+        guardarCacheEnArchivo(SECCION, noticiasValidas, pageSize, MAX_PAGES);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
         huboCambio = true;
@@ -141,10 +132,10 @@ export async function GET(req: NextRequest) {
     } else {
       noticiasParaResponder = cache.noticias;
       fromCache = true;
-      // --- Actualización en segundo plano, NO afecta la respuesta actual ---
+      // Actualización en segundo plano
       (async () => {
         try {
-          const { noticias: noticiasApi } = await fetchNoticiasGenerales(tema);
+          const { noticias: noticiasApi } = await fetchNoticiasGenerales();
           const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
             (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
           );
@@ -153,61 +144,57 @@ export async function GET(req: NextRequest) {
             [],
             ["title","link"],
             "pubDate",
-            MAX_PAGES * pageSize,
+            5 * 4,
             ["description","image_url","source_id","link"]
           );
-          const titulosCache = new Set(cache.noticias.map(n => n.title));
-          if (
-            noticiasValidas.length > 0 &&
-            (noticiasValidas.length !== cache.noticias.length ||
-              noticiasValidas.some(n => !titulosCache.has(n.title)))
-          ) {
+          if (noticiasValidas.length > 0) {
+            lastApiSuccess = Date.now();
             cache = {
               noticias: noticiasValidas,
               timestamp: Date.now(),
               errorMsg: undefined,
               lastValidNoticias: noticiasValidas,
             };
-            guardarCacheEnArchivo(noticiasValidas, pageSize, MAX_PAGES);
+            guardarCacheEnArchivo(SECCION, noticiasValidas, pageSize, MAX_PAGES);
           }
         } catch {}
       })();
     }
-
-    // No mostrar páginas vacías
-    const { noticiasPaginadas, totalNoticias, realMaxPages } = paginarNoticias(noticiasParaResponder);
-    const hayNoticias = noticiasPaginadas.length > 0;
-
-    return NextResponse.json({
-      noticias: noticiasPaginadas,
+    const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < COOLDOWN_MS);
+    const { itemsPaginados, totalItems, realMaxPages } = paginar(noticiasParaResponder, page, pageSize, MAX_PAGES);
+    return NextResponse.json(respuestaApiEstandar({
+      noticias: itemsPaginados,
       cached: fromCache,
       huboCambio,
-      errorMsg: hayNoticias ? errorMsg : "No hay noticias disponibles.",
+      errorMsg,
       fallback: fromCache,
-      apiStatus: errorMsg && !hayNoticias ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
+      apiStatus: errorMsg && !itemsPaginados.length ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
       meta: {
-        tema,
         page,
         pageSize,
-        total: totalNoticias,
+        total: totalItems,
         maxPages: realMaxPages,
         updatedAt: new Date(cache.timestamp || now).toISOString(),
         fromCache,
         lastApiSuccess: lastApiSuccess ? new Date(lastApiSuccess).toISOString() : null,
         cooldownActive,
       },
-    });
+    }));
   } catch (err: any) {
-    return NextResponse.json({
+    return NextResponse.json(respuestaApiEstandar({
       noticias: [],
       cached: false,
+      huboCambio: false,
       errorMsg: err?.message || "Error inesperado en el servidor.",
       fallback: false,
+      apiStatus: 'api-error',
       meta: {
         updatedAt: new Date().toISOString(),
         fromCache: false,
+        lastApiSuccess: null,
+        cooldownActive: false,
       },
-    }, { status: 500 });
+    }), { status: 500 });
   }
 }
 

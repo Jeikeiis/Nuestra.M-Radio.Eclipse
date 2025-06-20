@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { deduplicarCombinado, Dato, filtrarYLimpiarDatos } from "@/utils/deduplicar";
 import { loadCache, saveCache } from "@/utils/cacheFileManager";
 import { API_USER_KEY } from "@/utils/cacheManager";
+import { limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
+import { guardarCacheEnArchivo, respuestaApiEstandar } from '@/utils/cacheHelpers';
+import { paginar } from '@/utils/paginacion';
 
 const SECCION = "farandula";
 const CACHE_DURATION_MS = 4 * 60 * 60 * 1000; // 4 horas
@@ -36,17 +39,6 @@ function cargarCacheDesdeArchivo() {
     cache.timestamp = loaded.timestamp;
     cache.lastValidNoticias = noticiasUnicas;
   }
-}
-
-// --- Guardar cache a archivo ---
-function guardarCacheEnArchivo(noticias: Dato[], pageSize: number = 4, maxPages: number = 5) {
-  const noticiasUnicas = filtrarYLimpiarDatos(noticias, {
-    camposClave: ["title","link"],
-    campoFecha: "pubDate",
-    maxItems: maxPages * pageSize,
-    camposMezcla: ["description","image_url","source_id","link"]
-  });
-  saveCache(SECCION, noticiasUnicas);
 }
 
 function getIp(req: NextRequest): string {
@@ -96,25 +88,11 @@ export async function GET(req: NextRequest) {
     if (isNaN(page) || page < 1) page = 1;
     const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
     const MAX_PAGES = 5;
-    function paginarNoticias(noticias: Dato[]) {
-      const totalNoticias = Math.min(noticias.length, MAX_PAGES * pageSize);
-      const realMaxPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalNoticias / pageSize)));
-      const start = (page - 1) * pageSize;
-      const end = Math.min(start + pageSize, totalNoticias);
-      return {
-        noticiasPaginadas: noticias.slice(start, end),
-        totalNoticias,
-        realMaxPages,
-      };
-    }
-
     let errorMsg: string | null = null;
     let fromCache = true;
     let huboCambio = false;
     let noticiasParaResponder: Dato[] = [];
-
     const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
-
     if (cacheExpirado) {
       const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasFarandula();
       const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
@@ -128,7 +106,6 @@ export async function GET(req: NextRequest) {
         5 * 4,
         ["description","image_url","source_id","link"]
       );
-      // Marcar siempre el timestamp de último acceso a la API, aunque no haya datos nuevos
       lastApiSuccess = now;
       if (noticiasValidas.length > 0) {
         cache = {
@@ -137,7 +114,7 @@ export async function GET(req: NextRequest) {
           errorMsg: undefined,
           lastValidNoticias: noticiasValidas,
         };
-        guardarCacheEnArchivo(noticiasValidas);
+        guardarCacheEnArchivo(SECCION, noticiasValidas, pageSize, MAX_PAGES);
         noticiasParaResponder = noticiasValidas;
         fromCache = false;
         huboCambio = true;
@@ -149,7 +126,6 @@ export async function GET(req: NextRequest) {
     } else {
       noticiasParaResponder = cache.noticias;
       fromCache = true;
-      // Actualización en segundo plano
       (async () => {
         try {
           const { noticias: noticiasApi } = await fetchNoticiasFarandula();
@@ -172,39 +148,47 @@ export async function GET(req: NextRequest) {
               errorMsg: undefined,
               lastValidNoticias: noticiasValidas,
             };
-            guardarCacheEnArchivo(noticiasValidas);
+            guardarCacheEnArchivo(SECCION, noticiasValidas, pageSize, MAX_PAGES);
           }
         } catch {}
       })();
     }
     const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < COOLDOWN_MS);
-    return NextResponse.json({
-      noticias: noticiasParaResponder,
+    const { itemsPaginados, totalItems, realMaxPages } = paginar(noticiasParaResponder, page, pageSize, MAX_PAGES);
+    return NextResponse.json(respuestaApiEstandar({
+      noticias: itemsPaginados,
       cached: fromCache,
       huboCambio,
-      errorMsg: errorMsg,
+      errorMsg,
       fallback: fromCache,
-      apiStatus: errorMsg && !noticiasParaResponder.length ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
+      apiStatus: errorMsg && !itemsPaginados.length ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
       meta: {
+        region,
+        page,
+        pageSize,
+        total: totalItems,
+        maxPages: realMaxPages,
         updatedAt: new Date(cache.timestamp || now).toISOString(),
         fromCache,
         lastApiSuccess: lastApiSuccess ? new Date(lastApiSuccess).toISOString() : null,
         cooldownActive,
       },
-    });
+    }));
   } catch (err: any) {
-    return NextResponse.json({
+    return NextResponse.json(respuestaApiEstandar({
       noticias: [],
       cached: false,
+      huboCambio: false,
       errorMsg: err?.message || "Error inesperado en el servidor.",
       fallback: false,
+      apiStatus: 'api-error',
       meta: {
         updatedAt: new Date().toISOString(),
         fromCache: false,
         lastApiSuccess: null,
         cooldownActive: false,
       },
-    }, { status: 500 });
+    }), { status: 500 });
   }
 }
 

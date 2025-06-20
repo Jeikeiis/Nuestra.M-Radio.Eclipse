@@ -1,11 +1,12 @@
 // src/utils/deduplicar.ts
-// Utilidad centralizada para deduplicar arrays de objetos por campos clave, con mezcla de información útil
-// Generalizado: no solo para noticias
+// Utilidad centralizada y profesional para deduplicar y limpiar arrays de objetos por campos clave, con mezcla de información útil.
+// Dependencias cruzadas: Usado por cacheHelpers.ts y endpoints de API. No depende de otros utils salvo tipos propios.
 
 export interface Dato {
   [key: string]: any;
 }
 
+// Normaliza texto para comparación robusta (sin tildes, minúsculas, sin HTML)
 function normalizeText(text: string): string {
   return (text || "")
     .toLowerCase()
@@ -17,6 +18,7 @@ function normalizeText(text: string): string {
     .trim();
 }
 
+// Compara similitud de textos (exacto, substring largo, o Levenshtein <=3)
 function areSimilar(a: string, b: string): boolean {
   if (!a || !b) return false;
   const na = normalizeText(a);
@@ -27,6 +29,7 @@ function areSimilar(a: string, b: string): boolean {
   return false;
 }
 
+// Distancia de Levenshtein para similitud flexible
 function levenshtein(a: string, b: string): number {
   const matrix = Array.from({ length: a.length + 1 }, (_, i) => [i]);
   for (let j = 1; j <= b.length; j++) matrix[0][j] = j;
