@@ -197,7 +197,8 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
   else if (fallback) apiStatus = "fallback";
 
   // --- Renderizado de estados especiales ---
-  if (loading && noticiasPrevias.length > 0) {
+  if (loading && (noticias.length > 0 || noticiasPrevias.length > 0)) {
+    // Mostrar datos previos o actuales mientras carga, sin parpadeo
     return (
       <div className={sectionClass} aria-busy="true" style={{position:'relative'}}>
         <ApiStatusIndicator status={apiStatus} />
@@ -220,6 +221,48 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
             {updatedMsg}
           </div>
         )}
+        {/* Renderizar noticias actuales o previas mientras carga */}
+        <section aria-live="polite">
+          {noticiasPagina.map((noticia, idx) => (
+            <article className="noticia-contenedor" key={idx} style={{marginBottom:24}}>
+              <a
+                href={noticia.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="noticia-titulo"
+                aria-label={noticia.title}
+                tabIndex={0}
+                onClick={e => {
+                  if (!noticia.link) {
+                    e.preventDefault();
+                    alert("Enlace no disponible");
+                  }
+                }}
+              >
+                <span className="noticia-titulo-text">{noticia.title}</span>
+              </a>
+              <div className="noticia-meta">
+                {noticia.source_id && (
+                  <span className="noticia-fuente" title="Fuente">
+                    <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><circle cx="10" cy="10" r="8" fill="#b71c1c"/><text x="10" y="15" textAnchor="middle" fontSize="10" fill="#fff">F</text></svg>
+                    {noticia.source_id}
+                  </span>
+                )}
+                {noticia.pubDate && (
+                  <span className="noticia-fecha" title="Fecha de publicación">
+                    <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><rect x="2" y="4" width="16" height="14" rx="3" fill="#888"/><rect x="5" y="8" width="10" height="2" fill="#fff"/></svg>
+                    {formatearFecha(noticia.pubDate)}
+                  </span>
+                )}
+              </div>
+              {noticia.description && (
+                <div className="noticia-description">
+                  {limpiarDescripcion(noticia.description)}
+                </div>
+              )}
+            </article>
+          ))}
+        </section>
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',fontWeight:600,color:'#888'}}>Cargando datos...</div>
         <style>{`
           @keyframes fadeinout {

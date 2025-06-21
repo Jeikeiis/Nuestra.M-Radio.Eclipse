@@ -1,6 +1,263 @@
 {
   "noticias": [
     {
+      "article_id": "c1541e2b3f065262c5c68d8e5349995e",
+      "title": "Valor de apertura del dólar en República Dominicana este 20 de junio de USD a DOP",
+      "link": "https://www.infobae.com/noticias/2025/06/20/valor-de-apertura-del-dolar-en-republica-dominicana-este-20-de-junio-de-usd-a-dop/",
+      "keywords": null,
+      "creator": [
+        "Armando Montes"
+      ],
+      "description": "Este fue el comportamiento de la divisa estadounidense durante los primeros minutos de la jornada",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:18:46",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/LCCYKAAEIVHLHNQIPGHEFLD674.jpg?auth=4a0d04c595c596f24f851ee93e7915c829588f763749971dc779a97d87bbf229&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "5e0774a116f8385807e0cb5677d42774",
+      "title": "Paraguay: cotización de apertura del dólar hoy 20 de junio de USD a PYG",
+      "link": "https://www.infobae.com/noticias/2025/06/20/paraguay-cotizacion-de-apertura-del-dolar-hoy-20-de-junio-de-usd-a-pyg/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Se registró un alza en los valores del dólar con respecto a la jornada anterior",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:18:29",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/6LJ5Z7DNDNARDCTU33EIWHZJZE.jpg?auth=a9f23e103794ac4a4b277b694b753274ac8bcb74b07487c2235ae531d8b4c653&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "97ffa96ea15262b3646c21d254a94a7b",
+      "title": "Euro: cotización de apertura hoy 20 de junio en Paraguay",
+      "link": "https://www.infobae.com/noticias/2025/06/20/euro-cotizacion-de-apertura-hoy-20-de-junio-en-paraguay/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Este fue el comportamiento de la divisa europea durante los primeros minutos de la jornada",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:18:13",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/M7SXACIQG5AOBOHT5VURCJI6FM.jpg?auth=c133e4db3fffc5890b54cae04fb761bf07af874cddd74388b8cc815b75887b3e&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "cc6faaddf30007b4d52aaa4fdff2c91c",
+      "title": "Valor de apertura del euro en Bolivia este 20 de junio de EUR a BOB",
+      "link": "https://www.infobae.com/noticias/2025/06/20/valor-de-apertura-del-euro-en-bolivia-este-20-de-junio-de-eur-a-bob/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Se registró un alza en los valores del euro con respecto a la jornada anterior",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:17:55",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/ERBLW5LTXJEQBFCUIROX6DDH5U.jpg?auth=27a1d44b1e00593056d3abfddba35ca0f361aee91d4efb1c8c71cb42d3e7a83d&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "cdb731263980a035e60956e36fec03ff",
+      "title": "Euro: cotización de apertura hoy 20 de junio en República Dominicana",
+      "link": "https://www.infobae.com/noticias/2025/06/20/euro-cotizacion-de-apertura-hoy-20-de-junio-en-republica-dominicana/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Se registró un alza en los valores del euro con respecto a la jornada anterior",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:17:39",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/6YCSWJCAMVHXRPCECCY2KA6JLA.jpg?auth=43b390b1d9d84a93573e98feaa9231dbb2960c996917a0049b4a72016bc4753b&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "c68d03cd888f6c730c3a51c2cd03ebff",
+      "title": "Dólar: cotización de apertura hoy 20 de junio en Bolivia",
+      "link": "https://www.infobae.com/noticias/2025/06/20/dolar-cotizacion-de-apertura-hoy-20-de-junio-en-bolivia/",
+      "keywords": null,
+      "creator": [
+        "Infobae Noticias"
+      ],
+      "description": "Este fue el comportamiento de la divisa estadounidense durante los primeros minutos de la jornada",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:17:23",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/PSVTNSV62VDODAW4Q7R7JATCZA.jpg?auth=bab0673ca41ff12584243308e36e254e2a06ee969e0b950db61344339e8b582b&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "60d611ee72efa9c43b7283430850a87e",
+      "title": "Paraguay: “mula” ingirió cápsulas de droga y se desvaneció mientras esperaba cruzar a Brasil",
+      "link": "https://www.primeraedicion.com.ar/nota/101014931/paraguay-mula-ingirio-capsulas-de-droga-y-se-desvanecio-mientras-esperaba-cruzar-a-brasil/",
+      "keywords": [
+        "ciudad del este",
+        "puente de la amistad",
+        "ingirió cápsulas de droga",
+        "policiales",
+        "#brasil",
+        "#paraguay",
+        "#narcotráfico"
+      ],
+      "creator": [
+        "Gaston Mazur"
+      ],
+      "description": "Un hombre oriundo del departamento de Misiones fue internado de urgencia en el Hospital Regional de Ciudad del Este, Paraguay, luego de desvanecerse en el área del Puente de la Amistad. El hecho ocurrió en la tarde del jueves y, tras ser auxiliado por agentes de seguridad, se confirmó que llevaba cápsulas de droga en [...]La entrada Paraguay: “mula” ingirió cápsulas de droga y se desvaneció mientras esperaba cruzar a Brasil se publicó primero en Primera Edición.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 13:16:06",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.primeraedicion.com.ar/wp-content/uploads/2020/12/puentye-e1750423456182.jpg",
+      "video_url": null,
+      "source_id": "primeraedicion",
+      "source_name": "Primera Edicion",
+      "source_priority": 2175624,
+      "source_url": "https://www.primeraedicion.com.ar",
+      "source_icon": "https://n.bytvi.com/primeraedicion.jpg",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
       "article_id": "b13be85aae962fd57295b28178961882",
       "title": "Corrientes a la vanguardia: llega el Radixact X7, la tecnología más avanzada contra el cáncer",
       "link": "https://www.perfil.com/noticias/nea/corrientes-a-la-vanguardia-llega-el-radixact-x7-la-tecnologia-mas-avanzada-contra-el-cancer.phtml",
@@ -105,258 +362,7 @@
       "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
       "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
       "duplicate": false
-    },
-    {
-      "article_id": "001e944e1e870655ff0857e1afdb5559",
-      "title": "El fin de semana largo comienza con largas filas para salir del país por Iguazú",
-      "link": "https://www.elterritorio.com.ar/noticias/2025/06/20/857817-el-fin-de-semana-largo-comienza-con-largas-filas-para-salir-del-pais-por-iguazu",
-      "keywords": null,
-      "creator": [
-        "redaccion@elterritorio.com.ar (El Territorio)"
-      ],
-      "description": "Pasadas las 6 de la mañana la fila para salir del país ya era de casi 2 kilómetros. Se cree que muchas de las personas que estaban en la espera se podrían alojar del lado brasileño.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:00:31",
-      "pubDateTZ": "UTC",
-      "image_url": "https://elterritorio-s3.cdn.net.ar/s3i233/2025/06/elterritorio/images/02/12/14/2121438_25e1661118b42999674bbfd1054d014b0efe26971685ce5755740cbfaae04e7c/md.webp",
-      "video_url": null,
-      "source_id": "elterritorio",
-      "source_name": "El Territorio",
-      "source_priority": 1548937,
-      "source_url": "https://www.elterritorio.com.ar",
-      "source_icon": "https://n.bytvi.com/elterritorio.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "37d5873cdc13bc0c77d835351c37d93a",
-      "title": "A 90 años de la muerte de Carlos Gardel | Tres teorías sobre el accidente que le costó la vida",
-      "link": "https://www.perfil.com/noticias/cultura/a-86-anos-de-la-muerte-de-carlos-gardel-tres-teorias-sobre-el-accidente-que-le-costo-la-vida.phtml",
-      "keywords": [
-        "muerte de gardel",
-        "carlos gardel",
-        "accidente medellín",
-        "guillermo artana",
-        "ernesto samper mendoza"
-      ],
-      "creator": [
-        "Carlos Piro"
-      ],
-      "description": "El 24 de junio de 1935 el Morocho del Abasto moría en un accidente de aviación en Medellín, Colombia. Cómo fue el choque de aeronaves que terminó con su vida. Leer más",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:00:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://fotos.perfil.com/2020/12/10/trim/540/304/carlos-gardel-1098224.jpg",
-      "video_url": null,
-      "source_id": "perfil",
-      "source_name": "Perfil",
-      "source_priority": 56989,
-      "source_url": "https://www.perfil.com",
-      "source_icon": "https://n.bytvi.com/perfil.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "1286409e8c8f47ad3cf051422138f237",
-      "title": "Diego Monroig reveló la decisión de FIFA que desata «polémica» en Boca: «Preocupación»",
-      "link": "https://elintransigente.com/2025/06/diego-monroig-revelo-la-decision-de-fifa-que-desata-polemica-en-boca-preocupacion/",
-      "keywords": [
-        "boca",
-        "fifa",
-        "boca juniors",
-        "mundial de clubes",
-        "diego monroig"
-      ],
-      "creator": [
-        "Nicolás Quercia"
-      ],
-      "description": "El periodista contó la noticia que tiene en vilo a Boca.The post Diego Monroig reveló la decisión de FIFA que desata «polémica» en Boca: «Preocupación» appeared first on El Intransigente.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 12:59:57",
-      "pubDateTZ": "UTC",
-      "image_url": "https://elintransigente.com/wp-content/uploads/2024/10/monroig-1.png",
-      "video_url": null,
-      "source_id": "elintransigente",
-      "source_name": "El Intransigente",
-      "source_priority": 3446332,
-      "source_url": "https://elintransigente.com",
-      "source_icon": "https://n.bytvi.com/elintransigente.jpg",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "a2acac5a9c6170d797b949361df2206b",
-      "title": "Juegos Panamericanos Lima 2027: anunciaron las disciplinas y sorprende la ausencia del básquetbol",
-      "link": "https://www.lanacion.com.ar/deportes/basquetbol/juegos-panamericanos-lima-2027-anunciaron-las-disciplinas-y-sorprende-la-ausencia-del-basquetbol-nid20062025/",
-      "keywords": [
-        "basquetbol"
-      ],
-      "creator": null,
-      "description": "Panam Sports dio a conocer la lista de los 36 deportes que se practicarán y llamó la atención que no estará uno de los más populares; en su lugar ingresó el cricket",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 12:59:50",
-      "pubDateTZ": "UTC",
-      "image_url": "https://resizer.glanacion.com/resizer/v2/MIZCLX654ZDI7EJZHSTKRUTC5Y.jpg?auth=a7c98a9f621f0b72d1da0b4af7e10fb3d95dfd314c645554fb9d635d7ad6f57c&height=1333&smart=true&width=2000",
-      "video_url": null,
-      "source_id": "lanacion",
-      "source_name": "La Nacion",
-      "source_priority": 7204,
-      "source_url": "https://www.lanacion.com.ar",
-      "source_icon": "https://n.bytvi.com/lanacion.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "d57d455d37187a0e2ba4b35be841c785",
-      "title": "Dos veces: conductor que atropelló a niño y huyó, quedó emplazado y volvió a escapar",
-      "link": "https://www.montevideo.com.uy/Noticias/Dos-veces-conductor-que-atropello-a-nino-y-huyo-quedo-emplazado-y-volvio-a-escapar-uc927585",
-      "keywords": null,
-      "creator": null,
-      "description": null,
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 12:54:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/202506/_W933_80/923514.jpg",
-      "video_url": null,
-      "source_id": "montevideo",
-      "source_name": "Montevideo Portal",
-      "source_priority": 6822,
-      "source_url": "https://www.montevideo.com.uy",
-      "source_icon": "https://n.bytvi.com/montevideo.png",
-      "language": "spanish",
-      "country": [
-        "uruguay"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "c80ed13a7698c0b2ffe5a25a2196c17a",
-      "title": "El PP pide suspender el pleno del TC sobre la amnistía para evitar \"un choque de trenes\"",
-      "link": "https://www.infobae.com/espana/agencias/2025/06/20/el-pp-pide-suspender-el-pleno-del-tc-sobre-la-amnistia-para-evitar-un-choque-de-trenes/",
-      "keywords": null,
-      "creator": [
-        "Newsroom Infobae"
-      ],
-      "description": null,
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 12:48:48",
-      "pubDateTZ": "UTC",
-      "image_url": null,
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "7475596e0b47f315b7e23b5fb75756ad",
-      "title": "Villarruel habilita jubilaciones anticipadas en el Senado para quienes adeuden hasta cinco años",
-      "link": "https://www.primeraedicion.com.ar/nota/101014934/villarruel-habilita-jubilaciones-anticipadas-en-el-senado-para-quienes-adeuden-hasta-cinco-anos/",
-      "keywords": [
-        "retiro",
-        "argentina",
-        "senado",
-        "victoria villarruel",
-        "jubilaciones",
-        "nacionales"
-      ],
-      "creator": [
-        "Gabriela Loreiro"
-      ],
-      "description": "La vicepresidenta Victoria Villarruel habilitó un régimen de retiro anticipado previo a la jubilación para trabajadores del Senado tanto de planta permanente como temporaria que adeudan hasta cinco años para acceder a ese beneficio. Así fue establecido por Villarruel en el decreto 0362/25 firmado el pasado 17 de junio, al que tuvo acceso la Agencia [...]La entrada Villarruel habilita jubilaciones anticipadas en el Senado para quienes adeuden hasta cinco años se publicó primero en Primera Edición.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 12:43:49",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.primeraedicion.com.ar/wp-content/uploads/2024/12/Victoria-Villarruel-121224.jpg",
-      "video_url": null,
-      "source_id": "primeraedicion",
-      "source_name": "Primera Edicion",
-      "source_priority": 2175624,
-      "source_url": "https://www.primeraedicion.com.ar",
-      "source_icon": "https://n.bytvi.com/primeraedicion.jpg",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
     }
   ],
-  "timestamp": 1750468183274
+  "timestamp": 1750468797777
 }

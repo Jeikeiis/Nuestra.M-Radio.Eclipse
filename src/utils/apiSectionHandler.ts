@@ -50,7 +50,7 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
       const noticiasUnicas = filtrarYLimpiarDatos(loaded.noticias, {
         camposClave: ["title","link"],
         campoFecha: "pubDate",
-        maxItems: 20,
+        maxItems: 100, // Permitir más elementos si hay más en el cache
         camposMezcla: ["description","image_url","source_id","link"]
       });
       cache.noticias = noticiasUnicas;
@@ -72,21 +72,21 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
         [],
         ["title","link"],
         "pubDate",
-        5 * 4,
+        100, // Permitir más elementos si hay más
         ["description","image_url","source_id","link"]
       );
       if (noticiasValidas.length > 0) {
         lastApiSuccess = Date.now();
-        // Controlar tamaño antes de guardar
+        // Solo recortar si hay más de maxNoticias
         const maxNoticias = MAX_PAGES * pageSize;
-        const noticiasLimitadas = noticiasValidas.slice(0, maxNoticias);
+        const noticiasLimitadas = noticiasValidas.length > maxNoticias ? noticiasValidas.slice(0, maxNoticias) : noticiasValidas;
         cache = {
           noticias: noticiasLimitadas,
           timestamp: Date.now(),
           errorMsg: undefined,
           lastValidNoticias: noticiasLimitadas,
         };
-        saveCache(seccion, noticiasLimitadas); // Guardar solo si hay cambios
+        saveCache(seccion, noticiasLimitadas);
       }
     } catch {}
   }
@@ -117,7 +117,14 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
         updateCacheInBackground(pageSize, MAX_PAGES);
       }
       const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < cooldownMs);
-      const { itemsPaginados, totalItems, realMaxPages } = paginar(noticiasParaResponder, page, pageSize, MAX_PAGES);
+      // Cambiar aquí: pasar lastValidNoticias como fallback
+      const { itemsPaginados, totalItems, realMaxPages } = paginar(
+        noticiasParaResponder,
+        page,
+        pageSize,
+        MAX_PAGES,
+        cache.lastValidNoticias
+      );
       return NextResponse.json(respuestaApiEstandar({
         noticias: itemsPaginados,
         cached: fromCache,
