@@ -78,7 +78,8 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         setNoticias(noticiasValidas);
         setNoticiasPrevias(viejasNoRepetidas);
         setCached(data.cached);
-        setMaxPages(Math.max(1, Math.ceil(combinadas.length / PAGE_SIZE)));
+        setPage(data.meta?.page || 1);
+        setMaxPages(data.meta?.realMaxPages || 1);
         setFallback(!!data.fallback);
         setCooldown(!!data.meta?.cooldownActive);
         setLoading(false);
@@ -229,7 +230,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         </div>
         <ApiStatusIndicator status={apiStatus} />
         {botonRecargaManual}
-        {/* ...paginación y noticiasPrevias... */}
+        {/* ...paginación and noticiasPrevias... */}
       </div>
     );
   }

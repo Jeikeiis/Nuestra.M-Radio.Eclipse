@@ -1,18 +1,88 @@
 {
   "noticias": [
     {
-      "article_id": "d13025bb9625d11fb5e4230e06b50ab5",
-      "title": "Mario Pergolini dio detalles de su nuevo programa en ElTrece: «Va a rescatar el humor del día”",
-      "link": "https://titulares.ar/mario-pergolini-dio-detalles-de-su-nuevo-programa-en-eltrece-va-a-rescatar-el-humor-del-dia/",
+      "article_id": "2957d8b2263f040ea94fc5d7ba46d753",
+      "title": "Este viernes habrá música, gastronomía y actividades para toda la familia por el Día de la Bandera",
+      "link": "https://elciudadanoweb.com/este-viernes-habra-musica-gastronomia-y-actividades-para-toda-la-familia-por-el-dia-de-la-bandera/",
       "keywords": [
-        "entretenimiento"
+        "ciudad"
+      ],
+      "creator": [
+        "Ana Cecilia Berdicever"
+      ],
+      "description": "Autoridades municipales y provinciales llevaron adelante la presentación de las celebraciones del 20 de junio con anuncios de buen clima, conciertos y actividadesLa entrada Este viernes habrá música, gastronomía y actividades para toda la familia por el Día de la Bandera se publicó primero en EL CIUDADANO.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 11:23:52",
+      "pubDateTZ": "UTC",
+      "image_url": "https://elciudadanoweb.com/wp-content/uploads/2025/06/asado.jpg",
+      "video_url": null,
+      "source_id": "elciudadanoweb",
+      "source_name": "El Ciudadano",
+      "source_priority": 1918873,
+      "source_url": "https://www.elciudadanoweb.com",
+      "source_icon": "https://n.bytvi.com/elciudadanoweb.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "93399ce3aad1df888cc533930e4be2a0",
+      "title": "Este viernes hay música, gastronomía y actividades para toda la familia por el Día de la Bandera",
+      "link": "https://elciudadanoweb.com/este-viernes-hay-musica-gastronomia-y-actividades-para-toda-la-familia-por-el-dia-de-la-bandera/",
+      "keywords": [
+        "ciudad"
+      ],
+      "creator": [
+        "Ana Cecilia Berdicever"
+      ],
+      "description": "Autoridades municipales y provinciales llevaron adelante la presentación de las celebraciones del 20 de junio con anuncios de buen clima, conciertos y actividadesLa entrada Este viernes hay música, gastronomía y actividades para toda la familia por el Día de la Bandera se publicó primero en EL CIUDADANO.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 11:23:52",
+      "pubDateTZ": "UTC",
+      "image_url": "https://elciudadanoweb.com/wp-content/uploads/2025/06/asado.jpg",
+      "video_url": null,
+      "source_id": "elciudadanoweb",
+      "source_name": "El Ciudadano",
+      "source_priority": 1918873,
+      "source_url": "https://www.elciudadanoweb.com",
+      "source_icon": "https://n.bytvi.com/elciudadanoweb.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "f9402cca15de29e9275b64f1f0d1d923",
+      "title": "Reservas vacaciones invierno 20% vacantes",
+      "link": "https://titulares.ar/reservas-vacaciones-invierno-20-vacantes/",
+      "keywords": [
+        "argentina"
       ],
       "creator": [
         "Marisol Medrano"
       ],
-      "description": "El regreso de Mario Pergolini a la televisión ha generado gran expectativa entre los seguidores del reconocido conductor. Después de varios años alejado de la pantalla chica, Pergolini vuelve con un nuevo programa que promete ser un éxito en la pantalla de El Trece. En una reciente entrevista, Mario Pergolini compartió algunos detalles sobre su [...]",
+      "description": "La crisis turística en la Ciudad de Buenos Aires La Ciudad de Buenos Aires solía ser un destino turístico muy popular para extranjeros que visitaban Argentina en busca de compras, cultura y entretenimiento. Sin embargo, la situación actual muestra un panorama desolador en términos de turismo internacional. La salida del cepo cambiario y la estabilidad [...]",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:40:15",
+      "pubDate": "2025-06-20 11:20:10",
       "pubDateTZ": "UTC",
       "image_url": "https://titulares.ar/wp-content/themes/jnews/assets/img/jeg-empty.png",
       "video_url": null,
@@ -36,161 +106,56 @@
       "duplicate": false
     },
     {
-      "article_id": "b232c902ee7a9252c210fc4860de6ce4",
-      "title": "Qué provincias cobran Ingresos Brutos por Netflix y Spotify",
-      "link": "https://www.iprofesional.com/impuestos/431104-que-provincias-cobran-ingresos-brutos-por-netflix-y-spotify",
+      "article_id": "8f3c695a53a0018ab0c22117d0b7e75c",
+      "title": "Paty Cantú revela sus experiencias paranormales más impactantes: “Me pusieron un chip en la cabeza”",
+      "link": "https://www.infobae.com/mexico/2025/06/20/paty-cantu-revela-sus-experiencias-paranormales-mas-impactantes-me-pusieron-un-chip-en-la-cabeza/",
+      "keywords": null,
+      "creator": [
+        "Cinthia Salvador"
+      ],
+      "description": "La cantante también narró un suceso que podría estar relacionado con la supuesta existencia de redes secretas que ofrecen fama",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 11:17:59",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/SKY4UA7FRRA4HF6DAAQOEJZPW4.jpg?auth=e21f9ef7411049107f23882fdafcfd9e3ef48b22d2702a219d40e0544984da18&height=1080&smart=true&width=1920",
+      "video_url": null,
+      "source_id": "infobae",
+      "source_name": "Infobae",
+      "source_priority": 1056,
+      "source_url": "https://www.infobae.com",
+      "source_icon": "https://n.bytvi.com/infobae.png",
+      "language": "spanish",
+      "country": [
+        "united states of america",
+        "colombia",
+        "mexico",
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "1f9f75c6f75c5ed1a276c2e1a282f30b",
+      "title": "El nuevo juguete de la FIFA tiene petrodólares y mil envoltorios, pero lo más lindo es lo de siempre",
+      "link": "https://www.lanacion.com.ar/deportes/futbol/el-nuevo-juguete-de-la-fifa-tiene-petrodolares-y-mil-envoltorios-pero-lo-mas-lindo-es-lo-de-siempre-nid20062025/",
       "keywords": [
-        "propia"
-      ],
-      "creator": null,
-      "description": "Santa Fe comenzará a aplicar un régimen de percepción del Impuesto sobre los Ingresos Brutos a servicios digitales. Qué provincias ya lo tienen (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'GTM-5LW5KQD', 'auto'); ga('require', 'displayfeatures'); ga('set', 'campaignSource', 'RSS Client for iProfesional'); ga('set', 'campaignMedium', 'RSS Client for iProfesional'); ga('set', {\"dataSource\": \"rss.atom.iprofesional.com\"}); ga('set', {\"referrer\": \"rss.atom.iprofesional.com\"}); ga('set', 'title', 'RSS Client for iProfesional'); ga('send', 'pageview'); var _comscore = _comscore || []; _comscore.push({ c1: \"2\", c2: \"16597048\" }); (function() { var s = document.createElement(\"script\"), el = document.getElementsByTagName(\"script\")[0]; s.async = true; s.src = \"https://sb.scorecardresearch.com/cs/16597048/beacon.js\"; el.parentNode.insertBefore(s, el); })();",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:24:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://resizer.iproimg.com/unsafe/640x/https://assets.iprofesional.com/assets/jpg/2024/12/588267.jpg",
-      "video_url": null,
-      "source_id": "iprofesional",
-      "source_name": "Iprofesional",
-      "source_priority": 57111,
-      "source_url": "https://www.iprofesional.com",
-      "source_icon": "https://n.bytvi.com/iprofesional.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "33fecb91ec7420f954a1e5f95db90d33",
-      "title": "Sarah Jessica Parker habló de su duro comienzo en la actuación: “Intentaba sobrevivir con 40 dólares”",
-      "link": "https://www.infobae.com/entretenimiento/2025/06/20/sarah-jessica-parker-hablo-de-su-duro-comienzo-en-la-actuacion-intentaba-sobrevivir-con-40-dolares/",
-      "keywords": null,
-      "creator": [
-        "Osvaldo Ortiz"
-      ],
-      "description": "Entrevistada en el podcast “Call Her Daddy”, la estrella de cine y televisión estadounidense reflexionó sobre la importancia de la constancia en la industria. Además compartió sus sencillas rutinas en la ciudad de Nueva York, donde supo brillar con “Sex and the city”",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:05:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/RHQ2VKUJQZGDLGCQ5HJGOU2ESA.jpeg?auth=4feefaf77e526a367220b9ebcc5bff757229d6088365edc6a87747d720d49e9d&height=720&smart=true&width=1280",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "293fefc99d59d14ab88b4855abf0e00b",
-      "title": "Cuál es el pequeño pueblo cordobés del Valle de Traslasierra que está lleno de balnearios y es ideal para hacer una escapada",
-      "link": "https://www.infobae.com/sociedad/2025/06/20/cual-es-el-pequeno-pueblo-cordobes-del-valle-de-traslasierra-que-esta-lleno-de-balnearios-y-es-ideal-para-hacer-una-escapada/",
-      "keywords": null,
-      "creator": [
-        "Constanza Almirón"
-      ],
-      "description": "Entornos naturales, sabores regionales y una atmósfera única hacen de este pueblo cordobés un destino cada vez más elegido. Cuáles son las mejores actividades",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:00:01",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/AP44DLPMTNCV5O452T27EQYDPQ.png?auth=d53fc5a16aef69c927dda6861e7f10288080a8bc41e02ccb171c410ec1e12f2b&height=1024&smart=true&width=1536",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "62f483f6cdeb0cb4157a2a5f17f32b20",
-      "title": "Cómo la incomodidad cotidiana puede aumentar la motivación y los propósitos en la vida moderna",
-      "link": "https://www.infobae.com/salud/2025/06/20/como-la-incomodidad-cotidiana-puede-aumentar-la-motivacion-y-los-propositos-en-la-vida-moderna/",
-      "keywords": null,
-      "creator": [
-        "Osvaldo Ortiz"
-      ],
-      "description": "El experto en neurociencia y bienestar, Michael Easter explicó en el podcast de “Huberman Lab” que pequeños desafíos diarios son capaces de impulsar el crecimiento personal y prevenir problemas asociados al sedentarismo o la gratificación instantánea",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:00:01",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/WSV3IWL3AVFHRI5YIIJIEFPEKE.jpg?auth=7d5b6aa5c06f7a87317cf739590943e00bff570eb33acb8c6d5ff2b8ecdd78dc&height=816&smart=true&width=1456",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "9231203d0070ee5f13480fdb35487f5f",
-      "title": "El efecto del Juego del calamar: qué ver después del final de la exitosa serie coreana",
-      "link": "https://www.lanacion.com.ar/espectaculos/series-de-tv/el-efecto-del-juego-del-calamar-que-ver-despues-del-final-de-la-exitosa-serie-coreana-nid20062025/",
-      "keywords": [
-        "series de tv"
+        "fútbol"
       ],
       "creator": [
-        "Natalia Trzenko"
+        "Ariel Senosiain"
       ],
-      "description": "Gracias al éxito de Netflix, la producción televisiva del país asiático es un fenómeno instalado que crece en el streaming",
+      "description": "Gianni Infantino logró su propósito de organizar un torneo al modo selecciones, aunque el futuro del Mundial genere más dudas que certezas",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:00:00",
+      "pubDate": "2025-06-20 11:16:59",
       "pubDateTZ": "UTC",
-      "image_url": "https://resizer.glanacion.com/resizer/v2/JTDWAAYT55GFVNTDT62OILG7RQ.jpg?auth=5dc8f010dc52f5cb369d386e19e4b4c28a357d53107a4d38a54330dde4498ac6&height=1333&smart=true&width=2000",
+      "image_url": "https://resizer.glanacion.com/resizer/v2/AAFAAJICR5B4LOUKSOGPNJOHLE.JPG?auth=3879189237c21a329436d357ffe40bd0b1864cd50468930c4372bd5fbbfe4d20&height=1666&smart=true&width=2500",
       "video_url": null,
       "source_id": "lanacion",
       "source_name": "La Nacion",
@@ -212,54 +177,18 @@
       "duplicate": false
     },
     {
-      "article_id": "b69ffd98e14c516202e2adacb249c820",
-      "title": "Las 10 mujeres más ricas del mundo que construyeron su fortuna sin herencias",
-      "link": "https://www.infobae.com/america/mundo/2025/06/20/las-10-mujeres-mas-ricas-del-mundo-que-construyeron-su-fortuna-sin-herencias/",
+      "article_id": "bb5d25d3c08cbbcecc20b5af6f9b69bd",
+      "title": "Magaly Medina se burla de Mario Irivarren tras ampay de Onelia Molina: “Pobre, tiene mala suerte con los jugadores de fútbol”",
+      "link": "https://www.infobae.com/peru/2025/06/20/magaly-medina-se-burla-de-mario-irivarren-tras-ampay-de-onelia-molina-pobre-tiene-mala-suerte-con-los-jugadores-de-futbol/",
       "keywords": null,
       "creator": [
-        "Dante Martignoni"
+        "Carol Ruiz"
       ],
-      "description": "Por primera vez, Forbes elaboró un ranking global que identifica a las principales empresarias que amasaron riquezas millonarias por cuenta propia. La lista abarca 13 países y sectores como la tecnología, la cosmética y la logística",
+      "description": "La conductora de Magaly TV La Firme comenta sarcásticamente sobre la relación del integrante de EEG con los futbolistas, tras la nueva aparición de Onelia con Anderson Santamaría",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 08:05:00",
+      "pubDate": "2025-06-20 11:14:14",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/USYFKLRMMBFRBF6PLHUPKXA5EI.jpg?auth=2d3e9fafbcb0fbb6b693e9e93997761685e3e95cd3db3880317e17b6116a077f&height=1024&smart=true&width=1792",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "475d2b266bd6fd77d878f98344b11a4e",
-      "title": "El ritual esencial de Julianne Hough para cuidar su cuerpo",
-      "link": "https://www.infobae.com/tendencias/2025/06/20/el-ritual-esencial-de-julianne-hough-para-cuidar-su-cuerpo/",
-      "keywords": null,
-      "creator": [
-        "Fausto Urriste"
-      ],
-      "description": "La actriz y bailarina compartió el simple consejo que transformó su rutina diaria, priorizando el autocuidado auténtico y la salud",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 08:05:00",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/A6ABEMPGAPYICKF6JV4AQCQKJM.jpg?auth=f716f94346a9fbc87d87945de19fcf5155c0560b8229306dda0259a9a5380f75&height=2440&smart=true&width=3660",
+      "image_url": "https://www.infobae.com/resizer/v2/ODS4GQ3L25CMZMKV3WZCQM2B64.jpg?auth=655b7079646b5387b312fd1433c3216bbab8de4327e3acec6572867b3b0d4b06&height=763&smart=true&width=1402",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -284,5 +213,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750456609514
+  "timestamp": 1750466497977
 }

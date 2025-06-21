@@ -5,19 +5,25 @@ import { saveCache } from './cacheFileManager';
 import { limpiarCacheSiExcede } from './cacheWorkflowManager';
 
 export function guardarCacheEnArchivo(seccion: string, noticias: Dato[], pageSize: number = 4, maxPages: number = 5) {
+  // Controlar tamaño antes de guardar
+  const maxNoticias = maxPages * pageSize;
   const noticiasUnicas = filtrarYLimpiarDatos(noticias, {
     camposClave: ["title","link"],
     campoFecha: "pubDate",
-    maxItems: maxPages * pageSize,
+    maxItems: maxNoticias,
     camposMezcla: ["description","image_url","source_id","link"]
   });
-  saveCache(seccion, noticiasUnicas);
+  if (noticiasUnicas.length > maxNoticias) {
+    saveCache(seccion, noticiasUnicas.slice(0, maxNoticias));
+  } else {
+    saveCache(seccion, noticiasUnicas);
+  }
   if (noticiasUnicas.length > 5 * 20) {
     limpiarCacheSiExcede(seccion, 5, 20);
   }
 }
 
-export function respuestaApiEstandar({ noticias, cached, huboCambio, errorMsg, fallback, apiStatus, meta }: any) {
+export function respuestaApiEstandar({ noticias, cached, huboCambio, errorMsg, fallback, apiStatus, meta, page, pageSize, realMaxPages, total }: any) {
   return {
     noticias,
     cached,
@@ -25,6 +31,12 @@ export function respuestaApiEstandar({ noticias, cached, huboCambio, errorMsg, f
     errorMsg: noticias.length ? errorMsg : 'No hay noticias disponibles.',
     fallback,
     apiStatus,
-    meta,
+    meta: {
+      ...meta,
+      page,
+      pageSize,
+      realMaxPages,
+      total,
+    },
   };
 }

@@ -1,6 +1,109 @@
 {
   "noticias": [
     {
+      "article_id": "2957d8b2263f040ea94fc5d7ba46d753",
+      "title": "Este viernes habrá música, gastronomía y actividades para toda la familia por el Día de la Bandera",
+      "link": "https://elciudadanoweb.com/este-viernes-habra-musica-gastronomia-y-actividades-para-toda-la-familia-por-el-dia-de-la-bandera/",
+      "keywords": [
+        "ciudad"
+      ],
+      "creator": [
+        "Ana Cecilia Berdicever"
+      ],
+      "description": "Autoridades municipales y provinciales llevaron adelante la presentación de las celebraciones del 20 de junio con anuncios de buen clima, conciertos y actividadesLa entrada Este viernes habrá música, gastronomía y actividades para toda la familia por el Día de la Bandera se publicó primero en EL CIUDADANO.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 11:23:52",
+      "pubDateTZ": "UTC",
+      "image_url": "https://elciudadanoweb.com/wp-content/uploads/2025/06/asado.jpg",
+      "video_url": null,
+      "source_id": "elciudadanoweb",
+      "source_name": "El Ciudadano",
+      "source_priority": 1918873,
+      "source_url": "https://www.elciudadanoweb.com",
+      "source_icon": "https://n.bytvi.com/elciudadanoweb.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "93399ce3aad1df888cc533930e4be2a0",
+      "title": "Este viernes hay música, gastronomía y actividades para toda la familia por el Día de la Bandera",
+      "link": "https://elciudadanoweb.com/este-viernes-hay-musica-gastronomia-y-actividades-para-toda-la-familia-por-el-dia-de-la-bandera/",
+      "keywords": [
+        "ciudad"
+      ],
+      "creator": [
+        "Ana Cecilia Berdicever"
+      ],
+      "description": "Autoridades municipales y provinciales llevaron adelante la presentación de las celebraciones del 20 de junio con anuncios de buen clima, conciertos y actividadesLa entrada Este viernes hay música, gastronomía y actividades para toda la familia por el Día de la Bandera se publicó primero en EL CIUDADANO.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 11:23:52",
+      "pubDateTZ": "UTC",
+      "image_url": "https://elciudadanoweb.com/wp-content/uploads/2025/06/asado.jpg",
+      "video_url": null,
+      "source_id": "elciudadanoweb",
+      "source_name": "El Ciudadano",
+      "source_priority": 1918873,
+      "source_url": "https://www.elciudadanoweb.com",
+      "source_icon": "https://n.bytvi.com/elciudadanoweb.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "0e66ff227f8256c6a01f79fc590f994c",
+      "title": "Harán una peña en Temperley con música, feria y comidas típicas",
+      "link": "https://launion.com.ar/nota/48885/2025/06/haran-una-pena-en-temperley-con-musica-feria-y-comidas-tipicas",
+      "keywords": [
+        "lomas"
+      ],
+      "creator": null,
+      "description": "En el Club Ituzaingo se presentarán artistas locales, ballets folklóricos y un gran cierre a cargo de la cantante santiagueña Graciela Carabajal.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 10:30:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://launion.com.ar/img/publicaciones/2025/06/19/baja/2126351.webp",
+      "video_url": null,
+      "source_id": "launion",
+      "source_name": "Inicio",
+      "source_priority": 423424,
+      "source_url": "https://www.launion.com.ar",
+      "source_icon": "https://n.bytvi.com/launion.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
       "article_id": "68bee59d63cbf1734376f2083552bb34",
       "title": "Siete matrimonios de Hollywood que parecían eternos: estrellas entre separaciones, infidelidades y traiciones",
       "link": "https://www.lanacion.com.ar/espectaculos/personajes/siete-matrimonios-de-hollywood-que-parecian-eternos-estrellas-entre-separaciones-infidelidades-y-nid20062025/",
@@ -140,42 +243,7 @@
       "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
       "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
       "duplicate": false
-    },
-    {
-      "article_id": "aad92a54a0fda8a0816200eb695eba95",
-      "title": "Lali Espósito, una de las artistas femeninas con más Premios Gardel de la historia",
-      "link": "https://www.lacapitalmdp.com/lali-esposito-una-de-las-artistas-femeninas-con-mas-premios-gardel-de-la-historia/",
-      "keywords": [
-        "arte y espectáculos"
-      ],
-      "creator": [
-        "pGalano"
-      ],
-      "description": "Lali Espósito se convirtió en la artista femenina con más Premios Gardel de la historia al arrasar en la ceremonia de entraga de los galardones, que se realizó este miércoles último. Se llevó todos los galardones de las categorías en las cuales estaba nominada y se convirtió en una de las artistas femeninas con más [...]",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-19 20:10:55",
-      "pubDateTZ": "UTC",
-      "image_url": "https://storage.lacapitalmdp.com/2025/06/lali-gardel.jpg",
-      "video_url": null,
-      "source_id": "lacapitalmdp",
-      "source_name": "Lacapitalmdp",
-      "source_priority": 945868,
-      "source_url": "https://www.lacapitalmdp.com",
-      "source_icon": "https://n.bytvi.com/lacapitalmdp.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
     }
   ],
-  "timestamp": 1750456321620
+  "timestamp": 1750466813931
 }

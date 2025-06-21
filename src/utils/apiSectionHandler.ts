@@ -14,6 +14,22 @@ interface SectionApiOptions {
   region?: string;
 }
 
+// Helper para reintentos con backoff exponencial
+async function fetchWithRetry(fetchFn: () => Promise<{ noticias: Dato[]; errorMsg?: string }>, maxRetries = 3, baseDelay = 1000): Promise<{ noticias: Dato[]; errorMsg?: string }> {
+  let attempt = 0;
+  let lastError = null;
+  while (attempt <= maxRetries) {
+    const result = await fetchFn();
+    if (!result.errorMsg || !/rate limit|limit exceeded|cooldown/i.test(result.errorMsg)) {
+      return result;
+    }
+    lastError = result.errorMsg;
+    await new Promise(res => setTimeout(res, baseDelay * Math.pow(2, attempt)));
+    attempt++;
+  }
+  return { noticias: [], errorMsg: lastError || 'Error desconocido tras reintentos.' };
+}
+
 export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, fetchNoticias, region }: SectionApiOptions) {
   let cache: {
     noticias: Dato[];
@@ -45,6 +61,36 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
 
   cargarCacheDesdeArchivo();
 
+  async function updateCacheInBackground(pageSize: number, MAX_PAGES: number) {
+    try {
+      const { noticias: noticiasApi } = await fetchWithRetry(fetchNoticias);
+      const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
+        (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
+      );
+      const noticiasValidas = deduplicarCombinado(
+        noticiasFiltradas,
+        [],
+        ["title","link"],
+        "pubDate",
+        5 * 4,
+        ["description","image_url","source_id","link"]
+      );
+      if (noticiasValidas.length > 0) {
+        lastApiSuccess = Date.now();
+        // Controlar tamaño antes de guardar
+        const maxNoticias = MAX_PAGES * pageSize;
+        const noticiasLimitadas = noticiasValidas.slice(0, maxNoticias);
+        cache = {
+          noticias: noticiasLimitadas,
+          timestamp: Date.now(),
+          errorMsg: undefined,
+          lastValidNoticias: noticiasLimitadas,
+        };
+        saveCache(seccion, noticiasLimitadas); // Guardar solo si hay cambios
+      }
+    } catch {}
+  }
+
   async function GET(req: NextRequest) {
     try {
       const now = Date.now();
@@ -59,65 +105,16 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
       let noticiasParaResponder: Dato[] = [];
       const cacheExpirado = !cache.timestamp || (now - cache.timestamp > cacheDurationMs);
       if (cacheExpirado) {
-        const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticias();
-        const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
-          (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
-        );
-        const noticiasValidas = deduplicarCombinado(
-          noticiasFiltradas,
-          [],
-          ["title","link"],
-          "pubDate",
-          5 * 4,
-          ["description","image_url","source_id","link"]
-        );
-        lastApiSuccess = now;
-        if (noticiasValidas.length > 0) {
-          cache = {
-            noticias: noticiasValidas,
-            timestamp: now,
-            errorMsg: undefined,
-            lastValidNoticias: noticiasValidas,
-          };
-          guardarCacheEnArchivo(seccion, noticiasValidas, pageSize, MAX_PAGES);
-          noticiasParaResponder = noticiasValidas;
-          fromCache = false;
-          huboCambio = true;
-        } else {
-          errorMsg = apiError || "No se encontraron noticias válidas.";
-          noticiasParaResponder = cache.lastValidNoticias || [];
-          fromCache = true;
-        }
+        // Responde rápido con caché viejo si existe
+        noticiasParaResponder = cache.noticias;
+        fromCache = true;
+        // Actualiza en background SIEMPRE
+        updateCacheInBackground(pageSize, MAX_PAGES);
       } else {
         noticiasParaResponder = cache.noticias;
         fromCache = true;
-        // Actualización en segundo plano
-        (async () => {
-          try {
-            const { noticias: noticiasApi } = await fetchNoticias();
-            const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
-              (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
-            );
-            const noticiasValidas = deduplicarCombinado(
-              noticiasFiltradas,
-              [],
-              ["title","link"],
-              "pubDate",
-              5 * 4,
-              ["description","image_url","source_id","link"]
-            );
-            if (noticiasValidas.length > 0) {
-              lastApiSuccess = Date.now();
-              cache = {
-                noticias: noticiasValidas,
-                timestamp: Date.now(),
-                errorMsg: undefined,
-                lastValidNoticias: noticiasValidas,
-              };
-              guardarCacheEnArchivo(seccion, noticiasValidas, pageSize, MAX_PAGES);
-            }
-          } catch {}
-        })();
+        // Actualiza en background SIEMPRE
+        updateCacheInBackground(pageSize, MAX_PAGES);
       }
       const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < cooldownMs);
       const { itemsPaginados, totalItems, realMaxPages } = paginar(noticiasParaResponder, page, pageSize, MAX_PAGES);
@@ -130,12 +127,12 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
         apiStatus: errorMsg && !itemsPaginados.length ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
         meta: {
           region,
-          page,
-          pageSize,
-          total: totalItems,
-          realMaxPages,
           cooldownActive,
         },
+        page,
+        pageSize,
+        realMaxPages,
+        total: totalItems,
       }));
     } catch (e: any) {
       return NextResponse.json(respuestaApiEstandar({
@@ -146,6 +143,10 @@ export function createSectionApiHandler({ seccion, cacheDurationMs, cooldownMs, 
         fallback: false,
         apiStatus: 'error',
         meta: {},
+        page: 1,
+        pageSize: 4,
+        realMaxPages: 1,
+        total: 0,
       }), { status: 500 });
     }
   }

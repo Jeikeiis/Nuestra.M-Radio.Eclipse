@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ProgramacionSection.css";
-import ProgramacionGenericaSection from "./ProgramacionGenericaSection";
+import ApiProgramSection from "./ApiProgramSection";
 import Modal from "./Modal";
 
 const PROGRAMAS = [
@@ -8,7 +8,7 @@ const PROGRAMAS = [
     key: "noticias",
     icon: "📰",
     titulo: "Noticias",
-    contenido: <ProgramacionGenericaSection
+    contenido: <ApiProgramSection
       apiPath="/api/noticias"
       cacheKey="noticiasCacheLocal"
       sectionClass="programacion-noticias-section"
@@ -27,7 +27,7 @@ const PROGRAMAS = [
     key: "farandula",
     icon: "🎤",
     titulo: "Farándula",
-    contenido: <ProgramacionGenericaSection
+    contenido: <ApiProgramSection
       apiPath="/api/farandula"
       cacheKey="farandulaCacheLocal"
       sectionClass="programacion-farandula-section"
@@ -46,7 +46,7 @@ const PROGRAMAS = [
     key: "musica",
     icon: "🎵",
     titulo: "Música",
-    contenido: <ProgramacionGenericaSection
+    contenido: <ApiProgramSection
       apiPath="/api/musica"
       cacheKey="musicaCacheLocal"
       sectionClass="programacion-musica-section"
