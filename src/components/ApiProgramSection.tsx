@@ -1,8 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { deduplicarCombinado, Dato } from "@/utils/deduplicar";
 import ApiStatusIndicator, { ApiStatus } from "./ApiStatusIndicator";
 import { useLocalCache } from "@/utils/useLocalCache";
 
+/**
+ * Formatea una fecha a formato legible en español de Uruguay.
+ */
 function formatearFecha(fecha?: string) {
   if (!fecha) return "";
   const d = new Date(fecha);
@@ -10,6 +13,9 @@ function formatearFecha(fecha?: string) {
   return d.toLocaleDateString("es-UY", { day: "2-digit", month: "short", year: "numeric" });
 }
 
+/**
+ * Props para ApiProgramSection
+ */
 interface ApiProgramSectionProps {
   apiPath: string;
   cacheKey: string;
@@ -21,6 +27,9 @@ interface ApiProgramSectionProps {
 
 const PAGE_SIZE = 4;
 
+/**
+ * Componente genérico para renderizar una sección de programación basada en datos de API y caché local.
+ */
 const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
   apiPath,
   cacheKey,
@@ -29,6 +38,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
   emptyMsg,
   adminKey = 'adminNoticias',
 }) => {
+  // --- Estados principales ---
   const [noticias, setNoticias] = useState<Dato[]>([]);
   const [noticiasPrevias, setNoticiasPrevias] = useState<Dato[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,7 +55,18 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
 
   const { guardarCache, cargarCache } = useLocalCache<Dato[]>(cacheKey);
 
-  const cargarNoticias = (forzar = false, nuevaPagina = page) => {
+  // --- Función para limpiar descripciones de HTML/script ---
+  const limpiarDescripcion = useCallback((texto: string): string => {
+    if (!texto) return "";
+    let limpio = texto.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "");
+    limpio = limpio.replace(/<[^>]+>/g, "");
+    const txt = document.createElement('textarea');
+    txt.innerHTML = limpio;
+    return txt.value;
+  }, []);
+
+  // --- Carga de noticias desde API y/o caché ---
+  const cargarNoticias = useCallback((forzar = false, nuevaPagina = page) => {
     if (forzar) {
       const ahora = Date.now();
       if (ahora - lastManualReload < 120000) {
@@ -101,8 +122,9 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         setIsReloading(false);
         setFallback(false);
       });
-  };
+  }, [apiPath, cargarCache, emptyMsg, guardarCache, lastManualReload, page]);
 
+  // --- Efecto inicial y limpieza ---
   useEffect(() => {
     let isMounted = true;
     cargarNoticias();
@@ -115,19 +137,9 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
       if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
     };
     // eslint-disable-next-line
-  }, []);
+  }, [cargarNoticias]);
 
-  function obtenerNoticiasPagina(noticiasNuevas: Dato[], noticiasViejas: Dato[], pagina: number, pageSize: number) {
-    const todas = [
-      ...noticiasNuevas,
-      ...noticiasViejas
-    ];
-    const todasLimitadas = todas.slice(0, 5 * pageSize);
-    const inicio = (pagina - 1) * pageSize;
-    const fin = inicio + pageSize;
-    return todasLimitadas.slice(inicio, fin);
-  }
-
+  // --- Cálculo de paginación y sincronización de páginas ---
   useEffect(() => {
     const todas = [
       ...noticias,
@@ -138,8 +150,21 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
     const paginasReales = Math.max(1, Math.ceil(todasLimitadas.length / PAGE_SIZE));
     setMaxPages(paginasReales);
     if (page > paginasReales) setPage(paginasReales);
-  }, [noticias, noticiasPrevias]);
+  }, [noticias, noticiasPrevias, page]);
 
+  // --- Memo para obtener las noticias de la página actual ---
+  const noticiasPagina = useMemo(() => {
+    const todas = [
+      ...noticias,
+      ...noticiasPrevias.filter(n => !noticias.some(n2 => n2.title === n.title))
+    ];
+    const todasLimitadas = todas.slice(0, 5 * PAGE_SIZE);
+    const inicio = (page - 1) * PAGE_SIZE;
+    const fin = inicio + PAGE_SIZE;
+    return todasLimitadas.slice(inicio, fin);
+  }, [noticias, noticiasPrevias, page]);
+
+  // --- Estado de admin y botón de recarga manual ---
   const esAdmin = typeof window !== 'undefined' && localStorage.getItem(adminKey) === '1';
   const botonRecargaManual = esAdmin && (
     <button
@@ -166,25 +191,12 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
     </button>
   );
 
+  // --- Estado de la API para el indicador visual ---
   let apiStatus: ApiStatus = "ok";
   if (cooldown) apiStatus = "cooldown";
   else if (fallback) apiStatus = "fallback";
 
-  const noticiasPagina = obtenerNoticiasPagina(noticias, noticiasPrevias, page, PAGE_SIZE);
-
-  // Limpia scripts y HTML peligroso de un string
-  function limpiarDescripcion(texto: string): string {
-    if (!texto) return "";
-    // Elimina <script> y <style> y su contenido
-    let limpio = texto.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "");
-    // Elimina el resto de etiquetas HTML
-    limpio = limpio.replace(/<[^>]+>/g, "");
-    // Opcional: decodifica entidades HTML básicas
-    const txt = document.createElement('textarea');
-    txt.innerHTML = limpio;
-    return txt.value;
-  }
-
+  // --- Renderizado de estados especiales ---
   if (loading && noticiasPrevias.length > 0) {
     return (
       <div className={sectionClass} aria-busy="true" style={{position:'relative'}}>
@@ -208,7 +220,6 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
             {updatedMsg}
           </div>
         )}
-        {/* ...paginación y noticiasPrevias... */}
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',fontWeight:600,color:'#888'}}>Cargando datos...</div>
         <style>{`
           @keyframes fadeinout {
@@ -230,7 +241,6 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         </div>
         <ApiStatusIndicator status={apiStatus} />
         {botonRecargaManual}
-        {/* ...paginación and noticiasPrevias... */}
       </div>
     );
   }
@@ -245,6 +255,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
     );
   }
 
+  // --- Renderizado principal ---
   return (
     <div className={sectionClass} style={{position:'relative'}}>
       <ApiStatusIndicator status={apiStatus} />
@@ -267,10 +278,11 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
           {updatedMsg}
         </div>
       )}
-      <div className="paginacion-controles" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
+      <nav className="paginacion-controles" aria-label="Paginación de noticias" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, margin: '16px 0' }}>
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
+          aria-label="Página anterior"
           style={{
             padding: '6px 16px',
             borderRadius: 6,
@@ -290,6 +302,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
         {page < maxPages && (
           <button
             onClick={() => setPage((p) => Math.min(maxPages, p + 1))}
+            aria-label="Página siguiente"
             style={{
               padding: '6px 16px',
               borderRadius: 6,
@@ -304,46 +317,48 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
             Siguiente ▶
           </button>
         )}
-      </div>
-      {noticiasPagina.map((noticia, idx) => (
-        <div className="noticia-contenedor" key={idx}>
-          <a
-            href={noticia.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="noticia-titulo"
-            aria-label={noticia.title}
-            tabIndex={0}
-            onClick={e => {
-              if (!noticia.link) {
-                e.preventDefault();
-                alert("Enlace no disponible");
-              }
-            }}
-          >
-            <span className="noticia-titulo-text">{noticia.title}</span>
-          </a>
-          <div className="noticia-meta">
-            {noticia.source_id && (
-              <span className="noticia-fuente" title="Fuente">
-                <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><circle cx="10" cy="10" r="8" fill="#b71c1c"/><text x="10" y="15" textAnchor="middle" fontSize="10" fill="#fff">F</text></svg>
-                {noticia.source_id}
-              </span>
-            )}
-            {noticia.pubDate && (
-              <span className="noticia-fecha" title="Fecha de publicación">
-                <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><rect x="2" y="4" width="16" height="14" rx="3" fill="#888"/><rect x="5" y="8" width="10" height="2" fill="#fff"/></svg>
-                {formatearFecha(noticia.pubDate)}
-              </span>
-            )}
-          </div>
-          {noticia.description && (
-            <div className="noticia-description">
-              {limpiarDescripcion(noticia.description)}
+      </nav>
+      <section aria-live="polite">
+        {noticiasPagina.map((noticia, idx) => (
+          <article className="noticia-contenedor" key={idx} style={{marginBottom:24}}>
+            <a
+              href={noticia.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="noticia-titulo"
+              aria-label={noticia.title}
+              tabIndex={0}
+              onClick={e => {
+                if (!noticia.link) {
+                  e.preventDefault();
+                  alert("Enlace no disponible");
+                }
+              }}
+            >
+              <span className="noticia-titulo-text">{noticia.title}</span>
+            </a>
+            <div className="noticia-meta">
+              {noticia.source_id && (
+                <span className="noticia-fuente" title="Fuente">
+                  <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><circle cx="10" cy="10" r="8" fill="#b71c1c"/><text x="10" y="15" textAnchor="middle" fontSize="10" fill="#fff">F</text></svg>
+                  {noticia.source_id}
+                </span>
+              )}
+              {noticia.pubDate && (
+                <span className="noticia-fecha" title="Fecha de publicación">
+                  <svg width="14" height="14" viewBox="0 0 20 20" style={{marginRight:4,verticalAlign:'middle'}}><rect x="2" y="4" width="16" height="14" rx="3" fill="#888"/><rect x="5" y="8" width="10" height="2" fill="#fff"/></svg>
+                  {formatearFecha(noticia.pubDate)}
+                </span>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+            {noticia.description && (
+              <div className="noticia-description">
+                {limpiarDescripcion(noticia.description)}
+              </div>
+            )}
+          </article>
+        ))}
+      </section>
       <style>{`
         @keyframes fadeinout {
           0% { opacity: 0; transform: translateY(-10px); }
