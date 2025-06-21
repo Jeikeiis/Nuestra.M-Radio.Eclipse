@@ -1,25 +1,11 @@
 "use client";
 import "./globals.css";
-import { createContext, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
 import RadioDashboard from "@/components/RadioDashboard";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-
-// Nuevo contexto solo para el estado de hidratación
-export const HydrationContext = createContext(false);
-export const ThemeContext = createContext({
-  darkMode: true,
-  setDarkMode: (v: boolean) => {},
-});
-// Añade contexto para radioOpen
-export const RadioDashboardContext = createContext<{
-  radioOpen: boolean;
-  setRadioOpen: (v: boolean) => void;
-}>({
-  radioOpen: false,
-  setRadioOpen: () => {},
-});
+import { HydrationContext, ThemeContext, RadioDashboardContext } from "@/context/AppContexts";
 
 export default function RootLayout({
   children,

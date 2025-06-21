@@ -4,7 +4,7 @@ import ProgramacionSection from "@/components/ProgramacionSection";
 import LocutoresSection from "@/components/LocutoresSection";
 import RadioDashboard from "@/components/RadioDashboard";
 import ClasicosDelRecuerdoSection from "@/components/ClasicosDelRecuerdoSection";
-import { HydrationContext, RadioDashboardContext } from "./layout";
+import { HydrationContext, RadioDashboardContext } from "@/context/AppContexts";
 
 // Definir el tipo del contexto de audio
 export type AudioContextType = {

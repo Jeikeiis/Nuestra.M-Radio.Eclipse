@@ -5,6 +5,7 @@ import { USER_API_KEY } from "@/utils/cacheManager";
 import { limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
 import { guardarCacheEnArchivo, respuestaApiEstandar } from '@/utils/cacheHelpers';
 import { paginar } from '@/utils/paginacion';
+import { createSectionApiHandler } from '@/utils/apiSectionHandler';
 
 const SECCION = "noticias";
 const CACHE_DURATION_MS = parseInt(process.env.CACHE_DURATION_MS || '') || 10 * 60 * 1000;
@@ -86,117 +87,14 @@ function respuestaNoticias({ noticias, cached, huboCambio, errorMsg, fallback, a
 }
 
 // --- Endpoint principal GET ---
-export async function GET(req: NextRequest) {
-  try {
-    const now = Date.now();
-    const { searchParams } = new URL(req.url);
-    let page = parseInt(searchParams.get("page") || "1", 10);
-    if (isNaN(page) || page < 1) page = 1;
-    const pageSize = Math.min(Math.max(parseInt(searchParams.get("pageSize") || "4", 10), 1), 4);
-    const MAX_PAGES = 5;
-    let errorMsg: string | null = null;
-    let fromCache = true;
-    let huboCambio = false;
-    let noticiasParaResponder: Dato[] = [];
-    const cacheExpirado = !cache.timestamp || (now - cache.timestamp > CACHE_DURATION_MS);
-    if (cacheExpirado) {
-      const { noticias: noticiasApi, errorMsg: apiError } = await fetchNoticiasGenerales();
-      const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
-        (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
-      );
-      const noticiasValidas = deduplicarCombinado(
-        noticiasFiltradas,
-        [],
-        ["title","link"],
-        "pubDate",
-        5 * 4,
-        ["description","image_url","source_id","link"]
-      );
-      lastApiSuccess = now;
-      if (noticiasValidas.length > 0) {
-        cache = {
-          noticias: noticiasValidas,
-          timestamp: now,
-          errorMsg: undefined,
-          lastValidNoticias: noticiasValidas,
-        };
-        guardarCacheEnArchivo(SECCION, noticiasValidas, pageSize, MAX_PAGES);
-        noticiasParaResponder = noticiasValidas;
-        fromCache = false;
-        huboCambio = true;
-      } else {
-        errorMsg = apiError || "No se encontraron noticias válidas.";
-        noticiasParaResponder = cache.lastValidNoticias || [];
-        fromCache = true;
-      }
-    } else {
-      noticiasParaResponder = cache.noticias;
-      fromCache = true;
-      // Actualización en segundo plano
-      (async () => {
-        try {
-          const { noticias: noticiasApi } = await fetchNoticiasGenerales();
-          const noticiasFiltradas = (Array.isArray(noticiasApi) ? noticiasApi : []).filter(
-            (n: Dato) => n && n.title && n.link && typeof n.title === 'string' && n.title.length > 6
-          );
-          const noticiasValidas = deduplicarCombinado(
-            noticiasFiltradas,
-            [],
-            ["title","link"],
-            "pubDate",
-            5 * 4,
-            ["description","image_url","source_id","link"]
-          );
-          if (noticiasValidas.length > 0) {
-            lastApiSuccess = Date.now();
-            cache = {
-              noticias: noticiasValidas,
-              timestamp: Date.now(),
-              errorMsg: undefined,
-              lastValidNoticias: noticiasValidas,
-            };
-            guardarCacheEnArchivo(SECCION, noticiasValidas, pageSize, MAX_PAGES);
-          }
-        } catch {}
-      })();
-    }
-    const cooldownActive = lastApiSuccess > 0 && (now - lastApiSuccess < COOLDOWN_MS);
-    const { itemsPaginados, totalItems, realMaxPages } = paginar(noticiasParaResponder, page, pageSize, MAX_PAGES);
-    return NextResponse.json(respuestaApiEstandar({
-      noticias: itemsPaginados,
-      cached: fromCache,
-      huboCambio,
-      errorMsg,
-      fallback: fromCache,
-      apiStatus: errorMsg && !itemsPaginados.length ? 'api-error' : (fromCache ? 'cache-fijo' : 'api-directa'),
-      meta: {
-        page,
-        pageSize,
-        total: totalItems,
-        maxPages: realMaxPages,
-        updatedAt: new Date(cache.timestamp || now).toISOString(),
-        fromCache,
-        lastApiSuccess: lastApiSuccess ? new Date(lastApiSuccess).toISOString() : null,
-        cooldownActive,
-      },
-    }));
-  } catch (err: any) {
-    return NextResponse.json(respuestaApiEstandar({
-      noticias: [],
-      cached: false,
-      huboCambio: false,
-      errorMsg: err?.message || "Error inesperado en el servidor.",
-      fallback: false,
-      apiStatus: 'api-error',
-      meta: {
-        updatedAt: new Date().toISOString(),
-        fromCache: false,
-        lastApiSuccess: null,
-        cooldownActive: false,
-      },
-    }), { status: 500 });
-  }
-}
+const { GET } = createSectionApiHandler({
+  seccion: SECCION,
+  cacheDurationMs: CACHE_DURATION_MS,
+  cooldownMs: COOLDOWN_MS,
+  fetchNoticias: fetchNoticiasGenerales,
+});
+
+export { GET };
 
 export async function GET_CACHE_COUNT(req: NextRequest) {
   const titulosNuevo = new Set(cache.noticias.map((n: Dato) => n.title));

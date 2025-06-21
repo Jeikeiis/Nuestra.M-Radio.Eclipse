@@ -1,27 +1,27 @@
 {
   "noticias": [
     {
-      "article_id": "32d325b12e25910b8f52d9d5db466948",
-      "title": "Milei descartó indulto a Cristina Kirchner",
-      "link": "https://sinmordaza.com/noticia/460317-milei-descarto-indulto-a-cristina-kirchner.html",
+      "article_id": "65faf4a857135c62c17b46f8a667b7fb",
+      "title": "Ahora, la Corte reactivó la Causa Correo Argentino de Mauricio Macri",
+      "link": "https://diariotextual.com/inicio/index.php/2025/06/20/ahora-la-corte-reactivo-la-causa-correo-argentino-de-mauricio-macri/",
       "keywords": [
-        "política destacado",
-        "+01"
+        "politica",
+        "a - portada"
       ],
       "creator": [
-        "Tadeo Bruza"
+        "Diario1 Diario1"
       ],
-      "description": "El presidente Javier Milei se refirió por primera vez a la ratificación de la condena contra Cristina Fernández de Kirchner en la causa Vialidad y descartó de plano la posibilidad de otorgar un indulto a la exmandataria. La vicepresidenta entre 2019 y 2023 fue sentenciada a seis años de prisión e inhabilitación perpetua para ejercer [...]La noticia Milei descartó indulto a Cristina Kirchner se publicó primero en Sin Mordaza.",
+      "description": "La Corte Suprema de Justicia de la Nación dio un nuevo giro en la causa Correo Argentino, al rechazar un recurso de queja presentado por la defensa de Jaime Cibils...La entrada Ahora, la Corte reactivó la Causa Correo Argentino de Mauricio Macri se publicó primero en Diario Textual.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:46:22",
+      "pubDate": "2025-06-20 12:35:52",
       "pubDateTZ": "UTC",
-      "image_url": "https://i0.wp.com/sinmordaza.com/wp-content/uploads/2025/05/sm-milei-garrahan.png?resize=702%2C458&ssl=1",
+      "image_url": "https://diariotextual.com/inicio/wp-content/uploads/2024/05/correoargentino2024-79-1170x782.jpg",
       "video_url": null,
-      "source_id": "sinmordaza",
-      "source_name": "Inicio - Sin Mordaza",
-      "source_priority": 349688,
-      "source_url": "https://sinmordaza.com",
-      "source_icon": "https://n.bytvi.com/sinmordaza.png",
+      "source_id": "diariotextualinicio",
+      "source_name": "Diario Textual",
+      "source_priority": 179789,
+      "source_url": "https://diariotextual.com/inicio",
+      "source_icon": "https://n.bytvi.com/diariotextualinicio.png",
       "language": "spanish",
       "country": [
         "argentina"
@@ -34,21 +34,21 @@
       "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
       "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
       "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
+      "duplicate": true
     },
     {
-      "article_id": "37d8d26c459478cf78f30bec3f64d731",
-      "title": "Pronóstico del tiempo para este viernes en Comodoro Rivadavia y Rada Tilly",
-      "link": "https://www.diariocronica.com.ar/noticias/2025/06/20/119277-pronostico-del-tiempo-para-este-viernes-en-comodoro-rivadavia-y-rada-tilly",
+      "article_id": "559f296a04735f0452d74c58cfaf786c",
+      "title": "“El que las hace, las paga”: Milei celebró la condena a Cristina Kirchner",
+      "link": "https://www.diariocronica.com.ar/noticias/2025/06/20/119280-el-que-las-hace-las-paga-milei-celebro-la-condena-a-cristina-kirchner",
       "keywords": null,
       "creator": [
         "(Diario Crónica)"
       ],
-      "description": "El Servicio Meteorológico Nacional emitió su pronóstico para el 20 de junio, con posibilidad de chaparrones.",
+      "description": "El presidente destacó que la Justicia actuó sin interferencias y calificó de “aberrante” la posibilidad de un indulto. También defendió su plan económico, apuntó contra el Congreso por la reforma jubilatoria y reafirmó su respaldo a Israel.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:30:01",
+      "pubDate": "2025-06-20 12:33:23",
       "pubDateTZ": "UTC",
-      "image_url": "https://diariocronica-s3.cdn.net.ar/s3i233/2025/04/diariocronica/images/01/84/13/1841302_6924efa47fd0d8a7f4d97178b2ad57a5db517b3d05b852b3435d8f433fd5e339/md.webp",
+      "image_url": "https://diariocronica-s3.cdn.net.ar/s3i233/2025/06/diariocronica/images/02/12/12/2121297_1374f501cbfdc38a17e697efe2812b9a4a57ef09dce2c864b24720207d901279/md.webp",
       "video_url": null,
       "source_id": "diariocronica_ar",
       "source_name": "Diariocronica Ar",
@@ -70,29 +70,26 @@
       "duplicate": false
     },
     {
-      "article_id": "6b28e2d675cc3e44537368e8c8f1adec",
-      "title": "Santos Cerdán pide al Supremo que suspenda su declaración del miércoles y le cite en julio",
-      "link": "https://www.infobae.com/espana/2025/06/20/santos-cerdan-pide-al-supremo-que-suspenda-su-declaracion-del-miercoles-y-le-cite-en-julio/",
+      "article_id": "790698666d8a22a7b1c6e9e5cc175131",
+      "title": "La escalofriante confesión de la mujer que asesinó y descuartizó a su expareja en Mendoza",
+      "link": "https://www.elterritorio.com.ar/noticias/2025/06/20/857816-la-escalofriante-confesion-de-la-mujer-que-asesino-y-descuartizo-a-su-expareja-en-mendoza",
       "keywords": null,
       "creator": [
-        "Newsroom Infobae"
+        "redaccion@elterritorio.com.ar (El Territorio)"
       ],
-      "description": "Defiende que su abogado necesita más tiempo para estudiar toda la documentación de la causa",
+      "description": "Los restos de la víctima, identificado como César Darío Rodas, fueron encontrados por la policía en la propiedad de la principal acusada, Adriana Valeria Suárez. Además de ella, hay otros dos cómplices detenidos.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:18:26",
+      "pubDate": "2025-06-20 12:30:32",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/RHTRIL3O55FZHCCF6OISOOO7JQ.jpg?auth=b432b70a26c021188b5227181e424ad87aafeb27eff3d24dfe50487f0a0507b5&height=1280&smart=true&width=1920",
+      "image_url": "https://elterritorio-s3.cdn.net.ar/s3i233/2025/06/elterritorio/images/02/12/07/2120763_d0110d485cc56ad7e021edc4694d5d3fec8989a0f0984e9fae61e7937ffada8c/md.webp",
       "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
+      "source_id": "elterritorio",
+      "source_name": "El Territorio",
+      "source_priority": 1548937,
+      "source_url": "https://www.elterritorio.com.ar",
+      "source_icon": "https://n.bytvi.com/elterritorio.png",
       "language": "spanish",
       "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
         "argentina"
       ],
       "category": [
@@ -103,21 +100,21 @@
       "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
       "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
       "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": true
+      "duplicate": false
     },
     {
-      "article_id": "25cce76cb57a04ea7c642a1595fb3b59",
-      "title": "Las últimas previsiones para Dallas: temperatura, lluvias y viento",
-      "link": "https://www.infobae.com/noticias/2025/06/20/las-ultimas-previsiones-para-dallas-temperatura-lluvias-y-viento/",
+      "article_id": "e81c76e92de2b153b9c941da42ffb436",
+      "title": "Detienen a hijo del Nilo Burga por caso Qali Warma: Fiscalía allana viviendas en Lima, Trujillo, Cajamarca y otras ciudades",
+      "link": "https://www.infobae.com/peru/2025/06/20/detienen-a-hijo-del-nilo-burga-por-caso-qali-warma-fiscalia-allana-viviendas-en-lima-trujillo-cajamarca-y-otras-ciudades/",
       "keywords": null,
       "creator": [
-        "Infobae Noticias"
+        "Clara  Giraldo"
       ],
-      "description": "Los fenómenos meteorológicos y análisis de probabilidad permiten dar información sobre la temperatura, lluvias y vientos para las próximas horas",
+      "description": "Entre los inmuebles intervenidos figuran propiedades de Michael Burga, Edgar Capani, Miguel Ángel Rosales y otras personas implicadas como presuntos miembros de la organización investigada",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:16:25",
+      "pubDate": "2025-06-20 12:25:29",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/2RPSHR2EUZHC3FMCUT33N6DNX4.jpg?auth=65f0b7ef03682e8455d52589c04b87101cbeb9c11ebdbb1455b31cab30f27465&height=816&smart=true&width=1456",
+      "image_url": "https://www.infobae.com/resizer/v2/U5JBMUBPVFHKBBYZEYMBBJZ4HE.png?auth=ea19833675c1213abfa5288a0028d059a8759aa6fa267337f2516619f45cf1eb&height=1080&smart=true&width=1920",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -142,18 +139,90 @@
       "duplicate": false
     },
     {
-      "article_id": "1ee48853ab5ae4344325db8411ddc574",
-      "title": "Previsión del clima en Houston para antes de salir de casa este 20 de junio",
-      "link": "https://www.infobae.com/noticias/2025/06/20/prevision-del-clima-en-houston-para-antes-de-salir-de-casa-este-20-de-junio/",
+      "article_id": "d8eefb0a41684d821573868e1c310656",
+      "title": "Tato Aguilera confirmó la noticia más esperada en Boca: «Va a ser refuerzo»",
+      "link": "https://elintransigente.com/2025/06/tato-aguilera-confirmo-la-noticia-mas-esperada-en-boca-va-a-ser-refuerzo/",
+      "keywords": [
+        "boca juniors",
+        "leandro paredes",
+        "mercado de pases",
+        "tato aguilera",
+        "boca"
+      ],
+      "creator": [
+        "Nicolás Quercia"
+      ],
+      "description": "El periodista dio la información que celebra todo Boca.The post Tato Aguilera confirmó la noticia más esperada en Boca: «Va a ser refuerzo» appeared first on El Intransigente.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 12:24:38",
+      "pubDateTZ": "UTC",
+      "image_url": "https://elintransigente.com/wp-content/uploads/2020/12/tato-aguilera.jpg",
+      "video_url": null,
+      "source_id": "elintransigente",
+      "source_name": "El Intransigente",
+      "source_priority": 3446332,
+      "source_url": "https://elintransigente.com",
+      "source_icon": "https://n.bytvi.com/elintransigente.jpg",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "c7dc56bae85f8f942e5fd85176f64681",
+      "title": "Irak refuerza control de radiación en medio de tensiones por ataques a Irán",
+      "link": "https://www.diariocronica.com.ar/noticias/2025/06/20/119279-irak-refuerza-control-de-radiacion-en-medio-de-tensiones-por-ataques-a-iran",
       "keywords": null,
       "creator": [
-        "Infobae Noticias"
+        "(Diario Crónica)"
       ],
-      "description": "Para evitar cualquier imprevisto es importante conocer el pronóstico del tiempo",
+      "description": "El primer ministro instruyó a sus equipos a evaluar riesgos tras los bombardeos israelíes a centrales nucleares iraníes. Hasta ahora, no se detectaron variaciones en los niveles de fondo.",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:16:02",
+      "pubDate": "2025-06-20 12:22:36",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/S4HRATMSCZC5LKID5MCCTKH54E.jpg?auth=5f842b3e8870fb1e0df3c1790ddbf09a18245077c7b0ede112949b8be48f71ca&height=816&smart=true&width=1456",
+      "image_url": "https://diariocronica-s3.cdn.net.ar/s3i233/2025/06/diariocronica/images/02/12/12/2121244_117201a070c46f0c11535f24b8091ae19f0fd032f17effe47439a28c1ac69e77/md.webp",
+      "video_url": null,
+      "source_id": "diariocronica_ar",
+      "source_name": "Diariocronica Ar",
+      "source_priority": 2931989,
+      "source_url": "https://www.diariocronica.com.ar",
+      "source_icon": "https://n.bytvi.com/diariocronica_ar.png",
+      "language": "spanish",
+      "country": [
+        "argentina"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "bf21e06ddbaeca76e1b78c79928c282f",
+      "title": "Petro cuestionó que el atentado contra Miguel Uribe haya sido por fines políticos y arremetió contra la prensa: “No se conviertan en heraldos de la muerte”",
+      "link": "https://www.infobae.com/colombia/2025/06/20/petro-cuestiono-que-el-atentado-contra-miguel-uribe-haya-sido-por-fines-politicos-y-arremetio-contra-la-prensa-no-se-conviertan-en-heraldos-de-la-muerte/",
+      "keywords": null,
+      "creator": [
+        "Daniel Esteban Reyes Espinosa"
+      ],
+      "description": "El presidente pidió manejar con cautela la información sobre el ataque. Sin embargo, para la Fiscalía, el ataque sicarial contra el precandidato presidencial habría sido por motivos políticos",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-20 12:22:17",
+      "pubDateTZ": "UTC",
+      "image_url": "https://www.infobae.com/resizer/v2/3VH4KRMNV5CVVDS4OYXWWHMFDU.jpg?auth=9f2590d4687ff676e6dd946eedf6191ca7475809f44cf1698d15c0d5eb8ee23e&height=533&smart=true&width=800",
       "video_url": null,
       "source_id": "infobae",
       "source_name": "Infobae",
@@ -178,24 +247,30 @@
       "duplicate": false
     },
     {
-      "article_id": "3cf962633998a06b2e1a500508697f27",
-      "title": "Final de Gran Hermano: uno por uno, todos los ganadores de las ediciones en Argentina",
-      "link": "https://www.clarin.com/fama/final-gran-hermano-ganadores-ediciones-argentina_0_brE6SXe68v.html",
-      "keywords": null,
-      "creator": [
-        "Clarin.com - Home"
+      "article_id": "26ca839cfc58cbcfce643075a5c86f37",
+      "title": "Villarruel va a Rosario por el Día de la Bandera y Milei encabeza acto propio en Buenos Aires",
+      "link": "https://www.perfil.com/noticias/breaking-news/villarruel-estara-en-rosario-por-el-dia-de-la-bandera-milei-en-buenos-aires-la-grieta-se-traslada-a-los-actos-patrios.phtml",
+      "keywords": [
+        "",
+        "milei",
+        "grieta",
+        "vicoria villaruel",
+        "día de la bandera"
       ],
-      "description": "El próximo martes 24 se definirá al nuevo vencedor.Los perfiles de quiénes obtuvieron este premio en el pasado.",
+      "creator": [
+        "Raquel Marconi"
+      ],
+      "description": "Javier Milei encabezará la ceremonia en el Campo Argentino de Polo, mientras que la vicepresidenta participará del acto en el Monumento a la Bandera, junto al gobernador Maximiliano Pullaro. Leer más",
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 09:11:52",
+      "pubDate": "2025-06-20 12:20:34",
       "pubDateTZ": "UTC",
-      "image_url": "https://www.clarin.com/img/2022/10/17/a8f1N-lkd_2000x1500__1.jpg",
+      "image_url": "https://fotos.perfil.com/2025/05/25/trim/540/304/260525villarruelmileiafpg-2029555.jpg",
       "video_url": null,
-      "source_id": "clarin",
-      "source_name": "Clarin",
-      "source_priority": 1115,
-      "source_url": "https://www.clarin.com",
-      "source_icon": "https://n.bytvi.com/clarin.png",
+      "source_id": "perfil",
+      "source_name": "Perfil",
+      "source_priority": 56989,
+      "source_url": "https://www.perfil.com",
+      "source_icon": "https://n.bytvi.com/perfil.png",
       "language": "spanish",
       "country": [
         "argentina"
@@ -211,5 +286,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750456312776
+  "timestamp": 1750466232555
 }

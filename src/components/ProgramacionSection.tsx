@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./ProgramacionSection.css";
-import ProgramacionNoticiasSection from "./ProgramacionNoticiasSection";
-import ProgramacionMusicaSection from "./ProgramacionMusicaSection";
-import ProgramacionFarandulaSection from "./ProgramacionFarandulaSection";
+import ProgramacionGenericaSection from "./ProgramacionGenericaSection";
 import Modal from "./Modal";
 
 const PROGRAMAS = [
@@ -10,7 +8,14 @@ const PROGRAMAS = [
     key: "noticias",
     icon: "📰",
     titulo: "Noticias",
-    contenido: <ProgramacionNoticiasSection />,
+    contenido: <ProgramacionGenericaSection
+      apiPath="/api/noticias"
+      cacheKey="noticiasCacheLocal"
+      sectionClass="programacion-noticias-section"
+      updatedMsg="¡Noticias actualizadas!"
+      emptyMsg="No se encontraron noticias relevantes."
+      adminKey="adminNoticias"
+    />,
   },
   {
     key: "informacion",
@@ -22,7 +27,14 @@ const PROGRAMAS = [
     key: "farandula",
     icon: "🎤",
     titulo: "Farándula",
-    contenido: <ProgramacionFarandulaSection />,
+    contenido: <ProgramacionGenericaSection
+      apiPath="/api/farandula"
+      cacheKey="farandulaCacheLocal"
+      sectionClass="programacion-farandula-section"
+      updatedMsg="¡Farándula actualizada!"
+      emptyMsg="No se encontraron noticias de farándula relevantes."
+      adminKey="adminNoticias"
+    />,
   },
   {
     key: "entretenimiento",
@@ -34,7 +46,14 @@ const PROGRAMAS = [
     key: "musica",
     icon: "🎵",
     titulo: "Música",
-    contenido: <ProgramacionMusicaSection />,
+    contenido: <ProgramacionGenericaSection
+      apiPath="/api/musica"
+      cacheKey="musicaCacheLocal"
+      sectionClass="programacion-musica-section"
+      updatedMsg="¡Música actualizada!"
+      emptyMsg="No se encontraron noticias de música relevantes."
+      adminKey="adminNoticias"
+    />,
   },
   {
     key: "horoscopo",
