@@ -167,13 +167,37 @@ body {
   }
 }
 @media (max-width: 640px) {
-  .main-content {
-    padding-top: 21rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 1rem;
-    max-width: 100vw;
-    gap: 0.5rem;
+  html, body {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+  .main-content,
+  .card,
+  .programacion-section,
+  .locutores-section,
+  .eventos-section,
+  .contacto-section,
+  .podcasts-section,
+  .main-section {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Fuerza que todos los elementos hijos nunca se desborden horizontalmente */
+@media (max-width: 640px) {
+  * {
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
 }
 
@@ -185,7 +209,6 @@ body {
    6. Componentes: Secciones y Tarjetas
    ===================== */
 .card,
-.programacion-section,
 .locutores-section,
 .eventos-section,
 .contacto-section,
@@ -209,7 +232,6 @@ body {
   box-sizing: border-box !important;
 }
 .card:hover,
-.programacion-section:hover,
 .locutores-section:hover,
 .eventos-section:hover,
 .contacto-section:hover,
@@ -220,7 +242,6 @@ body {
   background: var(--section-bg-contrast) !important;
 }
 .card::before,
-.programacion-section::before,
 .locutores-section::before,
 .eventos-section::before,
 .contacto-section::before,
@@ -231,7 +252,6 @@ body {
 
 @media (max-width: 1400px) {
   .card,
-  .programacion-section,
   .locutores-section,
   .eventos-section,
   .contacto-section,
@@ -244,7 +264,6 @@ body {
 }
 @media (max-width: 900px) {
   .card,
-  .programacion-section,
   .locutores-section,
   .eventos-section,
   .contacto-section,
@@ -257,7 +276,6 @@ body {
 }
 @media (max-width: 640px) {
   .card,
-  .programacion-section,
   .locutores-section,
   .eventos-section,
   .contacto-section,
@@ -268,11 +286,7 @@ body {
   }
 }
 
-/* =====================
-   7. Títulos y Textos de Sección
-   ===================== */
 .card h3,
-.programacion-title,
 .locutores-title,
 .eventos-title,
 .contacto-title {
@@ -426,11 +440,19 @@ html.dark .noticia-contenedor .noticia-titulo {
     padding-right: 0.5rem;
   }
 }
+@media (max-width: 640px) {
+  .main-section {
+    max-width: 100vw;
+    width: 100vw;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 
 /* =====================
    12. Animaciones Sutiles (Pro)
    ===================== */
-.card, .programacion-section, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
+.card, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
   will-change: box-shadow, background, border-color;
   transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
 }
@@ -461,7 +483,6 @@ html.dark .noticia-contenedor .noticia-titulo {
   border: 0;
 }
 
-/* Eliminados estilos de modal, ahora están en ProgramacionSection.css */
 
 
 

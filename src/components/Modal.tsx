@@ -55,12 +55,20 @@ const Modal: React.FC<ModalProps> = ({
       const originalOverflow = document.body.style.overflow;
       const originalPosition = document.body.style.position;
       const originalWidth = document.body.style.width;
+      const originalOverscroll = document.body.style.overscrollBehavior;
+      const originalScrollX = document.body.style.overflowX;
       // Solo bloquear el body si no es móvil
       const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
       if (!isMobile) {
         document.body.style.overflow = "hidden";
+        document.body.style.overflowX = "hidden";
         document.body.style.position = "fixed";
         document.body.style.width = "100vw";
+        document.body.style.overscrollBehavior = "none";
+      } else {
+        document.body.style.overflow = "hidden";
+        document.body.style.overflowX = "hidden";
+        document.body.style.overscrollBehavior = "none";
       }
       // Prevenir scroll en iOS/Safari solo si no es móvil
       if (!isMobile) {
@@ -70,6 +78,8 @@ const Modal: React.FC<ModalProps> = ({
         document.body.style.overflow = originalOverflow;
         document.body.style.position = originalPosition;
         document.body.style.width = originalWidth;
+        document.body.style.overscrollBehavior = originalOverscroll;
+        document.body.style.overflowX = originalScrollX;
         if (!isMobile) {
           document.body.removeEventListener('touchmove', preventScroll);
         }
@@ -85,16 +95,29 @@ const Modal: React.FC<ModalProps> = ({
   // Detectar móvil
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
 
+  // --- OPTIMIZACIÓN: Eliminar blur y animación en móviles, usar clases CSS ---
+  const modalClass = `programacion-modal${isMobile ? ' programacion-modal--mobile' : ''} ${className}`;
+  const contentClass = `programacion-modal-content${isMobile ? ' programacion-modal-content--mobile' : ''}`;
+
   return (
     <div
-      className={`programacion-modal ${className}`}
+      className={modalClass}
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel || title || "Modal"}
       tabIndex={-1}
       ref={modalRef}
       onClick={onClose}
-      style={{
+      style={isMobile ? {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        background: "rgba(30,32,38,0.92)",
+        overflow: 'hidden',
+        overscrollBehavior: 'none',
+      } : {
         zIndex: 2000,
         position: "fixed",
         top: 0,
@@ -106,22 +129,34 @@ const Modal: React.FC<ModalProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow: isMobile ? 'auto' : 'hidden', // Permitir scroll en móviles
-        WebkitOverflowScrolling: isMobile ? 'touch' : undefined,
+        overflow: 'hidden',
+        overscrollBehavior: 'none',
       }}
     >
       <div
-        className="programacion-modal-content"
-        style={{
-          maxWidth: isMobile ? "99vw" : maxWidth,
-          minWidth: isMobile ? "98vw" : minWidth,
-          width: isMobile ? "99vw" : undefined,
-          maxHeight: isMobile ? "98vh" : "90vh",
+        className={contentClass}
+        style={isMobile ? {
+          maxWidth: '100vw',
+          minWidth: 0,
+          width: '100vw',
+          maxHeight: '100vh',
+          height: 'auto',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          position: 'relative',
+          padding: '1.2rem 0.5rem 1.2rem 0.5rem',
+          border: 'none',
+          WebkitOverflowScrolling: 'touch',
+        } : {
+          maxWidth: maxWidth,
+          minWidth: minWidth,
+          maxHeight: "90vh",
           height: "auto",
           overflowY: "auto",
+          overflowX: "hidden",
           position: "relative",
           animation: "modalIn 0.22s cubic-bezier(.4,1.2,.6,1)",
-          padding: isMobile ? "1.1rem 0.3rem 0.7rem 0.3rem" : "2rem 2.5rem 2rem 2.5rem",
+          padding: "2rem 2.5rem 2rem 2.5rem",
           border: "none",
           WebkitOverflowScrolling: 'touch',
         }}

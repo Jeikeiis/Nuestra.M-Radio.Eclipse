@@ -1,15 +1,13 @@
 /**
- * Hook React para gestionar caché local en el navegador de forma tipada y segura.
- * Permite guardar y cargar datos en localStorage bajo una clave específica.
+ * Hook React profesional para gestionar caché local en el navegador de forma tipada, segura y robusta.
+ * Permite guardar, cargar y limpiar datos en localStorage bajo una clave específica.
  *
  * @template T Tipo de dato a almacenar.
  * @param {string} cacheKey Clave única para el caché en localStorage.
- * @returns {{ guardarCache: (data: T) => void, cargarCache: () => T | null }}
- *
- * Dependencias: React (useCallback). Solo debe usarse en componentes cliente.
+ * @returns {{ guardarCache: (data: T) => void, cargarCache: () => T | null, limpiarCache: () => void }}
  *
  * Ejemplo:
- * const { guardarCache, cargarCache } = useLocalCache<MyType>('mi-clave');
+ * const { guardarCache, cargarCache, limpiarCache } = useLocalCache<MyType>('mi-clave');
  */
 import { useCallback } from "react";
 
@@ -18,7 +16,6 @@ export function useLocalCache<T = any>(cacheKey: string) {
     try {
       localStorage.setItem(cacheKey, JSON.stringify(data));
     } catch (e) {
-      // Puede fallar si el almacenamiento está lleno o deshabilitado
       if (process.env.NODE_ENV === 'development') {
         console.warn('No se pudo guardar en localStorage:', e);
       }
@@ -38,5 +35,15 @@ export function useLocalCache<T = any>(cacheKey: string) {
     }
   }, [cacheKey]);
 
-  return { guardarCache, cargarCache };
+  const limpiarCache = useCallback(() => {
+    try {
+      localStorage.removeItem(cacheKey);
+    } catch (e) {
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('No se pudo limpiar localStorage:', e);
+      }
+    }
+  }, [cacheKey]);
+
+  return { guardarCache, cargarCache, limpiarCache };
 }

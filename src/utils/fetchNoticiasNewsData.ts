@@ -33,6 +33,9 @@ export async function fetchNoticiasNewsData(region: string) {
     if (!data.results || !Array.isArray(data.results)) {
       throw new Error("La respuesta de la API de NewsData.io no contiene artículos.");
     }
+    if (process.env.NODE_ENV === 'development') {
+      // Puedes agregar logs o validaciones adicionales aquí
+    }
     return data.results;
   } catch (e: any) {
     throw new Error("No se pudieron obtener noticias. Verifica tu conexión, la API key o el límite de uso. " + (e?.message || ""));

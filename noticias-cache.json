@@ -1,357 +1,331 @@
 {
   "noticias": [
     {
-      "article_id": "c1541e2b3f065262c5c68d8e5349995e",
-      "title": "Valor de apertura del dólar en República Dominicana este 20 de junio de USD a DOP",
-      "link": "https://www.infobae.com/noticias/2025/06/20/valor-de-apertura-del-dolar-en-republica-dominicana-este-20-de-junio-de-usd-a-dop/",
+      "article_id": "3689e7c97fa3f1d532bf5f10d305b1fb",
+      "title": "Llamado laboral en Cinemateca Uruguaya: cuáles son los requisitos y cómo postularse",
+      "link": "https://www.montevideo.com.uy/Noticias/Llamado-laboral-en-Cinemateca-Uruguaya-cuales-son-los-requisitos-y-como-postularse-uc927760",
       "keywords": null,
-      "creator": [
-        "Armando Montes"
-      ],
-      "description": "Este fue el comportamiento de la divisa estadounidense durante los primeros minutos de la jornada",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:18:46",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/LCCYKAAEIVHLHNQIPGHEFLD674.jpg?auth=4a0d04c595c596f24f851ee93e7915c829588f763749971dc779a97d87bbf229&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "5e0774a116f8385807e0cb5677d42774",
-      "title": "Paraguay: cotización de apertura del dólar hoy 20 de junio de USD a PYG",
-      "link": "https://www.infobae.com/noticias/2025/06/20/paraguay-cotizacion-de-apertura-del-dolar-hoy-20-de-junio-de-usd-a-pyg/",
-      "keywords": null,
-      "creator": [
-        "Infobae Noticias"
-      ],
-      "description": "Se registró un alza en los valores del dólar con respecto a la jornada anterior",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:18:29",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/6LJ5Z7DNDNARDCTU33EIWHZJZE.jpg?auth=a9f23e103794ac4a4b277b694b753274ac8bcb74b07487c2235ae531d8b4c653&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "97ffa96ea15262b3646c21d254a94a7b",
-      "title": "Euro: cotización de apertura hoy 20 de junio en Paraguay",
-      "link": "https://www.infobae.com/noticias/2025/06/20/euro-cotizacion-de-apertura-hoy-20-de-junio-en-paraguay/",
-      "keywords": null,
-      "creator": [
-        "Infobae Noticias"
-      ],
-      "description": "Este fue el comportamiento de la divisa europea durante los primeros minutos de la jornada",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:18:13",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/M7SXACIQG5AOBOHT5VURCJI6FM.jpg?auth=c133e4db3fffc5890b54cae04fb761bf07af874cddd74388b8cc815b75887b3e&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "cc6faaddf30007b4d52aaa4fdff2c91c",
-      "title": "Valor de apertura del euro en Bolivia este 20 de junio de EUR a BOB",
-      "link": "https://www.infobae.com/noticias/2025/06/20/valor-de-apertura-del-euro-en-bolivia-este-20-de-junio-de-eur-a-bob/",
-      "keywords": null,
-      "creator": [
-        "Infobae Noticias"
-      ],
-      "description": "Se registró un alza en los valores del euro con respecto a la jornada anterior",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:17:55",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/ERBLW5LTXJEQBFCUIROX6DDH5U.jpg?auth=27a1d44b1e00593056d3abfddba35ca0f361aee91d4efb1c8c71cb42d3e7a83d&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "cdb731263980a035e60956e36fec03ff",
-      "title": "Euro: cotización de apertura hoy 20 de junio en República Dominicana",
-      "link": "https://www.infobae.com/noticias/2025/06/20/euro-cotizacion-de-apertura-hoy-20-de-junio-en-republica-dominicana/",
-      "keywords": null,
-      "creator": [
-        "Infobae Noticias"
-      ],
-      "description": "Se registró un alza en los valores del euro con respecto a la jornada anterior",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:17:39",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/6YCSWJCAMVHXRPCECCY2KA6JLA.jpg?auth=43b390b1d9d84a93573e98feaa9231dbb2960c996917a0049b4a72016bc4753b&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "c68d03cd888f6c730c3a51c2cd03ebff",
-      "title": "Dólar: cotización de apertura hoy 20 de junio en Bolivia",
-      "link": "https://www.infobae.com/noticias/2025/06/20/dolar-cotizacion-de-apertura-hoy-20-de-junio-en-bolivia/",
-      "keywords": null,
-      "creator": [
-        "Infobae Noticias"
-      ],
-      "description": "Este fue el comportamiento de la divisa estadounidense durante los primeros minutos de la jornada",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:17:23",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.infobae.com/resizer/v2/PSVTNSV62VDODAW4Q7R7JATCZA.jpg?auth=bab0673ca41ff12584243308e36e254e2a06ee969e0b950db61344339e8b582b&height=1080&smart=true&width=1920",
-      "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
-      "language": "spanish",
-      "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "60d611ee72efa9c43b7283430850a87e",
-      "title": "Paraguay: “mula” ingirió cápsulas de droga y se desvaneció mientras esperaba cruzar a Brasil",
-      "link": "https://www.primeraedicion.com.ar/nota/101014931/paraguay-mula-ingirio-capsulas-de-droga-y-se-desvanecio-mientras-esperaba-cruzar-a-brasil/",
-      "keywords": [
-        "ciudad del este",
-        "puente de la amistad",
-        "ingirió cápsulas de droga",
-        "policiales",
-        "#brasil",
-        "#paraguay",
-        "#narcotráfico"
-      ],
-      "creator": [
-        "Gaston Mazur"
-      ],
-      "description": "Un hombre oriundo del departamento de Misiones fue internado de urgencia en el Hospital Regional de Ciudad del Este, Paraguay, luego de desvanecerse en el área del Puente de la Amistad. El hecho ocurrió en la tarde del jueves y, tras ser auxiliado por agentes de seguridad, se confirmó que llevaba cápsulas de droga en [...]La entrada Paraguay: “mula” ingirió cápsulas de droga y se desvaneció mientras esperaba cruzar a Brasil se publicó primero en Primera Edición.",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:16:06",
-      "pubDateTZ": "UTC",
-      "image_url": "https://www.primeraedicion.com.ar/wp-content/uploads/2020/12/puentye-e1750423456182.jpg",
-      "video_url": null,
-      "source_id": "primeraedicion",
-      "source_name": "Primera Edicion",
-      "source_priority": 2175624,
-      "source_url": "https://www.primeraedicion.com.ar",
-      "source_icon": "https://n.bytvi.com/primeraedicion.jpg",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "b13be85aae962fd57295b28178961882",
-      "title": "Corrientes a la vanguardia: llega el Radixact X7, la tecnología más avanzada contra el cáncer",
-      "link": "https://www.perfil.com/noticias/nea/corrientes-a-la-vanguardia-llega-el-radixact-x7-la-tecnologia-mas-avanzada-contra-el-cancer.phtml",
-      "keywords": [
-        "salud",
-        "corrientes",
-        "instituto de oncología"
-      ],
-      "creator": [
-        "Redacción Perfil NEA"
-      ],
-      "description": "El equipamiento es para el Instituto de Oncología que está en construcción y que se espera sea inaugurado antes de fin de año. Llevará el nombre Papa Francisco. Leer más",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:03:01",
-      "pubDateTZ": "UTC",
-      "image_url": "https://fotos.perfil.com/2025/06/20/trim/540/304/instituto-de-oncologia-2046541.jpg",
-      "video_url": null,
-      "source_id": "perfil",
-      "source_name": "Perfil",
-      "source_priority": 56989,
-      "source_url": "https://www.perfil.com",
-      "source_icon": "https://n.bytvi.com/perfil.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "e1962c55b32fdfc1914f4578108bfc76",
-      "title": "Vallaron la casa de Cristina Kirchner y se dispuso un fuerte operativo de seguridad",
-      "link": "https://www.lanacion.com.ar/politica/vallaron-la-casa-de-cristina-kirchner-y-se-dispuso-un-fuerte-operativo-de-seguridad-nid20062025/",
-      "keywords": [
-        "política"
-      ],
       "creator": null,
-      "description": "El escenario en los alrededores del departamento en Monserrat cambió en las últimas horas; trabajan la PFA y la Policía de la Ciudad",
-      "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:01:59",
-      "pubDateTZ": "UTC",
-      "image_url": "https://resizer.glanacion.com/resizer/v2/UEFEATUA7NDBPAX2LGZ5FXAM5Q.JPG?auth=724a9948e58f20ae5bb920231a5bf031f87c8077e1a395312f9c76b675b226aa&height=1333&smart=true&width=1995",
-      "video_url": null,
-      "source_id": "lanacion",
-      "source_name": "La Nacion",
-      "source_priority": 7204,
-      "source_url": "https://www.lanacion.com.ar",
-      "source_icon": "https://n.bytvi.com/lanacion.png",
-      "language": "spanish",
-      "country": [
-        "argentina"
-      ],
-      "category": [
-        "top"
-      ],
-      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-      "duplicate": false
-    },
-    {
-      "article_id": "67ce73f65e439c1a08108a6a6f455bba",
-      "title": "El estadounidense Xavier Castañeda, segundo refuerzo del Unicaja para la próxima campaña",
-      "link": "https://www.infobae.com/espana/agencias/2025/06/20/el-estadounidense-xavier-castaneda-segundo-refuerzo-del-unicaja-para-la-proxima-campana/",
-      "keywords": null,
-      "creator": [
-        "Newsroom Infobae"
-      ],
       "description": null,
       "content": "ONLY AVAILABLE IN PAID PLANS",
-      "pubDate": "2025-06-20 13:01:28",
+      "pubDate": "2025-06-22 13:58:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/202506/_W933_80/923674.jpeg",
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "283e2fa6d56a07c0c8121cf69fa91885",
+      "title": "Del gobierno chino al papa: las principales reacciones al ataque de EE. UU. contra Irán",
+      "link": "https://www.montevideo.com.uy/Noticias/Del-gobierno-chino-al-papa-las-principales-reacciones-al-ataque-de-EE-UU-contra-Iran-uc927758",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-22 13:55:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/202506/_W933_80/923673.jpg",
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "e6b5a1f0e6c35d767773c2138c5e6029",
+      "title": "Panorama desolador: un barrio acomodado de Tel Aviv amaneció entre escombros",
+      "link": "https://www.montevideo.com.uy/Noticias/Panorama-desolador-un-barrio-acomodado-de-Tel-Aviv-amanecio-entre-escombros-uc927754",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-22 12:55:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/202506/_W933_80/923672.jpg",
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "e047a28a50478aeae61d504f7857d021",
+      "title": "“Planificando el fin de la izquierda”: la reunión de Lemoine con libertarios uruguayos",
+      "link": "https://www.montevideo.com.uy/Noticias/-Planificando-el-fin-de-la-izquierda--la-reunion-de-Lemoine-con-libertarios-uruguayos-uc927752",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-22 12:34:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/202506/_W933_80/923669.jpg",
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "0c3d344a0dd83ec1d866b8a385893846",
+      "title": "Conexión Ganadera: una buena noticia para los damnificados",
+      "link": "https://www.elobservador.com.uy/opinion/conexion-ganadera-una-buena-noticia-los-damnificados-n6005103",
+      "keywords": [
+        "opinion"
+      ],
+      "creator": [
+        "nroba@observador.com.uy (Natalia Roba)"
+      ],
+      "description": "La imputación de los principales directivos de Conexión Ganadera es un hito importante pero es recién el comienzo de una investigación de largo aliento que tendrá varias etapas; el fiscal hizo anuncio sobre el recupero de bienes",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-22 08:00:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://media.elobservador.com.uy/p/dd4e9c648a3e529f53cb98e78ab4984e/adjuntos/362/imagenes/100/615/0100615804/1200x675/smart/20250403-manifestantes-contra-conexion-ganadera-audiencia-conexion-ganadera-juzgado-concurso.jpg",
+      "video_url": null,
+      "source_id": "elobservador",
+      "source_name": "El Observador",
+      "source_priority": 112879,
+      "source_url": "https://www.elobservador.com.uy",
+      "source_icon": "https://n.bytvi.com/elobservador.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "b47a7c6f38eaa831ba216bb1f20f4c7e",
+      "title": "Así es la colaboración de Sonic Racing: CrossWorlds y Nickelodeon",
+      "link": "https://latam.ign.com/sonic-racing-crossworlds/108813/news/asi-es-la-colaboracion-de-sonic-racing-crossworlds-y-nickelodeon",
+      "keywords": [
+        "sonic racing: crossworlds",
+        "gallery",
+        "noticias"
+      ],
+      "creator": null,
+      "description": "Los mundos de Sonic y Nickelodeon chocan.Sonic Racing: Crossworld estará disponible para Nintendo Switch, PlayStation 4, PlayStation 5, Xbox One, Xbox Series X|S, PC (a través de Steam y Epic Games), con una versión para Nintendo Switch 2 que llegará más adelante. Saldrá a la venta el próximo 25 de septiembre de 2025. Se trata de ...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-22 02:13:16",
+      "pubDateTZ": "UTC",
+      "image_url": "https://sm.ign.com/ign_latam/screenshot/default/srcw-spongebob-4_mb6f.jpg",
+      "video_url": null,
+      "source_id": "ign_latam",
+      "source_name": "Ign Latinoamérica",
+      "source_priority": 121,
+      "source_url": "https://latam.ign.com",
+      "source_icon": "https://n.bytvi.com/ign_latam.png",
+      "language": "spanish",
+      "country": [
+        "honduras",
+        "el salvador",
+        "guinea",
+        "spain",
+        "mexico",
+        "argentina",
+        "colombia",
+        "cuba",
+        "venezuela",
+        "peru",
+        "chile",
+        "ecuador",
+        "puerto rico",
+        "dominican republic",
+        "costa rica",
+        "bolivia",
+        "paraguay",
+        "panama",
+        "guatemala",
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "42eefaa3e14cb90600f8e8d5d082b915",
+      "title": "Accidente de globo aerostático en Brasil: ¿qué se sabe y qué dijo el abogado del piloto?",
+      "link": "https://www.montevideo.com.uy/Noticias/Accidente-de-globo-aerostatico-en-Brasil--que-se-sabe-y-que-dijo-el-abogado-del-piloto--uc927735",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-21 23:49:00",
       "pubDateTZ": "UTC",
       "image_url": null,
       "video_url": null,
-      "source_id": "infobae",
-      "source_name": "Infobae",
-      "source_priority": 1056,
-      "source_url": "https://www.infobae.com",
-      "source_icon": "https://n.bytvi.com/infobae.png",
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
       "language": "spanish",
       "country": [
-        "united states of america",
-        "colombia",
-        "mexico",
-        "argentina"
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "4b605f82de0656277f93b8ed39172897",
+      "title": "Recluso huyó de su celda de prisión preventiva en el ex-Comcar este sábado, según Interior",
+      "link": "https://www.montevideo.com.uy/Noticias/Recluso-huyo-de-su-celda-de-prision-preventiva-en-el-ex-Comcar-este-sabado-segun-Interior-uc927732",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-21 22:47:00",
+      "pubDateTZ": "UTC",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "7a403c58ce83acad4f2691dda3983bf6",
+      "title": "Mieres criticó la decisión del gobierno por licencias médicas: “Se da un paso atrás”",
+      "link": "https://www.montevideo.com.uy/Noticias/Mieres-critico-la-decision-del-gobierno-por-licencias-medicas--Se-da-un-paso-atras--uc927726",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-21 21:31:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/202409/_W933_80/896636.jpg",
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "07e3d734c9758e0d81404c52af5e73ed",
+      "title": "En el mes “más frío del invierno”, ¿cuáles son las tendencias para vacaciones de julio?",
+      "link": "https://www.montevideo.com.uy/Noticias/En-el-mes-mas-frio-del-invierno--cuales-son-las-tendencias-para-vacaciones-de-julio--uc927720",
+      "keywords": null,
+      "creator": null,
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-21 20:35:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://imagenes.montevideo.com.uy/imgnoticias/201907/_W933_80/698915.jpg",
+      "video_url": null,
+      "source_id": "montevideo",
+      "source_name": "Montevideo Portal",
+      "source_priority": 6822,
+      "source_url": "https://www.montevideo.com.uy",
+      "source_icon": "https://n.bytvi.com/montevideo.png",
+      "language": "spanish",
+      "country": [
+        "uruguay"
       ],
       "category": [
         "top"
@@ -364,5 +338,5 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750468797777
+  "timestamp": 1750644990525
 }

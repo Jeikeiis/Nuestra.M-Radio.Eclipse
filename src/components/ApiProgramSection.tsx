@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import { deduplicarCombinado, Dato } from "@/utils/deduplicar";
 import ApiStatusIndicator, { ApiStatus } from "./ApiStatusIndicator";
 import { useLocalCache } from "@/utils/useLocalCache";
+import { deduplicarCombinado, Dato } from "@/utils/sectionDeduplicar";
+import he from "he";
 
 /**
  * Formatea una fecha a formato legible en español de Uruguay.
@@ -60,9 +61,7 @@ const ApiProgramSection: React.FC<ApiProgramSectionProps> = ({
     if (!texto) return "";
     let limpio = texto.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "");
     limpio = limpio.replace(/<[^>]+>/g, "");
-    const txt = document.createElement('textarea');
-    txt.innerHTML = limpio;
-    return txt.value;
+    return he.decode(limpio);
   }, []);
 
   // --- Carga de noticias desde API y/o caché ---

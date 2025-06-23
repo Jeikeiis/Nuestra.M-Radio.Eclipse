@@ -45,3 +45,5 @@ export function limpiarCacheSiExcede(seccion: string, maxPaginas = 15, porPagina
     saveCache(seccion, nuevas);
   }
 }
+
+// DEPRECATED: Toda la lógica fue migrada a sectionCacheManager.ts

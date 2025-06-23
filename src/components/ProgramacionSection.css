@@ -32,6 +32,7 @@ html.dark {
   transition: background 0.2s, border-color 0.2s;
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
+  will-change: box-shadow, background, border-color;
 }
 
 .programacion-section::before { display: none; }
@@ -174,6 +175,22 @@ html.dark {
   hyphens: auto;
 }
 
+/* Noticias y enlaces adaptativos solo para sección programación */
+.noticia-contenedor a,
+.noticia-contenedor .noticia-titulo {
+  color: var(--program-title, var(--section-title, #fff)) !important;
+}
+html.dark .noticia-contenedor a,
+html.dark .noticia-contenedor .noticia-titulo {
+  color: #fff !important;
+}
+
+/* Animación sutil solo para programación */
+.programacion-section {
+  will-change: box-shadow, background, border-color;
+  transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+}
+
 @media (max-width: 640px) {
   .programacion-section {
     padding-left: unset;
@@ -239,6 +256,38 @@ html.dark {
     padding: 1.1rem 0.3rem 0.7rem 0.3rem !important;
   }
   .programacion-modal { align-items: flex-end; padding-bottom: env(safe-area-inset-bottom, 0); }
+}
+
+/* --- MODAL MOBILE OPTIMIZADO --- */
+.programacion-modal--mobile {
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30,32,38,0.97); /* sin blur */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: auto;
+  animation: none !important;
+}
+.programacion-modal-content--mobile {
+  max-width: 99vw;
+  min-width: 98vw;
+  width: 99vw;
+  max-height: 98vh;
+  height: auto;
+  overflow-y: auto;
+  position: relative;
+  animation: none !important;
+  padding: 1.1rem 0.3rem 0.7rem 0.3rem;
+  border: none;
+  border-radius: 1.2em 1.2em 0 0;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.13);
+  WebkitOverflowScrolling: touch;
 }
 
 .programacion-modal {

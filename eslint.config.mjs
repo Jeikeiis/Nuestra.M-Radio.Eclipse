@@ -11,6 +11,8 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // Puedes agregar reglas personalizadas aquí
+  // Ejemplo: { rules: { 'no-console': 'warn' } }
 ];
 
 export default eslintConfig;
