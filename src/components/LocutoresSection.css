@@ -76,6 +76,15 @@
   margin-bottom: 0.1rem;
 }
 
+.locutores-section {
+  overflow: visible !important;
+}
+.locutores-title, .locutores-desc-main {
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: unset !important;
+}
+
 @media (max-width: 900px) {
   .locutores-section {
     padding: 1.2rem 0.5rem 1.2rem 0.5rem;
@@ -85,6 +94,8 @@
 @media (max-width: 640px) {
   .locutores-section {
     padding: 0.7rem 0.2rem 1.2rem 0.2rem;
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
   }
   .locutores-grid { gap: 0.7rem; }
   .locutores-profile {
@@ -92,6 +103,10 @@
     min-height: 80px;
   }
   .locutores-img { width: 60px; height: 60px; }
+  .locutores-desc-main {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 :root { --section-shadow: none; }
