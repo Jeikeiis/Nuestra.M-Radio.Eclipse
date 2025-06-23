@@ -1,14 +1,35 @@
+/**
+ * API endpoint para noticias - Radio Eclipse
+ * Integra con NewsData.io y sistema de caché profesional
+ * 
+ * @author Radio Eclipse - Sistema de Noticias
+ * @version 2.0.0
+ */
+
 import { createSectionApiHandler } from "@/utils/sectionCacheManager";
 import { fetchNoticiasNewsData } from "@/utils/fetchNoticiasNewsData";
 
-const CACHE_DURATION_MS = parseInt(process.env.CACHE_DURATION_MS || '') || 10 * 60 * 1000;
-const COOLDOWN_MS = parseInt(process.env.COOLDOWN_MS || '') || 61 * 60 * 1000;
+// Configuración específica para noticias
+const CONFIG = {
+  CACHE_DURATION_MS: parseInt(process.env.NOTICIAS_CACHE_DURATION_MS || '') || 10 * 60 * 1000, // 10 min default
+  COOLDOWN_MS: parseInt(process.env.NOTICIAS_COOLDOWN_MS || '') || 61 * 60 * 1000, // 61 min default
+  REGION: 'noticias',
+  MAX_RETRIES: 3,
+  RETRY_DELAY_MS: 2000,
+} as const;
 
+// Crear handler con configuración específica de noticias
 const { GET } = createSectionApiHandler({
   seccion: "noticias",
-  cacheDurationMs: CACHE_DURATION_MS,
-  cooldownMs: COOLDOWN_MS,
-  fetchNoticias: () => fetchNoticiasNewsData("noticias"),
+  cacheDurationMs: CONFIG.CACHE_DURATION_MS,
+  cooldownMs: CONFIG.COOLDOWN_MS,
+  fetchNoticias: () => fetchNoticiasNewsData(CONFIG.REGION, {
+    category: 'top',
+    size: 20, // Obtener más resultados para mejor calidad
+  }),
+  region: CONFIG.REGION,
+  maxRetries: CONFIG.MAX_RETRIES,
+  retryDelayMs: CONFIG.RETRY_DELAY_MS,
 });
 
 export { GET };

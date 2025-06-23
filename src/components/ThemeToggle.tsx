@@ -30,23 +30,23 @@ export default function ThemeToggle() {
       aria-label="Cambiar modo claro/oscuro"
     >
       <span className="icon-sun-moon" aria-hidden="true">
-        <span className="eclipse-container">
+        <span className="eclipse-container animated">
           {/* Halo de la luna (debe estar detrás de la luna y el sol) */}
-          <span className="eclipse-moon-halo" />
+          <span className="eclipse-moon-halo animated" />
           {/* Sol */}
-          <span className="eclipse-sun" />
+          <span className="eclipse-sun animated" />
           {/* Rayos del sol */}
           {[...Array(8)].map((_, i) => (
             <span
               key={i}
-              className="eclipse-ray"
+              className="eclipse-ray animated"
               style={{
                 transform: `rotate(${i * 45}deg) translate(9px, -1px)`,
               }}
             />
           ))}
           {/* Luna/Eclipse */}
-          <span className="eclipse-moon" />
+          <span className="eclipse-moon animated" />
         </span>
       </span>
     </button>

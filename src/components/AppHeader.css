@@ -175,54 +175,28 @@
 }
 
 .app-header-theme-toggle {
-  margin-left: 0.5rem;
-  margin-top: 0;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static;
   max-width: 48px;
   max-height: 48px;
   width: 48px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.07); /* Sutil para destacar el área */
-}
-.app-header-theme-toggle > * {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  border-radius: 50%;
-}
-@media (min-width: 640px) {
-  .app-header-theme-toggle {
-    margin-left: 1rem;
-    margin-top: 0;
-    max-width: 48px;
-    max-height: 48px;
-    width: 48px;
-    height: 48px;
-    overflow: visible;
-    background: rgba(255,255,255,0.10);
-    padding: 0;
-  }
 }
 @media (max-width: 640px) {
   .app-header-theme-toggle {
-    position: absolute;
-    right: 0.1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 !important;
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
     max-width: 32px !important;
     max-height: 32px !important;
     width: 32px !important;
     height: 32px !important;
-    margin-left: 0.1rem !important;
-    margin-right: 0 !important;
-    padding: 0 !important;
   }
 }
 
@@ -305,18 +279,15 @@
     margin-right: 0 !important;
   }
   .app-header-theme-toggle {
-    position: absolute;
-    right: 0.1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 !important;
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
     max-width: 32px !important;
     max-height: 32px !important;
     width: 32px !important;
     height: 32px !important;
-    margin-left: 0.1rem !important;
-    margin-right: 0 !important;
-    padding: 0 !important;
   }
   .app-header-actions {
     width: 100%;

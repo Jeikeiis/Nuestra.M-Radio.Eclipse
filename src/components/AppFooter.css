@@ -1,5 +1,21 @@
 /* Footer moderno, simple y responsivo */
 
+/* Ajuste de colores para el footer */
+.app-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+:root {
+  --footer-bg: var(--background);
+  --footer-text: var(--foreground);
+}
+
+.dark {
+  --footer-bg: var(--background);
+  --footer-text: #ffffff; /* Texto blanco en modo oscuro */
+}
+
 .app-footer {
   width: 100vw;
   background: var(--footer-bg);
@@ -159,47 +175,61 @@
     border-top-width: 1px;
   }
   .footer-content {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+    justify-content: space-between;
+    gap: 0.2rem;
+    padding: 0 0.2rem;
     width: 100%;
     max-width: 100vw;
   }
-  .footer-credits {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 0.2rem;
-    margin-top: 0;
-    padding: 0;
-  }
-  .footer-sponsors {
-    justify-content: center;
-    width: 100%;
-    margin: 0.2rem 0;
-    padding: 0;
-  }
-  .sponsors-carousel-outer {
-    max-width: 80vw;
-    min-width: 0;
-    margin: 0 auto;
-    padding: 0;
-  }
   .footer-logo {
-    justify-content: center;
-    width: 100%;
-    margin: 0.2rem 0 0 0;
+    margin-bottom: 0;
     padding: 0;
   }
   .footer-logo img {
-    display: block;
-    margin: 0 auto;
-    width: 70px;
-    height: auto;
+    width: 90px;
+    height: 90px;
+    margin: 0 0.2rem 0 0;
+    margin-left: 2rem;
+  }
+  .footer-sponsors {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    min-width: 0;
+    flex-direction: row;
+  }
+  .sponsors-carousel-outer {
     max-width: 40vw;
-    max-height: 70px;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-sponsor-img {
+    width: 18px;
+    height: 18px;
+    margin: 0 2px;
+  }
+  .footer-credits {
+    align-items: flex-end;
+    text-align: right;
+    font-size: 0.8rem;
+    gap: 0.05rem;
+    margin-top: 0;
+    width: auto;
+    padding: 0;
+  }
+  .footer-madeby {
+    font-size: 0.7rem;
+    margin-top: 0;
+  }
+  .footer-stats {
+    font-size: 0.8rem !important;
+    margin-top: 0 !important;
+  }
+  .footer-link {
+    font-size: 0.8rem;
   }
 }
 
