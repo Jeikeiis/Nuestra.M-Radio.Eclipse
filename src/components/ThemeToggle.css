@@ -1,33 +1,17 @@
 /* =============================
    Panel de Personalización CSS para ThemeToggle
    ============================= */
-:root {
-  --themetoggle-bg: transparent;
-  --themetoggle-text: #23272f; /* Oscuro para modo claro */
-  --themetoggle-sun: #FFD600;
-  --themetoggle-ray: #FFD600;
-  --themetoggle-moon: #e6e9f0;
-  --themetoggle-moon-shadow: #bfc3d1;
-  --themetoggle-moon-border: #23272f;
-}
-.dark {
-  --themetoggle-bg: transparent;
-  --themetoggle-text: #ededed;
-  --themetoggle-sun: #FFD600;
-  --themetoggle-ray: #FFD600;
-  --themetoggle-moon: #d2d6e0;
-  --themetoggle-moon-shadow: #7a7e8a;
-  --themetoggle-moon-border: #18181b;
-}
+/* Las variables ahora están centralizadas en globals.css */
 
 /* ThemeToggle.css: estilos exclusivos para el botón y animación de ThemeToggle */
 .theme-toggle-btn, .theme-toggle-btn * {
   color: var(--themetoggle-text) !important;
+  transition: color 0.3s, background 0.3s;
 }
 .theme-toggle-btn {
   width: 48px;
   height: 48px;
-  background: var(--footer-bg);
+  background: var(--themetoggle-bg);
   border: none;
   outline: none;
   cursor: pointer;
@@ -68,7 +52,6 @@
   top: -4px; left: -4px;
   width: 36px; height: 36px;
   border-radius: 50%;
-  /* box-shadow: 0 0 16px 8px #bfc3d122; */
   z-index: 0;
   pointer-events: none;
   animation: halo-pulse 6s infinite alternate;
@@ -83,14 +66,13 @@
   width: 28px; height: 28px;
   border-radius: 50%;
   background: var(--themetoggle-sun);
-  /* box-shadow: 0 0 12px 2px #FFD60066; */
   z-index: 1;
-  transition: background 0.5s; /* box-shadow 0.5s; */
+  transition: background 0.5s;
   animation: sun-glow 2s infinite alternate;
 }
 @keyframes sun-glow {
-  0% { /* box-shadow: 0 0 12px 2px #FFD60066, 0 0 0 0 #FFD60033; */ }
-  100% { /* box-shadow: 0 0 24px 8px #FFD60099, 0 0 8px 4px #FFD60055; */ }
+  0% { }
+  100% { }
 }
 .eclipse-ray {
   position: absolute;
@@ -135,9 +117,6 @@
   top: 0; left: 0;
   width: 100%; height: 100%;
   border-radius: 50%;
-  /* box-shadow:
-    8px 0 12px 2px #18181bcc,
-    0 0 16px 4px #bfc3d122; */
   pointer-events: none;
   z-index: 4;
 }
@@ -152,21 +131,11 @@
   height: 7px;
   border-radius: 50%;
   background: rgba(191,195,209,0.22);
-  /* box-shadow:
-    8px 4px 0 0 rgba(191,195,209,0.18),
-    12px 10px 0 0 rgba(191,195,209,0.13),
-    3px 13px 0 0 rgba(191,195,209,0.16),
-    14px 3px 0 0 rgba(191,195,209,0.10); */
   z-index: 2;
   pointer-events: none;
 }
 .dark .eclipse-moon::before {
   background: rgba(122,126,138,0.22);
-  /* box-shadow:
-    8px 4px 0 0 rgba(122,126,138,0.18),
-    12px 10px 0 0 rgba(122,126,138,0.13),
-    3px 13px 0 0 rgba(122,126,138,0.16),
-    14px 3px 0 0 rgba(122,126,138,0.10); */
 }
 
 @media (max-width: 640px) {
@@ -196,7 +165,38 @@
   .eclipse-ray {
     width: 6px !important;
     height: 1.5px !important;
-    /* Ajuste para que no sobresalga */
     transform-origin: left center !important;
   }
 }
+
+/* Optimizaciones para transiciones */
+.transitioning-theme .eclipse-sun,
+.transitioning-theme .eclipse-moon,
+.transitioning-theme .eclipse-ray,
+.transitioning-theme .eclipse-moon-halo {
+  transition-delay: 0.2s;
+}
+
+  .icon-sun-moon, .eclipse-container {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+  }
+  .eclipse-sun, .eclipse-moon, .eclipse-moon-halo {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+  }
+  .eclipse-ray {
+    width: 6px !important;
+    height: 1.5px !important;
+    /* Ajuste para que no sobresalga */
+    transform-origin: left center !important;
+  }
+
