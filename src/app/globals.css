@@ -168,36 +168,47 @@ body {
   }
 }
 @media (max-width: 640px) {
-  html, body, #__next, .app-root, .main-content, section, header, footer, .card, .main-section, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
+  html, body, #__next, .app-root, .main-content, .main-section, section, header, footer, .card, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    overflow-x: hidden !important;
     box-sizing: border-box !important;
+    overflow-x: hidden !important;
     margin: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
   }
-  * {
+  .card,
+  .locutores-section,
+  .eventos-section,
+  .contacto-section,
+  .podcasts-section,
+  .main-section {
+    width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
   }
-}
-
-/* Fuerza que todos los elementos hijos nunca se desborden horizontalmente */
-@media (max-width: 640px) {
-  * {
-    max-width: 100vw !important;
+  .main-content {
+    width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
   }
-}
-
-.main-content > section:last-child {
-  margin-bottom: 2rem !important;
 }
 
 /* =====================
@@ -524,8 +535,8 @@ header, .app-header {
   max-width: 48px;
   box-sizing: border-box;
   overflow: visible;
+  padding-right: 0.5rem;
 }
-
 @media (max-width: 640px) {
   header, .app-header {
     padding-left: 0.2rem !important;
@@ -534,6 +545,10 @@ header, .app-header {
   .theme-toggle-btn {
     min-width: 40px;
     max-width: 40px;
+    padding-right: 0.25rem !important;
+  }
+  .theme-toggle-btn {
+    padding-right: 0.7rem !important;
   }
 }
 

@@ -345,3 +345,14 @@
     padding: 0.18rem 0.4rem;
   }
 }
+
+@media (max-width: 640px) {
+  .main-content {
+    padding-top: 14rem !important;
+    padding-bottom: 5rem !important;
+    background: rgba(30,30,30,0.97);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);
+    margin-bottom: 2.5rem !important;
+  }
+}
