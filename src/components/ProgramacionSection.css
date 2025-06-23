@@ -193,10 +193,10 @@ html.dark .noticia-contenedor .noticia-titulo {
 
 @media (max-width: 640px) {
   .programacion-section {
-    padding-left: unset;
-    padding-right: unset;
-    padding: unset;
-    box-sizing: unset;
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
+    /* Elimina los unsets para permitir el padding */
+    box-sizing: border-box;
   }
   .programacion-list { gap: 0.4rem; margin: 0.5rem 0 0 0; }
   .programacion-item { padding: 0.5rem 0.3rem; min-height: 38px; font-size: 0.97rem; }
