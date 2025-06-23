@@ -19,24 +19,44 @@ html.dark {
 }
 
 .programacion-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--program-bg);
-  border-radius: 1rem;
-  border: 1.5px solid var(--program-border);
+  background: var(--section-bg) !important;
+  border-radius: 1rem !important;
+  border: 1.5px solid var(--section-border) !important;
+  padding: 2.5rem 2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
   position: relative;
-  overflow: visible;
-  z-index: auto;
-  transition: background 0.2s, border-color 0.2s;
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
-  will-change: box-shadow, background, border-color;
+  overflow: hidden !important;
+  color: var(--section-title) !important;
+  box-shadow: var(--section-shadow) !important;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s !important;
+  max-width: 90rem !important;
+  width: 100% !important;
+  margin: 0 auto 2.5rem auto !important;
+  box-sizing: border-box !important;
 }
 
-.programacion-section::before { display: none; }
-.programacion-section:hover { border-color: var(--program-border-hover); }
+@media (max-width: 1400px) {
+  .programacion-section {
+    max-width: 99vw !important;
+    padding-left: 1vw !important;
+    padding-right: 1vw !important;
+  }
+}
+@media (max-width: 900px) {
+  .programacion-section {
+    max-width: 100vw !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
+@media (max-width: 640px) {
+  .programacion-section {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+  }
+}
 
 .programacion-title {
   color: var(--primary, #ff0000);
@@ -193,10 +213,9 @@ html.dark .noticia-contenedor .noticia-titulo {
 
 @media (max-width: 640px) {
   .programacion-section {
-    padding-left: 0.8rem !important;
-    padding-right: 0.8rem !important;
-    /* Elimina los unsets para permitir el padding */
-    box-sizing: border-box;
+    padding: 1.2rem 0.3rem 1.2rem 0.3rem !important;
+    min-height: 200px;
+    max-width: 99vw;
   }
   .programacion-list { gap: 0.4rem; margin: 0.5rem 0 0 0; }
   .programacion-item { padding: 0.5rem 0.3rem; min-height: 38px; font-size: 0.97rem; }

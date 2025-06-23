@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { exportarCaches } from '@/utils/cacheWorkflowManager';
-import { USER_API_KEY } from '@/utils/cacheManager';
-import { respuestaApiEstandar } from '@/utils/cacheHelpers';
+import { exportarCaches } from '../../../../utils/cacheWorkflowManager';
+import { USER_API_KEY } from '../../../../utils/cacheManager';
+import { respuestaApiEstandar } from '../../../../utils/cacheHelpers';
 
 export async function POST(request: Request) {
   const auth = request.headers.get('authorization');

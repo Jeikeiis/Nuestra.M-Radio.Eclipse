@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { importarCaches, limpiarCacheSiExcede } from '@/utils/cacheWorkflowManager';
-import { USER_API_KEY } from '@/utils/cacheManager';
-import { respuestaApiEstandar } from '@/utils/cacheHelpers';
+import { importarCaches, limpiarCacheSiExcede } from '../../../../utils/cacheWorkflowManager';
+import { USER_API_KEY } from '../../../../utils/cacheManager';
+import { respuestaApiEstandar } from '../../../../utils/cacheHelpers';
 
 const SECCIONES = ['farandula', 'musica', 'noticias'];
 
