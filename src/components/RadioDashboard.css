@@ -357,23 +357,71 @@
 
 @media (max-width: 480px) {
   .radio-dashboard {
-    padding: 1rem 0.3rem 1.2rem 0.3rem;
-    max-width: 98vw;
+    padding: 0.7rem 0.1rem 1rem 0.1rem;
+    max-width: 70vw;
+    width: 70vw;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1.2rem;
     border-radius: 1.1rem;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  /* Márgenes laterales solo en móviles */
+  body .radio-dashboard {
+    margin-left: 15vw;
+    margin-right: 15vw;
   }
   .radio-dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
   }
   .radio-dashboard-controls-row {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.7rem;
     margin-top: 0.3rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
   .custom-slider {
-    width: 100%;
-    max-width: 98vw;
-    margin: 0.3rem 0;
+    width: 6.5rem;
+    max-width: 40vw;
+    margin: 0 0.2rem;
   }
+  .radio-dashboard-play {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .radio-dashboard-close {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.2rem;
+  }
+  .radio-dashboard-live {
+    min-width: 2.5rem;
+    height: 2.2rem;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+  .radio-dashboard-title {
+    font-size: 1rem;
+  }
+  .radio-dashboard-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mejorar contraste de iconos en todos los modos */
+.radio-dashboard-play svg,
+.radio-dashboard-close svg {
+  filter: drop-shadow(0 1px 2px #0006);
 }

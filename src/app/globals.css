@@ -311,7 +311,7 @@ html {
 @media (max-width: 640px) {
   body, .main-content {
     background: var(--background); /* Fondo blanco en modo claro y oscuro en dispositivos móviles */
-    padding-bottom: 5rem;
+    padding-bottom: 7rem;
   }
   html, body, #__next, .app-root, .main-content, .main-section, section, header, footer, .card, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
     width: 100% !important;
@@ -325,40 +325,17 @@ html {
     border-left-width: 0 !important;
     border-right-width: 0 !important;
   }
-  .card,
-  .locutores-section,
-  .eventos-section,
-  .contacto-section,
-  .podcasts-section,
-  .main-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-    border-left-width: 0 !important;
-    border-right-width: 0 !important;
-  }
-  .main-content {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+  /* EXCEPCIÓN: No forzar width ni max-width en .radio-dashboard */
+  .radio-dashboard {
+    width: auto !important;
+    max-width: none !important;
+    margin-left: unset !important;
+    margin-right: unset !important;
+    padding-left: unset !important;
+    padding-right: unset !important;
   }
 }
 
-/* =====================
-   6. Componentes: Secciones y Tarjetas
-   ===================== */
 .card,
 .locutores-section,
 .eventos-section,

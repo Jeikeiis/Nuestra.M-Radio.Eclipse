@@ -98,11 +98,13 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
           className="radio-dashboard-close"
           aria-label="Minimizar reproductor"
         >
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+          {/* Icono close siempre blanco y visible */}
+          <svg width="28" height="28" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="12" fill="#ff4d4f" />
             <path
-              d="M18 6L6 18M6 6l12 12"
-              stroke="currentColor"
-              strokeWidth="2"
+              d="M16 8L8 16M8 8l8 8"
+              stroke="#fff"
+              strokeWidth="2.2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -116,14 +118,31 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
             className="radio-dashboard-play"
             aria-label={playing ? "Pausar" : "Reproducir"}
           >
+            {/* Iconos play/pause siempre blancos y claros */}
             {playing ? (
-              <svg width="22" height="22" fill="none" viewBox="0 0 20 20">
-                <rect x="4" y="4" width="4" height="12" fill="#fff" />
-                <rect x="12" y="4" width="4" height="12" fill="#fff" />
+              <svg width="28" height="28" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="12" fill="#ff4d4f" />
+                <rect
+                  x="8"
+                  y="7"
+                  width="3.5"
+                  height="10"
+                  rx="1.2"
+                  fill="#fff"
+                />
+                <rect
+                  x="12.5"
+                  y="7"
+                  width="3.5"
+                  height="10"
+                  rx="1.2"
+                  fill="#fff"
+                />
               </svg>
             ) : (
-              <svg width="22" height="22" fill="none" viewBox="0 0 20 20">
-                <polygon points="5,4 15,10 5,16" fill="#fff" />
+              <svg width="28" height="28" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="12" fill="#ff4d4f" />
+                <polygon points="9,7 18,12 9,17" fill="#fff" />
               </svg>
             )}
           </button>
@@ -136,7 +155,12 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
             onChange={handleVolumeChange}
             className="custom-slider"
             aria-label="Volumen"
-            style={{ width: "8rem", maxWidth: 120, paddingRight: 9, paddingLeft: 9 }}
+            style={{
+              width: "8rem",
+              maxWidth: 120,
+              paddingRight: 9,
+              paddingLeft: 9,
+            }}
           />
           <button
             onClick={onSyncLive}
@@ -148,9 +172,7 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
             <span className="leading-none">Vivo</span>
           </button>
         </div>
-        {error && (
-          <span className="radio-dashboard-error">Error de señal</span>
-        )}
+        {error && <span className="radio-dashboard-error">Error de señal</span>}
       </div>
     </section>
   );
