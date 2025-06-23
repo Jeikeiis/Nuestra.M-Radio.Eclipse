@@ -9,40 +9,55 @@
   transition: color 0.3s, background 0.3s;
 }
 .theme-toggle-btn {
-  width: 48px;
-  height: 48px;
-  background: var(--themetoggle-bg);
-  border: none;
-  outline: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0 !important;
+  background: var(--themetoggle-bg, #e53935);
+  border: none; /* Quitar borde */
+  outline: none;
   border-radius: 50%;
-  transition: background 0.3s;
-  padding: 0;
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 .theme-toggle-btn:hover {
-  background: rgba(253, 122, 0, 0.08);
+  background: var(--themetoggle-bg-hover, #b71c1c);
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.13);
 }
-.icon-sun-moon, .eclipse-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  display: block;
-  pointer-events: none;
+.theme-toggle-btn > * {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+.icon-sun-moon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0;
 }
 .eclipse-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
   position: relative;
-  width: 28px;
-  height: 28px;
-  display: block;
-  animation: sun-spin 18s linear infinite;
+  margin: auto;
+  /* animation: sun-spin 18s linear infinite;  Quitar giro del sol */
 }
 @keyframes sun-spin {
   100% { transform: rotate(360deg); }
@@ -98,7 +113,7 @@
   width: 28px; height: 28px;
   border-radius: 50%;
   background: radial-gradient(circle at 60% 40%, var(--themetoggle-moon) 55%, var(--themetoggle-moon-shadow) 70%, var(--themetoggle-moon-border) 100%);
-  border: 1.5px solid var(--themetoggle-moon-border);
+  /* border: 1.5px solid var(--themetoggle-moon-border);  Quitar borde */
   z-index: 3;
   /* Ahora la luna se mueve más lejos en modo sol */
   transform: translate(12px, 0) scale(0.9);
@@ -107,7 +122,7 @@
 }
 .dark .eclipse-moon {
   background: radial-gradient(circle at 60% 40%, var(--themetoggle-moon) 45%, var(--themetoggle-moon-shadow) 70%, var(--themetoggle-moon-border) 100%);
-  border: 1.5px solid var(--themetoggle-moon-border);
+  /* border: 1.5px solid var(--themetoggle-moon-border);  Quitar borde */
   /* Centrada en modo oscuro */
   transform: translate(0, 0) scale(1);
 }
@@ -176,27 +191,40 @@
 .transitioning-theme .eclipse-moon-halo {
   transition-delay: 0.2s;
 }
-
-  .icon-sun-moon, .eclipse-container {
-    width: 22px !important;
-    height: 22px !important;
-    min-width: 22px !important;
-    min-height: 22px !important;
-    max-width: 22px !important;
-    max-height: 22px !important;
-  }
-  .eclipse-sun, .eclipse-moon, .eclipse-moon-halo {
-    width: 22px !important;
-    height: 22px !important;
-    min-width: 22px !important;
-    min-height: 22px !important;
-    max-width: 22px !important;
-    max-height: 22px !important;
-  }
-  .eclipse-ray {
-    width: 6px !important;
-    height: 1.5px !important;
-    /* Ajuste para que no sobresalga */
-    transform-origin: left center !important;
-  }
+.theme-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.theme-toggle-sun {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.theme-toggle-moon-eclipse {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+  /* La transición se maneja inline para usar darkMode */
+}
+.theme-toggle-moon-eclipse svg {
+  width: 80%;
+  height: 80%;
+  display: block;
+}
 

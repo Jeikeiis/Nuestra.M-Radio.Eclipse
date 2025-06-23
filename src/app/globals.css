@@ -311,6 +311,7 @@ html {
 @media (max-width: 640px) {
   body, .main-content {
     background: var(--background); /* Fondo blanco en modo claro y oscuro en dispositivos móviles */
+    padding-bottom: 5rem;
   }
   html, body, #__next, .app-root, .main-content, .main-section, section, header, footer, .card, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
     width: 100% !important;
@@ -858,13 +859,28 @@ header, .app-header {
 }
 
 .theme-toggle-btn {
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 48px;
   max-width: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  width: 48px;
+  height: 48px;
+  padding: 0 !important;
+  background: var(--themetoggle-bg);
+  border-radius: 50%;
   box-sizing: border-box;
   overflow: visible;
-  padding-right: 0.5rem;
   transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn svg, .theme-toggle-btn > * {
+  display: block;
+  margin: auto;
+  width: 60%;
+  height: 60%;
 }
 
 @media (max-width: 640px) {
@@ -876,7 +892,10 @@ header, .app-header {
   .theme-toggle-btn {
     min-width: 40px;
     max-width: 40px;
-    padding-right: 0.7rem !important;
+    min-height: 40px;
+    max-height: 40px;
+    width: 40px;
+    height: 40px;
   }
 }
 
