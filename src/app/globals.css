@@ -299,6 +299,11 @@ html {
     max-width: 100vw;
   }
 }
+@media (min-width: 900px) {
+  .main-content {
+    padding-top: 16rem; /* Incrementado desde 14rem */
+  }
+}
 @media (max-width: 640px) {
   html, body, #__next, .app-root, .main-content, .main-section, section, header, footer, .card, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
     width: 100% !important;
@@ -607,7 +612,13 @@ button:active::before {
   .app-footer { padding: 1.5rem 0.5rem; }
 }
 @media (max-width: 640px) {
-  .app-footer { padding: 1rem 0.5rem; }
+  .app-footer {
+    text-align: center; /* Centrar contenido */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* =====================
