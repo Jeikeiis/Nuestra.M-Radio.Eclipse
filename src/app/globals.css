@@ -177,6 +177,10 @@ body, html {
   padding-bottom: var(--space-3xl);
 }
 
+body, .main-content {
+  background: var(--background); /* Fondo blanco en modo claro y oscuro en modo oscuro */
+}
+
 /* Mejoras de rendimiento */
 .card, .section, .main-section {
   contain: layout style paint;
@@ -305,6 +309,9 @@ html {
   }
 }
 @media (max-width: 640px) {
+  body, .main-content {
+    background: var(--background); /* Fondo blanco en modo claro y oscuro en dispositivos móviles */
+  }
   html, body, #__next, .app-root, .main-content, .main-section, section, header, footer, .card, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
     width: 100% !important;
     min-width: 0 !important;
@@ -892,4 +899,65 @@ header, .app-header {
     box-shadow var(--transition-theme),
     color var(--transition-theme),
     transform var(--transition-fast);
+}
+
+.main-content, .locutores-section, .clasicos-section, .programacion-section {
+  background: var(--background); /* Fondo blanco en modo claro y oscuro en modo oscuro */
+}
+
+.dark .main-content, .dark .locutores-section, .dark .clasicos-section, .dark .programacion-section {
+  background: var(--background); /* Fondo oscuro ya definido */
+}
+
+/* =====================
+   1. Variables Globales y Temas Optimizados - Modo Claro
+   ===================== */
+:root {
+  --background: #fff;
+  --foreground: #18181b;
+  --primary: #ff5252;
+  --primary-dark: #b71c1c;
+  --primary-light: #ff6f60;
+  --primary-alpha: rgba(255, 82, 82, 0.1);
+
+  --section-bg: linear-gradient(135deg, #fff 0%, #f7f7f7 100%);
+  --section-bg-contrast: #f7f7f7;
+  --section-title: #b71c1c;
+  --section-shadow: 0 8px 32px 0 rgba(0,0,0,0.08);
+  --section-border: #ffe0e0;
+
+  /* Variables para ThemeToggle específicas del tema claro */
+  --themetoggle-bg: transparent;
+  --themetoggle-text: #18181b;
+  --themetoggle-sun: #FFD600;
+  --themetoggle-ray: #FFD600;
+  --themetoggle-moon: #d2d6e0;
+  --themetoggle-moon-shadow: #7a7e8a;
+  --themetoggle-moon-border: #ededed;
+
+  /* Variables semánticas actualizadas para tema claro */
+  --appheader-bg: #fff;
+  --appheader-text: #18181b;
+  --footer-bg: #f7f7f7;
+  --footer-text: #18181b;
+  --footer-link: #e9be6a;
+  --footer-link-dark: #bfa14a;
+  --footer-border: #e0e0e0;
+  --footer-card-bg: #fff;
+  --footer-muted: #888;
+}
+
+@media (max-width: 640px) {
+  .main-section,
+  .card,
+  .locutores-section,
+  .eventos-section,
+  .contacto-section,
+  .podcasts-section {
+    background: var(--section-bg) !important;
+    /* Asegura fondo claro en modo claro */
+  }
+  body, .main-content {
+    background: var(--background) !important;
+  }
 }
