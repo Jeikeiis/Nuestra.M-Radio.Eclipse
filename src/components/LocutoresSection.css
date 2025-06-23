@@ -25,9 +25,9 @@
 }
 
 .locutores-profile {
-  background: rgba(255,255,255,0.06);
+  background: var(--section-bg-contrast, rgba(255,255,255,0.06));
   border-radius: 1rem;
-  border: 2px solid var(--color-accent-dark, #b71c1c);
+  border: 2px solid var(--section-border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,11 +37,11 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  color: var(--color-foreground);
+  color: var(--foreground) !important;
 }
 .locutores-profile:hover {
-  border-color: var(--primary, #ff0000);
-  background: rgba(255,255,255,0.12);
+  border-color: var(--primary);
+  background: var(--section-bg);
 }
 
 /* Imagen de locutor */
@@ -62,7 +62,7 @@
 .locutores-name {
   font-size: 1.08rem;
   font-weight: 600;
-  color: var(--primary, #ff0000);
+  color: var(--section-title) !important;
   text-align: center;
   letter-spacing: 0.01em;
   opacity: 0.93;
@@ -70,13 +70,29 @@
 }
 .locutores-programa {
   font-size: 1.01rem;
-  color: var(--color-foreground);
+  color: var(--foreground) !important;
   text-align: center;
   opacity: 0.85;
   margin-bottom: 0.1rem;
 }
+.section-desc-main, .clasicos-desc-main, .locutores-desc-main {
+  font-size: 1.1rem;
+  color: var(--foreground);
+  text-align: left;
+  margin-bottom: 2rem;
+  max-width: 36rem;
+  line-height: 1.6;
+  opacity: 0.92;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal !important;
+  word-break: break-word;
+}
 
 .locutores-section {
+  background: var(--section-bg) !important;
+  color: var(--foreground) !important;
+  border: 2.5px solid var(--section-border);
   overflow: visible !important;
 }
 .locutores-title, .locutores-desc-main {

@@ -4,8 +4,8 @@
   border: 2px solid var(--section-border);
   border-radius: 16px;
   background: var(--section-bg);
-  text-align: center;
   color: var(--foreground);
+  text-align: center;
   box-shadow: var(--section-shadow);
   max-width: 480px;
   margin-left: auto;
@@ -30,7 +30,7 @@
 
 .clasicos-desc-main {
   font-size: 1.1rem;
-  color: var(--primary);
+  color: var(--foreground);
   text-align: left;
   margin-bottom: 2rem;
   max-width: 36rem;
@@ -38,6 +38,8 @@
   opacity: 0.92;
   margin-left: auto;
   margin-right: auto;
+  white-space: normal !important;
+  word-break: break-word;
 }
 
 @media (max-width: 640px) {

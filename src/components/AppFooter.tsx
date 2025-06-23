@@ -6,18 +6,6 @@ export default function AppFooter() {
   return (
     <footer className="app-footer">
       <div className="footer-content">
-        <div className="footer-logo">
-          <Image
-            src="/RadioEclipse2.0.webp"
-            alt="Radio Eclipse 106.3"
-            width={160}
-            height={160}
-            priority
-          />
-        </div>
-        <div className="footer-sponsors">
-          <SponsorsCarousel />
-        </div>
         <div className="footer-credits">
           <span>
             © {new Date().getFullYear()}{" "}
@@ -34,6 +22,18 @@ export default function AppFooter() {
             Hecho por Jeikeiis con{" "}
             <span className="footer-heart">♥</span> y Next.js
           </span>
+        </div>
+        <div className="footer-sponsors">
+          <SponsorsCarousel />
+        </div>
+        <div className="footer-logo">
+          <Image
+            src="/RadioEclipse2.0.webp"
+            alt="Radio Eclipse 106.3"
+            width={160}
+            height={160}
+            priority
+          />
         </div>
       </div>
     </footer>

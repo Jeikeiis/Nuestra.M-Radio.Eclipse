@@ -5,10 +5,11 @@
   justify-content: center;
   margin: 0 auto 2.5rem auto;
   padding: 1.2rem 1.5rem 2.5rem 1.5rem; /* Menos padding arriba, igual abajo */
-  background: rgba(35, 39, 47, 0.92);
+  background: var(--section-bg) !important;
+  color: var(--foreground) !important;
+  border: 2.5px solid var(--section-border);
   border-radius: 1.5rem;
   /* box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(255,0,0,0.04); */
-  border: 2.5px solid var(--color-accent-dark, #b71c1c);
   backdrop-filter: blur(2px);
   position: relative;
   overflow: hidden;
@@ -32,7 +33,7 @@
 .eventos-title {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--primary, #ff0000) !important;
+  color: var(--section-title) !important;
   margin-bottom: 0.7rem;
   text-align: center;
   letter-spacing: 0.03em;
@@ -41,7 +42,7 @@
 
 .eventos-desc-main {
   font-size: 1.1rem;
-  color: var(--color-foreground, #1a1a1a) !important;
+  color: var(--foreground) !important;
   text-align: left;
   margin-bottom: 2rem;
   max-width: 36rem;

@@ -1,21 +1,28 @@
 :root {
-  --program-bg: #f9fafb;
-  --program-item-bg: #fff;
-  --program-border: #b71c1c;
-  --program-border-hover: #ff0000;
-  --program-title: #23272f;
-  --program-text: #23272f;
-  --program-modal-bg: #fff;
+  /* Paleta base */
+  --background: #fff;
+  --foreground: #171717;
+  --primary: #e53935;
+  --primary-dark: #b71c1c;
+  --section-bg: linear-gradient(120deg, #fff0f0cc 0%, #ffeaea99 60%, #ffe3e399 100%);
+  --section-bg-contrast: #fff6f6cc;
+  --section-title: #e53935;
+  --section-shadow: 0 6px 32px 0 rgba(255,0,0,0.07);
+  --section-border: #ff6f60;
+  /* Otras variables globales */
 }
 
-html.dark {
-  --program-bg: #23272f;
-  --program-item-bg: #262b34;
-  --program-border: #b71c1c;
-  --program-border-hover: #ff0000;
-  --program-title: #fff;
-  --program-text: #fff;
-  --program-modal-bg: #1e2026;
+.dark, html.dark {
+  --background: #18181b;
+  --foreground: #ededed;
+  --primary: #ff5252;
+  --primary-dark: #b71c1c;
+  --section-bg: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
+  --section-bg-contrast: #2a0000;
+  --section-title: #ff5252;
+  --section-shadow: 0 8px 32px 0 rgba(255,0,0,0.18), 0 1.5px 8px 0 rgba(255,0,0,0.10);
+  --section-border: #ff5252;
+  /* Otras variables globales */
 }
 
 .programacion-section {
@@ -28,7 +35,7 @@ html.dark {
   align-items: center !important;
   position: relative;
   overflow: hidden !important;
-  color: var(--section-title) !important;
+  color: var(--foreground) !important;
   box-shadow: var(--section-shadow) !important;
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s !important;
   max-width: 90rem !important;
@@ -59,7 +66,7 @@ html.dark {
 }
 
 .programacion-title {
-  color: var(--primary, #ff0000);
+  color: var(--section-title);
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: 0.03em;
@@ -117,7 +124,7 @@ html.dark {
 }
 
 .programacion-text {
-  color: var(--program-text);
+  color: var(--foreground) !important;
   font-size: 1.08rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -152,7 +159,7 @@ html.dark {
 
 .noticia-titulo {
   font-weight: 800;
-  color: var(--program-title);
+  color: var(--section-title);
   font-size: 1.23rem;
   margin-bottom: 0.08rem;
   text-decoration: none;
@@ -166,6 +173,7 @@ html.dark {
 .noticia-titulo-text { display: inline; }
 
 .noticia-meta {
+  color: var(--foreground) !important;
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
@@ -175,12 +183,23 @@ html.dark {
   margin-bottom: 0.1rem;
 }
 
-.noticia-fuente { color: #b71c1c; font-weight: 600; display: flex; align-items: center; gap: 0.2rem; }
-.noticia-fecha { color: #888; display: flex; align-items: center; gap: 0.2rem; }
+.noticia-fuente {
+  color: var(--primary, #b71c1c) !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.noticia-fecha {
+  color: var(--foreground) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
 
 .noticia-description {
   background: var(--program-item-bg, #fff);
-  color: var(--program-text, #23272f);
+  color: var(--foreground) !important;
   border: none;
   border-radius: 0.7em;
   padding: 1em;
@@ -198,11 +217,11 @@ html.dark {
 /* Noticias y enlaces adaptativos solo para sección programación */
 .noticia-contenedor a,
 .noticia-contenedor .noticia-titulo {
-  color: var(--program-title, var(--section-title, #fff)) !important;
+  color: var(--section-title) !important;
 }
 html.dark .noticia-contenedor a,
 html.dark .noticia-contenedor .noticia-titulo {
-  color: #fff !important;
+  color: var(--section-title) !important;
 }
 
 /* Animación sutil solo para programación */
@@ -329,7 +348,7 @@ html.dark .noticia-contenedor .noticia-titulo {
   border-radius: 1.2rem;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
   border: 1.5px solid var(--program-border, #b71c1c);
-  color: var(--program-text, #23272f);
+  color: var(--foreground);
   padding: 2.5rem 2rem 2rem 2rem;
   transition: box-shadow 0.2s, background 0.2s, color 0.2s;
   max-width: 95vw;
@@ -359,7 +378,7 @@ html.dark .noticia-contenedor .noticia-titulo {
 
 html.dark .programacion-modal-content {
   background: var(--program-modal-bg, #1e2026);
-  color: var(--program-text, #fff);
+  color: var(--foreground);
   border: 1.5px solid var(--program-border, #b71c1c);
 }
 html.dark .noticia-contenedor {
@@ -368,7 +387,7 @@ html.dark .noticia-contenedor {
 }
 html.dark .noticia-description {
   background: var(--program-item-bg, #262b34);
-  color: var(--program-text, #fff);
+  color: var(--foreground);
 }
 
 @keyframes modalIn {

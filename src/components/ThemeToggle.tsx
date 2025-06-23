@@ -25,9 +25,8 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className={`theme-toggle-btn px-4 py-2 rounded font-semibold transition-all
-      bg-transparent hover:bg-gray-100 dark:bg-transparent dark:hover:bg-orange-900 w-[48px] h-[48px] flex items-center justify-center shadow-none`}
-      onClick={() => setDarkMode((v: boolean) => !v)}
+      className="theme-toggle-btn"
+      onClick={() => setDarkMode(!darkMode)}
       aria-label="Cambiar modo claro/oscuro"
     >
       <span className="icon-sun-moon" aria-hidden="true">
@@ -42,7 +41,7 @@ export default function ThemeToggle() {
               key={i}
               className="eclipse-ray"
               style={{
-                transform: `rotate(${i * 45}deg) translate(12px, -1px)`,
+                transform: `rotate(${i * 45}deg) translate(9px, -1px)`,
               }}
             />
           ))}

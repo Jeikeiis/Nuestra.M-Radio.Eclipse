@@ -61,7 +61,8 @@ html {
 *, *::before, *::after { box-sizing: inherit; }
 body, html {
   margin: 0; padding: 0;
-  width: 100%; max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   overflow-x: hidden !important;
   padding-bottom: 110px;
@@ -167,27 +168,21 @@ body {
   }
 }
 @media (max-width: 640px) {
-  html, body {
+  html, body, #__next, .app-root, .main-content, section, header, footer, .card, .main-section, .locutores-section, .eventos-section, .contacto-section, .podcasts-section {
     width: 100% !important;
     min-width: 0 !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     overflow-x: hidden !important;
-  }
-  .main-content,
-  .card,
-  .programacion-section,
-  .locutores-section,
-  .eventos-section,
-  .contacto-section,
-  .podcasts-section,
-  .main-section {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100vw !important;
     box-sizing: border-box !important;
-    overflow-x: hidden !important;
+    margin: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+  }
+  * {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
 }
 
@@ -281,8 +276,22 @@ body {
   .contacto-section,
   .podcasts-section,
   .main-section {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+  .section-desc-main {
+    max-width: 98vw;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 }
 
@@ -316,12 +325,26 @@ body {
   text-align: center;
 }
 
+.section-desc-main {
+  font-size: 1.1rem;
+  color: var(--foreground);
+  text-align: left;
+  margin-bottom: 2rem;
+  max-width: 36rem;
+  line-height: 1.6;
+  opacity: 0.92;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal !important;
+  word-break: break-word;
+}
+
 .locutores-desc-main,
 .eventos-desc-main,
 .contacto-desc-main,
 .clasicos-desc-main {
   font-size: 1.1rem;
-  color: var(--color-foreground, var(--foreground));
+  color: var(--foreground);
   text-align: left;
   margin-bottom: 2rem;
   max-width: 36rem;
@@ -481,6 +504,37 @@ html.dark .noticia-contenedor .noticia-titulo {
   clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
+}
+header, .app-header {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.theme-toggle-btn {
+  flex-shrink: 0;
+  min-width: 48px;
+  max-width: 48px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+@media (max-width: 640px) {
+  header, .app-header {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+  .theme-toggle-btn {
+    min-width: 40px;
+    max-width: 40px;
+  }
 }
 
 
