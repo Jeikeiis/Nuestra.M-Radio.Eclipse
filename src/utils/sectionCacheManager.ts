@@ -198,20 +198,14 @@ export function limpiarCacheSiExcede(seccion: string, maxItems: number = CONFIG.
 
 export function procesarNoticiasApi(
   noticiasApi: NewsDataArticle[], 
-  cacheExistente: Dato[] = []
+  cacheExistente: Dato[] = [],
+  seccion: string = 'noticias'
 ): Dato[] {
-  // Filtrar y validar artículos de la API
-  const noticiasValidas = noticiasApi.filter(noticia => 
-    noticia &&
-    noticia.title &&
-    noticia.link &&
-    typeof noticia.title === 'string' &&
-    noticia.title.trim().length >= CONFIG.MIN_ARTICLE_TITLE_LENGTH &&
-    noticia.link.startsWith('http')
-  );
+  // Filtrar y validar artículos de la API con logging
+  const noticiasValidas = filtrarNoticiasValidas(noticiasApi, seccion);
 
   // Deduplicar combinando con caché existente
-  return deduplicarCombinado(
+  const deduplicadas = deduplicarCombinado(
     noticiasValidas,
     cacheExistente,
     ['title', 'link'],
@@ -219,6 +213,14 @@ export function procesarNoticiasApi(
     CONFIG.MAX_CACHE_ITEMS,
     ['description', 'image_url', 'source_id', 'content']
   );
+
+  if (deduplicadas.length < noticiasValidas.length) {
+    logger.warn(seccion, 'Se detectaron y eliminaron duplicados', {
+      antes: noticiasValidas.length,
+      despues: deduplicadas.length
+    });
+  }
+  return deduplicadas;
 }
 
 export function respuestaApiEstandar(params: {
@@ -269,6 +271,7 @@ export function respuestaApiEstandar(params: {
 // --- WORKFLOWS DE IMPORTACIÓN/EXPORTACIÓN ---
 
 export async function exportarCaches(): Promise<Record<string, CacheData | null>> {
+  logger.info('global', '[INICIO] Exportación de todos los cachés');
   const resultado: Record<string, CacheData | null> = {};
   
   for (const seccion of SECCIONES) {
@@ -283,11 +286,12 @@ export async function exportarCaches(): Promise<Record<string, CacheData | null>
       resultado[seccion] = null;
     }
   }
-  
+  logger.info('global', '[FIN] Exportación de cachés');
   return resultado;
 }
 
 export async function importarCaches(data: Record<string, any>): Promise<boolean> {
+  logger.info('global', '[INICIO] Importación de cachés');
   let success = true;
   
   for (const seccion of SECCIONES) {
@@ -314,7 +318,7 @@ export async function importarCaches(data: Record<string, any>): Promise<boolean
       success = false;
     }
   }
-  
+  logger.info('global', '[FIN] Importación de cachés');
   return success;
 }
 
@@ -394,7 +398,7 @@ export function createSectionApiHandler(config: SectionConfig) {
         
       } catch (error) {
         lastError = error as Error;
-        logger.warn(seccion, `Intento ${attempt + 1} falló`, undefined, { 
+        logger.warn(seccion, `Intento ${attempt + 1} falló`, { 
           error: lastError.message 
         });
       }
@@ -430,14 +434,13 @@ export function createSectionApiHandler(config: SectionConfig) {
 
     cache.updating = true;
     cache.lastUpdateAttempt = now;
+    logger.info(seccion, '[INICIO] Actualización de caché');
 
     try {
-      logger.info(seccion, 'Iniciando actualización de caché');
-      
       const result = await fetchWithRetry();
       
       if (result.noticias.length > 0) {
-        const noticiasValidas = procesarNoticiasApi(result.noticias, cache.noticias);
+        const noticiasValidas = procesarNoticiasApi(result.noticias, cache.noticias, seccion);
         
         cache.noticias = noticiasValidas;
         cache.metadata.timestamp = now;
@@ -450,7 +453,7 @@ export function createSectionApiHandler(config: SectionConfig) {
           limpiarCacheSiExcede(seccion);
         });
 
-        logger.info(seccion, 'Caché actualizado exitosamente', {
+        logger.info(seccion, '[FIN] Caché actualizado exitosamente', {
           newItemCount: noticiasValidas.length,
           apiItemCount: result.noticias.length,
           totalApiCalls: cache.metadata.totalApiCalls
@@ -552,6 +555,37 @@ export function createSectionApiHandler(config: SectionConfig) {
   }
 
   return { GET };
+}
+
+// --- HELPERS INTERNOS MEJORADOS ---
+
+/**
+ * Pagina un array de noticias de forma segura.
+ * @param items Noticias a paginar
+ * @param page Página solicitada (1-indexed)
+ * @param pageSize Tamaño de página
+ * @returns Noticias paginadas
+ */
+function paginarNoticias<T>(items: T[], page: number, pageSize: number): T[] {
+  if (!Array.isArray(items) || items.length === 0) return [];
+  const realMaxPages = Math.max(1, Math.ceil(items.length / pageSize));
+  const safePage = Math.min(page, realMaxPages);
+  const start = (safePage - 1) * pageSize;
+  const end = Math.min(start + pageSize, items.length);
+  return items.slice(start, end);
+}
+
+/**
+ * Valida y filtra noticias, logueando las descartadas.
+ */
+function filtrarNoticiasValidas(noticiasApi: NewsDataArticle[], seccion: string): NewsDataArticle[] {
+  return noticiasApi.filter(noticia => {
+    const valida = noticia && noticia.title && noticia.link && typeof noticia.title === 'string' && noticia.title.trim().length >= CONFIG.MIN_ARTICLE_TITLE_LENGTH && noticia.link.startsWith('http');
+    if (!valida) {
+      logger.warn(seccion, 'Noticia descartada por formato inválido', { noticia });
+    }
+    return valida;
+  });
 }
 
 // Re-exportar utilidades para compatibilidad
