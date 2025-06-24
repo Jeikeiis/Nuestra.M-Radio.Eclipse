@@ -19,7 +19,7 @@ const CONFIG = {
 } as const;
 
 // Crear handler con configuración específica de farándula
-const { GET } = createSectionApiHandler({
+const handler = createSectionApiHandler({
   seccion: "farandula",
   cacheDurationMs: CONFIG.CACHE_DURATION_MS,
   cooldownMs: CONFIG.COOLDOWN_MS,
@@ -32,4 +32,4 @@ const { GET } = createSectionApiHandler({
   retryDelayMs: CONFIG.RETRY_DELAY_MS,
 });
 
-export { GET };
+export const GET = handler.GET;
