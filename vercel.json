@@ -1,19 +1,8 @@
 {
-  "cron": [
+  "crons": [
     {
-      "path": "/api/noticias?force=1",
-      "schedule": "*/15 * * * *",
-      "enabled": true
-    },
-    {
-      "path": "/api/musica?force=1",
-      "schedule": "*/15 * * * *",
-      "enabled": true
-    },
-    {
-      "path": "/api/farandula?force=1",
-      "schedule": "*/15 * * * *",
-      "enabled": true
+      "path": "/api/cron",
+      "schedule": "*/15 * * * *"
     }
   ]
 }
