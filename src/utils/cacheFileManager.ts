@@ -3,7 +3,11 @@
 import fs from 'fs';
 import path from 'path';
 
-const CACHE_DIR = path.resolve(process.cwd(), 'mi-aplicacion-next');
+const CACHE_DIR = path.resolve(process.cwd(), 'cache'); // Mejor usar 'cache' o '.next/cache'
+
+if (!fs.existsSync(CACHE_DIR)) {
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+}
 
 export function getCacheFilePath(seccion: string) {
   return path.join(CACHE_DIR, `${seccion}-cache.json`);

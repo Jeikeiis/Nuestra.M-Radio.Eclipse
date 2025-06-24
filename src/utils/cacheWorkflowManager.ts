@@ -24,11 +24,17 @@ export async function exportarCaches() {
 }
 
 export async function importarCaches(data: Record<string, any>) {
+  let success = true;
   for (const seccion of SECCIONES) {
-    if (data[seccion] && Array.isArray(data[seccion].noticias)) {
-      saveCache(seccion, data[seccion].noticias);
+    try {
+      if (data[seccion] && Array.isArray(data[seccion].noticias)) {
+        saveCache(seccion, data[seccion].noticias);
+      }
+    } catch {
+      success = false;
     }
   }
+  return success;
 }
 
 
