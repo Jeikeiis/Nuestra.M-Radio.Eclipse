@@ -128,7 +128,7 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
                   width="3.5"
                   height="10"
                   rx="1.2"
-                  fill="#fff"
+                  /* fill eliminado para que lo controle el CSS */
                 />
                 <rect
                   x="12.5"
@@ -136,13 +136,13 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
                   width="3.5"
                   height="10"
                   rx="1.2"
-                  fill="#fff"
+                  /* fill eliminado para que lo controle el CSS */
                 />
               </svg>
             ) : (
               <svg width="28" height="28" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="12" fill="#ff4d4f" />
-                <polygon points="9,7 18,12 9,17" fill="#fff" />
+                <polygon points="9,7 18,12 9,17" /* fill eliminado para que lo controle el CSS */ />
               </svg>
             )}
           </button>
@@ -153,14 +153,8 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
             step={0.01}
             value={volume}
             onChange={handleVolumeChange}
-            className="custom-slider"
+            className="custom-slider radio-dashboard-volume"
             aria-label="Volumen"
-            style={{
-              width: "8rem",
-              maxWidth: 120,
-              paddingRight: 9,
-              paddingLeft: 9,
-            }}
           />
           <button
             onClick={onSyncLive}

@@ -1,92 +1,90 @@
 /* Footer moderno, simple y responsivo */
 
+/* Variables específicas del footer migradas desde globals.css */
+:root {
+  --footer-bg: var(--background);
+  --footer-text: var(--foreground);
+  --footer-link: #a37c27;
+  --footer-link-dark: #c29436;
+  --footer-border: #eaeaea;
+  --footer-card-bg: #fafafa;
+  --footer-muted: #555555;
+}
+
+.dark, html.dark {
+  --footer-bg: #18181b;
+  --footer-text: #ededed;
+  --footer-link: #e9be6a;
+  --footer-border: #2a2a30;
+  --footer-card-bg: #202026;
+  --footer-muted: #b0b0b0;
+}
+
 /* Ajuste de colores para el footer */
 .app-footer {
   background: var(--footer-bg);
   color: var(--footer-text);
 }
 
-:root {
-  --footer-bg: var(--background);
-  --footer-text: var(--foreground);
-}
-
-.dark {
-  --footer-bg: var(--background);
-  --footer-text: #ffffff; /* Texto blanco en modo oscuro */
-}
-
 .app-footer {
   width: 100vw;
   background: var(--footer-bg);
   color: var(--footer-text);
-  padding: 0.3rem 0.5rem 0.2rem 0.5rem; /* reducido */
+  padding: 0.3rem 1rem 0.2rem 1rem;
   border-top: 1.5px solid var(--footer-border);
-  display: flex;
-  flex-direction: column;
+  display: grid; /* Usar grid para todos los tamaños */
+  grid-template-columns: auto 1fr auto; /* Tres columnas: logo, carrusel, créditos */
   align-items: center;
+  justify-content: space-between;
   position: fixed;
   left: 0; right: 0; bottom: 0;
-  min-height: 38px; /* reducido */
+  min-height: 40px;
   margin: 0;
   overflow-x: hidden;
   font-family: 'Montserrat', 'Inter', Arial, sans-serif;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
   z-index: 100;
+  gap: 1rem;
 }
 
 .footer-content {
+  display: contents; /* Permitir que los hijos se alineen según el grid */
   width: 100%;
   max-width: 1200px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem; /* reducido */
   margin: 0 auto;
-  padding: 0 0;
-  flex-wrap: wrap;
 }
 
 .footer-logo {
   display: flex;
-  align-items: flex-end;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
+
 .footer-logo img {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
+  width: 140px;
+  height: 140px;
+  min-width: 100px;
+  min-height: 100px;
+  object-fit: contain;
   object-position: center;
   border-radius: 0.5rem;
   background: transparent;
   border: none;
   display: block;
-  max-width: 90vw;
-  height: auto;
-  min-width: 60px;
-  max-height: 90px;
-  object-fit: contain;
-  object-position: center;
-}
-@media (max-width: 600px) {
-  .footer-logo img {
-    width: 70px;
-    height: auto;
-    max-width: 40vw;
-    max-height: 70px;
-    margin-left: 0.5rem;
-  }
+  max-height: 140px;
+  margin: 0;
 }
 
 .footer-sponsors {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 0 0.5rem;
+  justify-content: center;
+  margin: 0;
   padding: 0;
   min-width: 0;
   background: none;
+  overflow: hidden;
 }
 
 .sponsors-carousel-outer {
@@ -94,7 +92,7 @@
   align-items: center;
   justify-content: center;
   width: auto;
-  max-width: 100vw;
+  max-width: 60vw;
   min-width: 0;
   overflow: hidden;
   padding: 0;
@@ -107,7 +105,7 @@
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
-  font-size: 0.8rem; /* reducido */
+  font-size: 0.75rem;
   gap: 0.05rem;
   opacity: 0.92;
   color: var(--footer-text) !important;
@@ -116,10 +114,11 @@
 .footer-link {
   color: var(--footer-link);
   text-decoration: underline;
-  font-size: 0.8rem; /* reducido */
+  font-size: 0.75rem;
   font-weight: 600;
   transition: color 0.2s, background 0.2s;
 }
+
 .footer-link:hover {
   color: var(--footer-link-dark);
   background: var(--footer-link);
@@ -127,7 +126,7 @@
 }
 
 .footer-madeby {
-  font-size: 0.7rem; /* reducido */
+  font-size: 0.7rem;
   opacity: 0.7;
   margin-top: 0;
   color: var(--footer-text) !important;
@@ -140,166 +139,196 @@
 }
 
 .footer-sponsor-img {
-  width: 32px; /* reducido */
-  height: 32px; /* reducido */
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   object-position: center;
   background: #fff;
   border-radius: 0.5rem;
   border: 1.5px solid #eee;
-  margin: 0 4px; /* reducido */
+  margin: 0 4px;
   padding: 0;
   transition: border-color 0.2s;
   display: block;
 }
+
 .footer-sponsor-img:hover {
   border-color: #ff4d4f;
 }
 
-@media (max-width: 900px) {
-  .footer-content {
-    gap: 1.2rem;
-    padding: 0 1.2rem;
-  }
-  .footer-logo img { width: 90px; height: 90px; }
-  .sponsors-carousel-outer { max-width: 120px; min-width: 60px; }
-  .footer-sponsor-img { width: 28px; height: 28px; margin: 0 6px; }
-  .footer-credits { font-size: 0.85rem; gap: 0.1rem; }
+/* Agrandar el primer logo del carrusel (logo de la radio) */
+.sponsors-carousel-outer .footer-sponsor-img:first-child {
+  width: 60px;
+  height: 60px;
+  max-width: 60px;
+  max-height: 60px;
 }
 
-@media (max-width: 600px) {
-  .app-footer {
-    min-height: 38px;
-    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
-    font-size: 0.85rem;
-    border-top-width: 1px;
+/* En móviles, también agrandar ese logo */
+@media (max-width: 640px) {
+  .sponsors-carousel-outer .footer-sponsor-img:first-child {
+    width: 38px;
+    height: 38px;
+    max-width: 38px;
+    max-height: 38px;
   }
-  .footer-content {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.2rem;
-    padding: 0 0.2rem;
-    width: 100%;
-    max-width: 100vw;
-  }
-  .footer-logo {
-    margin-bottom: 0;
-    padding: 0;
-  }
-  .footer-logo img {
-    width: 90px;
-    height: 90px;
-    margin: 0 0.2rem 0 0;
-    margin-left: 2rem;
-  }
-  .footer-sponsors {
-    margin: 0;
-    padding: 0;
-    width: auto;
-    min-width: 0;
-    flex-direction: row;
-  }
-  .sponsors-carousel-outer {
-    max-width: 40vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-  }
+}
+
+@media (max-width: 900px) {
   .footer-sponsor-img {
-    width: 18px;
-    height: 18px;
-    margin: 0 2px;
+    width: 24px;
+    height: 24px;
+    margin: 0 3px;
   }
+  
+  .footer-logo img {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+  }
+  
   .footer-credits {
-    align-items: flex-end;
-    text-align: right;
-    font-size: 0.8rem;
-    gap: 0.05rem;
-    margin-top: 0;
-    width: auto;
-    padding: 0;
-  }
-  .footer-madeby {
     font-size: 0.7rem;
-    margin-top: 0;
-  }
-  .footer-stats {
-    font-size: 0.8rem !important;
-    margin-top: 0 !important;
-  }
-  .footer-link {
-    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 640px) {
   .app-footer {
-    text-align: center; /* Centrar contenido */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem; /* Espaciado entre elementos */
-    padding: 1rem; /* Ajustar el padding */
+    grid-template-columns: auto auto auto; /* Mantener tres columnas */
+    gap: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    min-height: 38px;
   }
 
-  .footer-content {
-    flex-direction: column; /* Cambiar a columna */
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem; /* Espaciado entre elementos */
-    padding: 0 0.5rem; /* Ajustar el padding */
-    width: 100%;
-    max-width: 100vw;
-  }
-  .footer-logo {
-    margin-bottom: 0;
-    padding: 0;
-  }
   .footer-logo img {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto; /* Centrar logo */
-  }
-  .footer-sponsors {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
     margin: 0;
-    padding: 0;
-    width: auto;
-    min-width: 0;
-    flex-direction: row;
+    padding-right: 1rem; /* Agregar padding right para alejar del borde */
   }
+
   .sponsors-carousel-outer {
-    max-width: 40vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
+    max-width: 35vw;
+    overflow: hidden;
+    margin: 0 auto; /* Centrar carrusel */
   }
+
+  .sponsors-carousel-track {
+    max-width: 35vw;
+    overflow: hidden; /* Evitar procesamiento de elementos fuera de vista */
+  }
+
   .footer-sponsor-img {
     width: 18px;
     height: 18px;
     margin: 0 2px;
   }
+
   .footer-credits {
+    font-size: 0.6rem;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem; /* Agregar padding left */
+  }
+  
+  .footer-madeby {
+    font-size: 0.6rem;
+  }
+  
+  .footer-link {
+    font-size: 0.6rem;
+  }
+}
+
+/* Estilos migrados desde globals.css para el footer */
+.footer-card {
+  background: var(--footer-card-bg);
+  border: 1px solid var(--footer-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.footer-muted {
+  color: var(--footer-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Modo oscuro */
+.dark .app-footer {
+  background: var(--footer-bg-dark, #18181b);
+  color: var(--footer-text-dark, #ededed);
+  border-top: 1.5px solid var(--footer-border-dark, #23232b);
+}
+.dark .footer-link {
+  color: var(--footer-link-dark, #ff9800);
+}
+.dark .footer-link:hover {
+  color: var(--footer-link, #fd7a00);
+  background: var(--footer-link-dark, #ff9800);
+}
+.dark .footer-sponsor-img {
+  background: #23232b;
+  border: 1.5px solid #444;
+}
+.dark .footer-credits,
+.dark .footer-madeby {
+  color: var(--footer-text-dark, #ededed) !important;
+}
+
+/* Fin del archivo: elimina cualquier bloque duplicado o líneas sueltas después de aquí */
+  
+
+  .footer-logo img {
+    width: 50px; /* Reducir tamaño de la imagen */
+    height: 50px;
+    margin: 0; /* Eliminar márgenes */
+    padding-right: 1rem; /* Agregar padding right para alejar del borde */
+  }
+
+  .sponsors-carousel-outer {
+    max-width: 35vw; /* Reducir el ancho horizontal del carrusel */
+    min-width: 0;
+    padding: 0;
+    margin: 0 auto; /* Centrar carrusel */
+  }
+
+  .sponsors-carousel-track {
+    max-width: 35vw; /* Reducir el ancho horizontal del track */
+    overflow: hidden; /* Evitar procesamiento de elementos fuera de vista */
+  }
+
+  .footer-credits {
+    font-size: 0.6rem; /* Reducir aún más tamaño de texto */
     text-align: center; /* Centrar texto */
     align-items: center;
-    font-size: 0.8rem;
-    gap: 0.05rem;
-    margin-top: 0;
-    width: auto;
-    padding: 0;
+    margin: 0; /* Eliminar márgenes */
+    padding: 0; /* Eliminar padding */
+    padding-left: 1rem; /* Agregar padding left */
   }
-  .footer-madeby {
-    font-size: 0.7rem;
-    margin-top: 0;
-  }
-  .footer-stats {
-    font-size: 0.8rem !important;
-    margin-top: 0 !important;
-  }
-  .footer-link {
-    font-size: 0.8rem;
-  }
+
+
+/* Estilos migrados desde globals.css para el footer */
+.footer-card {
+  background: var(--footer-card-bg);
+  border: 1px solid var(--footer-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.footer-muted {
+  color: var(--footer-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 /* Modo oscuro */

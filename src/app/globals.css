@@ -325,15 +325,6 @@ html {
     border-left-width: 0 !important;
     border-right-width: 0 !important;
   }
-  /* EXCEPCIÓN: No forzar width ni max-width en .radio-dashboard */
-  .radio-dashboard {
-    width: auto !important;
-    max-width: none !important;
-    margin-left: unset !important;
-    margin-right: unset !important;
-    padding-left: unset !important;
-    padding-right: unset !important;
-  }
 }
 
 .card,
@@ -558,57 +549,6 @@ button:active::before {
   height: 300px;
 }
 
-/* =====================
-   9. Footer Moderno
-   ===================== */
-.app-footer {
-  color: var(--footer-text);
-  background: var(--footer-bg);
-  width: 100%;
-  padding: 2rem 1rem;
-  border-top: 1px solid var(--footer-border);
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
-  transition: background 0.2s, color 0.2s;
-}
-.app-footer a {
-  color: var(--footer-link);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.app-footer a:hover {
-  color: var(--footer-link-dark);
-}
-.app-footer .footer-card {
-  background: var(--footer-card-bg);
-  border: 1px solid var(--footer-border);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.app-footer .footer-muted {
-  color: var(--footer-muted);
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-@media (max-width: 900px) {
-  .app-footer { padding: 1.5rem 0.5rem; }
-}
-@media (max-width: 640px) {
-  .app-footer {
-    text-align: center; /* Centrar contenido */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* =====================
-   10. Noticias y Enlaces Adaptativos
-   ===================== */
 .noticia-contenedor a,
 .noticia-contenedor .noticia-titulo {
   color: var(--program-title, var(--section-title, #fff)) !important;
@@ -951,7 +891,6 @@ header, .app-header {
   .contacto-section,
   .podcasts-section {
     background: var(--section-bg) !important;
-    /* Asegura fondo claro en modo claro */
   }
   body, .main-content {
     background: var(--background) !important;
