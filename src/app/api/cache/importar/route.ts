@@ -8,7 +8,7 @@ const SECCIONES = ['farandula', 'musica', 'noticias'];
 export async function POST(request: Request) {
   const auth = request.headers.get('authorization');
   if (!auth || auth !== `Bearer ${USER_API_KEY}`) {
-    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: 'No autorizado', cached: false, huboCambio: false, fallback: false, apiStatus: 'unauthorized', meta: {} }), { status: 401 });
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: 'No autorizado', cached: false, huboCambio: false, fallback: false, apiStatus: 'error', meta: {} }), { status: 401 });
   }
   try {
     const data = await request.json();
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         limpiarCacheSiExcede(seccion, 5, 20);
       }
     }
-    return NextResponse.json(respuestaApiEstandar({ noticias: [], cached: true, huboCambio: true, fallback: false, apiStatus: 'ok', meta: { importedAt: new Date().toISOString() } }));
+    return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: '', cached: true, huboCambio: true, fallback: false, apiStatus: 'ok', meta: {} }));
   } catch (e: any) {
     return NextResponse.json(respuestaApiEstandar({ noticias: [], errorMsg: e?.message || 'Error desconocido', cached: false, huboCambio: false, fallback: false, apiStatus: 'error', meta: {} }), { status: 500 });
   }

@@ -11,6 +11,7 @@ import path from 'path';
 import { NextRequest, NextResponse } from "next/server";
 import { deduplicarCombinado, filtrarYLimpiarDatos, type Dato } from "./sectionDeduplicar";
 import type { NewsDataArticle, FetchNoticiasResult } from "./fetchNoticiasNewsData";
+import { redisGet, redisSet } from './redisClient';
 
 // --- TIPOS PROFESIONALES ---
 
@@ -94,13 +95,82 @@ const logger = {
   }
 };
 
+// --- GESTIÓN DE CACHÉ EN REDIS (ASYNC) ---
+
+export async function saveCache(seccion: string, noticias: Dato[], metadata?: Partial<CacheMetadata>): Promise<boolean> {
+  const key = `${seccion}-cache`;
+  const cacheData: CacheData = {
+    noticias: noticias.slice(0, CONFIG.MAX_CACHE_ITEMS),
+    metadata: {
+      timestamp: Date.now(),
+      lastApiSuccess: Date.now(),
+      version: CONFIG.CACHE_VERSION,
+      totalApiCalls: 0,
+      rateLimitHits: 0,
+      ...metadata,
+    }
+  };
+  // Guardar en Redis
+  const ok = await redisSet(key, cacheData);
+  // Guardar en disco local también (sincrónico, pero rápido)
+  saveCacheEnDisco(seccion, cacheData.noticias, cacheData.metadata);
+  if (ok) {
+    logger.info(seccion, 'Caché guardado en Redis y disco', {
+      itemCount: cacheData.noticias.length
+    });
+  } else {
+    logger.error(seccion, 'Error guardando caché en Redis');
+  }
+  return ok;
+}
+
+export async function loadCache(seccion: string): Promise<CacheData | null> {
+  const key = `${seccion}-cache`;
+  let data = await redisGet<CacheData>(key);
+  if (data) {
+    logger.info(seccion, 'Caché cargado desde Redis', {
+      itemCount: data.noticias.length,
+      version: data.metadata.version
+    });
+    // Sincronizar disco si está desactualizado
+    saveCacheEnDisco(seccion, data.noticias, data.metadata);
+    return data;
+  }
+  logger.info(seccion, 'Caché no encontrado en Redis, intentando cargar desde disco');
+  // Intentar cargar desde disco y migrar a Redis si existe
+  const diskData = loadCacheDesdeDisco(seccion);
+  if (diskData) {
+    await redisSet(key, diskData);
+    logger.info(seccion, 'Caché migrado de disco a Redis', {
+      itemCount: diskData.noticias.length
+    });
+    return diskData;
+  }
+  return null;
+}
+
+export async function limpiarCacheSiExcede(seccion: string, maxItems: number = CONFIG.CLEANUP_THRESHOLD): Promise<boolean> {
+  const cache = await loadCache(seccion);
+  if (!cache || cache.noticias.length <= maxItems) {
+    return false;
+  }
+  logger.info(seccion, 'Limpiando caché por exceso de items', {
+    currentCount: cache.noticias.length,
+    targetCount: maxItems
+  });
+  const noticiasLimitadas = cache.noticias
+    .sort((a, b) => new Date(b.pubDate || 0).getTime() - new Date(a.pubDate || 0).getTime())
+    .slice(0, maxItems);
+  return await saveCache(seccion, noticiasLimitadas, cache.metadata);
+}
+
 // --- GESTIÓN DE CACHÉ EN DISCO ---
 
 export function getCacheFilePath(seccion: string): string {
   return path.resolve(CONFIG.CACHE_DIR, `${seccion}-cache.json`);
 }
 
-export function loadCache(seccion: string): CacheData | null {
+export function loadCacheDesdeDisco(seccion: string): CacheData | null {
   const file = getCacheFilePath(seccion);
   
   if (!fs.existsSync(file)) {
@@ -144,7 +214,7 @@ export function loadCache(seccion: string): CacheData | null {
   }
 }
 
-export function saveCache(seccion: string, noticias: Dato[], metadata?: Partial<CacheMetadata>): boolean {
+export function saveCacheEnDisco(seccion: string, noticias: Dato[], metadata?: Partial<CacheMetadata>): boolean {
   const file = getCacheFilePath(seccion);
   
   try {
@@ -173,25 +243,6 @@ export function saveCache(seccion: string, noticias: Dato[], metadata?: Partial<
     logger.error(seccion, 'Error guardando caché en disco', error as Error, { file });
     return false;
   }
-}
-
-export function limpiarCacheSiExcede(seccion: string, maxItems: number = CONFIG.CLEANUP_THRESHOLD): boolean {
-  const cache = loadCache(seccion);
-  
-  if (!cache || cache.noticias.length <= maxItems) {
-    return false;
-  }
-
-  logger.info(seccion, 'Limpiando caché por exceso de items', {
-    currentCount: cache.noticias.length,
-    targetCount: maxItems
-  });
-
-  const noticiasLimitadas = cache.noticias
-    .sort((a, b) => new Date(b.pubDate || 0).getTime() - new Date(a.pubDate || 0).getTime())
-    .slice(0, maxItems);
-
-  return saveCache(seccion, noticiasLimitadas, cache.metadata);
 }
 
 // --- FUNCIONES DE UTILIDAD PROFESIONALES ---
@@ -273,10 +324,9 @@ export function respuestaApiEstandar(params: {
 export async function exportarCaches(): Promise<Record<string, CacheData | null>> {
   logger.info('global', '[INICIO] Exportación de todos los cachés');
   const resultado: Record<string, CacheData | null> = {};
-  
   for (const seccion of SECCIONES) {
     try {
-      resultado[seccion] = loadCache(seccion);
+      resultado[seccion] = await loadCache(seccion);
       logger.info(seccion, 'Caché exportado', {
         hasData: !!resultado[seccion],
         itemCount: resultado[seccion]?.noticias.length || 0
@@ -293,15 +343,12 @@ export async function exportarCaches(): Promise<Record<string, CacheData | null>
 export async function importarCaches(data: Record<string, any>): Promise<boolean> {
   logger.info('global', '[INICIO] Importación de cachés');
   let success = true;
-  
   for (const seccion of SECCIONES) {
     try {
       const sectionData = data[seccion];
-      
       if (sectionData && Array.isArray(sectionData.noticias)) {
-        const saved = saveCache(seccion, sectionData.noticias, sectionData.metadata);
+        const saved = await saveCache(seccion, sectionData.noticias, sectionData.metadata);
         if (!saved) success = false;
-        
         logger.info(seccion, 'Caché importado', {
           itemCount: sectionData.noticias.length,
           success: saved
@@ -322,13 +369,14 @@ export async function importarCaches(data: Record<string, any>): Promise<boolean
   return success;
 }
 
-// --- CACHÉ EN MEMORIA GLOBAL ---
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const memoryCache: Record<string, MemoryCacheEntry> = {};
 
-function initializeMemoryCache(seccion: string): MemoryCacheEntry {
-  const diskCache = loadCache(seccion);
-  
+export async function initializeMemoryCache(seccion: string): Promise<MemoryCacheEntry> {
+  const diskCache = await loadCache(seccion);
   const entry: MemoryCacheEntry = {
     noticias: diskCache?.noticias || [],
     metadata: diskCache?.metadata || {
@@ -341,16 +389,17 @@ function initializeMemoryCache(seccion: string): MemoryCacheEntry {
     updating: false,
     lastUpdateAttempt: 0,
   };
-
   memoryCache[seccion] = entry;
-  
   logger.info(seccion, 'Caché en memoria inicializado', {
     itemCount: entry.noticias.length,
     lastSuccess: entry.metadata.lastApiSuccess,
     version: entry.metadata.version
   });
-
   return entry;
+}
+
+export function getMemoryCache(seccion: string): MemoryCacheEntry {
+  return memoryCache[seccion];
 }
 
 // --- FACTORY PARA HANDLERS DE API ---
@@ -366,22 +415,14 @@ export function createSectionApiHandler(config: SectionConfig) {
     retryDelayMs = 1000
   } = config;
 
-  // Inicializar caché en memoria
-  if (!memoryCache[seccion]) {
-    initializeMemoryCache(seccion);
-  }
-
-  const cache = memoryCache[seccion];
-
-  // Función de reintento con backoff exponencial
+  // --- Mover helpers internos aquí para que estén en scope ---
   async function fetchWithRetry(): Promise<FetchNoticiasResult> {
     let lastError: Error | null = null;
-    
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
+        const cache = memoryCache[seccion];
         cache.metadata.totalApiCalls++;
         const result = await fetchNoticias();
-        
         if (result.rateLimitHit) {
           cache.metadata.rateLimitHits++;
           logger.warn(seccion, 'Rate limit detectado', { 
@@ -389,82 +430,73 @@ export function createSectionApiHandler(config: SectionConfig) {
             totalRateLimits: cache.metadata.rateLimitHits 
           });
         }
-
         if (!result.errorMsg || result.noticias.length > 0) {
           return result;
         }
-
         lastError = new Error(result.errorMsg);
-        
       } catch (error) {
         lastError = error as Error;
         logger.warn(seccion, `Intento ${attempt + 1} falló`, { 
           error: lastError.message 
         });
       }
-
-      // Esperar antes del siguiente intento (backoff exponencial)
       if (attempt < maxRetries) {
         const delay = retryDelayMs * Math.pow(2, attempt);
         await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
-
     return {
       noticias: [],
       errorMsg: lastError?.message || 'Error desconocido tras múltiples intentos',
     };
   }
 
-  // Actualización de caché en background
   async function updateCacheInBackground(pageSize: number, maxPages: number): Promise<void> {
+    const cache = memoryCache[seccion];
     const now = Date.now();
-    
-    // Evitar updates concurrentes
     if (cache.updating) {
       logger.info(seccion, 'Update ya en progreso, omitiendo');
       return;
     }
-
-    // Cooldown entre updates
     if (now - cache.lastUpdateAttempt < CONFIG.UPDATE_COOLDOWN_MS) {
       logger.info(seccion, 'En cooldown, omitiendo update');
       return;
     }
-
     cache.updating = true;
     cache.lastUpdateAttempt = now;
     logger.info(seccion, '[INICIO] Actualización de caché');
-
     try {
       const result = await fetchWithRetry();
-      
-      if (result.noticias.length > 0) {
+      // Log de resultado crudo para debug
+      logger.info(seccion, '[DEBUG] Resultado de fetchWithRetry', { noticiasCount: result.noticias.length, errorMsg: result.errorMsg });
+      if (result.noticias && Array.isArray(result.noticias) && result.noticias.length > 0) {
         const noticiasValidas = procesarNoticiasApi(result.noticias, cache.noticias, seccion);
-        
-        cache.noticias = noticiasValidas;
-        cache.metadata.timestamp = now;
-        cache.metadata.lastApiSuccess = now;
-        cache.metadata.region = region;
-
-        // Guardar en disco de forma asíncrona
-        setImmediate(() => {
-          saveCache(seccion, noticiasValidas, cache.metadata);
-          limpiarCacheSiExcede(seccion);
-        });
-
-        logger.info(seccion, '[FIN] Caché actualizado exitosamente', {
-          newItemCount: noticiasValidas.length,
-          apiItemCount: result.noticias.length,
-          totalApiCalls: cache.metadata.totalApiCalls
-        });
+        // Solo actualizar si hay cambios reales
+        const titulosActuales = new Set(cache.noticias.map(n => n.title));
+        const hayNuevas = noticiasValidas.some(n => !titulosActuales.has(n.title));
+        if (hayNuevas) {
+          cache.noticias = noticiasValidas;
+          cache.metadata.timestamp = now;
+          cache.metadata.lastApiSuccess = now;
+          cache.metadata.region = region;
+          setTimeout(() => {
+            saveCache(seccion, noticiasValidas, cache.metadata);
+            limpiarCacheSiExcede(seccion);
+          }, 0);
+          logger.info(seccion, '[FIN] Caché actualizado exitosamente', {
+            newItemCount: noticiasValidas.length,
+            apiItemCount: result.noticias.length,
+            totalApiCalls: cache.metadata.totalApiCalls
+          });
+        } else {
+          logger.info(seccion, 'No hay noticias nuevas respecto al caché actual. No se actualiza.');
+        }
       } else {
         logger.warn(seccion, 'No se obtuvieron noticias válidas', {
           errorMsg: result.errorMsg,
           rateLimitHit: result.rateLimitHit
         });
       }
-
     } catch (error) {
       logger.error(seccion, 'Error en actualización de caché', error as Error);
     } finally {
@@ -472,17 +504,22 @@ export function createSectionApiHandler(config: SectionConfig) {
     }
   }
 
-  // Handler principal de la API
+  async function getCacheSafe() {
+    if (!memoryCache[seccion]) {
+      await initializeMemoryCache(seccion);
+    }
+    return memoryCache[seccion];
+  }
+
   async function GET(req: NextRequest): Promise<NextResponse> {
+    const cache = await getCacheSafe();
     const url = new URL(req.url);
     const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10));
     const pageSize = Math.max(1, Math.min(20, parseInt(url.searchParams.get('pageSize') || '4', 10)));
     const force = url.searchParams.get('force') === '1';
-    
     const now = Date.now();
     const cacheAge = now - cache.metadata.timestamp;
     const isStale = cacheAge > cacheDurationMs;
-    
     logger.info(seccion, 'Procesando request', {
       page,
       pageSize,
@@ -507,7 +544,9 @@ export function createSectionApiHandler(config: SectionConfig) {
         await updateCacheInBackground(pageSize, CONFIG.DEFAULT_MAX_PAGES);
       } else {
         // Para requests normales, actualizar en background
-        setImmediate(() => updateCacheInBackground(pageSize, CONFIG.DEFAULT_MAX_PAGES));
+        setTimeout(() => {
+          updateCacheInBackground(pageSize, CONFIG.DEFAULT_MAX_PAGES);
+        }, 0);
       }
     }
 

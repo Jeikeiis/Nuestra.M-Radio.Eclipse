@@ -338,5 +338,11 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750644990525
+  "metadata": {
+    "timestamp": 1750644990525,
+    "lastApiSuccess": 0,
+    "version": "1.0.0",
+    "totalApiCalls": 0,
+    "rateLimitHits": 0
+  }
 }
