@@ -1,6 +1,60 @@
 {
   "noticias": [
     {
+      "article_id": "908af1b0909e4336d8e09d84e3fc96eb",
+      "title": "28 Years Later Final",
+      "link": "https://latam.ign.com/28-years-later/108826/news/28-years-later-final",
+      "keywords": [
+        "gallery",
+        "28 years later",
+        "noticias"
+      ],
+      "creator": null,
+      "description": "¿Es cine o una decisión polémica?Atención: este artículo podría contener spoilers Con la llegada de Exterminio: La Evolución a cines en todo el mundo, el público finalmente es testigo de cómo Danny Boyle y Alex Garland están continuando esta historia que inició hace 18 años. De inicio a fin, la película presenta una serie ...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "pubDate": "2025-06-24 01:59:00",
+      "pubDateTZ": "UTC",
+      "image_url": "https://sm.ign.com/ign_latam/screenshot/default/28-years-later-final_xjhr.jpg",
+      "video_url": null,
+      "source_id": "ign_latam",
+      "source_name": "Ign Latinoamérica",
+      "source_priority": 121,
+      "source_url": "https://latam.ign.com",
+      "source_icon": "https://n.bytvi.com/ign_latam.png",
+      "language": "spanish",
+      "country": [
+        "honduras",
+        "el salvador",
+        "guinea",
+        "spain",
+        "mexico",
+        "argentina",
+        "colombia",
+        "cuba",
+        "venezuela",
+        "peru",
+        "chile",
+        "ecuador",
+        "puerto rico",
+        "dominican republic",
+        "costa rica",
+        "bolivia",
+        "paraguay",
+        "panama",
+        "guatemala",
+        "uruguay"
+      ],
+      "category": [
+        "top"
+      ],
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "duplicate": false
+    },
+    {
       "article_id": "2957d8b2263f040ea94fc5d7ba46d753",
       "title": "Este viernes habrá música, gastronomía y actividades para toda la familia por el Día de la Bandera",
       "link": "https://elciudadanoweb.com/este-viernes-habra-musica-gastronomia-y-actividades-para-toda-la-familia-por-el-dia-de-la-bandera/",
@@ -245,5 +299,12 @@
       "duplicate": false
     }
   ],
-  "timestamp": 1750466813931
+  "metadata": {
+    "timestamp": 1750815943705,
+    "lastApiSuccess": 1750815943705,
+    "version": "1.0.0",
+    "totalApiCalls": 1,
+    "rateLimitHits": 0,
+    "region": "música"
+  }
 }

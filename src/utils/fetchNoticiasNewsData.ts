@@ -134,21 +134,37 @@ export async function fetchNoticiasNewsData(
     return { noticias: [], errorMsg: error };
   }
 
-  if (!region || typeof region !== 'string' || region.trim().length < 2) {
-    const error = 'Región debe ser una cadena válida con al menos 2 caracteres';
-    logger.error(error, { region });
+  // Permitir region vacío ('') para búsquedas generales
+  if (region == null || typeof region !== 'string') {
+    const error = 'Región debe ser una cadena (puede ser vacía para búsquedas generales)';
+    logger.error(error + ` region: ${region}`);
     return { noticias: [], errorMsg: error };
   }
 
   // Construcción de URL con parámetros seguros
-  const searchParams = new URLSearchParams({
-    apikey: CONFIG.API_KEY,
-    q: region.trim(),
-    country: options.country || CONFIG.DEFAULT_COUNTRY,
-    language: options.language || CONFIG.DEFAULT_LANGUAGE,
-    category: options.category || CONFIG.DEFAULT_CATEGORY,
-    ...(options.size && { size: Math.min(options.size, 50).toString() })
-  });
+  // Si region es '' y no se pasa category, solo country y apikey (para noticias generales)
+  // Si solo se pasa region, solo apikey y q
+  let searchParams: URLSearchParams;
+  if (region === '' && !options.category) {
+    searchParams = new URLSearchParams({
+      apikey: CONFIG.API_KEY,
+      country: options.country || CONFIG.DEFAULT_COUNTRY,
+    });
+  } else if (region && Object.keys(options).length === 0) {
+    searchParams = new URLSearchParams({
+      apikey: CONFIG.API_KEY,
+      q: region.trim(),
+    });
+  } else {
+    searchParams = new URLSearchParams({
+      apikey: CONFIG.API_KEY,
+      q: region.trim(),
+      ...(options.country && { country: options.country }),
+      ...(options.language && { language: options.language }),
+      ...(options.category && { category: options.category }),
+      ...(options.size && { size: Math.min(options.size, 50).toString() })
+    });
+  }
 
   const url = `${CONFIG.API_BASE_URL}?${searchParams.toString()}`;
   

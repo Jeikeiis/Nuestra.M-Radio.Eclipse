@@ -23,9 +23,8 @@ const handler = createSectionApiHandler({
   seccion: "musica",
   cacheDurationMs: CONFIG.CACHE_DURATION_MS,
   cooldownMs: CONFIG.COOLDOWN_MS,
-  fetchNoticias: () => fetchNoticiasNewsData(CONFIG.REGION, {
-    category: 'entertainment',
-    size: 15, // Resultados moderados para música
+  fetchNoticias: () => fetchNoticiasNewsData('music', {
+    language: 'es', // Solo pasar q=music y language=es
   }),
   region: CONFIG.REGION,
   maxRetries: CONFIG.MAX_RETRIES,

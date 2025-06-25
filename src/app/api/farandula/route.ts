@@ -23,9 +23,8 @@ const handler = createSectionApiHandler({
   seccion: "farandula",
   cacheDurationMs: CONFIG.CACHE_DURATION_MS,
   cooldownMs: CONFIG.COOLDOWN_MS,
-  fetchNoticias: () => fetchNoticiasNewsData(CONFIG.REGION, {
-    category: 'entertainment',
-    size: 15, // Menos resultados ya que es más específico
+  fetchNoticias: () => fetchNoticiasNewsData('farandula', {
+    // Solo pasar q=farandula (region), sin category ni size
   }),
   region: CONFIG.REGION,
   maxRetries: CONFIG.MAX_RETRIES,

@@ -23,9 +23,9 @@ const handler = createSectionApiHandler({
   seccion: "noticias",
   cacheDurationMs: CONFIG.CACHE_DURATION_MS,
   cooldownMs: CONFIG.COOLDOWN_MS,
-  fetchNoticias: () => fetchNoticiasNewsData(CONFIG.REGION, {
-    category: 'top',
-    size: 20, // Obtener más resultados para mejor calidad
+  fetchNoticias: () => fetchNoticiasNewsData('', {
+    country: 'uy',
+    // No pasar category ni size para que la URL sea solo country+apikey
   }),
   region: CONFIG.REGION,
   maxRetries: CONFIG.MAX_RETRIES,
