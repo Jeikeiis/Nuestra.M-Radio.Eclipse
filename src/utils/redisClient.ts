@@ -19,9 +19,12 @@ export async function redisGet<T = any>(key: string): Promise<T | null> {
   }
 }
 
+// TTL de 4 días (en segundos)
+const FOUR_DAYS_SECONDS = 4 * 24 * 60 * 60;
+
 export async function redisSet<T = any>(key: string, value: T): Promise<boolean> {
   try {
-    await redis.set(key, JSON.stringify(value));
+    await redis.set(key, JSON.stringify(value), { ex: FOUR_DAYS_SECONDS });
     return true;
   } catch (e) {
     return false;

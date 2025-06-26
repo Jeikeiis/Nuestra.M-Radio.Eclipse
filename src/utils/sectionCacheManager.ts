@@ -11,7 +11,7 @@ import path from 'path';
 import { NextRequest, NextResponse } from "next/server";
 import { deduplicarCombinado, filtrarYLimpiarDatos, type Dato } from "./sectionDeduplicar";
 import type { NewsDataArticle, FetchNoticiasResult } from "./fetchNoticiasNewsData";
-import { redisGet, redisSet } from './redisClient';
+import { redisGet, redisSet, redis } from './redisClient';
 
 // --- TIPOS PROFESIONALES ---
 
@@ -27,11 +27,6 @@ export interface CacheMetadata {
 export interface CacheData {
   noticias: Dato[];
   metadata: CacheMetadata;
-}
-
-export interface MemoryCacheEntry extends CacheData {
-  updating: boolean;
-  lastUpdateAttempt: number;
 }
 
 export interface ApiResponse {
@@ -373,35 +368,6 @@ function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const memoryCache: Record<string, MemoryCacheEntry> = {};
-
-export async function initializeMemoryCache(seccion: string): Promise<MemoryCacheEntry> {
-  const diskCache = await loadCache(seccion);
-  const entry: MemoryCacheEntry = {
-    noticias: diskCache?.noticias || [],
-    metadata: diskCache?.metadata || {
-      timestamp: 0,
-      lastApiSuccess: 0,
-      version: CONFIG.CACHE_VERSION,
-      totalApiCalls: 0,
-      rateLimitHits: 0,
-    },
-    updating: false,
-    lastUpdateAttempt: 0,
-  };
-  memoryCache[seccion] = entry;
-  logger.info(seccion, 'Caché en memoria inicializado', {
-    itemCount: entry.noticias.length,
-    lastSuccess: entry.metadata.lastApiSuccess,
-    version: entry.metadata.version
-  });
-  return entry;
-}
-
-export function getMemoryCache(seccion: string): MemoryCacheEntry {
-  return memoryCache[seccion];
-}
-
 // --- FACTORY PARA HANDLERS DE API ---
 
 export function createSectionApiHandler(config: SectionConfig) {
@@ -420,14 +386,10 @@ export function createSectionApiHandler(config: SectionConfig) {
     let lastError: Error | null = null;
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
-        const cache = memoryCache[seccion];
-        cache.metadata.totalApiCalls++;
         const result = await fetchNoticias();
         if (result.rateLimitHit) {
-          cache.metadata.rateLimitHits++;
           logger.warn(seccion, 'Rate limit detectado', { 
-            attempt: attempt + 1, 
-            totalRateLimits: cache.metadata.rateLimitHits 
+            attempt: attempt + 1
           });
         }
         if (!result.errorMsg || result.noticias.length > 0) {
@@ -452,41 +414,48 @@ export function createSectionApiHandler(config: SectionConfig) {
   }
 
   async function updateCacheInBackground(pageSize: number, maxPages: number): Promise<void> {
-    const cache = memoryCache[seccion];
+    // Leer caché actual desde Redis
+    const cache = await loadCache(seccion) || {
+      noticias: [],
+      metadata: {
+        timestamp: 0,
+        lastApiSuccess: 0,
+        version: CONFIG.CACHE_VERSION,
+        totalApiCalls: 0,
+        rateLimitHits: 0,
+      }
+    };
     const now = Date.now();
-    if (cache.updating) {
-      logger.info(seccion, 'Update ya en progreso, omitiendo');
+    // Lock atómico con helpers LUA para máxima seguridad
+    const lockKey = `${seccion}-cache-lock`;
+    const lockId = uuidv4();
+    const lockTtl = 60; // segundos
+    const acquired = await acquireRedisLock(lockKey, lockTtl, lockId);
+    if (!acquired) {
+      logger.info(seccion, 'Otro proceso está actualizando el caché (lock en Redis), omitiendo');
       return;
     }
-    if (now - cache.lastUpdateAttempt < CONFIG.UPDATE_COOLDOWN_MS) {
-      logger.info(seccion, 'En cooldown, omitiendo update');
-      return;
-    }
-    cache.updating = true;
-    cache.lastUpdateAttempt = now;
-    logger.info(seccion, '[INICIO] Actualización de caché');
+    logger.info(seccion, '[INICIO] Actualización de caché (lock adquirido)', { lockId });
     try {
       const result = await fetchWithRetry();
-      // Log de resultado crudo para debug
       logger.info(seccion, '[DEBUG] Resultado de fetchWithRetry', { noticiasCount: result.noticias.length, errorMsg: result.errorMsg });
       if (result.noticias && Array.isArray(result.noticias) && result.noticias.length > 0) {
         const noticiasValidas = procesarNoticiasApi(result.noticias, cache.noticias, seccion);
-        // Solo actualizar si hay cambios reales
         const titulosActuales = new Set(cache.noticias.map(n => n.title));
         const hayNuevas = noticiasValidas.some(n => !titulosActuales.has(n.title));
         if (hayNuevas) {
-          cache.noticias = noticiasValidas;
-          cache.metadata.timestamp = now;
-          cache.metadata.lastApiSuccess = now;
-          cache.metadata.region = region;
-          setTimeout(() => {
-            saveCache(seccion, noticiasValidas, cache.metadata);
-            limpiarCacheSiExcede(seccion);
-          }, 0);
+          const nuevaMetadata = {
+            ...cache.metadata,
+            timestamp: now,
+            lastApiSuccess: now,
+            region: region,
+          };
+          await saveCache(seccion, noticiasValidas, nuevaMetadata);
+          await limpiarCacheSiExcede(seccion);
           logger.info(seccion, '[FIN] Caché actualizado exitosamente', {
             newItemCount: noticiasValidas.length,
             apiItemCount: result.noticias.length,
-            totalApiCalls: cache.metadata.totalApiCalls
+            totalApiCalls: nuevaMetadata.totalApiCalls
           });
         } else {
           logger.info(seccion, 'No hay noticias nuevas respecto al caché actual. No se actualiza.');
@@ -500,15 +469,35 @@ export function createSectionApiHandler(config: SectionConfig) {
     } catch (error) {
       logger.error(seccion, 'Error en actualización de caché', error as Error);
     } finally {
-      cache.updating = false;
+      // Liberar el lock solo si sigue siendo nuestro (LUA helper)
+      await releaseRedisLock(lockKey, lockId);
+      logger.info(seccion, 'Lock liberado (LUA)', { lockId });
     }
   }
 
   async function getCacheSafe() {
-    if (!memoryCache[seccion]) {
-      await initializeMemoryCache(seccion);
+    // Siempre leer desde Redis para entornos serverless (Vercel)
+    const cache = await loadCache(seccion);
+    if (!cache) {
+      // Si no hay nada en Redis ni disco, inicializar vacío
+      return {
+        noticias: [],
+        metadata: {
+          timestamp: 0,
+          lastApiSuccess: 0,
+          version: CONFIG.CACHE_VERSION,
+          totalApiCalls: 0,
+          rateLimitHits: 0,
+        },
+        updating: false,
+        lastUpdateAttempt: 0,
+      };
     }
-    return memoryCache[seccion];
+    return {
+      ...cache,
+      updating: false,
+      lastUpdateAttempt: 0,
+    };
   }
 
   async function GET(req: NextRequest): Promise<NextResponse> {
@@ -629,3 +618,28 @@ function filtrarNoticiasValidas(noticiasApi: NewsDataArticle[], seccion: string)
 
 // Re-exportar utilidades para compatibilidad
 export { deduplicarCombinado } from "./sectionDeduplicar";
+
+// --- HELPERS DE LOCK REDIS ATÓMICO ---
+async function acquireRedisLock(key: string, ttlSeconds: number, value: string): Promise<boolean> {
+  // @ts-ignore
+  const redis = (globalThis as any).redis || require('./redisClient').redis;
+  // SET key value NX EX ttl
+  // @ts-ignore
+  const result = await redis.set(key, value, { NX: true, EX: ttlSeconds });
+  return result === 'OK';
+}
+async function releaseRedisLock(key: string, value: string): Promise<void> {
+  // Solo borra el lock si el valor coincide (evita borrar lock de otro proceso)
+  // @ts-ignore
+  const redis = (globalThis as any).redis || require('./redisClient').redis;
+  // Usar script LUA para atomicidad
+  const script = `if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end`;
+  // @ts-ignore
+  await redis.eval(script, [key], [value]);
+}
+
+// --- UUID seguro para entornos serverless/Next.js ---
+const uuidv4 = () =>
+  typeof globalThis.crypto !== 'undefined' && typeof globalThis.crypto.randomUUID === 'function'
+    ? globalThis.crypto.randomUUID()
+    : Math.random().toString(36).substring(2) + Date.now().toString(36);
