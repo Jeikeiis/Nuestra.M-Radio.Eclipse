@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { forwardRef, useCallback } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import { FaBroadcastTower } from "react-icons/fa";
 import "./AppHeader.css";
 
@@ -39,6 +39,24 @@ const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
       },
       []
     );
+
+    // Estado para conexión
+    const [offline, setOffline] = useState(false);
+    useEffect(() => {
+      function handleOnline() {
+        setOffline(false);
+      }
+      function handleOffline() {
+        setOffline(true);
+      }
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
+      setOffline(!navigator.onLine);
+      return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+      };
+    }, []);
 
     return (
       <header
@@ -114,6 +132,22 @@ const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
               />
               Radio en Vivo
             </button>
+            {offline && (
+              <div style={{
+                color: '#fff',
+                background: '#b71c1c',
+                borderRadius: 6,
+                padding: '0.25rem 0.7rem',
+                marginTop: 6,
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
+                textAlign: 'center',
+                zIndex: 1000,
+              }}>
+                Conexión inestable o perdida. El stream puede verse afectado.
+              </div>
+            )}
             <div className="app-header-theme-toggle">
               <ThemeToggle />
             </div>
