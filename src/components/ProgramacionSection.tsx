@@ -15,7 +15,7 @@ const PROGRAMAS = [
       updatedMsg="¡Noticias actualizadas!"
       emptyMsg="No se encontraron noticias relevantes."
       adminKey="adminNoticias"
-    />,
+    />, // visible pero no interactivo
   },
   {
     key: "informacion",
@@ -34,7 +34,7 @@ const PROGRAMAS = [
       updatedMsg="¡Farándula actualizada!"
       emptyMsg="No se encontraron noticias de farándula relevantes."
       adminKey="adminNoticias"
-    />,
+    />, // visible pero no interactivo
   },
   {
     key: "entretenimiento",
@@ -53,7 +53,7 @@ const PROGRAMAS = [
       updatedMsg="¡Música actualizada!"
       emptyMsg="No se encontraron noticias de música relevantes."
       adminKey="adminNoticias"
-    />,
+    />, // visible pero no interactivo
   },
   {
     key: "horoscopo",
@@ -78,15 +78,15 @@ export default function ProgramacionSection() {
       <h2 className="programacion-title">Programación</h2>
       <ul className="programacion-list">
         {PROGRAMAS.map((prog) => {
-          const esInteractivo = ["noticias", "musica", "farandula"].includes(prog.key);
+          // Todas las secciones desactivadas para noticias, musica y farandula
+          const esInteractivo = false;
           return (
             <li
               key={prog.key}
-              className={`programacion-item${esInteractivo ? '' : ' programacion-item-disabled'}`}
-              onClick={esInteractivo ? () => setModal(prog.key) : undefined}
-              tabIndex={esInteractivo ? 0 : -1}
-              style={{ cursor: esInteractivo ? "pointer" : "not-allowed", opacity: esInteractivo ? 1 : 0.5 }}
-              aria-label={esInteractivo ? `Abrir ${prog.titulo}` : `${prog.titulo} (no disponible)`}
+              className={`programacion-item programacion-item-disabled`}
+              tabIndex={-1}
+              style={{ cursor: "not-allowed", opacity: 0.5 }}
+              aria-label={`${prog.titulo} (no disponible)`}
             >
               <span className="programacion-emoji">{prog.icon}</span>
               <span className="programacion-text">{prog.titulo}</span>
@@ -95,22 +95,7 @@ export default function ProgramacionSection() {
         })}
       </ul>
       {/* Modal profesional reutilizable para secciones configuradas */}
-      {PROGRAMAS.filter((prog) => ["noticias", "musica", "farandula"].includes(prog.key)).map(
-        (prog) => (
-          <Modal
-            key={prog.key}
-            open={modal === prog.key}
-            onClose={() => setModal(null)}
-            title={prog.titulo}
-            icon={prog.icon}
-            ariaLabel={`Modal de ${prog.titulo}`}
-            maxWidth={typeof window !== "undefined" && window.innerWidth <= 640 ? "99vw" : "1200px"}
-            minWidth={typeof window !== "undefined" && window.innerWidth <= 640 ? undefined : "600px"}
-          >
-            {prog.contenido}
-          </Modal>
-        )
-      )}
+      {/* No mostrar modales para ninguna sección desactivada */}
     </section>
   );
 }

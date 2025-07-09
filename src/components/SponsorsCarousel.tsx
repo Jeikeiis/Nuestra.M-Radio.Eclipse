@@ -12,13 +12,24 @@ function isMobile() {
 const sponsors = [
   { src: "/SanitariaNunez.webp", alt: "Sanitaria Nuñez" },
   { src: "/MirandaConstruccion.webp", alt: "Miranda Construcciones" },
-  { src: "/ChiariaPizzi.webp", alt: "Estudio Jurídico Notarial Chiara Pizzi" }, // Nuevo sponsor actualizado a webp
-  { src: "/GiannattasioAcademia.webp", alt: "Academia de Choferes Giannattasio" }, // Sponsor agregado
+  { src: "/ChiariaPizzi.webp", alt: "Estudio Jurídico Notarial Chiara Pizzi" },
+  { src: "/GiannattasioAcademia.webp", alt: "Academia de Choferes Giannattasio" },
   // Puedes agregar más sponsors aquí
 ];
 
+const fallbackSponsors = [
+  { src: "/file.svg", alt: "Sponsor Genérico" },
+];
+
 function SponsorItem({ src, alt }: { src: string; alt: string }) {
-  // Si es el logo de Miranda Construcción, lo envolvemos en un enlace
+  const [imgError, setImgError] = useState(false);
+  if (imgError) {
+    return (
+      <div className="sponsor-carousel-item">
+        <div className="footer-sponsor-img" style={{display:'flex',alignItems:'center',justifyContent:'center',background:'#eee',width:80,height:80,borderRadius:'50%',fontWeight:600,fontSize:14,color:'#b71c1c'}}>{alt}</div>
+      </div>
+    );
+  }
   if (src === "/MirandaConstruccion.webp") {
     return (
       <div className="sponsor-carousel-item">
@@ -34,6 +45,7 @@ function SponsorItem({ src, alt }: { src: string; alt: string }) {
             height={160}
             className="footer-sponsor-img"
             draggable={false}
+            onError={() => setImgError(true)}
           />
         </a>
       </div>
@@ -48,6 +60,7 @@ function SponsorItem({ src, alt }: { src: string; alt: string }) {
         height={160}
         className="footer-sponsor-img"
         draggable={false}
+        onError={() => setImgError(true)}
       />
     </div>
   );
@@ -58,33 +71,42 @@ export default function SponsorsCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [trackWidth, setTrackWidth] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [currentSponsors, setCurrentSponsors] = useState(sponsors.length > 0 ? sponsors : fallbackSponsors);
 
   // Duplicar sponsors para loop infinito
-  const sponsorsLoop = [...sponsors, ...sponsors];
+  const sponsorsLoop = [...currentSponsors, ...currentSponsors];
+
+  // Reiniciar sponsors si cambia la lista
+  useEffect(() => {
+    setCurrentSponsors(sponsors.length > 0 ? sponsors : fallbackSponsors);
+  }, [sponsors.length]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Actualizar ancho del track y reiniciar offset si cambia
   useEffect(() => {
     if (!mounted) return;
     function updateWidths() {
       if (trackRef.current) {
-        // Usa el ancho real del track dividido por 2 (por el loop)
         setTrackWidth(trackRef.current.scrollWidth / 2);
+        setOffset(0); // Reinicia el offset para evitar saltos
       }
     }
     updateWidths();
     window.addEventListener("resize", updateWidths);
     return () => window.removeEventListener("resize", updateWidths);
-  }, [mounted]);
+  }, [mounted, currentSponsors.length]);
 
+  // Animación robusta, pausa en hover/touch
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || paused) return;
     let interval: number;
     let pos = offset;
-    const speed = 0.3; // px por frame, mucho más lento
-    const fps = 30; // Limitar a 30 FPS
+    const speed = 0.3;
+    const fps = 30;
     function animate() {
       pos += speed;
       if (trackWidth > 0 && pos >= trackWidth) {
@@ -92,14 +114,33 @@ export default function SponsorsCarousel() {
       }
       setOffset(pos);
     }
-    interval = window.setInterval(animate, 1000 / fps); // 30 FPS
+    interval = window.setInterval(animate, 1000 / fps);
     return () => clearInterval(interval);
-  }, [trackWidth, mounted]);
+  }, [trackWidth, mounted, paused]);
+
+  // Limpieza de offset si cambia el número de sponsors
+  useEffect(() => {
+    setOffset(0);
+  }, [currentSponsors.length]);
 
   if (!mounted) return null;
 
+  // Handlers para pausar/reanudar
+  const handlePause = () => setPaused(true);
+  const handleResume = () => setPaused(false);
+
   return (
-    <div className="sponsors-carousel-outer">
+    <div
+      className="sponsors-carousel-outer"
+      onMouseEnter={handlePause}
+      onMouseLeave={handleResume}
+      onTouchStart={handlePause}
+      onTouchEnd={handleResume}
+      tabIndex={0}
+      aria-label="Carrusel de sponsors"
+      role="region"
+      style={{outline:'none'}}
+    >
       <div
         className="sponsors-carousel-track"
         ref={trackRef}

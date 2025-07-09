@@ -131,6 +131,11 @@
   transition: color 0.2s;
 }
 
+.programacion-text-activa {
+  color: #fff !important;
+  /* Puedes agregar más estilos si quieres simular el estado activo */
+}
+
 .main-content--with-header > .programacion-section:first-child { margin-top: 0 !important; }
 
 .programacion-noticias-section {
