@@ -19,7 +19,16 @@ export default function AppFooter() {
             </a>
           </span>
           <span className="footer-madeby">
-            Hecho por Jeikeiis con{" "}
+            Hecho por{" "}
+            <a
+              href="https://instagram.com/jeikeiis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link madelink"
+            >
+              Jeikeiis
+            </a>{" "}
+            con{" "}
             <span className="footer-heart">♥</span> y Next.js
           </span>
         </div>

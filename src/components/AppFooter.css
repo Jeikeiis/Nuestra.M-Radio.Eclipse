@@ -119,10 +119,17 @@
   transition: color 0.2s, background 0.2s;
 }
 
-.footer-link:hover {
-  color: var(--footer-link-dark);
-  background: var(--footer-link);
-  border-radius: 0.25rem;
+.footer-link.madelink {
+  color: var(--footer-text) !important;
+  text-decoration: none;
+  background: none;
+  font-weight: 600;
+}
+
+.footer-link.madelink:hover {
+  color: var(--footer-text) !important;
+  background: none;
+  text-decoration: none;
 }
 
 .footer-madeby {
