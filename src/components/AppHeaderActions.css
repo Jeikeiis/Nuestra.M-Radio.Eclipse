@@ -50,14 +50,18 @@
   inset: 0;
   z-index: 1;
   background:
-    repeating-radial-gradient(circle at 15% 30%, #FFD60088 0.5px, transparent 1.5px),
-    repeating-radial-gradient(circle at 80% 60%, #FFA72655 0.7px, transparent 1.7px),
-    repeating-radial-gradient(circle at 50% 80%, #FFF3E0aa 0.6px, transparent 1.2px);
-  background-size: 32px 32px, 44px 44px, 28px 28px;
-  background-repeat: repeat;
-  opacity: 0.12;
-  filter: blur(0.1px);
-  animation: mystic-particles 6s linear infinite;
+    radial-gradient(circle at 80% 50%, #FFD60033 0%, transparent 70%),
+    radial-gradient(circle at 30% 20%, #FFD60022 0%, transparent 80%),
+    radial-gradient(circle at 60% 80%, #FFA72622 0%, transparent 75%),
+    radial-gradient(circle at 15% 85%, #FFFDE744 0%, transparent 80%),
+    radial-gradient(circle at 70% 10%, #FFD54F44 0%, transparent 80%),
+    radial-gradient(circle at 40% 60%, #FFECB344 0%, transparent 80%),
+    radial-gradient(circle at 90% 30%, #FFF8E144 0%, transparent 80%);
+  background-size: 200% 100%, 120% 100%, 150% 100%, 110% 100%, 130% 100%, 140% 100%, 120% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.22;
+  filter: blur(2.5px);
+  animation: particles-cloud-move 3s linear 1;
 }
 
 /* =========================
@@ -124,14 +128,18 @@
   inset: 0;
   z-index: 1;
   background:
-    repeating-radial-gradient(circle at 20% 70%, #fff 0.6px, transparent 1.6px),
-    repeating-radial-gradient(circle at 70% 40%, #fff8 0.8px, transparent 1.8px),
-    repeating-radial-gradient(circle at 60% 90%, #fff6 0.7px, transparent 1.3px);
-  background-size: 36px 36px, 48px 48px, 32px 32px;
-  background-repeat: repeat;
-  opacity: 0.09;
-  filter: blur(0.1px);
-  animation: mystic-particles 6s linear infinite;
+    radial-gradient(circle at 80% 50%, #fff3 0%, transparent 70%),
+    radial-gradient(circle at 30% 20%, #fff2 0%, transparent 80%),
+    radial-gradient(circle at 60% 80%, #fff2 0%, transparent 75%),
+    radial-gradient(circle at 15% 85%, #fff8 0%, transparent 80%),
+    radial-gradient(circle at 70% 10%, #fff6 0%, transparent 80%),
+    radial-gradient(circle at 40% 60%, #fff4 0%, transparent 80%),
+    radial-gradient(circle at 90% 30%, #fff5 0%, transparent 80%);
+  background-size: 200% 100%, 120% 100%, 150% 100%, 110% 100%, 130% 100%, 140% 100%, 120% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.16;
+  filter: blur(3px);
+  animation: particles-cloud-move 3s linear 1;
 }
 
 .dark .app-header-actions:hover,
@@ -140,23 +148,6 @@
   background: linear-gradient(90deg, #18181b 60%, #23232b 100%);
   box-shadow: 0 8px 32px 0 #fff4, 0 0px 24px 0 #fff2, 0 0 0 3px #fff5;
   padding: 0.32rem 1rem;
-}
-
-.dark .app-header-actions::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image:
-    radial-gradient(circle, #fff 0.7px, transparent 1.5px),
-    radial-gradient(circle, #fff8 1px, transparent 2px),
-    radial-gradient(circle, #fff6 0.8px, transparent 1.5px);
-  background-size: 22px 22px, 38px 38px, 28px 28px;
-  background-position: 4px 8px, 20px 16px, 12px 24px;
-  opacity: 0.28;
-  mix-blend-mode: lighten;
-  filter: blur(0.5px);
 }
 
 /* =========================
@@ -276,6 +267,21 @@
   100% {
     background-position: 0% 60%, 20% 40%, 0% 80%;
     opacity: 0.2;
+  }
+}
+
+@keyframes particles-cloud-move {
+  0% {
+    background-position: 100% 0, 0% 0, 100% 100%;
+    opacity: 0.18;
+  }
+  50% {
+    background-position: 0% 0, 100% 0, 0% 100%;
+    opacity: 0.22;
+  }
+  100% {
+    background-position: 100% 0, 0% 0, 100% 100%;
+    opacity: 0.18;
   }
 }
 
