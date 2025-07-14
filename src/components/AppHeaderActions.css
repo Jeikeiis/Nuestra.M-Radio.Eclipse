@@ -14,10 +14,10 @@
   border: none;
   border-radius: 1.7rem;
   background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.18) 0%, 
-    #FFF8E1 30%, 
-    #FFE0B2 70%, 
-    #ffd04f96 100%
+    rgba(255, 255, 255, 0.08) 0%, 
+    #FFF8E188 30%, 
+    #FFE0B288 70%, 
+    #ffd04f55 100%
   );
   box-shadow:
     0 2px 12px 0 #ffa82600,
@@ -57,6 +57,7 @@
   background-repeat: repeat;
   opacity: 0.12;
   filter: blur(0.1px);
+  animation: mystic-particles 6s linear infinite;
 }
 
 /* =========================
@@ -130,6 +131,7 @@
   background-repeat: repeat;
   opacity: 0.09;
   filter: blur(0.1px);
+  animation: mystic-particles 6s linear infinite;
 }
 
 .dark .app-header-actions:hover,
@@ -248,16 +250,32 @@
 
 @keyframes mystic-particles {
   0% {
-    background-position: 0% 50%, 60% 30%, 80% 70%;
+    background-position: 100% 40%, 120% 80%, 160% 60%;
+    opacity: 0.2;
+  }
+  10% {
+    background-position: 90% 45%, 110% 75%, 150% 65%;
+    opacity: 0.35;
+  }
+  25% {
+    background-position: 70% 55%, 90% 65%, 130% 80%;
+    opacity: 0.5;
+  }
+  40% {
+    background-position: 60% 30%, 80% 50%, 120% 80%;
     opacity: 0.7;
   }
-  50% {
-    background-position: 40% 50%, 80% 60%, 100% 80%;
-    opacity: 1;
+  60% {
+    background-position: 40% 70%, 60% 40%, 80% 60%;
+    opacity: 0.85;
+  }
+  80% {
+    background-position: 20% 50%, 40% 80%, 60% 30%;
+    opacity: 0.7;
   }
   100% {
-    background-position: 100% 50%, 120% 90%, 160% 100%;
-    opacity: 0;
+    background-position: 0% 60%, 20% 40%, 0% 80%;
+    opacity: 0.2;
   }
 }
 
