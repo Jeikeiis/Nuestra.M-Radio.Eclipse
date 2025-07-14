@@ -1,0 +1,270 @@
+/* =========================
+   AppHeaderActions - Estilos principales
+   ========================= */
+.app-header-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  width: auto;
+  margin-top: 0;
+  box-sizing: border-box;
+  min-height: 54px;
+  border: none;
+  border-radius: 1.7rem;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.18) 0%, 
+    #FFF8E1 30%, 
+    #FFE0B2 70%, 
+    #ffd04f96 100%
+  );
+  box-shadow:
+    0 2px 12px 0 #ffa82600,
+    0 0 8px #ffa82600,
+    0 0 0 3px #ffa82600;
+  padding: 0.32rem 1.05rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================
+   Efectos decorativos
+   ========================= */
+.app-header-actions::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 1.7rem;
+  z-index: 0;
+  background: radial-gradient(circle at 10% 20%, #FFA726 0%, #FFF3E0 60%, transparent 100%);
+  box-shadow: 0 0 12px 1px #FFA72633, 0 0 0 1px #FFA726;
+  opacity: 0.5;
+}
+
+.app-header-actions::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    repeating-radial-gradient(circle at 15% 30%, #FFD60088 0.5px, transparent 1.5px),
+    repeating-radial-gradient(circle at 80% 60%, #FFA72655 0.7px, transparent 1.7px),
+    repeating-radial-gradient(circle at 50% 80%, #FFF3E0aa 0.6px, transparent 1.2px);
+  background-size: 32px 32px, 44px 44px, 28px 28px;
+  background-repeat: repeat;
+  opacity: 0.12;
+  filter: blur(0.1px);
+}
+
+/* =========================
+   Hover y Focus
+   ========================= */
+.app-header-actions:hover,
+.app-header-actions:focus-within {
+  border-color: #FF9800;
+  background: linear-gradient(90deg, 
+    rgba(255, 248, 225, 0.12) 0%, 
+    #FFE0B2cc 30%, 
+    #FFD54Fbb 70%, 
+    #FFD54F 100%
+  );
+  box-shadow:
+    0 8px 32px 0 #FFA72633,
+    0 0px 24px 0 #FF980022,
+    0 0 0 3px #FFA72644;
+  padding: 0.38rem 1.18rem;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 640px) {
+  .app-header-actions {
+    padding: 0.15rem 0.5rem !important;
+    min-height: 38px !important;
+    border: 2px solid #ff4d4f !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =========================
+   Modo oscuro
+   ========================= */
+.dark .app-header-actions {
+  border: none;
+  border-radius: 1.7rem;
+  background: linear-gradient(90deg, #23232b 60%, #18181b 100%);
+  box-shadow: 0 4px 24px 0 #fff2, 0 0 12px #fff1, 0 0 0 3px #fff3;
+  padding: 0.25rem 0.75rem;
+  min-height: 54px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .app-header-actions::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 1.7rem;
+  z-index: 0;
+  background: radial-gradient(circle at 80% 30%, #fff 0%, #fff3 60%, transparent 100%);
+  box-shadow: 0 0 14px 1px #fff3, 0 0 0 1px #fff;
+  opacity: 0.4;
+}
+
+.dark .app-header-actions::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    repeating-radial-gradient(circle at 20% 70%, #fff 0.6px, transparent 1.6px),
+    repeating-radial-gradient(circle at 70% 40%, #fff8 0.8px, transparent 1.8px),
+    repeating-radial-gradient(circle at 60% 90%, #fff6 0.7px, transparent 1.3px);
+  background-size: 36px 36px, 48px 48px, 32px 32px;
+  background-repeat: repeat;
+  opacity: 0.09;
+  filter: blur(0.1px);
+}
+
+.dark .app-header-actions:hover,
+.dark .app-header-actions:focus-within {
+  border-color: #fff;
+  background: linear-gradient(90deg, #18181b 60%, #23232b 100%);
+  box-shadow: 0 8px 32px 0 #fff4, 0 0px 24px 0 #fff2, 0 0 0 3px #fff5;
+  padding: 0.32rem 1rem;
+}
+
+.dark .app-header-actions::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle, #fff 0.7px, transparent 1.5px),
+    radial-gradient(circle, #fff8 1px, transparent 2px),
+    radial-gradient(circle, #fff6 0.8px, transparent 1.5px);
+  background-size: 22px 22px, 38px 38px, 28px 28px;
+  background-position: 4px 8px, 20px 16px, 12px 24px;
+  opacity: 0.28;
+  mix-blend-mode: lighten;
+  filter: blur(0.5px);
+}
+
+/* =========================
+   Animación metálica profesional
+   ========================= */
+.app-header-actions.metal-animate::after {
+  content: "";
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 220%;
+  height: 100%;
+  border-radius: 1.7rem;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    #FFB30044 18%,
+    #FFD54Fcc 35%,
+    #FFF8E1ee 50%,
+    #FFB30088 65%,
+    transparent 100%
+  );
+  opacity: 1;
+  z-index: 10;
+  filter: blur(1.2px) brightness(1.09) saturate(1.10);
+  animation: metal-shine-actions 0.9s cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
+
+/* =========================
+   Partículas animadas
+   ========================= */
+.app-header-actions.metal-animate::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  border-radius: 1.7rem;
+  z-index: 11;
+  background:
+    radial-gradient(circle at 12% 52%, #FFD54Fcc 1.5px, transparent 3px),
+    radial-gradient(circle at 62% 32%, #FFF8E1bb 1.2px, transparent 2.5px),
+    radial-gradient(circle at 82% 72%, #FFB30099 1.2px, transparent 2.5px);
+  background-size: 100% 100%;
+  opacity: 0.5;
+  animation: mystic-particles 0.7s linear 1;
+}
+
+/* =========================
+   Keyframes
+   ========================= */
+@keyframes metal-shine-actions {
+  0% {
+    left: 100%;
+    opacity: 0.15;
+    filter: blur(1.5px) brightness(1.08) saturate(1.05);
+    transform: scaleX(0.92);
+  }
+  15% {
+    left: 80%;
+    opacity: 0.7;
+    filter: blur(2px) brightness(1.18) saturate(1.15);
+    transform: scaleX(1.08);
+  }
+  35% {
+    left: 40%;
+    opacity: 1;
+    filter: blur(2.5px) brightness(1.22) saturate(1.18);
+    transform: scaleX(1.15);
+  }
+  55% {
+    left: 0%;
+    opacity: 0.85;
+    filter: blur(2px) brightness(1.13) saturate(1.12);
+    transform: scaleX(0.98);
+  }
+  70% {
+    left: -30%;
+    opacity: 0.5;
+    filter: blur(1.2px) brightness(1.05) saturate(1.08);
+    transform: scaleX(1.04);
+  }
+  100% {
+    left: -60%;
+    opacity: 0;
+    filter: blur(1px) brightness(1) saturate(1);
+    transform: scaleX(0.92);
+  }
+}
+
+@keyframes mystic-particles {
+  0% {
+    background-position: 0% 50%, 60% 30%, 80% 70%;
+    opacity: 0.7;
+  }
+  50% {
+    background-position: 40% 50%, 80% 60%, 100% 80%;
+    opacity: 1;
+  }
+  100% {
+    background-position: 100% 50%, 120% 90%, 160% 100%;
+    opacity: 0;
+  }
+}
+
+/* =========================
+   Z-index para hijos
+   ========================= */
+.app-header-actions > * {
+  position: relative;
+  z-index: 20;
+}

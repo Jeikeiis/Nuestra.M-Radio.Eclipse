@@ -514,13 +514,13 @@
   }
 }
 
-.dark .app-header-whatsapp-btn {
-  background: #25D366;
-  border-color: #128C7E;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+/* HUD de acciones migrado a archivo separado: AppHeaderActions.css */
+
+/* Si algún hijo reacciona con sombra, asegúrate que el z-index de los pseudo-elementos sea menor que el de los hijos interactivos */
+.app-header-actions > * {
+  position: relative;
+  z-index: 20;
 }
-.dark .app-header-whatsapp-btn:hover,
 .dark .app-header-whatsapp-btn:focus {
   background: #128C7E;
   border-color: #25D366;
