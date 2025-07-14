@@ -25,13 +25,21 @@
   border-radius: 50%;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
-  transition: background 0.3s, box-shadow 0.3s;
+  overflow: visible; /* Permite que la animación sobresalga */
+  transition: background 0.3s, box-shadow 0.32s cubic-bezier(.68,-0.55,.27,1.55), transform 0.32s cubic-bezier(.68,-0.55,.27,1.55);
+  will-change: box-shadow, transform;
+}
+.theme-toggle-btn:active {
+  transform: scale(0.97) rotate(0deg);
+  box-shadow: 0 0 24px 4px #FFD60099;
+  transition: box-shadow 0.18s, transform 0.18s;
 }
 .theme-toggle-btn:hover {
   background: var(--themetoggle-bg-hover, #b71c1c);
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.13);
+  box-shadow: 0 8px 24px 0 rgba(255,214,0,0.18);
+  transform: scale(1.12) rotate(-8deg);
 }
+
 .theme-toggle-btn > * {
   display: flex !important;
   align-items: center !important;
@@ -198,6 +206,10 @@
   width: 100%;
   height: 100%;
   position: relative;
+  /* Más fps y suavidad: duración mayor y cubic-bezier más fluido */
+  transition: transform 0.44s cubic-bezier(.77,0,.18,1.01);
+  will-change: transform;
+  overflow: visible;
 }
 .theme-toggle-sun {
   position: absolute;
@@ -209,6 +221,11 @@
   justify-content: center;
   pointer-events: none;
   z-index: 1;
+  transition:
+    filter 0.28s cubic-bezier(.77,0,.18,1.01),
+    transform 0.44s cubic-bezier(.77,0,.18,1.01);
+  filter: drop-shadow(0 0 8px #FFD60088);
+  overflow: visible; /* Permite que los SVG y sombras sobresalgan */
 }
 .theme-toggle-moon-eclipse {
   position: absolute;
@@ -221,10 +238,89 @@
   pointer-events: none;
   z-index: 2;
   /* La transición se maneja inline para usar darkMode */
+  transition:
+    transform 0.44s cubic-bezier(.77,0,.18,1.01),
+    filter 0.28s cubic-bezier(.77,0,.18,1.01);
+  will-change: transform, filter;
+  overflow: visible; /* Permite que los SVG y sombras sobresalgan */
 }
 .theme-toggle-moon-eclipse svg {
   width: 80%;
   height: 80%;
   display: block;
+  transition: filter 0.32s cubic-bezier(.68,-0.55,.27,1.55), transform 0.32s cubic-bezier(.68,-0.55,.27,1.55);
+  filter: drop-shadow(0 0 8px #FFD60088);
+}
+.theme-toggle-btn:active .theme-toggle-icon {
+  /* Rebote más lento y fluido */
+  animation: theme-toggle-bounce-slow 0.44s cubic-bezier(.77,0,.18,1.01);
+}
+@keyframes theme-toggle-bounce-slow {
+  0% { transform: scale(1.12) rotate(0deg);}
+  40% { transform: scale(0.96) rotate(-8deg);}
+  100% { transform: scale(1.12) rotate(0deg);}
+}
+
+/* Efecto placa metálica brillante */
+.theme-toggle-btn::after {
+  content: "";
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 220%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 50%;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255,255,255,0.18) 35%,
+    rgba(255,255,255,0.45) 50%,
+    rgba(255,255,255,0.18) 65%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.18s;
+  z-index: 10;
+}
+
+.theme-toggle-btn.animate-metal {
+  /* Activar animación de brillo metálico */
+}
+.theme-toggle-btn.animate-metal::after {
+  animation: metal-shine 0.7s cubic-bezier(.68,-0.55,.27,1.55) 1;
+  opacity: 1;
+}
+
+@keyframes metal-shine {
+  0% {
+    left: -60%;
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  50% {
+    left: 0%;
+    opacity: 1;
+  }
+  80% {
+    left: 60%;
+    opacity: 0.7;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Elimina el focus persistente tras el click */
+.theme-toggle-btn:focus {
+  outline: none !important;
+}
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-xl);
 }
 

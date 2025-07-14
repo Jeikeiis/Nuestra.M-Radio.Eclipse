@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, useCallback, useEffect, useState } from "react";
-import { FaBroadcastTower } from "react-icons/fa";
+import { FaBroadcastTower, FaWhatsapp } from "react-icons/fa";
 import "./AppHeader.css";
 
 const ThemeToggle = dynamic(() => import("./ThemeToggle"), { ssr: false });
@@ -132,6 +132,16 @@ const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(
               />
               Radio en Vivo
             </button>
+            {/* Icono WhatsApp debajo del botón de radio */}
+            <a
+              href="https://wa.me/59891889477"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="app-header-whatsapp-btn"
+              aria-label="Contactar por WhatsApp"
+            >
+              <FaWhatsapp />
+            </a>
             {offline && (
               <div style={{
                 color: '#fff',

@@ -81,6 +81,22 @@
   cursor: pointer;
 }
 
+.contacto-desc-main {
+  font-size: 1.18rem;
+  color: var(--foreground);
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 36rem;
+  line-height: 1.7;
+  opacity: 0.96;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: var(--font-body, 'Inter', Arial, sans-serif);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px #00000011;
+}
+
 @media (max-width: 640px) {
   .contacto-section {
     padding: 0.7rem 0.5rem 1.2rem 0.5rem;

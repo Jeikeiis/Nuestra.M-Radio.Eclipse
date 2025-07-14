@@ -132,20 +132,143 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center; /* Centrado horizontal */
+  gap: 1.2rem;
   width: auto;
   margin-top: 0;
-  overflow: hidden; /* Evita scroll vertical y horizontal */
+  overflow: hidden;
   box-sizing: border-box;
+  min-height: 54px; /* Un poco más alto */
+  border: none; /* Elimina el borde para mejor integración visual */
+  border-radius: 1.7rem;
+  background: linear-gradient(90deg, 
+    rgba(255, 248, 225, 0.18) 0%, /* Más transparente a la izquierda */
+    #FFF8E1 30%, 
+    #FFE0B2 70%, 
+    #FFD54F 100% /* Más dorado a la derecha */
+  );
+  box-shadow:
+    0 2px 12px 0 #FFA72622,
+    0 0 8px #FFA72611,
+    0 0 0 3px #FFA72644;
+  padding: 0.32rem 1.05rem;
+  min-height: 54px;
+  position: relative;
+  overflow: hidden; /* Limita el efecto visual al área del marco */
+}
+/* Ajusta el área del efecto para que no sobresalga */
+.app-header-actions::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0; /* Limita el fondo al área interna */
+  border-radius: 1.7rem;
+  z-index: 0;
+  background: radial-gradient(circle at 10% 20%, #FFA726 0%, #FFF3E0 60%, transparent 100%);
+  box-shadow: 0 0 12px 1px #FFA72633, 0 0 0 1px #FFA726;
+  opacity: 0.5;
+}
+.app-header-actions::after {
+  /* Partículas luminosas artísticas */
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0; /* Limita las partículas al área interna */
+  z-index: 1;
+  background:
+    repeating-radial-gradient(circle at 15% 30%, #FFD60088 0.5px, transparent 1.5px),
+    repeating-radial-gradient(circle at 80% 60%, #FFA72655 0.7px, transparent 1.7px),
+    repeating-radial-gradient(circle at 50% 80%, #FFF3E0aa 0.6px, transparent 1.2px);
+  background-size: 32px 32px, 44px 44px, 28px 28px;
+  background-repeat: repeat;
+  opacity: 0.12;
+  filter: blur(0.1px);
+}
+.app-header-actions:hover,
+.app-header-actions:focus-within {
+  border-color: #FF9800;
+  background: linear-gradient(90deg, 
+    rgba(255, 248, 225, 0.12) 0%, 
+    #FFE0B2cc 30%, 
+    #FFD54Fbb 70%, 
+    #FFD54F 100%
+  );
+  /* Menos dorado y más transparente en hover */
+  box-shadow:
+    0 8px 32px 0 #FFA72633,
+    0 0px 24px 0 #FF980022,
+    0 0 0 3px #FFA72644;
+  padding: 0.38rem 1.18rem;
 }
 @media (max-width: 640px) {
   .app-header-actions {
-    width: 100%;
-    justify-content: center !important;
-    gap: 0.1rem !important;
-    padding: 0 !important;
-    position: relative;
+    padding: 0.15rem 0.5rem !important;
+    min-height: 38px !important;
   }
+}
+
+/* Modo oscuro: marco blanco con resplandor y partículas frías */
+.dark .app-header-actions {
+  border: none; /* Elimina el borde también en modo oscuro */
+  border-radius: 1.7rem;
+  background: linear-gradient(90deg, #23232b 60%, #18181b 100%);
+  box-shadow: 0 4px 24px 0 #fff2, 0 0 12px #fff1, 0 0 0 3px #fff3;
+  padding: 0.25rem 0.75rem;
+  min-height: 54px;
+  position: relative;
+  overflow: hidden; /* Limita el efecto visual al área del marco */
+}
+.dark .app-header-actions::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 1.7rem;
+  z-index: 0;
+  background: radial-gradient(circle at 80% 30%, #fff 0%, #fff3 60%, transparent 100%);
+  box-shadow: 0 0 14px 1px #fff3, 0 0 0 1px #fff;
+  opacity: 0.4;
+}
+.dark .app-header-actions::after {
+  /* Partículas frías y sutiles */
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    repeating-radial-gradient(circle at 20% 70%, #fff 0.6px, transparent 1.6px),
+    repeating-radial-gradient(circle at 70% 40%, #fff8 0.8px, transparent 1.8px),
+    repeating-radial-gradient(circle at 60% 90%, #fff6 0.7px, transparent 1.3px);
+  background-size: 36px 36px, 48px 48px, 32px 32px;
+  background-repeat: repeat;
+  opacity: 0.09;
+  filter: blur(0.1px);
+}
+.dark .app-header-actions:hover,
+.dark .app-header-actions:focus-within {
+  border-color: #fff;
+  background: linear-gradient(90deg, #18181b 60%, #23232b 100%);
+  box-shadow: 0 8px 32px 0 #fff4, 0 0px 24px 0 #fff2, 0 0 0 3px #fff5;
+  padding: 0.32rem 1rem;
+}
+
+/* Escarchas más sutiles y artísticas */
+.dark .app-header-actions::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle, #fff 0.7px, transparent 1.5px),
+    radial-gradient(circle, #fff8 1px, transparent 2px),
+    radial-gradient(circle, #fff6 0.8px, transparent 1.5px);
+  background-size: 22px 22px, 38px 38px, 28px 28px;
+  background-position: 4px 8px, 20px 16px, 12px 24px;
+  opacity: 0.28;
+  mix-blend-mode: lighten;
+  filter: blur(0.5px);
 }
 
 .app-header-radio-btn {
@@ -328,3 +451,183 @@
     margin-bottom: 2.5rem !important;
   }
 }
+
+.app-header-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #25D366;
+  border-radius: 9999px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border: 2.5px solid #128C7E;
+  color: #fff;
+  font-size: 2.1rem;
+  margin: 0;
+  padding: 0;
+  transition: border-color 0.18s, box-shadow 0.18s, color 0.18s, background 0.18s;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+  text-decoration: none;
+  outline: none;
+  vertical-align: middle; /* Alineado vertical */
+}
+.app-header-whatsapp-btn:hover,
+.app-header-whatsapp-btn:focus {
+  background: #128C7E;
+  color: #fff;
+  border-color: #25D366;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+}
+.app-header-whatsapp-btn svg {
+  display: block;
+  margin: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));
+}
+
+.dark .app-header-whatsapp-btn {
+  background: #25D366;
+  border-color: #128C7E;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+}
+.dark .app-header-whatsapp-btn:hover,
+.dark .app-header-whatsapp-btn:focus {
+  background: #128C7E;
+  border-color: #25D366;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+}
+
+@media (max-width: 640px) {
+  .app-header-whatsapp-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    font-size: 1.5rem !important;
+  }
+  .app-header-actions {
+    gap: 0.5rem !important;
+  }
+}
+
+.dark .app-header-whatsapp-btn {
+  background: #25D366;
+  border-color: #128C7E;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+}
+.dark .app-header-whatsapp-btn:hover,
+.dark .app-header-whatsapp-btn:focus {
+  background: #128C7E;
+  border-color: #25D366;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+}
+
+@media (max-width: 640px) {
+  .app-header-whatsapp-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    font-size: 1.5rem !important;
+  }
+  .app-header-actions {
+    gap: 0.5rem !important;
+  }
+}
+
+/* Efecto placa metálica animada para todas las acciones */
+.app-header-actions.metal-animate::after {
+  content: "";
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 220%;
+  height: 100%;
+  border-radius: 1.7rem;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    #FFB30044 18%,
+    #FFD54Fcc 35%,
+    #FFF8E1ee 50%,
+    #FFB30088 65%,
+    transparent 100%
+  );
+  opacity: 1;
+  z-index: 10;
+  filter: blur(1.2px) brightness(1.09) saturate(1.10);
+}
+
+/* Partículas místicas animadas durante el efecto */
+.app-header-actions.metal-animate::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  border-radius: 1.7rem;
+  z-index: 11;
+  background:
+    radial-gradient(circle at 12% 52%, #FFD54Fcc 1.5px, transparent 3px),
+    radial-gradient(circle at 62% 32%, #FFF8E1bb 1.2px, transparent 2.5px),
+    radial-gradient(circle at 82% 72%, #FFB30099 1.2px, transparent 2.5px);
+  background-size: 100% 100%;
+  opacity: 0.5;
+  animation: mystic-particles 0.7s linear 1;
+}
+
+@keyframes metal-shine-actions {
+  0% {
+    left: -60%;
+    opacity: 0.2;
+    filter: blur(1.5px) brightness(1.08) saturate(1.05);
+  }
+  20% {
+    opacity: 0.7;
+    filter: blur(2px) brightness(1.18) saturate(1.15);
+  }
+  50% {
+    left: 0%;
+    opacity: 1;
+    filter: blur(2.5px) brightness(1.22) saturate(1.18);
+  }
+  80% {
+    left: 60%;
+    opacity: 0.7;
+    filter: blur(1.5px) brightness(1.13) saturate(1.12);
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    filter: blur(1px) brightness(1) saturate(1);
+  }
+}
+
+@keyframes mystic-particles {
+  0% {
+    background-position: 0% 50%, 60% 30%, 80% 70%;
+    opacity: 0.7;
+  }
+  50% {
+    background-position: 40% 50%, 80% 60%, 100% 80%;
+    opacity: 1;
+  }
+  100% {
+    background-position: 100% 50%, 120% 90%, 160% 100%;
+    opacity: 0;
+  }
+}
+
+/* Si algún hijo reacciona con sombra, asegúrate que el z-index de los pseudo-elementos sea menor que el de los hijos interactivos */
+.app-header-actions > * {
+  position: relative;
+  z-index: 20;
+}
+

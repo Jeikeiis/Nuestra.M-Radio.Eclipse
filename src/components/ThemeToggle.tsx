@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import "./ThemeToggle.css";
 
 // Importa el contexto de tema global
@@ -7,6 +7,7 @@ import { ThemeContext } from "@/context/AppContexts";
 
 export default function ThemeToggle() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -27,13 +28,50 @@ export default function ThemeToggle() {
     }, 10);
   }, [darkMode]);
 
+  // Animación de placa metálica al hacer click
+  function handleClick() {
+    setDarkMode(!darkMode);
+    // Busca el contenedor de acciones y dispara el efecto
+    const actions = document.querySelector('.app-header-actions');
+    if (actions) {
+      actions.classList.add('metal-animate');
+      setTimeout(() => {
+        actions.classList.remove('metal-animate');
+      }, 700); // Duración de la animación
+    }
+    // Quita el focus del botón
+    if (btnRef.current) btnRef.current.blur();
+  }
+
   return (
     <button
-      className="theme-toggle-btn"
-      onClick={() => setDarkMode(!darkMode)}
+      ref={btnRef}
+      className={`theme-toggle-btn`}
+      onClick={handleClick}
       aria-label="Cambiar modo claro/oscuro"
+      // Animación de escala y sombra al hacer clic
+      style={{
+        transition:
+          "box-shadow 0.32s cubic-bezier(.68,-0.55,.27,1.55), transform 0.32s cubic-bezier(.68,-0.55,.27,1.55)",
+        boxShadow: darkMode
+          ? "0 0 16px 2px #FFD60055"
+          : "0 0 12px 1px #e5393555",
+        transform: darkMode
+          ? "scale(1.08) rotate(-10deg)"
+          : "scale(1.08) rotate(10deg)",
+      }}
     >
-      <span className="theme-toggle-icon" aria-hidden="true">
+      <span
+        className="theme-toggle-icon"
+        aria-hidden="true"
+        // Animación de rebote al cambiar
+        style={{
+          transition: "transform 0.38s cubic-bezier(.68,-0.55,.27,1.55)",
+          transform: darkMode
+            ? "scale(1.12) rotate(-15deg)"
+            : "scale(1.12) rotate(15deg)",
+        }}
+      >
         {/* Sol siempre visible, eclipse con la luna */}
         <span className="theme-toggle-sun">
           <svg
@@ -63,9 +101,14 @@ export default function ThemeToggle() {
           className="theme-toggle-moon-eclipse"
           style={{
             opacity: 1,
-            transform: darkMode ? "translateX(0) scale(1)" : "translateX(18px) scale(0.7)",
-            transition: "transform 0.32s cubic-bezier(.77,0,.18,1.01)",
+            transform: darkMode
+              ? "translateX(0) scale(1.08) rotate(-8deg)"
+              : "translateX(18px) scale(0.7) rotate(12deg)",
+            transition: "transform 0.42s cubic-bezier(.77,0,.18,1.01)",
             zIndex: 2,
+            filter: darkMode
+              ? "drop-shadow(0 0 8px #FFD60088)"
+              : "drop-shadow(0 0 4px #e5393588)",
           }}
         >
           {/* Luna minimalista */}

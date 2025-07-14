@@ -119,7 +119,7 @@
 }
 
 .radio-dashboard-title {
-  font-size: 0.95rem;
+  font-size: 1.15rem; /* antes 0.95rem */
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-weight: 800;
   color: var(--radiodash-title);
@@ -131,7 +131,7 @@
 }
 
 .radio-dashboard-subtitle {
-  font-size: 0.8rem;
+  font-size: 1rem; /* antes 0.8rem */
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-weight: 600;
   color: var(--radiodash-subtitle);
@@ -146,7 +146,7 @@
   display: block;
   color: var(--radiodash-detail);
   font-weight: 400;
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* antes 0.7rem */
   opacity: 0.8;
   margin-top: 0.05rem;
   white-space: nowrap;
@@ -266,7 +266,7 @@
 }
 
 .radio-dashboard-volume-label {
-  font-size: 0.75rem;
+  font-size: 0.9rem; /* antes 0.75rem */
   font-weight: 600;
   color: var(--radiodash-title);
   opacity: 0.7;
@@ -274,7 +274,7 @@
 }
 
 .radio-dashboard-volume-value {
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* antes 0.7rem */
   font-weight: 600;
   color: var(--radiodash-subtitle);
   min-width: 35px;
@@ -465,7 +465,7 @@
 
 /* Error */
 .radio-dashboard-error {
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* antes 0.7rem */
   color: var(--radiodash-btn-bg);
   margin-left: 0.4rem;
   margin-top: 0.3rem;
@@ -487,7 +487,7 @@
 }
 
 .radio-dashboard-error-container .radio-dashboard-error {
-  font-size: 0.85rem !important;
+  font-size: 1rem !important; /* antes 0.85rem */
   font-weight: 600;
   margin: 0 !important;
   color: var(--radiodash-btn-bg);
@@ -532,15 +532,15 @@
   }
   
   .radio-dashboard--expanded .radio-dashboard-title {
-    font-size: 0.9rem !important;
+    font-size: 1.05rem !important; /* antes 0.9rem */
   }
   
   .radio-dashboard--expanded .radio-dashboard-subtitle {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important; /* antes 0.75rem */
   }
   
   .radio-dashboard--expanded .radio-dashboard-subtitle-detail {
-    font-size: 0.65rem !important;
+    font-size: 0.8rem !important; /* antes 0.65rem */
   }
   
   .radio-dashboard--expanded .radio-dashboard-controls-row {
@@ -608,15 +608,15 @@
   }
   
   .radio-dashboard-title {
-    font-size: 0.75rem;
+    font-size: 0.95rem; /* antes 0.75rem */
   }
   
   .radio-dashboard-subtitle {
-    font-size: 0.65rem;
+    font-size: 0.8rem; /* antes 0.65rem */
   }
   
   .radio-dashboard-subtitle-detail {
-    font-size: 0.55rem;
+    font-size: 0.7rem; /* antes 0.55rem */
   }
   
   .radio-dashboard-play,
