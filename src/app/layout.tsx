@@ -16,8 +16,7 @@ export default function RootLayout({
   const audioRef = useRef<HTMLAudioElement>(null);
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
   const [playing, setPlaying] = useState(false);
-  // Cambia el valor inicial a 0.7 (70%)
-  const [volume, setVolume] = useState(0.7);
+  const [volume, setVolume] = useState(1);
   const [error, setError] = useState(false);
   // Estado para controlar el preloader
   const [hydrated, setHydrated] = useState(false);
@@ -50,9 +49,7 @@ export default function RootLayout({
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("radioVolume");
-      // Si no hay valor guardado, usar 0.7 como predeterminado
       if (saved !== null) setVolume(Number(saved));
-      else setVolume(0.7);
     }
     // Solo una vez al montar
     // eslint-disable-next-line react-hooks/exhaustive-deps
