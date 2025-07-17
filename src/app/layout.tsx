@@ -51,6 +51,8 @@ export default function RootLayout({
       const saved = localStorage.getItem("radioVolume");
       if (saved !== null) setVolume(Number(saved));
     }
+    // Solo una vez al montar
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -61,22 +63,33 @@ export default function RootLayout({
   // Sincronización automática al abrir el panel por primera vez
   useEffect(() => {
     if (radioOpen && !radioSyncDone) {
-      handleSyncLive();
+      // Solo sincroniza si NO está reproduciendo ya
+      if (!playing && audioRef.current && audioRef.current.paused) {
+        handleSyncLive();
+      }
       setRadioSyncDone(true);
     }
-    // Eliminado el reset de radioSyncDone al cerrar el panel
-  }, [radioOpen]);
+    if (!radioOpen && radioSyncDone) {
+      setRadioSyncDone(false); // Resetear al cerrar el panel
+    }
+  }, [radioOpen, radioSyncDone, playing]);
 
   // Sincronizar con el vivo
-  const handleSyncLive = () => {
+  const handleSyncLive = async () => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       audioRef.current.load();
-      audioRef.current.play();
+      try {
+        await audioRef.current.play();
+      } catch (e) {
+        // Puede fallar por autoplay policies
+        setError(true);
+      }
     }
   };
 
+  // MediaSession solo una vez al montar
   useEffect(() => {
     if (typeof window === "undefined") return;
     if ("mediaSession" in navigator) {
@@ -116,7 +129,8 @@ export default function RootLayout({
         navigator.mediaSession.setActionHandler("seekto", null);
       };
     }
-  }, [playing]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <html lang="es" className={hydrated ? (darkMode ? "dark" : "") : ""}>

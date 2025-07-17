@@ -91,6 +91,7 @@ export default function SponsorsCarousel() {
     if (!mounted) return;
     function updateWidths() {
       if (trackRef.current) {
+        // El ancho real del track es la suma de los hijos (sin dividir por 2)
         setTrackWidth(trackRef.current.scrollWidth / 2);
         setOffset(0); // Reinicia el offset para evitar saltos
       }
@@ -105,7 +106,7 @@ export default function SponsorsCarousel() {
     if (!mounted || paused) return;
     let interval: number;
     let pos = offset;
-    const speed = 0.3;
+    const speed = 0.5; // Un poco más rápido para evitar cortes
     const fps = 30;
     function animate() {
       pos += speed;
@@ -146,7 +147,8 @@ export default function SponsorsCarousel() {
         ref={trackRef}
         style={{
           transform: `translateX(-${offset}px)`,
-          minWidth: "100%",
+          minWidth: "max-content", // Asegura que el track nunca se corte
+          width: "auto",
         }}
       >
         {sponsorsLoop.map((s, i) => (

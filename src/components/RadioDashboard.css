@@ -53,6 +53,14 @@
   gap: 0.5rem !important;
 }
 
+/* Efecto hover para el panel principal */
+.radio-dashboard:hover,
+.radio-dashboard--expanded:hover {
+  border-color: var(--radiodash-border) !important;
+  box-shadow: 0 4px 24px 0 rgba(255,77,79,0.18) !important;
+  background: var(--radiodash-bg);
+}
+
 /* Versión expandida */
 .radio-dashboard--expanded {
   width: 98vw !important;
@@ -159,7 +167,7 @@
 .radio-dashboard-close,
 .radio-dashboard-play {
   color: var(--radiodash-btn-text);
-  background: var(--radiodash-btn-bg);
+  background: transparent; /* Cambiado de var(--radiodash-btn-bg) a transparente */
   border: none;
   border-radius: 9999px;
   display: flex;
@@ -180,7 +188,7 @@
 
 .radio-dashboard-close:hover,
 .radio-dashboard-play:hover {
-  background: var(--radiodash-btn-bg-hover);
+  background: rgba(255,255,255,0.08); /* Ligero fondo blanco translúcido al hover */
 }
 
 .radio-dashboard-play:hover {
@@ -195,11 +203,7 @@
   min-height: 3.2rem !important;
   border-radius: 50% !important;
   box-shadow: 0 6px 20px rgba(255,77,79,0.3);
-}
-
-.radio-dashboard-play--large:hover {
-  transform: scale(1.06);
-  box-shadow: 0 8px 24px rgba(255,77,79,0.4);
+  background: transparent !important; /* Asegura fondo transparente */
 }
 
 /* Botón de cerrar expandido */
@@ -209,6 +213,7 @@
   min-width: 2.4rem !important;
   min-height: 2.4rem !important;
   flex-shrink: 0;
+  background: transparent !important; /* Asegura fondo transparente */
 }
 
 /* Área principal expandida */

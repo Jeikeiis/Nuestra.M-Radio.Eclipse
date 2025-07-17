@@ -1,7 +1,7 @@
 // VERSIÓN ANTERIOR (sin Modal, panel flotante propio)
 // IMPORTANTE: Si quieres volver a la versión profesionalizada con Modal, descomenta el bloque inferior.
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./RadioDashboard.css";
 
 export interface RadioDashboardProps {
@@ -42,6 +42,19 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const [connecting, setConnecting] = useState(false);
+
+  // Nuevo: manejar el evento canplay para saber cuándo el stream está listo
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const handleCanPlay = () => setConnecting(false);
+    audio.addEventListener("canplay", handleCanPlay);
+    return () => {
+      audio.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [audioRef]);
+
   /**
    * Alterna la reproducción/pausa del audio.
    */
@@ -49,10 +62,15 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
     if (!audioRef.current) return;
     if (audioRef.current.paused) {
       try {
+        setConnecting(true); // Mostrar "Conectando..." hasta canplay
+        // Forzar recarga del stream para asegurar buffer fresco
+        audioRef.current.load();
         await audioRef.current.play();
         setPlaying(true);
         setError(false);
+        // El estado connecting se desactiva en canplay
       } catch (err) {
+        setConnecting(false);
         setError(true);
       }
     } else {
@@ -129,9 +147,26 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
                 onClick={handlePlayPause}
                 className="radio-dashboard-play radio-dashboard-play--large"
                 aria-label={playing ? "Pausar" : "Reproducir"}
+                disabled={connecting}
               >
                 {/* Iconos play/pause más grandes */}
-                {playing ? (
+                {connecting ? (
+                  // Loader simple mientras conecta
+                  <svg width="48" height="48" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="12" fill="#ff4d4f" opacity="0.6" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="8"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="2"
+                      strokeDasharray="24"
+                      strokeDashoffset="8"
+                      style={{ animation: "spin 1s linear infinite" } as any}
+                    />
+                  </svg>
+                ) : playing ? (
                   <svg width="48" height="48" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="12" fill="#ff4d4f" />
                     <rect
@@ -186,7 +221,15 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
                 <span className="leading-none">Sincronizar</span>
               </button>
             </div>
-            {error && (
+            {/* Mostrar mensaje de conexión si está conectando */}
+            {connecting && (
+              <div className="radio-dashboard-error-container">
+                <span className="radio-dashboard-error">
+                  ⏳ Conectando a la radio en vivo...
+                </span>
+              </div>
+            )}
+            {error && !connecting && (
               <div className="radio-dashboard-error-container">
                 <span className="radio-dashboard-error">
                   ⚠️ Error de señal - Reintentando...
@@ -196,6 +239,12 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
           </div>
         </div>
       </div>
+      {/* Animación para el loader */}
+      <style>{`
+        @keyframes spin {
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   );
 };
