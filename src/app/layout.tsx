@@ -16,7 +16,13 @@ export default function RootLayout({
   const audioRef = useRef<HTMLAudioElement>(null);
   const streamUrl = "https://stream.zeno.fm/we6d4vg2198uv";
   const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("radioVolume");
+      if (saved !== null) return Number(saved);
+    }
+    return 0.7;
+  });
   const [error, setError] = useState(false);
   // Estado para controlar el preloader
   const [hydrated, setHydrated] = useState(false);
@@ -45,15 +51,6 @@ export default function RootLayout({
     }
   }, [darkMode]);
 
-  // Persistencia de volumen
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("radioVolume");
-      if (saved !== null) setVolume(Number(saved));
-    }
-    // Solo una vez al montar
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("radioVolume", String(volume));
