@@ -16,6 +16,8 @@ export type AudioContextType = {
   setError: (v: boolean) => void;
   handleSyncLive: () => void;
   audioRef: React.RefObject<HTMLAudioElement>;
+  streamLoading?: boolean;
+  streamPreloaded?: boolean;
 };
 export const AudioContext = createContext<AudioContextType | null>(null);
 

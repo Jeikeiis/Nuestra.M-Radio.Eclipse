@@ -14,6 +14,8 @@ export interface RadioDashboardProps {
   onClose?: () => void;
   onSyncLive: () => void;
   audioRef: React.RefObject<HTMLAudioElement>;
+  streamLoading?: boolean;
+  streamPreloaded?: boolean;
 }
 
 /**
@@ -29,6 +31,8 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
   onClose,
   onSyncLive,
   audioRef,
+  streamLoading = false,
+  streamPreloaded = false,
 }) => {
   // Manejo de Escape para cerrar el panel
   const panelRef = useRef<HTMLDivElement>(null);
@@ -42,35 +46,33 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  const [connecting, setConnecting] = useState(false);
-
-  // Nuevo: manejar el evento canplay para saber cuándo el stream está listo
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const handleCanPlay = () => setConnecting(false);
-    audio.addEventListener("canplay", handleCanPlay);
-    return () => {
-      audio.removeEventListener("canplay", handleCanPlay);
-    };
-  }, [audioRef]);
-
   /**
    * Alterna la reproducción/pausa del audio.
    */
   const handlePlayPause = async () => {
     if (!audioRef.current) return;
+
     if (audioRef.current.paused) {
       try {
-        setConnecting(true); // Mostrar "Conectando..." hasta canplay
-        // Forzar recarga del stream para asegurar buffer fresco
-        audioRef.current.load();
-        await audioRef.current.play();
-        setPlaying(true);
-        setError(false);
-        // El estado connecting se desactiva en canplay
+        // Usar el stream precargado si está disponible
+        if (!streamPreloaded) {
+          audioRef.current.load();
+        }
+
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setPlaying(true);
+              setError(false);
+            })
+            .catch((e) => {
+              console.error("Error reproduciendo stream:", e);
+              setError(true);
+            });
+        }
       } catch (err) {
-        setConnecting(false);
+        console.error("Error al iniciar reproducción:", err);
         setError(true);
       }
     } else {
@@ -147,10 +149,10 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
                 onClick={handlePlayPause}
                 className="radio-dashboard-play radio-dashboard-play--large"
                 aria-label={playing ? "Pausar" : "Reproducir"}
-                disabled={connecting}
+                disabled={streamLoading && !playing}
               >
                 {/* Iconos play/pause más grandes */}
-                {connecting ? (
+                {streamLoading && !playing ? (
                   // Loader simple mientras conecta
                   <svg width="48" height="48" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="12" fill="#ff4d4f" opacity="0.6" />
@@ -222,17 +224,24 @@ const RadioDashboard: React.FC<RadioDashboardProps> = ({
               </button>
             </div>
             {/* Mostrar mensaje de conexión si está conectando */}
-            {connecting && (
+            {streamLoading && !playing && (
               <div className="radio-dashboard-error-container">
                 <span className="radio-dashboard-error">
                   ⏳ Conectando a la radio en vivo...
                 </span>
               </div>
             )}
-            {error && !connecting && (
+            {error && !streamLoading && (
               <div className="radio-dashboard-error-container">
                 <span className="radio-dashboard-error">
                   ⚠️ Error de señal - Reintentando...
+                </span>
+              </div>
+            )}
+            {streamPreloaded && !playing && !streamLoading && !error && (
+              <div className="radio-dashboard-status-container">
+                <span className="radio-dashboard-status">
+                  ✅ Stream listo para reproducir
                 </span>
               </div>
             )}

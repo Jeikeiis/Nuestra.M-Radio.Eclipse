@@ -35,6 +35,8 @@ export default function RootLayout({
   });
   const [radioOpen, setRadioOpen] = useState(false);
   const [radioSyncDone, setRadioSyncDone] = useState(false);
+  const [streamPreloaded, setStreamPreloaded] = useState(false);
+  const [streamLoading, setStreamLoading] = useState(false);
 
   useEffect(() => {
     setHydrated(true);
@@ -71,17 +73,65 @@ export default function RootLayout({
     }
   }, [radioOpen, radioSyncDone, playing]);
 
+  // Efecto para precargar el stream cuando la app está hidratada
+  useEffect(() => {
+    if (hydrated && audioRef.current && !streamPreloaded) {
+      // Precargar el stream silenciosamente sin reproducir
+      setStreamLoading(true);
+      audioRef.current.load();
+
+      // Escuchar cuando el stream está listo para reproducir
+      const handleCanPlay = () => {
+        setStreamPreloaded(true);
+        setStreamLoading(false);
+      };
+
+      const handleError = () => {
+        setStreamPreloaded(false);
+        setStreamLoading(false);
+        setError(true);
+      };
+
+      audioRef.current.addEventListener("canplay", handleCanPlay);
+      audioRef.current.addEventListener("error", handleError);
+
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.removeEventListener("canplay", handleCanPlay);
+          audioRef.current.removeEventListener("error", handleError);
+        }
+      };
+    }
+  }, [hydrated, streamPreloaded]);
+
   // Sincronizar con el vivo
   const handleSyncLive = async () => {
     if (audioRef.current) {
+      setStreamLoading(true);
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       audioRef.current.load();
+
       try {
-        await audioRef.current.play();
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setPlaying(true);
+              setError(false);
+            })
+            .catch((e) => {
+              console.error("Error reproduciendo stream:", e);
+              setError(true);
+            })
+            .finally(() => {
+              setStreamLoading(false);
+            });
+        }
       } catch (e) {
-        // Puede fallar por autoplay policies
+        console.error("Error reproduciendo stream:", e);
         setError(true);
+        setStreamLoading(false);
       }
     }
   };
@@ -96,8 +146,8 @@ export default function RootLayout({
           artist: "Canelones, Uruguay",
           album: "Radio en vivo",
           artwork: [
-            { src: "/NuestraManana2.0.webp", sizes: "512x512", type: "image/webp" }
-          ]
+            { src: "/NuestraManana2.0.webp", sizes: "512x512", type: "image/webp" },
+          ],
         });
       };
       updateMetadata();
@@ -128,6 +178,20 @@ export default function RootLayout({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Compartir el estado de carga con los componentes hijos
+  const audioContextValue = {
+    playing,
+    setPlaying,
+    volume,
+    setVolume,
+    error,
+    setError,
+    handleSyncLive,
+    audioRef,
+    streamLoading,
+    streamPreloaded,
+  };
 
   return (
     <html lang="es" className={hydrated ? (darkMode ? "dark" : "") : ""}>
@@ -163,20 +227,42 @@ export default function RootLayout({
                     aria-label="Cargando contenido"
                   >
                     <div style={{ textAlign: "center" }}>
-                      <img src="/NuestraManana2.0.webp" alt="Cargando..." width={90} height={90} style={{ margin: "0 auto" }} />
-                      <div style={{ marginTop: 16, fontWeight: 700, fontSize: 18 }}>Cargando...</div>
+                      <img
+                        src="/NuestraManana2.0.webp"
+                        alt="Cargando..."
+                        width={90}
+                        height={90}
+                        style={{ margin: "0 auto" }}
+                      />
+                      <div
+                        style={{
+                          marginTop: 16,
+                          fontWeight: 700,
+                          fontSize: 18,
+                        }}
+                      >
+                        Cargando...
+                      </div>
                     </div>
                   </div>
                 )}
-                {/* Audio global siempre presente */}
+                {/* Audio global con eventos mejorados */}
                 <audio
                   ref={audioRef}
                   src={streamUrl}
-                  preload="auto"
+                  preload="metadata"
                   style={{ display: "none" }}
-                  onPlay={() => { setPlaying(true); setError(false); }}
+                  onPlay={() => {
+                    setPlaying(true);
+                    setError(false);
+                  }}
                   onPause={() => setPlaying(false)}
-                  onError={() => setError(true)}
+                  onError={() => {
+                    setError(true);
+                    setStreamLoading(false);
+                  }}
+                  onCanPlay={() => setStreamLoading(false)}
+                  onLoadStart={() => setStreamLoading(true)}
                   controls={false}
                   crossOrigin="anonymous"
                   playsInline
@@ -184,7 +270,7 @@ export default function RootLayout({
                 />
                 <div>
                   {children}
-                  {/* Panel de RadioDashboard fijo sobre el footer */}
+                  {/* Panel de RadioDashboard con información de carga */}
                   {hydrated && radioOpen && (
                     <RadioDashboard
                       playing={playing}
@@ -196,6 +282,8 @@ export default function RootLayout({
                       onClose={() => setRadioOpen(false)}
                       onSyncLive={handleSyncLive}
                       audioRef={audioRef}
+                      streamLoading={streamLoading}
+                      streamPreloaded={streamPreloaded}
                     />
                   )}
                   <AppFooter />

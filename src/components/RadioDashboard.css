@@ -468,7 +468,7 @@
   100% { opacity: 1; }
 }
 
-/* Error */
+/* Error y estados de conexión */
 .radio-dashboard-error {
   font-size: 0.85rem; /* antes 0.7rem */
   color: var(--radiodash-btn-bg);
@@ -496,6 +496,24 @@
   font-weight: 600;
   margin: 0 !important;
   color: var(--radiodash-btn-bg);
+}
+
+/* Estado de éxito */
+.radio-dashboard-status-container {
+  width: 100%;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+.radio-dashboard-status {
+  font-size: 1rem !important;
+  font-weight: 600;
+  margin: 0 !important;
+  color: var(--radiodash-live-bg);
 }
 
 /* SVG y iconos */
